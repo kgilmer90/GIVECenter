@@ -1,0 +1,99 @@
+<?php
+
+include_once('AbstractFile.php'); 
+include_once('IOException.php');
+include_once('FileFoundException.php');
+include_once('FileNotFoundException.php');
+include_once('FileMode.php');
+
+class FileWriter extends AbstractFile
+{
+	/**
+	 * FileReader constructor. Accepts a file name and file read mode
+	 * and attempts to open the file. If the file does not exist, a 
+	 * FileNotFoundException is thrown.
+	 * 
+	 * @param string $fileName - path to file to open
+	 * @param string $fileWriteMode - FileWriteMode class constant. Defaults
+	 * to FileWriteMode::WO_TRUNC_BIN for write-only binary mode, create if 
+	 * doesn't exist, truncate to zero if does exist
+	 * @throws IOException on general error
+	 * @throws FileNotFoundException when opened in a mode that requires the file already exist
+	 * @throws FileFoundException when opened in a mode that requires the file not already exist
+	 */
+	public function __construct($fileName, $fileWriteMode = FileWriteMode::WO_TRUNC_BIN)
+	{
+		$this->fname = $fileName;
+		
+		$exists = file_exists($this->fname);
+		
+		//if file exists but is trying to be opened in a mode that requires it not exist
+		if(($fileWriteMode == FileWriteMode::WO_CREATE_BIN || 
+			$fileWriteMode == FileWriteMode::WO_CREATE_TEXT ) && $exists)
+		{
+			throw new FileFoundException($this->fname);
+		}
+		//else if the file doesn't exist and is trying to be opened in a mode that requires it exist
+		else if(!$exists) {
+			throw new FileNotFoundException($this->fname);
+		}
+		
+		$this->handle = fopen($this->fname, $fileReadMode);
+		
+		if($this->handle == false) {
+			throw new IOException($this->fname);
+		}
+	}
+	
+	/**
+	 * Writes a string to the file, write stops at end of string or
+	 * after $length bytes of data have been written.
+	 * @param string $data string to write to the file
+	 * @param int $length maximum number of bytes to write, defaults to 1024
+	 * @return number of bytes written
+	 * @throws IOException on error
+	 */
+	public function write($data, $length = 1024)
+	{
+		$writeCount = fwrite($this->handle, $data, $length);
+		
+		if($writeCount == false) {
+			throw new IOException($this->fname);
+		}
+		else {
+			return $writeCount;
+		}
+	}
+	
+	/**
+	 * Writes a string to the file, write stops at end of string or
+	 * after $length bytes of data have been written, a newline is
+	 * appended to the end of the string.
+	 * @param string $data string to write to the file
+	 * @param int $length maximum number of bytes to write, defaults to 1024
+	 * @return number of bytes written
+	 * @throws IOException on error
+	 */
+	public function writeLine($data, $length = 1024)
+	{
+		$writeCount = fwrite($this->handle, $data."\n", $length);
+		
+		if($writeCount == false) {
+			throw new IOException($this->fname);
+		}
+		else {
+			return $writeCount;
+		}
+	}
+	
+	/**
+	 * FileReader class destructor, ensures the file is closed properly.
+	 */
+	public function __destruct()
+	{
+		if($this->handle != false) {
+			$this->close();
+		}
+	}
+}
+?>
