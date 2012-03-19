@@ -159,7 +159,7 @@ class MySQLDatabaseConn
 	}
 	/**
 	 * Fetches all rows from the query's dataset as a 2D array.
-	 * @return 2D array (outer array is idnexed numerically, inner array
+	 * @return 2D array (outer array is indexed numerically, inner array
 	 * is associative) of all rows in the query's dataset, or false if no
 	 * data exists.
 	 */
