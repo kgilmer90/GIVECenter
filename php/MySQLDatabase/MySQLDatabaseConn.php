@@ -3,11 +3,19 @@
 include_once('MySQLException.php');
 include_once('MySQLDatabaseConnException.php');
 include_once('MySQLQueryFailedException.php');
-include_once('MySQLClientConn.php');
-include_once('MySQLFetchArray.php');
 
 class MySQLDatabaseConn
 {	
+	//consts
+	const CLIENT_COMPRESS 		= MYSQL_CLIENT_COMPRESS;
+	const CLIENT_IGNORE_SPACE 	= MYSQL_CLIENT_IGNORE_SPACE;
+	const CLIENT_INTERACTIVE 	= MYSQL_CLIENT_INTERACTIVE;
+	const CLIENT_SSL 			= MYSQL_CLIENT_SSL;
+	
+	const FETCH_ASSOC 	= MYSQL_ASSOC;	//fetch result in associative array
+	const FETCH_BOTH	= MYSQL_BOTH;	//fetch result in array with numeric and assoc indices
+	const FETCH_NUM 	= MYSQL_NUM;	//fetch result in numerically indexed array
+	
 	//VITALS
 	private $dblink;		//link created with mysql_connect()
 	private $resource;		//query result -- boolean on INSERT, DELETE, UPDATE, DROP
@@ -24,7 +32,7 @@ class MySQLDatabaseConn
 	 * @param string $username - database user name
 	 * @param string $password - database password for user name
 	 * @param boolean $newlink - use a new link (true) or reuse old one (false), defaults to false
-	 * @param int $clientFlags - any of the MySQLClientConn class constants, defaults to zero
+	 * @param int $clientFlags - any of the MySQLDatabaseConn CLIENT class constants, defaults to zero
 	 * @throws MySQLDatabaseConnException if connection fails
 	 */
 	public function __construct($server, $username, $password, $newlink = false, $clientFlags = 0)
@@ -75,12 +83,12 @@ class MySQLDatabaseConn
 	}
 	/**
 	 * Fetches a row from the query's resulting dataset.
-	 * @param int $resultType - type of array to fetch, any of the MySQLFetchArray 
-	 * flags, defaults to BOTH
+	 * @param int $resultType - type of array to fetch, any of the MySQLDatabaseConn 
+	 * FETCH flags, defaults to FETCH_BOTH
 	 * @return array of specified type containing the next row of the dataset, or false
 	 * if no data remains.
 	 */
-	public function fetchArray($resultType = MySQLFetchArray::BOTH)
+	public function fetchRowAsArray($resultType = MySQLDatabaseConn::FETCH_BOTH)
 	{
 		$result = mysql_fetch_array($this->resource, $resultType);
 		$this->setErrors();
@@ -91,18 +99,18 @@ class MySQLDatabaseConn
 	 * @return associative array of the next row in the dataset, or false
 	 * if no data remains.
 	 */
-	public function fetchAssoc()
+	public function fetchRowAsAssoc()
 	{
-		return $this->fetchArray(MySQLFetchArray::ASSOC);
+		return $this->fetchArray(MySQLDatabaseConn::FETCH_ASSOC);
 	}
 	/**
 	 * Fetches a row from the query's dataset as a numerically-indexed array.
 	 * @return enumerated array of the next row in the dataset, or false
 	 * if no data remains.
 	 */
-	public function fetchNumeric()
+	public function fetchRowAsNumeric()
 	{
-		return $this->fetchArray(MySQLFetchArray::NUM);
+		return $this->fetchRowArray(MySQLDatabaseConn::FETCH_NUM);
 	}
 	/**
 	 * Fetches a row from the query's dataset as an object, similar to
@@ -114,7 +122,7 @@ class MySQLDatabaseConn
 	 * @return object containing the next row in the dataset, or false if
 	 * no data remains
 	 */
-	public function fetchObject($className = null, $arrayParams = null)
+	public function fetchRowAsObject($className = null, $arrayParams = null)
 	{
 		if($className == null) 
 		{
@@ -128,6 +136,84 @@ class MySQLDatabaseConn
 		else {
 			return mysql_fetch_object($this->resource, $className, $arrayParams);	
 		}
+	}
+	/**
+	 * Fetches all rows from the query's resulting dataset.
+	 * @param int $resultType - type of array to fetch, any of the MySQLDatabaseConn 
+	 * FETCH flags, defaults to FETCH_BOTH
+	 * @return 2D array (outer array is numerically-indexed, inner arrays are indexed
+	 * according to the FETCH type parameter) containing all rows of the dataset, or false
+	 * if no data remains.
+	 */
+	public function fetchAllAsArray($resultType = MySQLDatabaseConn::FETCH_BOTH)
+	{
+		$i = 0;
+		$results = array();
+		while($row = mysql_fetch_array($this->resource, $resultType))
+		{
+			$results[$i] = $row;
+			$i++;
+		}
+		$this->setErrors();
+		return $results;
+	}
+	/**
+	 * Fetches all rows from the query's dataset as a 2D array.
+	 * @return 2D array (outer array is idnexed numerically, inner array
+	 * is associative) of all rows in the query's dataset, or false if no
+	 * data exists.
+	 */
+	public function fetchAllAsAssoc()
+	{
+		return fetchAllAsArray(MySQLDatabaseConn::FETCH_ASSOC);
+	}
+	/**
+	 * Fetches all rows from the query's dataset as a numerically-indexed 2D array.
+	 * @return 2D array (both inner and outer arrays are indexed numerically) 
+	 * of all rows in the query's dataset, or false if no data exists.
+	 */
+	public function fetchAllAsNumeric()
+	{
+		return fetchAllAsArray(MySQLDatabaseConn::FETCH_NUM);
+	}
+	/**
+	 * Fetches all data available for the SQL query and returns it as a
+	 * numerically-indexed array of objects.
+	 * @param string $className - optional name of the class to instantiate and return
+	 * @param array $arrayParams - optional array of parameters to pass to
+	 * the object constructor
+	 * @return numerically-indexed array of objects containing all rows in the dataset, 
+	 * or false if no data exists.
+	 */
+	public function fetchAllAsObject($className = null, $arrayParams = null)
+	{
+		$i = 0;
+		$results = array();
+		if($arrayParams == null) 
+		{
+			if($className == null) {
+				while($obj = mysql_fetch_object($this->resource))
+				{
+					$results[$i] = $obj;
+					$i++;
+				}
+			}
+			else {
+				while($obj = mysql_fetch_object($this->resource, $classname))
+				{
+					$results[$i] = $obj;
+					$i++;
+				}
+			}
+		}
+		else {
+			while($obj = mysql_fetch_object($this->resource, $className, $arrayParams))
+			{
+				$results[$i] = $obj;
+				$i++;
+			}
+		}
+		return $results;
 	}
 	/**
 	 * Frees all memory associated with the resource from the last query, only
