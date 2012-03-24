@@ -18,6 +18,7 @@ class MySQLDatabaseConn
 	
 	//VITALS
 	private $dblink;		//link created with mysql_connect()
+	private $dbname;		//name of database selected on server
 	private $resource;		//query result -- boolean on INSERT, DELETE, UPDATE, DROP
 							//			   -- mysql resource on SELECT, SHOW, DESCRIBE, EXPLAIN
 	
@@ -38,11 +39,19 @@ class MySQLDatabaseConn
 	 */
 	public function __construct($server, $databaseName, $username, $password, $newlink = false, $clientFlags = 0)
 	{
+		$this->dbname = $databaseName;
 		$this->dblink = mysql_connect($server, $username, $password, $newlink, $clientFlags);
+		
 		$this->setErrors();
 		
 		if($this->dblink == false) {
-			throw new MySQLDatabaseConnException($this->errorStr."\n".server.' '.$username, $this->errorCode);
+			throw new MySQLDatabaseConnException($this->errorStr."\n".$server.' '.$username, $this->errorCode);
+		}
+		
+		$result = mysql_select_db($this->dbname, $this->resource);
+		$this->setErrors();
+		if($result == false) {
+			throw new MySQLDatabaseConnException($this->errorStr."\n".$server.' '.$username, $this->errorCode);
 		}
 	}
 	

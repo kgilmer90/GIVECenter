@@ -19,6 +19,11 @@ class GIVEAgency
 		$this->p_contact = $args['p_contact'];
 		$this->addr = $args['addr'];
 	}
+	
+	public function __toString()
+	{
+		
+	}
 }
 
 ?>
