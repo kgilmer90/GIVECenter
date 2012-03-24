@@ -1,0 +1,16 @@
+body {
+text-align: center;
+font-family: Arial;
+background-color: rgb(185, 179, 175);}
+h1 {
+text-align: center;
+color: #ee3e80;}
+h2 {
+text-align: center;
+color: #0088dd;}
+p.loginform { 
+margin: auto;
+text-align: center;
+width: 250px;
+border: 3px dotted #0088dd;
+}
