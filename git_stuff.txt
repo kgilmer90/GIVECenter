@@ -1,0 +1,17 @@
+___Setup_____
+Go to github and click the "fork" button.						# creates repo on github
+	git clone git://github.com/your_name/repo_name.git				# creates copy of repo in current directory
+	git remote add upstream git://github.com/user_to_copy/repo_to_copy.git		# assigns name 'upstream' to original repo
+	git fetch upstream								# downloads changes not present in your local repo
+	git merge upstream/master							# merges the changes with your repo
+
+	or...
+	git pull upstream								# pulls commits from upstream then adds to local repo, without review
+
+   **** Make your changes ******
+    git status							# shows files that are different from the current commit
+    git add filename						# adds filename to list of files to commit
+    git commit -a						# commit files, -a all files
+    git push origin master					# send commits to online repo
+    go back to git hub and click the "pull request" button.	# tells owner that you made changes you would like him to add
+
