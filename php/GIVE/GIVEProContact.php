@@ -7,9 +7,17 @@ class GIVEProContact
 	public $w_phone, $m_phone;					//STRING
 	public $mail;								//STRING
 	
-	public function __construct()
+	public function __construct($args)
 	{
-		
+		$this->id = $args['id'];
+		$this->title = $args['title'];
+		$this->l_name = $args['l_name'];
+		$this->f_name = $args['f_name'];
+		$this->m_name = $args['m_name'];
+		$this->suf = $args['suf'];
+		$this->w_phone = $args['w_phone'];
+		$this->m_phone = $args['m_phone'];
+		$this->mail = $args['mail'];
 	}
 }
 ?>
