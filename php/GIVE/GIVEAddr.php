@@ -8,7 +8,7 @@ class GIVEAddr
 	public function __construct($args)
 	{
 		$this->id = $args['id'];
-		$this->street = args['street'];
+		$this->street = $args['street'];
 		$this->city = $args['city'];
 		$this->state_us = $args['state_us'];
 		$this->zip = $args['zip'];
