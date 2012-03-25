@@ -18,30 +18,40 @@ class MySQLDatabaseConn
 	
 	//VITALS
 	private $dblink;		//link created with mysql_connect()
+	private $dbname;		//name of database selected on server
 	private $resource;		//query result -- boolean on INSERT, DELETE, UPDATE, DROP
 							//			   -- mysql resource on SELECT, SHOW, DESCRIBE, EXPLAIN
 	
 	//ERROR REPORTING
-	private $lastQuery;		//last query executed or attempted to execute
-	private $errorCode;		//returned from mysql_errno() after each connection, query, fetch, and close
-	private $errorStr;		//returned from mysql_error() after each connection, query, fetch, and close
+	public $lastQuery;		//last query executed or attempted to execute
+	public $errorCode;		//returned from mysql_errno() after each connection, query, fetch, and close
+	public $errorStr;		//returned from mysql_error() after each connection, query, fetch, and close
 	
 	/**
 	 * MySQLDatabaseConn constructor, attempts to establish a connection with a MySQL database.
 	 * @param string $server - server to connect to
-	 * @param string $username - database user name
+	 * @param string $databaseName - name of database
+	 * @param string $username - database user name 
 	 * @param string $password - database password for user name
 	 * @param boolean $newlink - use a new link (true) or reuse old one (false), defaults to false
 	 * @param int $clientFlags - any of the MySQLDatabaseConn CLIENT class constants, defaults to zero
 	 * @throws MySQLDatabaseConnException if connection fails
 	 */
-	public function __construct($server, $username, $password, $newlink = false, $clientFlags = 0)
+	public function __construct($server, $databaseName, $username, $password, $newlink = false, $clientFlags = 0)
 	{
+		$this->dbname = $databaseName;
 		$this->dblink = mysql_connect($server, $username, $password, $newlink, $clientFlags);
+		
 		$this->setErrors();
 		
 		if($this->dblink == false) {
-			throw new MySQLDatabaseConnException($this->errorStr."\n".server.' '.$username, $this->errorCode);
+			throw new MySQLDatabaseConnException($this->errorStr."\n".$server.' '.$username, $this->errorCode);
+		}
+		
+		$result = mysql_select_db($this->dbname, $this->resource);
+		$this->setErrors();
+		if($result == false) {
+			throw new MySQLDatabaseConnException($this->errorStr."\n".$server.' '.$username, $this->errorCode);
 		}
 	}
 	
@@ -68,18 +78,6 @@ class MySQLDatabaseConn
 			$this->resource = false;
 		}
 		return $status;
-	}
-	/**
-	 * Returns an associative array of the most current errors, array keys are "code" for the
-	 * numeric error code and "str" for the string message for the error.
-	 * @return associative array of error descriptions
-	 */
-	public function errors()
-	{
-		return array(
-			"code" => $this->errorCode,
-			"str" => $this->errorStr
-		);
 	}
 	/**
 	 * Fetches a row from the query's resulting dataset.
@@ -229,14 +227,6 @@ class MySQLDatabaseConn
 			$this->resource = false;
 		}
 		return $status;
-	}
-	/**
-	 * Returns the last query executed or attempted to be executed.
-	 * @return string query
-	 */
-	public function lastQuery()
-	{
-		return $this->lastQuery;
 	}
 	/**
 	 * Retrieves the number of rows from a result set, this command is only 
