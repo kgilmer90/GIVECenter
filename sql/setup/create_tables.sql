@@ -6,8 +6,8 @@ CREATE TABLE student_contact(
 	f_name VARCHAR(20),
 	m_name VARCHAR(20),
 	suf CHAR(3),
-	m_phone CHAR(9),
-	w_phone CHAR(9),
+	m_phone CHAR(10),
+	w_phone CHAR(10),
 	mail VARCHAR(40)) ENGINE INNODB;
 	
 CREATE TABLE pro_contact(
@@ -16,9 +16,9 @@ CREATE TABLE pro_contact(
 	l_name VARCHAR(30),
 	f_name VARCHAR(30),
 	m_name VARCHAR(30),
-	suf CHAR(3),
-	m_phone CHAR(9),
-	w_phone CHAR(9),
+	suf VARCHAR(3),
+	m_phone CHAR(10),
+	w_phone CHAR(10),
 	mail VARCHAR(40) ENGINE INNODB;
 	
 CREATE TABLE contact_history(
@@ -30,7 +30,7 @@ CREATE TABLE addr(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	street VARCHAR(50),
 	city VARCHAR(30),
-	state VARCHAR(30),
+	state_us VARCHAR(30),
 	zip CHAR(5)) ENGINE INNODB;
 	
 CREATE TABLE agency(
@@ -40,23 +40,28 @@ CREATE TABLE agency(
 	p_contact_id INT UNSIGNED, 
 	addr INT UNSIGNED,
 	mail VARCHAR(40),
-	phone CHAR(9),
-	fax CHAR(9)) ENGINE INNODB;
+	phone CHAR(10),
+	fax CHAR(10)) ENGINE INNODB;
 	
 CREATE TABLE program(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	agency INT UNSIGNED NOT NULL,
 	addr INT;
 	name VARCHAR(20),
-	p_contact
-	s_contact
+	p_contact INT UNSIGNED NOT NULL,
+	s_contact INT UNSIGNED NOT NULL,
 	descript VARCHAR(400),
 	referal BOOL,
 	season BINARY(4),
 	times BINARY(24),	
 	notes VARCHAR(400),
-	issues BINARY(40),
 	duration VARCHAR(50)) ENGINE INNODB;
+	
+CREATE TABLE program_issues(
+	program_id INT UNSIGNED NOT NULL,
+	issue_id INT UNSIGNED NOT NULL,
+	PRIMARY KEY(program_id,issue_id)) ENGINE INNODB;
+	
 	
 CREATE TABLE issues(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
