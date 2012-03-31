@@ -1,5 +1,10 @@
 <?php
 
+include_once('GIVEAddr.php');
+include_once('GIVEAgency.php');
+include_once('GIVEProContact.php');
+include_once('GIVEStudentContact.php');
+
 class GIVEProgram
 {
 	public $id;										//INT
@@ -25,7 +30,32 @@ class GIVEProgram
 		$this->issues = $args['issues'];
 		$this->addr = $args['addr'];
 		$this->agency = $args['agency'];
-		$this->s_contact = $args['p_contact'];
+		$this->p_contact = $args['p_contact'];
+		$this->s_contact = $args['s_contact'];
+	}
+	
+	public function __toString()
+	{
+		$str = "{$this->id}, {$this->referal}, {$this->season}, {$this->times}, ".
+		"{$this->name}, {$this->descript}, {$this->duration}, {$this->notes}, ";
+		
+		foreach($issues as $val) {
+			$str .= "$val, ";
+		}
+		
+		$str .= "{$this->addr}, {$this->agency}, {$this->p_contact}, {$this->s_contact}";
+	}
+	public function toHTMLString()
+	{
+		$str = __CLASS__.", {$this->id}, {$this->referal}, \"{$this->season}\", \"{$this->times}\", ".
+		"\"{$this->name}\", \"{$this->descript}\", \"{$this->duration}\", \"{$this->notes}\", ";
+		
+		foreach($issues as $val) {
+			$str .= "\"$val\", ";
+		}
+		
+		$str .= "{$this->addr->toHTMLString()}, {$this->agency->toHTMLString()}, ";
+		$str .= "{$this->p_contact->toHTMLString()}, {$this->s_contact->toHTMLString()}";
 	}
 }
 

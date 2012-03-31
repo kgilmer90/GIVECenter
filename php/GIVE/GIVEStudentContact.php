@@ -27,7 +27,7 @@ class GIVEStudentContact
 	
 	public function toHTMLString()
 	{
-		return "{$this->id}, \"{$this->l_name}\", \"{$this->suf}\", \"{$this->f_name}\", 
+		return __CLASS__.", {$this->id}, \"{$this->l_name}\", \"{$this->suf}\", \"{$this->f_name}\", 
 		\"{$this->m_name}\", \"{$this->w_phone}\", \"{$this->m_phone}\",
 		\"{$this->mail}\"";
 	}

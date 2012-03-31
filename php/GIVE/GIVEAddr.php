@@ -16,13 +16,12 @@ class GIVEAddr
 	
 	public function __toString()
 	{
-		return "{$this->id}, {$this->street}, {$this->city}, {$this->state_us}, {$this->zip}";
+		return "{$this->id},{$this->street},{$this->city}, {$this->state_us}, {$this->zip}";
 	}
-	
 	public function toHTMLString()
 	{
-		return "{$this->id}, \"{$this->street}\", \"{$this->city}\", 
-		\"{$this->state_us}\", {$this->zip}";
+		return __CLASS__.", {$this->id}, \"{$this->street}\", \"{$this->city}\", ".
+		"\"{$this->state_us}\", {$this->zip}";
 	}
 }
 

@@ -1,5 +1,8 @@
 <?php
 
+include_once('GIVEAddr.php');
+include_once('GIVEProContact.php');
+
 class GIVEAgency
 {
 	public $id;						//INT
@@ -22,7 +25,15 @@ class GIVEAgency
 	
 	public function __toString()
 	{
-		
+		return "{$this->id}, {$this->name}, {$this->descript}, {$this->mail}, {$this->phone}, ".
+		"{$this->fax}, {$this->p_contact}, {$this->addr}";
+	}
+	
+	public function toHTMLString()
+	{
+		return __CLASS__.", {$this->id}, \"{$this->name}\", \"{$this->descript}\", \"{$this->mail}\", ".
+		"\"{$this->phone}\", \"{$this->fax}\", {$this->p_contact->toHTMLString()}, ".
+		"{$this->addr->toHTMLString()}";
 	}
 }
 

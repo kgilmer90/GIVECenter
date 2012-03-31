@@ -22,15 +22,15 @@ class GIVEProContact
 	
 	public function __toString()
 	{
-		return "{$this->id}, {$this->suf}, {$this->f_name}, {$this->m_name}, 
-		{$this->l_name}, {$this->w_phone}, {$this->m_phone}, {$this->mail}";
+		return "{$this->id}, {$this->suf}, {$this->f_name}, {$this->m_name}, ".
+		"{$this->l_name}, {$this->w_phone}, {$this->m_phone}, {$this->mail}";
 	}
 	
 	public function toHTMLString()
 	{
-		return "{$this->id}, \"{$this->suf}\", \"{$this->f_name}\", \"{$this->m_name}\", 
-		\"{$this->l_name}\", \"{$this->w_phone}\", \"{$this->m_phone}\",
-		\"{$this->mail}\"";
+		return __CLASS__.", {$this->id}, \"{$this->suf}\", \"{$this->f_name}\", \"{$this->m_name}\", ". 
+		"\"{$this->l_name}\", \"{$this->w_phone}\", \"{$this->m_phone}\", ".
+		"\"{$this->mail}\"";
 	}
 }
 ?>
