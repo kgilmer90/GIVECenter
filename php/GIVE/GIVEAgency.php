@@ -31,7 +31,7 @@ class GIVEAgency
 	
 	public function toHTMLString()
 	{
-		return __CLASS__.", {$this->id}, \"{$this->name}\", \"{$this->descript}\", \"{$this->mail}\", ".
+		return /*__CLASS__.", */"{$this->id}, \"{$this->name}\", \"{$this->descript}\", \"{$this->mail}\", ".
 		"\"{$this->phone}\", \"{$this->fax}\", {$this->p_contact->toHTMLString()}, ".
 		"{$this->addr->toHTMLString()}";
 	}

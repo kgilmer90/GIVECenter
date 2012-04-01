@@ -5,22 +5,39 @@
 //
 ////////////////////////////////////////////////////
 //**************************************************
-var agency = [];
-var program = [];
+var agencies = [];
+var programs = [];
+var GIVE_MAP = {
+		agency:					"g",
+		agency_addr:			"ga",
+		agency_proContact:		"gp",
+		agency_program:			"gr",
+		program_issues:			"ri",
+		program_addr:			"ra",
+		program_proContact:		"rp",
+		program_studentContact:	"rs",
+		
+		readAhead:{addr:4, agency:6, proContact:8, program:8, studentContact:7}
+};
 
 function main() {
-	var GIVE_ADDR = "GIVEAddr";
-	var GIVE_AGENCY = "GIVEAgency";
-	var GIVE_CONTACT_HISTORY = "GIVEContactHistory";
-	var GIVE_PRO_CONTACT = "GIVEProContact";
-	var GIVE_PROGRAM = "GIVEProgram";
-	var GIVE_STUDENT_CONTACT = "GIVEStudentContact";
-	
 	var argc = arguments.length;
 	var argv = arguments;
 	
+	var agency;
+	var agency_procontact;
+	var agency_addr;
+	var agency_program;
+	var program_issues;
+	var program_addr;
+	var program_procontact;
+	var program_studentcontact;
+	
 	for(var i = 0; i < argc; i++) {
-		
+		var flag = argv[i];
+		if(flag == GIVE_FLAG.agency) {
+			
+		}
 	}
 }
 
@@ -41,9 +58,8 @@ function main() {
  * @param string zip - US zipcode
  * @return GIVEAddr object with fields initialized to function arguments
  */
-function GIVEAddr(id, street, city, state, zip) {
+function GIVEAddr(street, city, state, zip) {
 	var addr = {
-		id 			: id,
 		street 		: street,
 		city 		: city,
 		state_us 	: state,
@@ -107,9 +123,8 @@ function GIVEContactHistory(id, contact, program) {
  * @param string mail - contact person's email address
  * @return GIVEProContact object with fields initialized to function arguments
  */
-function GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
+function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
 	var pcon = {
-			id 		: id,
 			title 	: title,
 			l_name 	: l_name,
 			f_name	: f_name,
@@ -169,9 +184,8 @@ function GIVEProgram (id, referal, season, times, name, descript, duration, note
  * @param string mail - contact person's email address
  * @return GIVEStudentContact object with fields initialized to function arguments
  */
-function GIVEStudentContact(id, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
+function GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
 	var scon = {
-			id 		: id,
 			l_name 	: l_name,
 			f_name	: f_name,
 			m_name	: m_name,

@@ -14,7 +14,6 @@ class GIVEProgram
 	public $name, $descript, $duration, $notes;		//STRING
 	public $issues;									//STRING array
 	public $addr;									//GIVEAddr
-	public $agency;									//GIVEAgency
 	public $p_contact;								//GIVEProContact
 	public $s_contact;								//GIVEStudentContact
 	
@@ -29,7 +28,6 @@ class GIVEProgram
 		$this->notes = $args['notes'];
 		$this->issues = $args['issues'];
 		$this->addr = $args['addr'];
-		$this->agency = $args['agency'];
 		$this->p_contact = $args['p_contact'];
 		$this->s_contact = $args['s_contact'];
 	}
@@ -43,18 +41,18 @@ class GIVEProgram
 			$str .= "$val, ";
 		}
 		
-		$str .= "{$this->addr}, {$this->agency}, {$this->p_contact}, {$this->s_contact}";
+		$str .= "{$this->addr}, {$this->p_contact}, {$this->s_contact}";
 	}
 	public function toHTMLString()
 	{
-		$str = __CLASS__.", {$this->id}, {$this->referal}, \"{$this->season}\", \"{$this->times}\", ".
+		$str = /*__CLASS__.", */"{$this->id}, {$this->referal}, \"{$this->season}\", \"{$this->times}\", ".
 		"\"{$this->name}\", \"{$this->descript}\", \"{$this->duration}\", \"{$this->notes}\", ";
 		
 		foreach($issues as $val) {
 			$str .= "\"$val\", ";
 		}
 		
-		$str .= "{$this->addr->toHTMLString()}, {$this->agency->toHTMLString()}, ";
+		$str .= "{$this->addr->toHTMLString()}, ";
 		$str .= "{$this->p_contact->toHTMLString()}, {$this->s_contact->toHTMLString()}";
 	}
 }

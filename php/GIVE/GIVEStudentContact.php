@@ -2,14 +2,14 @@
 
 class GIVEStudentContact
 {
-	public $id;									//INT
+	//public $id;								//INT
 	public $l_name, $f_name, $m_name, $suf;		//STRING
 	public $m_phone, $w_phone;					//STRING
 	public $mail;								//STRING
 	
 	public function __construct($args)
 	{
-		$this->id = $args['id'];
+		//$this->id = $args['id'];
 		$this->l_name = $args['l_name'];
 		$this->f_name = $args['f_name'];
 		$this->m_name = $args['m_name'];
@@ -21,13 +21,13 @@ class GIVEStudentContact
 	
 	public function __toString()
 	{
-		return "{$this->id}, {$this->l_name}, {$this->suf}, {$this->f_name}, {$this->m_name}, 
+		return /*"{$this->id}, */ "{$this->l_name}, {$this->suf}, {$this->f_name}, {$this->m_name}, 
 		{$this->w_phone}, {$this->m_phone}, {$this->mail}";
 	}
 	
 	public function toHTMLString()
 	{
-		return __CLASS__.", {$this->id}, \"{$this->l_name}\", \"{$this->suf}\", \"{$this->f_name}\", 
+		return /*__CLASS__.", {$this->id}, */ "\"{$this->l_name}\", \"{$this->suf}\", \"{$this->f_name}\", 
 		\"{$this->m_name}\", \"{$this->w_phone}\", \"{$this->m_phone}\",
 		\"{$this->mail}\"";
 	}
