@@ -1,7 +1,6 @@
 <?php
 class GIVEProContact
 {
-	//public $id;								//INT
 	public $title;								//STRING
 	public $l_name, $f_name, $m_name, $suf;		//STRING
 	public $w_phone, $m_phone;					//STRING
@@ -9,7 +8,6 @@ class GIVEProContact
 	
 	public function __construct($args)
 	{
-		//$this->id = $args['id'];
 		$this->title = $args['title'];
 		$this->l_name = $args['l_name'];
 		$this->f_name = $args['f_name'];
