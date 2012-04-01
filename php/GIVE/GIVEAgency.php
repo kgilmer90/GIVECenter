@@ -24,25 +24,9 @@ class GIVEAgency
 		$this->addr = $args['addr'];
 		$this->programs = $args['programs'];
 	}
-	
-	public function __toString()
-	{
-		return "{$this->id}, {$this->name}, {$this->descript}, {$this->mail}, {$this->phone}, ".
-		"{$this->fax}, {$this->p_contact}, {$this->addr}";
-	}
-	
-	public function toHTMLString()
-	{
-		return /*__CLASS__.", */"{$this->id}, \"{$this->name}\", \"{$this->descript}\", \"{$this->mail}\", ".
-		"\"{$this->phone}\", \"{$this->fax}\", {$this->p_contact->toHTMLString()}, ".
-		"{$this->addr->toHTMLString()}";
-	}
-	public function toHTMLTable($id, $hidden = true, $display = 'none')
-	{
-		$visibility = ($hidden) ? 'hidden' : 'visible';
-		$display = ($hidden) ? 'none' : 'block';
-		
-		$str = "<table id=\"$id\" style=\"visibility=$visibility;display=$display;\">".PHP_EOL;
+	public function toHTMLTable($id)
+	{	
+		$str = "<table id=\"$id\">".PHP_EOL;
 		
 		$str .= '<tr>'.PHP_EOL;
 		$str .= '<td title="id">'.PHP_EOL;
@@ -82,13 +66,13 @@ class GIVEAgency
 		
 		$str .= '<tr>'.PHP_EOL;
 		$str .= '<td title="p_contact>'.PHP_EOL;
-		$str .= $this->p_contact->toHTMLTable($id.'_p_contact', $hidden, $display);
+		$str .= $this->p_contact->toHTMLTable($id.'_p_contact');
 		$str .= '</td>'.PHP_EOL;
 		$str .= '</tr>'.PHP_EOL;
 		
 		$str .= '<tr>'.PHP_EOL;
 		$str .= '<td title="addr">'.PHP_EOL;
-		$str .= $this->addr->toHTMLTable($id.'_addr', $hidden, $display);
+		$str .= $this->addr->toHTMLTable($id.'_addr');
 		$str .= '</td>'.PHP_EOL;
 		$str .= '</tr>'.PHP_EOL;
 		

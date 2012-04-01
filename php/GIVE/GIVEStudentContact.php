@@ -18,25 +18,9 @@ class GIVEStudentContact
 		$this->m_phone = $args['m_phone'];
 		$this->mail = $args['mail'];
 	}
-	
-	public function __toString()
+	public function toHTMLTable($id)
 	{
-		return /*"{$this->id}, */ "{$this->l_name}, {$this->suf}, {$this->f_name}, {$this->m_name}, 
-		{$this->w_phone}, {$this->m_phone}, {$this->mail}";
-	}
-	
-	public function toHTMLString()
-	{
-		return /*__CLASS__.", {$this->id}, */ "\"{$this->l_name}\", \"{$this->suf}\", \"{$this->f_name}\", 
-		\"{$this->m_name}\", \"{$this->w_phone}\", \"{$this->m_phone}\",
-		\"{$this->mail}\"";
-	}
-	public function toHTMLTable($id, $hidden = true, $display = 'none')
-	{
-		$visibility = ($hidden) ? 'hidden' : 'visible';
-		$display = ($hidden) ? 'none' : 'block';
-		
-		$str = "<table id=\"$id\" style=\"visibility=$visibility;display=$display;\">".PHP_EOL;
+		$str = "<table id=\"$id\">".PHP_EOL;
 		
 		$str .= '<tr>'.PHP_EOL;
 		$str .= '<td> title="l_name"'.PHP_EOL;

@@ -8,55 +8,107 @@
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
 
-var GIVE_MAP = {		//translation map to aid in parsing onload strings
-		
-		agency:					"g",		//flags in the onload array
-		agency_addr:			"ga",		//to signal what kind of object
-		agency_proContact:		"gp",		//to create with the data that follows
-		agency_program:			"gr",
-		program_issues:			"ri",
-		program_addr:			"ra",
-		program_proContact:		"rp",
-		program_studentContact:	"rs",
-		
-		numElements:{		//number of primitive (string or numeric) 
-			addr:4, 		//elementsthat compose a single GIVE object
-			agency:6, 		
-			proContact:8, 	//used to advance the array index variable
-			program:8, 		//when parsing onload strings
-			studentContact:7
-		}
-};
 /**
  * HTML <body> onload function
- * All database query results are passed as arguments to the function.
- * Arguments are then parsed for object type flags and corresponding
- * GIVE objects are created from the data. All GIVEProgram and 
- * GIVEAgency objects are stored in global arrays called
- * 'agencies' and 'programs'.
+ * All database query results are stored on the page as a hidden table.
+ * The table is then parsed and reconstructed as Javascript objects
+ * for convenience.
  */
-function main() {
-	var argc = arguments.length;
-	var argv = arguments;
+function initAgenciesAndPrograms() {
+	var agency_table = document.getElementById("agency_table");
+	var all_agencies = agency_table.rows;
 	
-	var agency = null;
-	var program = [];
-	for(var i = 0; i < argc; i++) {
+	for(var i in all_agencies) {
+		var agency = DOMElementToGIVEAgency(all_agencies[i].rows);
 		
-		var flag = argv[i];
-		
-		if(flag == GIVE_MAP.agency) {
-			agency = new GIVEAgency(argv[i+1], argv[i+2], argv[i+3], argv[i+4], argv[i+5], argv[i+6], null, null, null);
-			i += GIVE_MAP.numElements.agency;
-		}
-		else if(flag == GIVE_MAP.agency_proContact) {
-			agency.p_contact = new GIVEProContact(argv[i+1], argv[i+2], argv[i+3], argv[i+4], argv[i+5], argv[i+6], argv[i+7], argv[i+8]);
-			i += GIVE_MAP.numElements.proContact;
-		}
-		else if(flag == GIVE_MAP.agency_addr) {
-			
+		agencies.push(agency);
+		for(var i in agency.programs) {
+			programs.push(agency.programs[i]);
 		}
 	}
+}
+
+function DOMElementToGIVEAgency(agency_DOM_element) {
+	var id 			= agency_DOM_element[0].cells[0].innerHTML;
+	var name 		= agency_DOM_element[1].cells[0].innerHTML;
+	var descript 	= agency_DOM_element[2].cells[0].innerHTML;
+	var mail 		= agency_DOM_element[3].cells[0].innerHTML;
+	var phone 		= agency_DOM_element[4].cells[0].innerHTML;
+	var fax 		= agency_DOM_element[5].cells[0].innerHTML;
+	
+	var p_contact 	= DOMElementToGIVEProContact(agency_DOM_element[6].rows);
+	var addr 		= DOMElementToGIVEAddr(agency_DOM_element[7].rows);
+	var program_arr	= DOMElementToGIVEProgramsArray(agency_DOM_element[8].rows);
+	
+	var agency = GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, program_arr);
+
+	foreach(var i in program_arr) {
+		program_arr[i].agency = agency;
+	}
+	
+	return agency;
+}
+
+function DOMElementToGIVEAddr(addr_DOM_element) {
+	var street 		= addr_DOM_element[0].cells[0].innerHTML;
+	var city 		= addr_DOM_element[1].cells[0].innerHTML;
+	var state_us 	= addr_DOM_element[2].cells[0].innerHTML;
+	var zip 		= addr_DOM_element[3].cells[0].innerHTML;
+	
+	return new GIVEAddr(street, city, state_us, zip);
+}
+
+function DOMElementToGIVEProContact(p_contact_DOM_element) {
+	var title 		= p_contact_DOM_element[0].cells[0].innerHTML;
+	var l_name 		= p_contact_DOM_element[1].cells[0].innerHTML;
+	var f_name 		= p_contact_DOM_element[2].cells[0].innerHTML;
+	var m_name 		= p_contact_DOM_element[3].cells[0].innerHTML;
+	var suf 		= p_contact_DOM_element[4].cells[0].innerHTML;
+	var w_phone 	= p_contact_DOM_element[5].cells[0].innerHTML;
+	var m_phone 	= p_contact_DOM_element[6].cells[0].innerHTML;
+	var mail 		= p_contact_DOM_element[7].cells[0].innerHTML;
+	
+	return new GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
+}
+
+function DOMElementToGIVEProgramsArray(programs_array_DOM_element) {
+	
+	var program_arr = [];
+	for(var i in programs_array_DOM_element) {
+		var program = DOMElementToGIVEProgram(programs_array_DOM_element[i].rows);
+		program_arr.push(program);
+	}
+	return program_arr;
+}
+
+function DOMElementToGIVEProgram(program_DOM_element) {
+	var id 			= program_DOM_element[0].cells[0].innerHTML;
+	var referal 	= program_DOM_element[1].cells[0].innerHTML;
+	var season 		= program_DOM_element[2].cells[0].innerHTML;
+	var times 		= program_DOM_element[3].cells[0].innerHTML;
+	var name 		= program_DOM_element[4].cells[0].innerHTML;
+	var descript 	= program_DOM_element[5].cells[0].innerHTML;
+	var duration 	= program_DOM_element[6].cells[0].innerHTML;
+	var notes 		= program_DOM_element[7].cells[0].innerHTML;
+	
+	var issues 		= DOMElementToIssuesArray(program_DOM_element[8].rows);
+	var addr 		= DOMElementToGIVEAddr(program_DOM_element[9].rows);
+	var p_contact 	= DOMElementToProContact(program_DOM_element[10].rows);
+	var s_contact 	= DOMElementToStudentContact(program_DOM_element[11].rows);
+	
+	return new GIVEProgram(id, referal, season, times, name, descript, duration, notes, issues, addr, null, p_contact, s_contact);
+}
+
+function DOMElementToGIVEStudentContact(s_contact_DOM_element) {
+	var l_name 		= s_contact_DOM_element[0].cells[0].innerHTML;
+	var f_name 		= s_contact_DOM_element[1].cells[0].innerHTML;
+	var m_name 		= s_contact_DOM_element[2].cells[0].innerHTML;
+	var suf 		= s_contact_DOM_element[3].cells[0].innerHTML;
+	var w_phone 	= s_contact_DOM_element[4].cells[0].innerHTML;
+	var m_phone 	= s_contact_DOM_element[5].cells[0].innerHTML;
+	var mail 		= s_contact_DOM_element[6].cells[0].innerHTML;
+	
+	return new GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 
 //**************************************************

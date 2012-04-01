@@ -31,36 +31,9 @@ class GIVEProgram
 		$this->p_contact = $args['p_contact'];
 		$this->s_contact = $args['s_contact'];
 	}
-	
-	public function __toString()
-	{
-		$str = "{$this->id}, {$this->referal}, {$this->season}, {$this->times}, ".
-		"{$this->name}, {$this->descript}, {$this->duration}, {$this->notes}, ";
-		
-		foreach($issues as $val) {
-			$str .= "$val, ";
-		}
-		
-		$str .= "{$this->addr}, {$this->p_contact}, {$this->s_contact}";
-	}
-	public function toHTMLString()
-	{
-		$str = /*__CLASS__.", */"{$this->id}, {$this->referal}, \"{$this->season}\", \"{$this->times}\", ".
-		"\"{$this->name}\", \"{$this->descript}\", \"{$this->duration}\", \"{$this->notes}\", ";
-		
-		foreach($issues as $val) {
-			$str .= "\"$val\", ";
-		}
-		
-		$str .= "{$this->addr->toHTMLString()}, ";
-		$str .= "{$this->p_contact->toHTMLString()}, {$this->s_contact->toHTMLString()}";
-	}
-	public function toHTMLTable($id, $hidden = true, $display = 'none')
-	{
-		$visibility = ($hidden) ? 'hidden' : 'visible';
-		$display = ($hidden) ? 'none' : 'block';
-		
-		$str = "<table id=\"$id\" style=\"visibility=$visibility;display=$display;\">".PHP_EOL;
+	public function toHTMLTable($id)
+	{	
+		$str = "<table id=\"$id\">".PHP_EOL;
 		
 		$str .= '<tr>'.PHP_EOL;
 		$str .= '<td title="id">'.PHP_EOL;
@@ -112,19 +85,19 @@ class GIVEProgram
 		
 		$str .= "<tr>".PHP_EOL;
 		$str .= "<td>".PHP_EOL;
-		$str .= $this->addr->toHTMLTable('addr', $hidden, $display);
+		$str .= $this->addr->toHTMLTable('addr');
 		$str .= "</td>".PHP_EOL;
 		$str .= "</tr>".PHP_EOL;
 		
 		$str .= "<tr>".PHP_EOL;
 		$str .= "<td>".PHP_EOL;
-		$str .= $this->p_contact->toHTMLTable('p_contact', $hidden, $display);
+		$str .= $this->p_contact->toHTMLTable('p_contact');
 		$str .= "</td>".PHP_EOL;
 		$str .= "</tr>".PHP_EOL;
 		
 		$str .= "<tr>".PHP_EOL;
 		$str .= "<td>".PHP_EOL;
-		$str .= $this->s_contact->toHTMLTable('s_contact', $hidden, $display);
+		$str .= $this->s_contact->toHTMLTable('s_contact');
 		$str .= "</td>".PHP_EOL;
 		$str .= "</tr>".PHP_EOL;
 		
