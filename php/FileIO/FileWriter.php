@@ -88,7 +88,7 @@ class FileWriter extends AbstractFile
 	 */
 	public function writeLine($data, $length = 1024)
 	{
-		$writeCount = fwrite($this->handle, $data."\n", $length);
+		$writeCount = fwrite($this->handle, $data.PHP_EOL, $length);
 		
 		if($writeCount == false) {
 			throw new IOException($this->fname);

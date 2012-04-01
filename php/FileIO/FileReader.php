@@ -3,7 +3,6 @@
 include_once('AbstractFile.php'); 
 include_once('IOException.php');
 include_once('FileNotFoundException.php');
-include_once('FileToArray.php');
 
 class FileReader extends AbstractFile
 {	
