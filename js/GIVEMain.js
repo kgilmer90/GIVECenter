@@ -1,3 +1,10 @@
+//**************************************************
+////////////////////////////////////////////////////
+//
+//				GIVE MAIN SCRIPT
+//
+////////////////////////////////////////////////////
+//**************************************************
 var agency = [];
 var program = [];
 
@@ -68,6 +75,7 @@ function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, progr
 	};
 	agency.p_contact = (p_contact instanceof GIVEProContact) ? p_contact : null;
 	agency.addr = (addr instanceof GIVEAddr) ? addr : null;
+	agency.programs = (programs[0] instanceof GIVEProgram) ? programs : [];
 	return agency;
 }
 /**
