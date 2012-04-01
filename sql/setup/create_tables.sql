@@ -62,14 +62,13 @@ CREATE TABLE program_issues(
 	issue_id INT UNSIGNED NOT NULL,
 	PRIMARY KEY(program_id,issue_id)) ENGINE INNODB;
 	
-	
 CREATE TABLE issues(
 	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(20)) ENGINE INNODB;
 	
 CREATE TABLE image_paths(
    	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    image_type VARCHAR(20),
-    path VARCHAR(50)
-    name VARCHAR(20)) ENGINE INNODB;
+        image_type VARCHAR(20),
+        path VARCHAR(50)
+        name VARCHAR(20)) ENGINE INNODB;
 
