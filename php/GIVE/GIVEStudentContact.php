@@ -31,6 +31,58 @@ class GIVEStudentContact
 		\"{$this->m_name}\", \"{$this->w_phone}\", \"{$this->m_phone}\",
 		\"{$this->mail}\"";
 	}
+	public function toHTMLTable($id, $hidden = true, $display = 'none')
+	{
+		$visibility = ($hidden) ? 'hidden' : 'visible';
+		$display = ($hidden) ? 'none' : 'block';
+		
+		$str = "<table id=\"$id\" style=\"visibility=$visibility;display=$display;\">".PHP_EOL;
+		
+		$str .= '<tr>'.PHP_EOL;
+		$str .= '<td> title="l_name"'.PHP_EOL;
+		$str .= $this->l_name.PHP_EOL;
+		$str .= '</td>'.PHP_EOL;
+		$str .= '</tr>'.PHP_EOL;
+		
+		$str .= '<tr>'.PHP_EOL;
+		$str .= '<td> title="f_name"'.PHP_EOL;
+		$str .= $this->f_name.PHP_EOL;
+		$str .= '</td>'.PHP_EOL;
+		$str .= '</tr>'.PHP_EOL;
+	
+		$str .= '<tr>'.PHP_EOL;
+		$str .= '<td> title="m_name"'.PHP_EOL;
+		$str .= $this->m_name.PHP_EOL;
+		$str .= '</td>'.PHP_EOL;
+		$str .= '</tr>'.PHP_EOL;
+		
+		$str .= '<tr>'.PHP_EOL;
+		$str .= '<td> title="suf"'.PHP_EOL;
+		$str .= $this->suf.PHP_EOL;
+		$str .= '</td>'.PHP_EOL;
+		$str .= '</tr>'.PHP_EOL;
+
+		$str .= '<tr>'.PHP_EOL;
+		$str .= '<td> title="w_phone"'.PHP_EOL;
+		$str .= $this->w_phone.PHP_EOL;
+		$str .= '</td>'.PHP_EOL;
+		$str .= '</tr>'.PHP_EOL;
+		
+		$str .= '<tr>'.PHP_EOL;
+		$str .= '<td> title="m_phone"'.PHP_EOL;
+		$str .= $this->m_phone.PHP_EOL;
+		$str .= '</td>'.PHP_EOL;
+		$str .= '</tr>'.PHP_EOL;
+		
+		$str .= '<tr>'.PHP_EOL;
+		$str .= '<td> title="mail"'.PHP_EOL;
+		$str .= $this->mail.PHP_EOL;
+		$str .= '</td>'.PHP_EOL;
+		$str .= '</tr>'.PHP_EOL;
+		
+		$str .= '</table>';
+		return $str;
+	}
 }
 
 ?>

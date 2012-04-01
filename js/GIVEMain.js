@@ -5,37 +5,55 @@
 //
 ////////////////////////////////////////////////////
 //**************************************************
-var agencies = [];
-var programs = [];
-var GIVE_MAP = {
-		agency:					"g",
-		agency_addr:			"ga",
-		agency_proContact:		"gp",
+var agencies = [];		//global agencies array, contains all agencies
+var programs = [];		//global programs array, contains all programs
+
+var GIVE_MAP = {		//translation map to aid in parsing onload strings
+		
+		agency:					"g",		//flags in the onload array
+		agency_addr:			"ga",		//to signal what kind of object
+		agency_proContact:		"gp",		//to create with the data that follows
 		agency_program:			"gr",
 		program_issues:			"ri",
 		program_addr:			"ra",
 		program_proContact:		"rp",
 		program_studentContact:	"rs",
 		
-		readAhead:{addr:4, agency:6, proContact:8, program:8, studentContact:7}
+		numElements:{		//number of primitive (string or numeric) 
+			addr:4, 		//elementsthat compose a single GIVE object
+			agency:6, 		
+			proContact:8, 	//used to advance the array index variable
+			program:8, 		//when parsing onload strings
+			studentContact:7
+		}
 };
-
+/**
+ * HTML <body> onload function
+ * All database query results are passed as arguments to the function.
+ * Arguments are then parsed for object type flags and corresponding
+ * GIVE objects are created from the data. All GIVEProgram and 
+ * GIVEAgency objects are stored in global arrays called
+ * 'agencies' and 'programs'.
+ */
 function main() {
 	var argc = arguments.length;
 	var argv = arguments;
 	
-	var agency;
-	var agency_procontact;
-	var agency_addr;
-	var agency_program;
-	var program_issues;
-	var program_addr;
-	var program_procontact;
-	var program_studentcontact;
-	
+	var agency = null;
+	var program = [];
 	for(var i = 0; i < argc; i++) {
+		
 		var flag = argv[i];
-		if(flag == GIVE_FLAG.agency) {
+		
+		if(flag == GIVE_MAP.agency) {
+			agency = new GIVEAgency(argv[i+1], argv[i+2], argv[i+3], argv[i+4], argv[i+5], argv[i+6], null, null, null);
+			i += GIVE_MAP.numElements.agency;
+		}
+		else if(flag == GIVE_MAP.agency_proContact) {
+			agency.p_contact = new GIVEProContact(argv[i+1], argv[i+2], argv[i+3], argv[i+4], argv[i+5], argv[i+6], argv[i+7], argv[i+8]);
+			i += GIVE_MAP.numElements.proContact;
+		}
+		else if(flag == GIVE_MAP.agency_addr) {
 			
 		}
 	}
