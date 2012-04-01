@@ -63,9 +63,9 @@ function get_programs($1)
     //search issue
     for ($temp in $program_array)
     {
-        if (temp['program_id'] == $1)
+        if ($temp['program_id'] == $1)
         {
-            $results_array.push (temp['issue_id']);
+            $results_array.push ($temp['issue_id']);
         }
     }
     return $results_array;

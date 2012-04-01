@@ -1,12 +1,19 @@
+<?php
 /**
  * Creates Array Objects
- * @return agnecy object
+ * @return agency object
  *
  */
+
+include_once('../setup/search_queries.php');
+include_once('../../php/GIVE/GIVEAddr.php');
+include_once('../../php/MYSQLDatabase/MySQLDatabaseConn.php');
+ 
+ 
 function create_agencies()
 {
     $conn = new MySQLDatabaseConn('localhost','give_ctr_agencies','root', 'mypass');
-    $agency_array;
+    $agency_array = array();
 
     $query = "SELECT id,name,descript,mail,phone,fax,p_contact,addr
                 FROM agency";
@@ -23,3 +30,4 @@ function create_agencies()
     		
     return $agency_array;
 }
+?>

@@ -1,12 +1,18 @@
+<?php
 /**
  *  Do we want this?
  * @param program identifier for issues array?
  * @return return array of issues for the supplied program
  */
+ 
+ include_once('../setup/search_queries.php');
+include_once('../../php/GIVE/GIVEAddr.php');
+include_once('../../php/MYSQLDatabase/MySQLDatabaseConn.php');
+ 
 function create_issues($program_id)
 {
     $conn = new MySQLDatabaseConn('localhost','give_ctr_agencies','root', 'mypass');
-    $issue_array;
+    $issue_array = array();
 
     $query = "";
 
@@ -22,3 +28,4 @@ function create_issues($program_id)
 
     return $issue_array;
 }
+?>

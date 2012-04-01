@@ -3,9 +3,9 @@
  * object_creater.php
  */
 
-include('setup/search_queries.php');
-include('../php/GIVE/GIVEAddr.php');
-include('../php/MYSQLDatabase/MySQLDatabaseConn.php');
+include_once('../setup/search_queries.php');
+include_once('../../php/GIVE/GIVEAddr.php');
+include_once('../../php/MYSQLDatabase/MySQLDatabaseConn.php');
 
 /**
  * Creates array of Address Objects created based on Agnecy ID supplied
