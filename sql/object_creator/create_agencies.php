@@ -1,18 +1,19 @@
 <?php
-/**
+/*
  * Creates Array Objects
- * @return agency object
  *
  */
 
-include_once('../setup/search_queries.php');
 include_once('../../php/GIVE/GIVEAddr.php');
-include_once('../../php/MYSQLDatabase/MySQLDatabaseConn.php');
  
- 
-function create_agencies()
+/**
+ *  Creates Objects for all the agencies and their information and returns them
+ *  in an array
+ * @param MySQLDatabaseConn $conn
+ * @return array 
+ */
+function create_agencies($conn)
 {
-    $conn = new MySQLDatabaseConn('localhost','give_ctr_agencies','root', 'mypass');
     $agency_array = array();
 
     $query = "SELECT id,name,descript,mail,phone,fax,p_contact,addr

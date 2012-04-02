@@ -1,16 +1,14 @@
 <?php
 /**
  *Creates pro contact objects, and returns array holding all of them
+ * @param $conn     database connection object
  * @return array holding contact objects
  */
- 
- include_once('../setup/search_queries.php');
+
 include_once('../../php/GIVE/GIVEAddr.php');
-include_once('../../php/MYSQLDatabase/MySQLDatabaseConn.php');
  
-function create_p_contacts()
+function create_p_contacts($conn)
 {
-    $conn = new MySQLDatabaseConn('localhost','give_ctr_agencies','root', 'mypass');
     $p_array = array();
 
     $query = "SELECT id,title,l_name,f_name,m_name,suf,w_phone,m_phone,mail

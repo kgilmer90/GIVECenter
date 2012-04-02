@@ -1,16 +1,14 @@
 <?php
 /**
  *  Creates all student contact objects
+ * @param $conn database connection object
  * @return returns array holding objects
  */
  
- include_once('../setup/search_queries.php');
 include_once('../../php/GIVE/GIVEAddr.php');
-include_once('../../php/MYSQLDatabase/MySQLDatabaseConn.php');
 
-function create_s_contacts()
+function create_s_contacts($conn)
 {
-    $conn = new MySQLDatabaseConn('localhost','give_ctr_agencies','root', 'mypass');
     $s_array = array();
 
     $query = "SELECT id,l_name,f_name,m_name,suf,w_phone,m_phone,mail
