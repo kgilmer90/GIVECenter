@@ -16,22 +16,21 @@ var programs = [];		//global programs array, contains all programs
  */
 function initAgenciesAndPrograms() {
 	
-	var count = 1;
-	var id = "agency" + count;
-	var table = document.getElementById(id);
-	while(table)
-	{
-		var agency = DOMElementToGIVEAgency(table.rows);
+	var i = 1;
+	var tableId = "agency" + i;
+	var count = document.getElementById(tableId).rows.length;
+	for(i = 1; i <= count; i++) {
+		var agency = TableIdToGIVEAgency(tableId);
 		
 		agencies.push(agency);
 		
-		for(i in agency.programs) {
-			programs.push(agency.programs[i]);
+		var j;
+		for(j in agency.programs) {
+			programs.push(agency.programs[j]);
 		}
-		
-		count++;
-		id = "agency" + agency_count;
-		table = document.getElementById(id);
+		i++;
+		tableId = "agency" + i;
+		table = document.getElementById(tableId);
 	}
 }
 //REWRITE TO INCLUDE ID AND COUNT FROM ABOVE
@@ -39,17 +38,22 @@ function initAgenciesAndPrograms() {
 //APPROPRIATE ELEMENT
 //
 //CHANGES NECESSARY IN ALL OTHER DOMElementToGIVE__ functions as well
-function DOMElementToGIVEAgency(agency_DOM_element) {
-	var id 			= agency_DOM_element[0].cells[0].innerHTML;
+function TableIdToGIVEAgency(table_id) {
+	var agency_DOM_element = document.getElementById(table_id);
+	
+	var regex_pattern;
+	var id 			= agency_DOM_element.rows[0].innerHTML;
+	alert(id);
+	alert(id.match(regex_pattern));
 	var name 		= agency_DOM_element[1].cells[0].innerHTML;
 	var descript 	= agency_DOM_element[2].cells[0].innerHTML;
 	var mail 		= agency_DOM_element[3].cells[0].innerHTML;
 	var phone 		= agency_DOM_element[4].cells[0].innerHTML;
 	var fax 		= agency_DOM_element[5].cells[0].innerHTML;
 	
-	var p_contact 	= DOMElementToGIVEProContact(agency_DOM_element[6].rows);
-	var addr 		= DOMElementToGIVEAddr(agency_DOM_element[7].rows);
-	var program_arr	= DOMElementToGIVEProgramsArray(agency_DOM_element[8].rows);
+	var p_contact 	= AgencyTableIdToGIVEProContact(table_id + "_p_contact");
+	var addr 		= AgencyTableIdToGIVEAddr(table_id + "_addr");
+	var program_arr	= AgencyTableIdToGIVEProgramsArray(table_id + "_program");
 	
 	var agency = GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, program_arr);
 
@@ -60,7 +64,9 @@ function DOMElementToGIVEAgency(agency_DOM_element) {
 	return agency;
 }
 
-function DOMElementToGIVEAddr(addr_DOM_element) {
+function TableIdToGIVEAddr(table_id) {
+	var addr_DOM_element = document.getElementById(table_id);
+	
 	var street 		= addr_DOM_element[0].cells[0].innerHTML;
 	var city 		= addr_DOM_element[1].cells[0].innerHTML;
 	var state_us 	= addr_DOM_element[2].cells[0].innerHTML;
@@ -69,7 +75,9 @@ function DOMElementToGIVEAddr(addr_DOM_element) {
 	return new GIVEAddr(street, city, state_us, zip);
 }
 
-function DOMElementToGIVEProContact(p_contact_DOM_element) {
+function TableIdToGIVEProContact(table_id) {
+	var p_contact_DOM_element = document.getElementById(table_id);
+	
 	var title 		= p_contact_DOM_element[0].cells[0].innerHTML;
 	var l_name 		= p_contact_DOM_element[1].cells[0].innerHTML;
 	var f_name 		= p_contact_DOM_element[2].cells[0].innerHTML;
@@ -82,19 +90,21 @@ function DOMElementToGIVEProContact(p_contact_DOM_element) {
 	return new GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 
-function DOMElementToGIVEProgramsArray(programs_array_DOM_element) {
+function TableIdToGIVEProgramsArray(table_id) {
 	
 	var program_arr = [];
 	
 	var i;
-	for(i in programs_array_DOM_element) {
-		var program = DOMElementToGIVEProgram(programs_array_DOM_element[i].rows);
-		program_arr.push(program);
+	var count = document.getElementById(table_id).rows.length;
+	for(i = 1; i <= count; i++) {
+		var program = TableIdToGIVEProgram(table_id + i);
+		programs.push(program);
 	}
-	return program_arr;
 }
 
-function DOMElementToGIVEProgram(program_DOM_element) {
+function TableIdToGIVEProgram(table_id) {
+	var program_DOM_element = document.getElementById(table_id);
+	
 	var id 			= program_DOM_element[0].cells[0].innerHTML;
 	var referal 	= program_DOM_element[1].cells[0].innerHTML;
 	var season 		= program_DOM_element[2].cells[0].innerHTML;
@@ -112,7 +122,9 @@ function DOMElementToGIVEProgram(program_DOM_element) {
 	return new GIVEProgram(id, referal, season, times, name, descript, duration, notes, issues, addr, null, p_contact, s_contact);
 }
 
-function DOMElementToGIVEStudentContact(s_contact_DOM_element) {
+function TableIdToGIVEStudentContact(table_id) {
+	var s_contact_DOM_element = document.getElementById(table_id);
+	
 	var l_name 		= s_contact_DOM_element[0].cells[0].innerHTML;
 	var f_name 		= s_contact_DOM_element[1].cells[0].innerHTML;
 	var m_name 		= s_contact_DOM_element[2].cells[0].innerHTML;
