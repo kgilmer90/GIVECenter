@@ -72,3 +72,8 @@ CREATE TABLE image_paths(
         path VARCHAR(50)
         name VARCHAR(20)) ENGINE INNODB;
 
+CREATE TABLE users(
+        uname VARCHAR(30) NOT NULL,
+        passwd VARCHAR(30)
+        PRIMARY KEY(uname,passwd)) ENGINE INNODB;
+
