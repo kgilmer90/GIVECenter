@@ -262,7 +262,7 @@ class MySQLDatabaseConn
 	 */
 	public function __destruct()
 	{
-		if($this->dblink == false) {
+		if($this->dblink != false) {
 			$this->close();
 		}
 	}
