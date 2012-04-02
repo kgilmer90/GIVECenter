@@ -46,10 +46,31 @@ function remove_user($conn,$uname,$passwd)
 function change_pass($conn, $uname, $old_passwd, $new_passwd)
 {
     $query = "UPDATE users
-                SET passwd = $new_passwd
-                WHERE uname = $uname AND passwd = $old_passwd";
+                SET passwd = ".md5($new_passwd)."
+                WHERE uname = $uname AND passwd = ".md5($old_passwd);
     $conn->query($query);
 }
 
+/**
+ *  Checks credentials for person attempting to login
+ * @param type $conn    database connection object
+ * @param type $uname   username
+ * @param type $passwd    password
+ * @return type $varified boolean that returns if user and pass are correct
+ */
+function check_user($conn, $uname, $passwd)
+{
+    $verified = false;
+    
+    $query = "SELECT FROM users
+                WHERE uname = $uname AND passwd = ".md5($passwd);
+    
+    $conn->query($query);
+            
+    if ($conn->numRows() == 1)
+        $verified = true;
+    
+    return $verified;
+}
 
 ?>
