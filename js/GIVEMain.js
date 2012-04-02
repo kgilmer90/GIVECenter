@@ -15,21 +15,30 @@ var programs = [];		//global programs array, contains all programs
  * for convenience.
  */
 function initAgenciesAndPrograms() {
-	var agency_table = document.getElementById("agency_table");
-	var all_agencies = agency_table.rows;
 	
-	var i;
-	for(i in all_agencies) {
-		var agency = DOMElementToGIVEAgency(all_agencies[i].rows);
+	var count = 1;
+	var id = "agency" + count;
+	var table = document.getElementById(id);
+	while(table)
+	{
+		var agency = DOMElementToGIVEAgency(table.rows);
 		
 		agencies.push(agency);
 		
 		for(i in agency.programs) {
 			programs.push(agency.programs[i]);
 		}
+		
+		count++;
+		id = "agency" + agency_count;
+		table = document.getElementById(id);
 	}
 }
-
+//REWRITE TO INCLUDE ID AND COUNT FROM ABOVE
+//SO TO SEARCH THROUGH THE DOM TREE FOR THE
+//APPROPRIATE ELEMENT
+//
+//CHANGES NECESSARY IN ALL OTHER DOMElementToGIVE__ functions as well
 function DOMElementToGIVEAgency(agency_DOM_element) {
 	var id 			= agency_DOM_element[0].cells[0].innerHTML;
 	var name 		= agency_DOM_element[1].cells[0].innerHTML;
@@ -48,7 +57,6 @@ function DOMElementToGIVEAgency(agency_DOM_element) {
 	for(i in program_arr) {
 		program_arr[i].agency = agency;
 	}
-	
 	return agency;
 }
 
