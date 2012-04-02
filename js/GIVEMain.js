@@ -18,11 +18,13 @@ function initAgenciesAndPrograms() {
 	var agency_table = document.getElementById("agency_table");
 	var all_agencies = agency_table.rows;
 	
-	for(var i in all_agencies) {
+	var i;
+	for(i in all_agencies) {
 		var agency = DOMElementToGIVEAgency(all_agencies[i].rows);
 		
 		agencies.push(agency);
-		for(var i in agency.programs) {
+		
+		for(i in agency.programs) {
 			programs.push(agency.programs[i]);
 		}
 	}
@@ -42,7 +44,8 @@ function DOMElementToGIVEAgency(agency_DOM_element) {
 	
 	var agency = GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, program_arr);
 
-	foreach(var i in program_arr) {
+	var i;
+	for(i in program_arr) {
 		program_arr[i].agency = agency;
 	}
 	
@@ -74,7 +77,9 @@ function DOMElementToGIVEProContact(p_contact_DOM_element) {
 function DOMElementToGIVEProgramsArray(programs_array_DOM_element) {
 	
 	var program_arr = [];
-	for(var i in programs_array_DOM_element) {
+	
+	var i;
+	for(i in programs_array_DOM_element) {
 		var program = DOMElementToGIVEProgram(programs_array_DOM_element[i].rows);
 		program_arr.push(program);
 	}
