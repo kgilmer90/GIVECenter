@@ -26,4 +26,24 @@ function create_s_contacts($conn)
 
     return $s_array;
 }
+
+function create_s_contacts_limited($conn)
+{
+    $s_array = array();
+
+    $query = "SELECT id,l_name,f_name,m_name,suf,w_phone,mail
+                FROM student_contact";
+    
+    $conn->query($query);
+
+    $results = $conn->fetchAllAsAssoc();
+
+    foreach($results as $temp)
+    {
+        $p = new GIVEAgency($temp);
+        array_push($s_array,$p);
+    }
+
+    return $s_array;
+}
 ?>
