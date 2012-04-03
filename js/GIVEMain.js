@@ -18,8 +18,8 @@ function initAgenciesAndPrograms() {
 	
 	var i = 1;
 	var tableId = "agency" + i;
-	var count = document.getElementById(tableId).rows.length;
-	for(i = 1; i <= count; i++) {
+	var agency_count = document.getElementById("agency_table").rows.length;
+	for(i = 1; i <= agency_count; i++) {
 		var agency = TableIdToGIVEAgency(tableId);
 		
 		agencies.push(agency);
@@ -41,19 +41,16 @@ function initAgenciesAndPrograms() {
 function TableIdToGIVEAgency(table_id) {
 	var agency_DOM_element = document.getElementById(table_id);
 	
-	var regex_pattern = /^<td/i;
-	var id 			= agency_DOM_element.rows[0].innerHTML;
-	alert(id);
-	alert(id.match(regex_pattern));
-	var name 		= agency_DOM_element[1].cells[0].innerHTML;
-	var descript 	= agency_DOM_element[2].cells[0].innerHTML;
-	var mail 		= agency_DOM_element[3].cells[0].innerHTML;
-	var phone 		= agency_DOM_element[4].cells[0].innerHTML;
-	var fax 		= agency_DOM_element[5].cells[0].innerHTML;
+	var id 			= TableDataFromInnerHTML(agency_DOM_element.rows[0].innerHTML);
+	var name 		= TableDataFromInnerHTML(agency_DOM_element.rows[1].innerHTML);
+	var descript 	= TableDataFromInnerHTML(agency_DOM_element.rows[2].innerHTML);
+	var mail 		= TableDataFromInnerHTML(agency_DOM_element.rows[3].innerHTML);
+	var phone 		= TableDataFromInnerHTML(agency_DOM_element.rows[4].innerHTML);
+	var fax 		= TableDataFromInnerHTML(agency_DOM_element.rows[5].innerHTML);
 	
-	var p_contact 	= AgencyTableIdToGIVEProContact(table_id + "_p_contact");
-	var addr 		= AgencyTableIdToGIVEAddr(table_id + "_addr");
-	var program_arr	= AgencyTableIdToGIVEProgramsArray(table_id + "_program");
+	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
+	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
+	var program_arr	= TableIdToGIVEProgramsArray(table_id + "_program");
 	
 	var agency = GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, program_arr);
 
@@ -67,10 +64,10 @@ function TableIdToGIVEAgency(table_id) {
 function TableIdToGIVEAddr(table_id) {
 	var addr_DOM_element = document.getElementById(table_id);
 	
-	var street 		= addr_DOM_element[0].cells[0].innerHTML;
-	var city 		= addr_DOM_element[1].cells[0].innerHTML;
-	var state_us 	= addr_DOM_element[2].cells[0].innerHTML;
-	var zip 		= addr_DOM_element[3].cells[0].innerHTML;
+	var street 		= TableDataFromInnerHTML(addr_DOM_element.rows[0].innerHTML);
+	var city 		= TableDataFromInnerHTML(addr_DOM_element.rows[1].innerHTML);
+	var state_us 	= TableDataFromInnerHTML(addr_DOM_element.rows[2].innerHTML);
+	var zip 		= TableDataFromInnerHTML(addr_DOM_element.rows[3].innerHTML);
 	
 	return new GIVEAddr(street, city, state_us, zip);
 }
@@ -78,46 +75,49 @@ function TableIdToGIVEAddr(table_id) {
 function TableIdToGIVEProContact(table_id) {
 	var p_contact_DOM_element = document.getElementById(table_id);
 	
-	var title 		= p_contact_DOM_element[0].cells[0].innerHTML;
-	var l_name 		= p_contact_DOM_element[1].cells[0].innerHTML;
-	var f_name 		= p_contact_DOM_element[2].cells[0].innerHTML;
-	var m_name 		= p_contact_DOM_element[3].cells[0].innerHTML;
-	var suf 		= p_contact_DOM_element[4].cells[0].innerHTML;
-	var w_phone 	= p_contact_DOM_element[5].cells[0].innerHTML;
-	var m_phone 	= p_contact_DOM_element[6].cells[0].innerHTML;
-	var mail 		= p_contact_DOM_element[7].cells[0].innerHTML;
+	var title 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[0].innerHTML);
+	var l_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[1].innerHTML);
+	var f_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[2].innerHTML);
+	var m_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[3].innerHTML);
+	var suf 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[4].innerHTML);
+	var w_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[5].innerHTML);
+	var m_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[6].innerHTML);
+	var mail 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[7].innerHTML);
 	
 	return new GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 
 function TableIdToGIVEProgramsArray(table_id) {
-	
 	var program_arr = [];
 	
 	var i;
 	var count = document.getElementById(table_id).rows.length;
 	for(i = 1; i <= count; i++) {
 		var program = TableIdToGIVEProgram(table_id + i);
-		programs.push(program);
+		program_arr.push(program);
+		alert("TableIdToGIVEProgramsArray, program = " + program);
 	}
+	return program_arr;
 }
 
 function TableIdToGIVEProgram(table_id) {
 	var program_DOM_element = document.getElementById(table_id);
 	
-	var id 			= program_DOM_element[0].cells[0].innerHTML;
-	var referal 	= program_DOM_element[1].cells[0].innerHTML;
-	var season 		= program_DOM_element[2].cells[0].innerHTML;
-	var times 		= program_DOM_element[3].cells[0].innerHTML;
-	var name 		= program_DOM_element[4].cells[0].innerHTML;
-	var descript 	= program_DOM_element[5].cells[0].innerHTML;
-	var duration 	= program_DOM_element[6].cells[0].innerHTML;
-	var notes 		= program_DOM_element[7].cells[0].innerHTML;
+	var id 			= TableDataFromInnerHTML(program_DOM_element.rows[0].innerHTML);
+	var referal 	= TableDataFromInnerHTML(program_DOM_element.rows[1].innerHTML);
+	var season 		= TableDataFromInnerHTML(program_DOM_element.rows[2].innerHTML);
+	var times 		= TableDataFromInnerHTML(program_DOM_element.rows[3].innerHTML);
+	var name 		= TableDataFromInnerHTML(program_DOM_element.rows[4].innerHTML);
+	var descript 	= TableDataFromInnerHTML(program_DOM_element.rows[5].innerHTML);
+	var duration 	= TableDataFromInnerHTML(program_DOM_element.rows[6].innerHTML);
+	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[7].innerHTML);
 	
-	var issues 		= DOMElementToIssuesArray(program_DOM_element[8].rows);
-	var addr 		= DOMElementToGIVEAddr(program_DOM_element[9].rows);
-	var p_contact 	= DOMElementToProContact(program_DOM_element[10].rows);
-	var s_contact 	= DOMElementToStudentContact(program_DOM_element[11].rows);
+	var issues 		= TableIdToIssuesArray(table_id + "_issue");
+	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
+	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
+	var s_contact 	= TableIdToGIVEStudentContact(table_id + "_s_contact");
+	alert("TableIdToGIVEProgram, p_contact = " + p_contact);
+	alert("TableIdToGIVEProgram, s_contact = " + s_contact);
 	
 	return new GIVEProgram(id, referal, season, times, name, descript, duration, notes, issues, addr, null, p_contact, s_contact);
 }
@@ -125,15 +125,42 @@ function TableIdToGIVEProgram(table_id) {
 function TableIdToGIVEStudentContact(table_id) {
 	var s_contact_DOM_element = document.getElementById(table_id);
 	
-	var l_name 		= s_contact_DOM_element[0].cells[0].innerHTML;
-	var f_name 		= s_contact_DOM_element[1].cells[0].innerHTML;
-	var m_name 		= s_contact_DOM_element[2].cells[0].innerHTML;
-	var suf 		= s_contact_DOM_element[3].cells[0].innerHTML;
-	var w_phone 	= s_contact_DOM_element[4].cells[0].innerHTML;
-	var m_phone 	= s_contact_DOM_element[5].cells[0].innerHTML;
-	var mail 		= s_contact_DOM_element[6].cells[0].innerHTML;
+	var l_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[0].innerHTML);
+	var f_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[1].innerHTML);
+	var m_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[2].innerHTML);
+	var suf 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[3].innerHTML);
+	var w_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[4].innerHTML);
+	var m_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[5].innerHTML);
+	var mail 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[6].innerHTML);
 	
 	return new GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail);
+}
+
+function TableIdToIssuesArray(table_id) {
+	var issues_arr = [];
+	
+	var i;
+	var issue_DOM_element = document.getElementById(table_id);
+	var count = issue_DOM_element.rows.length;
+	for(i = 0; i < count; i++) {
+		var issue = TableDataFromInnerHTML(issue_DOM_element.rows[i].innerHTML);
+		issues_arr.push(issue);
+	}
+	return issues_arr;
+}
+
+function TableDataFromInnerHTML(innerHTML) {
+	if(!innerHTML) {
+		return null;
+	}
+	var pattern = "\<td (.+?)\>(.+?)\<\/td\>";
+	var regex = new RegExp(pattern, "i");
+	var matches = innerHTML.match(pattern);
+	
+	if(!matches) {
+		return null;
+	}
+	return matches[2];
 }
 
 //**************************************************
@@ -158,7 +185,12 @@ function GIVEAddr(street, city, state, zip) {
 		street 		: street,
 		city 		: city,
 		state_us 	: state,
-		zip 		: zip
+		zip 		: zip,
+		toString : function() {
+			return "street=" + this.street + 
+			",city=" + this.city + ",state_us=" + this.state_us + 
+			",zip=" + this.zip;
+		}
 	};
 	return addr;
 }
@@ -177,16 +209,28 @@ function GIVEAddr(street, city, state, zip) {
  */
 function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, programs) {
 	var agency = {
-			id 		: id, 
-			name	: name, 
-			descript: descript, 
-			mail	: mail, 
-			phone	: phone, 
-			fax		: fax
+			id 			: id, 
+			name		: name, 
+			descript	: descript, 
+			mail		: mail, 
+			phone		: phone, 
+			fax			: fax,
+			p_contact	: p_contact,
+			addr		: addr,
+			programs	: programs,
+			toString	: function() {
+				var str = "id=" + this.id + ",name=" + this.name + ",descript=" + 
+				this.descript + ",mail=" + this.mail + ",phone=" + this.phone + 
+				",fax=" + this.fax + "<br />" + this.p_contact + "<br />" + this.addr +
+				"<br />";
+				
+				var i;
+				for(i in this.programs) {
+					str += "program" + i + "=" + this.programs[i] + "<br />";
+				}
+				return str;
+			}
 	};
-	agency.p_contact = (p_contact instanceof GIVEProContact) ? p_contact : null;
-	agency.addr = (addr instanceof GIVEAddr) ? addr : null;
-	agency.programs = (programs[0] instanceof GIVEProgram) ? programs : [];
 	return agency;
 }
 /**
@@ -227,7 +271,12 @@ function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, ma
 			suf 	: suf,
 			w_phone	: w_phone, 
 			m_phone	: m_phone,
-			mail	: mail
+			mail	: mail,
+			toString : function() {
+				return "title=" + this.title + ",l_name=" + this.l_name + ",f_name=" + 
+				this.f_name + ",m_name=" + this.m_name + ",suf=" + this.suf + ",w_phone=" +
+				this.w_phone + ",m_phone" + this.m_phone + ",mail=" + this.mail;
+			}
 	};
 	return pcon;
 }
@@ -258,12 +307,27 @@ function GIVEProgram (id, referal, season, times, name, descript, duration, note
 			descript	: descript,
 			duration	: duration,
 			notes		: notes,
-			issues		: issues
+			issues		: issues,
+			addr		: addr,
+			agency		: agency,
+			p_contact	: p_contact,
+			s_contact	: s_contact,
+			toString 	: function() {
+				var str = "id=" + this.id + ",referal=" + this.referal + 
+				",season=" + this.season + ",times=" + this.times + ",name=" + 
+				this.name + ",descript=" + this.descript + ",duration=" + 
+				this.duration + ",notes=" + this.notes + "<br />";
+				
+				var i;
+				for(i in issues) {
+					str += "issue" + i + "=" + issues[i] + ",";
+				}
+				str += "<br />";
+				
+				str += this.addr + "<br />" + this.p_contact + "<br />" + this.s_contact;
+				return str;
+			}
 	};
-	program.addr = (addr instanceof GIVEAddr) ? addr : null;
-	program.agency = (agency instanceof GIVEAgency) ? agency : null;
-	program.p_contact = (p_contact instanceof GIVEProContact) ? p_contact : null;
-	program.s_contact = (s_contact instanceof GIVEStudentContact) ? s_contact : null;
 	return program;
 }
 /**
@@ -287,7 +351,12 @@ function GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail)
 			suf 	: suf,
 			w_phone	: w_phone, 
 			m_phone	: m_phone,
-			mail	: mail
+			mail	: mail,
+			toString : function() {
+				return "l_name=" + this.l_name + ",f_name=" + this.f_name + 
+				",m_name=" + this.m_name + ",suf=" + this.suf + ",w_phone=" +
+				this.w_phone + ",m_phone" + this.m_phone + ",mail=" + this.mail;
+			}
 	};
 	return scon;
 }
