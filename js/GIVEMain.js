@@ -41,7 +41,7 @@ function initAgenciesAndPrograms() {
 function TableIdToGIVEAgency(table_id) {
 	var agency_DOM_element = document.getElementById(table_id);
 	
-	var regex_pattern;
+	var regex_pattern = /^<td/i;
 	var id 			= agency_DOM_element.rows[0].innerHTML;
 	alert(id);
 	alert(id.match(regex_pattern));
