@@ -158,37 +158,9 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
 </style>
 <![endif]-->
-
-<script type="text/javascript">
-function hidestuff(boxid){
-   	document.getElementById(boxid).style.visibility="hidden";
-  	document.getElementById(boxid).style.position= "absolute";
-  	document.getElementById(boxid).style.display="none";
-}
-function showstuff(boxid){
-  	document.getElementById(boxid).style.visibility="visible";
-	document.getElementById(boxid).style.position= "relative";
-	document.getElementById(boxid).style.display="block";
-}
-function searchtoresults()
-{
-	showstuff('results');
-	hidestuff('interests');	
-}
-function backtosearch()
-{
-	showstuff('interests');
-	hidestuff('results');
-}
-function clearChoices()
-{
-	 document.getElementById('form1').reset();
-	 document.getElementById('form3').reset();
-
-}
-
-</script>
 </head>
+
+<script src="Navigation.js" type="text/javascript"></script>
 
 <body onload="hidestuff('results')">
 <div class="container" id="content">
@@ -199,8 +171,8 @@ function clearChoices()
   <div class="sidebar1">
     <div align="center">
       <ul class="nav">
-        <li><a href="file:///C:/Users/Karen/Documents/Software%20Engineering/Admin.html">Admin</a></li>
-        <li><a href="file:///C:/Users/Karen/Documents/Software%20Engineering/BrowseAll.html">Browse All</a></li>
+        <li><a href="file:///C:/Users/Karen/GIVECenter/html_css/Admin.html">Admin</a></li>
+        <li><a href="file:///C:/Users/Karen/GIVECenter/html_css/BrowseAll.html">Browse All</a></li>
         <li><a href="#">Logout</a></li>
         <li>
           <form id="form2" name="form2" method="post" action="">
