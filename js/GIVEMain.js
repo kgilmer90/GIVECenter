@@ -16,20 +16,24 @@ var programs = [];		//global programs array, contains all programs
 function initAgenciesAndPrograms() {
 	
 	var i = 1;
-	var tableId = "agency" + i;
+	//get the main table and count how many <tr> tags exist (number of agencies)
 	var agency_count = document.getElementById("agency_table").rows.length;
 	for(i = 1; i <= agency_count; i++) {
+		
+		//get the table for each agency and construct a GIVEAgency object from it
+		var tableId = "agency" + i;
 		var agency = TableIdToGIVEAgency(tableId);
 		
+		//add to global agencies array
 		agencies.push(agency);
 		
+		//each GIVEAgency contains an array of GIVEPrograms
+		//add each agency's programs to the global programs array
 		var j;
 		for(j in agency.programs) {
 			programs.push(agency.programs[j]);
 		}
 		i++;
-		tableId = "agency" + i;
-		table = document.getElementById(tableId);
 		document.write(agency);
 	}
 }
@@ -39,8 +43,14 @@ function initAgenciesAndPrograms() {
  * @returns GIVEAgency object representing the table data
  */
 function TableIdToGIVEAgency(table_id) {
+	
+	//retreive the DOM element within the GIVEAgency table id
 	var agency_DOM_element = document.getElementById(table_id);
 	
+	//there's no way to reliably retrieve the data in between <td> </td> tags
+	//using DOM element properties. Instead, obtain the innerHTML for the
+	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+	//the <td> </td> tags and obtain the data within
 	var id 			= TableDataFromInnerHTML(agency_DOM_element.rows[0].innerHTML);
 	var name 		= TableDataFromInnerHTML(agency_DOM_element.rows[1].innerHTML);
 	var descript 	= TableDataFromInnerHTML(agency_DOM_element.rows[2].innerHTML);
@@ -48,12 +58,18 @@ function TableIdToGIVEAgency(table_id) {
 	var phone 		= TableDataFromInnerHTML(agency_DOM_element.rows[4].innerHTML);
 	var fax 		= TableDataFromInnerHTML(agency_DOM_element.rows[5].innerHTML);
 	
+	//retrieve the DOM element for the following tables and repeat the process above
 	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var program_arr	= TableIdToGIVEProgramsArray(table_id + "_program");
 	
+	//build the complete GIVEAgency object
 	var agency = new GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, program_arr);
 
+	//GIVEAgency objects contain an array of GIVEProgram objects, each of which
+	//contains a reference back to its owner, the GIVEAgency object.
+	//The programs in the array initially have their agency property set null,
+	//so now go back and assign the agency property to the owning GIVEAgency object
 	var i;
 	for(i in program_arr) {
 		program_arr[i].agency = agency;
@@ -66,13 +82,20 @@ function TableIdToGIVEAgency(table_id) {
  * @returns GIVEAddr object representing the table data
  */
 function TableIdToGIVEAddr(table_id) {
-	var addr_DOM_element = document.getElementById(table_id);
 	
+	//retreive the DOM element within the GIVEAgency table id
+	var addr_DOM_element = document.getElementById(table_id);
+		
+	//there's no way to reliably retrieve the data in between <td> </td> tags
+	//using DOM element properties. Instead, obtain the innerHTML for the
+	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+	//the <td> </td> tags and obtain the data within
 	var street 		= TableDataFromInnerHTML(addr_DOM_element.rows[0].innerHTML);
 	var city 		= TableDataFromInnerHTML(addr_DOM_element.rows[1].innerHTML);
 	var state_us 	= TableDataFromInnerHTML(addr_DOM_element.rows[2].innerHTML);
 	var zip 		= TableDataFromInnerHTML(addr_DOM_element.rows[3].innerHTML);
 	
+	//build and return the complete GIVEAddr object
 	return new GIVEAddr(street, city, state_us, zip);
 }
 /**
@@ -81,8 +104,14 @@ function TableIdToGIVEAddr(table_id) {
  * @returns GIVEProContact object representing the table data
  */
 function TableIdToGIVEProContact(table_id) {
-	var p_contact_DOM_element = document.getElementById(table_id);
 	
+	//retreive the DOM element within the GIVEAgency table id
+	var p_contact_DOM_element = document.getElementById(table_id);
+		
+	//there's no way to reliably retrieve the data in between <td> </td> tags
+	//using DOM element properties. Instead, obtain the innerHTML for the
+	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+	//the <td> </td> tags and obtain the data within
 	var title 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[0].innerHTML);
 	var l_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[1].innerHTML);
 	var f_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[2].innerHTML);
@@ -92,6 +121,7 @@ function TableIdToGIVEProContact(table_id) {
 	var m_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[6].innerHTML);
 	var mail 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[7].innerHTML);
 	
+	//build and return the complete GIVEProContact object
 	return new GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 /**
@@ -105,6 +135,8 @@ function TableIdToGIVEProgramsArray(table_id) {
 	var i;
 	var count = document.getElementById(table_id).rows.length;
 	for(i = 1; i <= count; i++) {
+		
+		//get the table for each program and construct a GIVEProgram object from it
 		var program = TableIdToGIVEProgram(table_id + i);
 		program_arr.push(program);
 	}
@@ -116,8 +148,14 @@ function TableIdToGIVEProgramsArray(table_id) {
  * @returns GIVEProgram object representing the table data
  */
 function TableIdToGIVEProgram(table_id) {
-	var program_DOM_element = document.getElementById(table_id);
 	
+	//retreive the DOM element within the GIVEAgency table id
+	var program_DOM_element = document.getElementById(table_id);
+		
+	//there's no way to reliably retrieve the data in between <td> </td> tags
+	//using DOM element properties. Instead, obtain the innerHTML for the
+	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+	//the <td> </td> tags and obtain the data within
 	var id 			= TableDataFromInnerHTML(program_DOM_element.rows[0].innerHTML);
 	var referal 	= TableDataFromInnerHTML(program_DOM_element.rows[1].innerHTML);
 	var season 		= TableDataFromInnerHTML(program_DOM_element.rows[2].innerHTML);
@@ -127,11 +165,13 @@ function TableIdToGIVEProgram(table_id) {
 	var duration 	= TableDataFromInnerHTML(program_DOM_element.rows[6].innerHTML);
 	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[7].innerHTML);
 	
+	//retrieve the DOM element for the following tables and repeat the process above
 	var issues 		= TableIdToIssuesArray(table_id + "_issue");
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
 	var s_contact 	= TableIdToGIVEStudentContact(table_id + "_s_contact");
 	
+	//build and return the complete GIVEProgram object
 	return new GIVEProgram(id, referal, season, times, name, descript, duration, notes, issues, addr, null, p_contact, s_contact);
 }
 /**
@@ -140,8 +180,14 @@ function TableIdToGIVEProgram(table_id) {
  * @returns GIVEStudentContact object representing the table data
  */
 function TableIdToGIVEStudentContact(table_id) {
+	
+	//retreive the DOM element within the GIVEAgency table id
 	var s_contact_DOM_element = document.getElementById(table_id);
 	
+	//there's no way to reliably retrieve the data in between <td> </td> tags
+	//using DOM element properties. Instead, obtain the innerHTML for the
+	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+	//the <td> </td> tags and obtain the data within
 	var l_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[0].innerHTML);
 	var f_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[1].innerHTML);
 	var m_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[2].innerHTML);
@@ -150,6 +196,7 @@ function TableIdToGIVEStudentContact(table_id) {
 	var m_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[5].innerHTML);
 	var mail 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[6].innerHTML);
 	
+	//build and return the complete GIVEStudentContact object
 	return new GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 /**
@@ -158,12 +205,20 @@ function TableIdToGIVEStudentContact(table_id) {
  * @returns array of string objects representing the table data
  */
 function TableIdToIssuesArray(table_id) {
+	
 	var issues_arr = [];
 	
-	var i;
+	//retreive the DOM element within the GIVEAgency table id
 	var issue_DOM_element = document.getElementById(table_id);
+	
+	var i;
 	var count = issue_DOM_element.rows.length;
 	for(i = 0; i < count; i++) {
+		
+		//there's no way to reliably retrieve the data in between <td> </td> tags
+		//using DOM element properties. Instead, obtain the innerHTML for the
+		//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+		//the <td> </td> tags and obtain the data within
 		var issue = TableDataFromInnerHTML(issue_DOM_element.rows[i].innerHTML);
 		issues_arr.push(issue);
 	}
@@ -180,6 +235,8 @@ function TableDataFromInnerHTML(innerHTML) {
 	if(!innerHTML) {
 		return null;
 	}
+	
+	//<td prop1=value1 ... propN=valueN>text I actually care about </td>
 	var pattern = "\<td (.+?)\>(.+?)\<\/td\>";
 	var regex = new RegExp(pattern, "i");
 	var matches = innerHTML.match(pattern);
@@ -187,9 +244,11 @@ function TableDataFromInnerHTML(innerHTML) {
 	if(!matches) {
 		return null;
 	}
-	return matches[2];	//match[0] = whole string
-						//match[1] = text between "<td" and the closing ">"
-						//match[2] = text between "<td ...>" and "</td>"
+	
+	//matches[0] = whole string
+	//matches[1] = text between "<td" and the closing ">"
+	//matches[2] = text between "<td ...>" and "</td>"
+	return matches[2];
 }
 
 //**************************************************

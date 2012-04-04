@@ -7,13 +7,15 @@ include_once('GIVEProContact.php');
 include_once('GIVEProgram.php');
 include_once('GIVEStudentContact.php');
 
-function GIVEAgenciesToHTMLTable($agencies, $id, $hidden = true, $display = 'none')
+function GIVEAgenciesToHTMLTable($agencies, $hidden = true, $display = 'none')
 {
 	$visibility = ($hidden) ? 'hidden' : 'visible';
-	echo '<table id='.$id.' style="visibility='.$visibility.';display='.$display.';"';
+	echo '<table id="agency_table" style="visibility='.$visibility.';display='.$display.';"';
 	
+	var $i = 1;
 	foreach($agencies as $agency) {
-		echo $agency->toHTMLTable('agency'.$agency->id);
+		echo $agency->toHTMLTable('agency'.$i);
+		$i++;
 	}
 	echo '</table>';
 }
