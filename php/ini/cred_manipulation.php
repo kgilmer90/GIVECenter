@@ -8,7 +8,7 @@
  *
  */
 include ('../MySQLDatabase/MySQLDatabaseConn.php');
-include ('GIVECenterini.php');
+include ('GIVECenterIni.php');
 
 /**
  * Function Adds User for initial login to the site

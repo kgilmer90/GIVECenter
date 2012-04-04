@@ -9,9 +9,9 @@ var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
 
 /**
- * HTML <body> onload function
+ * HTML <body> onload function.
  * All database query results are stored on the page as a hidden table.
- * The table is then parsed and reconstructed as Javascript objects.
+ * This function parses the table and reconstructs the data as JS objects.
  */
 function initAgenciesAndPrograms() {
 	
@@ -228,7 +228,7 @@ function TableIdToIssuesArray(table_id) {
  * In most cases, content within <td> </td> tags could not be extracted
  * without also including the tags. This function strips off the <td> </td>
  * tags and returns the inner data.
- * @param innerHTML - string of the form "<td property1=value1, ..., propertyN=valueN>innerText</td>"
+ * @param innerHTML - string of the form "<td property1=value1 ... propertyN=valueN>innerText</td>"
  * @returns inner text content of the <td> </td> tag
  */
 function TableDataFromInnerHTML(innerHTML) {
@@ -236,7 +236,7 @@ function TableDataFromInnerHTML(innerHTML) {
 		return null;
 	}
 	
-	//<td prop1=value1 ... propN=valueN>text I actually care about </td>
+	//<td prop1=value1 ... propN=valueN>text I actually care about</td>
 	var pattern = "\<td (.+?)\>(.+?)\<\/td\>";
 	var regex = new RegExp(pattern, "i");
 	var matches = innerHTML.match(pattern);
