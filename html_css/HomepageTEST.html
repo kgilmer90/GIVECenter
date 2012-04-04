@@ -69,6 +69,8 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	float: left;
 	width: 12.5%;
 	padding-top: 90px;
+	/*	padding-left: 10px
+	padding-right: 10px; */
 	background-color: #FF9;
 	background-color: #cccccc;
 }
@@ -79,17 +81,37 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	background-image: url(gradientHORIZ.png);
 	height: 100%;
 }
-
-.agencyColumn {
+.results {
+	visibility: hidden;
+	display: none;
+	width: 100%;
+	float: left;
+	height: 100%;
+}
+.interests {
+	width: 100%;
+	float: left;
+	height: 100%;
+}
+.form1 {
+	background-color: #FFF;
+	border: thin solid #000;
+}
+.form3 {
+	background-color: #FFF;
+	border: thin solid #000;
+}
+.column1 {
 	width: 50%;
 	float: left;
+	border-right-width: thin;
+	border-right-style: solid;
+	border-right-color: #000;
 }
-.programColumn {
+.column2 {
 	width: 49%;
 	float: right;
 }
-
-
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
 	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
@@ -136,10 +158,12 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
 </style>
 <![endif]-->
-
 </head>
 
-<body>
+<script src="JsCombined.js" type="text/javascript"></script>
+
+
+<body onload="init()">
 <div class="container" id="content">
   <div align="center"></div>
   <!-- <div class="header">
@@ -149,7 +173,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     <div align="center">
       <ul class="nav">
         <li><a href="file:///C:/Users/Karen/GIVECenter/html_css/Admin.html">Admin</a></li>
-        <li><a href="#">Browse All</a></li>
+        <li><a href="file:///C:/Users/Karen/GIVECenter/html_css/BrowseAll.html">Browse All</a></li>
         <li><a href="#">Logout</a></li>
         <li>
           <form id="form2" name="form2" method="post" action="">
@@ -179,25 +203,160 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   <div class="content" id="content"> 
     <!-- <h1 align="center"><img src="giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
     <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-    <div align="right"><a href="file:///C:/Users/Karen/GIVECenter/html_css/HomepageJS.html"style="color: #009">Return to Advanced Search</a></div>
-    <h1 align="center">&nbsp;</h1>
-    <h1 align="center">Browse All</h1>
-    <h1 align="center">&nbsp;</h1>
-
-    <div class="agencyColumn" id="agencyColumn">
-    <div align="center">
-    Agencies
-    </div>
+    <div class ="results" id="results">
+    <div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
+      <h1 align="center">&nbsp;</h1>
+      <div align="center"></div>
+      <h1 align="center">Program Name</h1>
+      <div class="column1"> <b>
+        <label>
+        <p align="center">&nbsp;</p>
+        <p align="center">Description</p>
+        </label>
+        </b>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+      </div>
+      <div class="column2"> <b>
+        <label>
+        <p align="center">&nbsp;</p>
+        <p align="center">Contact Information</p>
+        </label>
+        </b>
+        <p align="center"> Name: <em>insertNameHere</em>
+        
+        <p align="center">Email: <em>insertEmailHere</em>
+        
+        <p align="center">Phone: <em>insertNumberHere</em> 
+      </div>
+      </p>
+      </p>
     </div>
     
-    <div class="programColumn" id="programColumn">
+    <!--********************* BETWEEN CONTENT PAGES ***************************** -->
+    
+    <div class = "interests" id="interests">
     <div align="center">
-    Programs
-    </div>
-    </div>
+    <h1 align="center">&nbsp;</h1>
+    <h1 align="center">Select Your Interests</h1>
+    <form id="form1" name="form1" method="post" action="">
+        <div align="center">
+          <table class="form1">
+            <tr>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Elderly</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Animals</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Outdoors</div>
+                </label></td>
+            </tr>
+            <tr>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Elderly</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Animals</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Outdoors</div>
+                </label></td>
+            </tr>
+            <tr>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Elderly</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Animals</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Outdoors</div>
+                </label></td>
+            </tr>
+            <tr>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Elderly</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Animals</div>
+                </label></td>
+              <td width="200"><label>
+                <div align="center">
+                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
+                  Outdoors</div>
+                </label></td>
+            </tr>
+          </table>
+        </div>
+      </form>
+      <p align="center">&nbsp; </p>
+      <p align="center">&nbsp;</p>
+      <div align="center">
+        <label><b>Select All Hours Available:</b></label>
+        <form id="form3" name="form3" method="post" action="">
+          <table width="150" class="form3">
+            <tr>
+            <div align="left">
 
-	
- 
+              <td><label>
+                  <input type="checkbox" name="Hours" value="checkbox" id="Hours_0" />
+                  Morning</label></td>
+            </tr>
+            <tr>
+              <td><label>
+                  <input type="checkbox" name="Hours" value="checkbox" id="Hours_1" />
+                  Afternoon</label></td>
+            </tr>
+            <tr>
+              <td><label>
+                  <input type="checkbox" name="Hours" value="checkbox" id="Hours_2" />
+                  Evening</label></td>
+            </tr>
+            <tr>
+              <td><label>
+                  <input type="checkbox" name="Hours" value="checkbox" id="Hours_3" />
+                  Night</label></td>
+          </table>
+          <p>
+        </form>
+       </div>
+       <button onclick="searchtoresults()">Submit</button>
+       <button onclick="clearChoices()"> Clear Choices </button>
+
+    </div>
+    </div>
+      
+      
+      </div>
+    </div>
   </div>
   <div align="center" class="container"><!-- end .container --></div>
 </div>
