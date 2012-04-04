@@ -11,8 +11,7 @@ var programs = [];		//global programs array, contains all programs
 /**
  * HTML <body> onload function
  * All database query results are stored on the page as a hidden table.
- * The table is then parsed and reconstructed as Javascript objects
- * for convenience.
+ * The table is then parsed and reconstructed as Javascript objects.
  */
 function initAgenciesAndPrograms() {
 	
@@ -31,13 +30,14 @@ function initAgenciesAndPrograms() {
 		i++;
 		tableId = "agency" + i;
 		table = document.getElementById(tableId);
+		document.write(agency);
 	}
 }
-//REWRITE TO INCLUDE ID AND COUNT FROM ABOVE
-//SO TO SEARCH THROUGH THE DOM TREE FOR THE
-//APPROPRIATE ELEMENT
-//
-//CHANGES NECESSARY IN ALL OTHER DOMElementToGIVE__ functions as well
+/**
+ * Constructs a GIVEAgency object from a table embedded in the HTML.
+ * @param table_id - table's id property so that the DOM element can be retrieved
+ * @returns GIVEAgency object representing the table data
+ */
 function TableIdToGIVEAgency(table_id) {
 	var agency_DOM_element = document.getElementById(table_id);
 	
@@ -52,7 +52,7 @@ function TableIdToGIVEAgency(table_id) {
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var program_arr	= TableIdToGIVEProgramsArray(table_id + "_program");
 	
-	var agency = GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, program_arr);
+	var agency = new GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, program_arr);
 
 	var i;
 	for(i in program_arr) {
@@ -60,7 +60,11 @@ function TableIdToGIVEAgency(table_id) {
 	}
 	return agency;
 }
-
+/**
+ * Constructs a GIVEAddr object from a table embedded in the HTML.
+ * @param table_id - table's id property so that the DOM element can be retrieved
+ * @returns GIVEAddr object representing the table data
+ */
 function TableIdToGIVEAddr(table_id) {
 	var addr_DOM_element = document.getElementById(table_id);
 	
@@ -71,7 +75,11 @@ function TableIdToGIVEAddr(table_id) {
 	
 	return new GIVEAddr(street, city, state_us, zip);
 }
-
+/**
+ * Constructs a GIVEAProContact object from a table embedded in the HTML.
+ * @param table_id - table's id property so that the DOM element can be retrieved
+ * @returns GIVEProContact object representing the table data
+ */
 function TableIdToGIVEProContact(table_id) {
 	var p_contact_DOM_element = document.getElementById(table_id);
 	
@@ -86,7 +94,11 @@ function TableIdToGIVEProContact(table_id) {
 	
 	return new GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
-
+/**
+ * Constructs an array of GIVEProgram objects from a table embedded in the HTML.
+ * @param table_id - table's id property so that the DOM element can be retrieved
+ * @returns array of GIVEProgram objects representing the table data
+ */
 function TableIdToGIVEProgramsArray(table_id) {
 	var program_arr = [];
 	
@@ -95,11 +107,14 @@ function TableIdToGIVEProgramsArray(table_id) {
 	for(i = 1; i <= count; i++) {
 		var program = TableIdToGIVEProgram(table_id + i);
 		program_arr.push(program);
-		alert("TableIdToGIVEProgramsArray, program = " + program);
 	}
 	return program_arr;
 }
-
+/**
+ * Constructs a GIVEAProgram object from a table embedded in the HTML.
+ * @param table_id - table's id property so that the DOM element can be retrieved
+ * @returns GIVEProgram object representing the table data
+ */
 function TableIdToGIVEProgram(table_id) {
 	var program_DOM_element = document.getElementById(table_id);
 	
@@ -116,12 +131,14 @@ function TableIdToGIVEProgram(table_id) {
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
 	var s_contact 	= TableIdToGIVEStudentContact(table_id + "_s_contact");
-	alert("TableIdToGIVEProgram, p_contact = " + p_contact);
-	alert("TableIdToGIVEProgram, s_contact = " + s_contact);
 	
 	return new GIVEProgram(id, referal, season, times, name, descript, duration, notes, issues, addr, null, p_contact, s_contact);
 }
-
+/**
+ * Constructs a GIVEStudentContact object from a table embedded in the HTML.
+ * @param table_id - table's id property so that the DOM element can be retrieved
+ * @returns GIVEStudentContact object representing the table data
+ */
 function TableIdToGIVEStudentContact(table_id) {
 	var s_contact_DOM_element = document.getElementById(table_id);
 	
@@ -135,7 +152,11 @@ function TableIdToGIVEStudentContact(table_id) {
 	
 	return new GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
-
+/**
+ * Constructs an array of string objects from a table embedded in the HTML.
+ * @param table_id - table's id property so that the DOM element can be retrieved
+ * @returns array of string objects representing the table data
+ */
 function TableIdToIssuesArray(table_id) {
 	var issues_arr = [];
 	
@@ -148,7 +169,13 @@ function TableIdToIssuesArray(table_id) {
 	}
 	return issues_arr;
 }
-
+/**
+ * In most cases, content within <td> </td> tags could not be extracted
+ * without also including the tags. This function strips off the <td> </td>
+ * tags and returns the inner data.
+ * @param innerHTML - string of the form "<td property1=value1, ..., propertyN=valueN>innerText</td>"
+ * @returns inner text content of the <td> </td> tag
+ */
 function TableDataFromInnerHTML(innerHTML) {
 	if(!innerHTML) {
 		return null;
@@ -160,7 +187,9 @@ function TableDataFromInnerHTML(innerHTML) {
 	if(!matches) {
 		return null;
 	}
-	return matches[2];
+	return matches[2];	//match[0] = whole string
+						//match[1] = text between "<td" and the closing ">"
+						//match[2] = text between "<td ...>" and "</td>"
 }
 
 //**************************************************
@@ -234,21 +263,6 @@ function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, progr
 	return agency;
 }
 /**
- * GIVEContactHistory object creation function
- * @param int id - numeric identifier
- * @param GIVEStudentContact contact - program's student contact
- * @param GIVEProgram program - student contact's program
- * @returns GIVEContactHistory object with fields initialized to function arguments
- */
-function GIVEContactHistory(id, contact, program) {
-	var hist = {
-			id : id
-	};
-	hist.contact = (contact instanceof GIVEStudentContact) ? contact : null;
-	hist.program = (program instanceof GIVEProgram) ? program : null;
-	return hist;
-}
-/**
  * GIVEProContact object creation function, represents the contact information
  * for a GIVEProgram's professional contact person.
  * @param int id - numeric identifier
@@ -275,7 +289,7 @@ function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, ma
 			toString : function() {
 				return "title=" + this.title + ",l_name=" + this.l_name + ",f_name=" + 
 				this.f_name + ",m_name=" + this.m_name + ",suf=" + this.suf + ",w_phone=" +
-				this.w_phone + ",m_phone" + this.m_phone + ",mail=" + this.mail;
+				this.w_phone + ",m_phone=" + this.m_phone + ",mail=" + this.mail;
 			}
 	};
 	return pcon;
