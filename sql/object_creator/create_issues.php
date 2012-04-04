@@ -1,6 +1,6 @@
 <?php
 /*
- *  Do we want this?
+ *  TODO: Do we want this?
  */
 
 include_once('../../php/GIVE/GIVEAddr.php');

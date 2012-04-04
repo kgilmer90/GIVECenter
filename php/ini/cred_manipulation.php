@@ -62,7 +62,7 @@ function check_user($conn, $uname, $passwd)
 {
     $verified = false;
     
-    $query = "SELECT FROM users
+    $query = "SELECT * FROM users
                 WHERE uname = $uname AND passwd = ".md5($passwd);
     
     $conn->query($query);
