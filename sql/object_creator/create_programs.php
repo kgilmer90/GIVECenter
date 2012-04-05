@@ -40,11 +40,11 @@ function create_programs($conn,$agency_id)
         //  ADDR Object
         $temp['addr'] = create_addr($conn, $temp['addr']);
         //  S Contact Objects
-        $temp['s_contact']=  create_s_contact($conn, $temp['s_contact']);
+        $temp['s_contact'] = create_s_contact($conn, $temp['s_contact']);
         //  P Contact Objects
-        $temp['p_contact']=  create_p_contact($conn, $temp['p_contact']);
+        $temp['p_contact'] = create_p_contact($conn, $temp['p_contact']);
         //  Issues Object
-        //  What to do here?
+        $temp['issues'] = create_issues($conn, $temp['id']);
         
         //Create Program Object to Hold Everything
         $program = new GIVEProgram($temp);
@@ -80,7 +80,7 @@ function create_all_programs($conn)
         //  P Contact Objects
         $temp['p_contact']=  create_p_contact($conn, $temp['p_contact']);
         //  Issues Object
-        //  What to do here?
+        $temp['issues'] = create_issues($conn, $temp['id']);
         
         //Create Program Object to Hold Everything
         $program = new GIVEProgram($temp);
@@ -89,23 +89,4 @@ function create_all_programs($conn)
 
     return $program_array;
 }
-
-/*
- * Foreach agency in database
- *      query database for agency fields
- *      query database for agency address and build address object
- *      query database for agency p_contact and build p_contact object
- *      query database for agency programs
- *          foreach program in agency
- *              query database for program fields
- *              query database for program address and build address object
- *              query database for program p_contact and build p_contact object
- *              query database for program s_contact and build s_contact object
- *              query database for program issues and build issues array
- *              
- *              build complete program object and add to array
- *      
- *      build complete agency object and add to array
- * 
- */
 ?>
