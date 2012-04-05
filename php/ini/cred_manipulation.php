@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 /*
  * Functions for:
  * Adding, Changing, Removing
@@ -62,13 +64,13 @@ function check_user($conn, $uname, $passwd)
 {
     $verified = false;
     
-    $query = "SELECT FROM users
-                WHERE uname = $uname AND passwd = ".md5($passwd);
+    $query = "SELECT uname FROM users WHERE uname = $uname AND passwd = ".md5($passwd);
     
     $conn->query($query);
             
-    if ($conn->numRows() == 1)
+    if ($conn->numRows() == 1) {
         $verified = true;
+    }
     
     return $verified;
 }

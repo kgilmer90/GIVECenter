@@ -2,6 +2,7 @@
 
 include_once('GIVEAddr.php');
 include_once('GIVEProContact.php');
+include_once('GIVEToHTML.php');
 
 class GIVEAgency
 {
@@ -28,61 +29,18 @@ class GIVEAgency
 	{	
 		$str = "<table id=\"$id\">".PHP_EOL;
 		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="id">'.PHP_EOL;
-		$str .= $this->id.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="name">'.PHP_EOL;
-		$str .= $this->name.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="descript">'.PHP_EOL;
-		$str .= $this->descript.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-	
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="mail">'.PHP_EOL;
-		$str .= $this->mail.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="phone">'.PHP_EOL;
-		$str .= $this->phone.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="fax">'.PHP_EOL;
-		$str .= $this->fax.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="p_contact>'.PHP_EOL;
-		$str .= $this->p_contact->toHTMLTable($id.'_p_contact');
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="addr">'.PHP_EOL;
-		$str .= $this->addr->toHTMLTable($id.'_addr');
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
+		$str .= GIVEWrapDataWithTrTd($this->id, 'id');
+		$str .= GIVEWrapDataWithTrTd($this->name, 'name');
+		$str .= GIVEWrapDataWithTrTd($this->descript, 'descript');
+		$str .= GIVEWrapDataWithTrTd($this->mail, 'mail');
+		$str .= GIVEWrapDataWithTrTd($this->phone, 'phone');
+		$str .= GIVEWrapDataWithTrTd($this->fax, 'fax');
+		$str .= GIVEWrapDataWithTrTd($this->p_contact->toHTMLTable($id.'_p_contact'), 'p_contact');
+		$str .= GIVEWrapDataWithTrTd($this->addr->toHTMLTable($id.'_addr'), 'addr');
 		
 		$i = 0;
 		foreach($this->programs as $program) {
-			$str .= '<tr>'.PHP_EOL;
-			$str .= "<td title=\"program$i\">".PHP_EOL;
-			$str .= $program->toHTMLTable("program$i").PHP_EOL;
-			$str .= '</td>'.PHP_EOL;
-			$str .= '</tr>'.PHP_EOL;
+			$str .= GIVEWrapDataWithTrTd($program->toHTMLTable("program$i"), "program$i");
 			$i++;
 		}
 		
