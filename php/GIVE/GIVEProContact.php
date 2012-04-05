@@ -21,53 +21,14 @@ class GIVEProContact
 	{	
 		$str = "<table id=\"$id\">".PHP_EOL;
 		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="title"'.PHP_EOL;
-		$str .= $this->title.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="l_name"'.PHP_EOL;
-		$str .= $this->l_name.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="f_name"'.PHP_EOL;
-		$str .= $this->f_name.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-	
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="m_name"'.PHP_EOL;
-		$str .= $this->m_name.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="suf"'.PHP_EOL;
-		$str .= $this->suf.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="w_phone"'.PHP_EOL;
-		$str .= $this->w_phone.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="m_phone"'.PHP_EOL;
-		$str .= $this->m_phone.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td> title="mail"'.PHP_EOL;
-		$str .= $this->mail.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
+		$str .= GIVEWrapDataWithTrTd($this->title, 'title');
+		$str .= GIVEWrapDataWithTrTd($this->l_name, 'l_name');
+		$str .= GIVEWrapDataWithTrTd($this->f_name, 'f_name');
+		$str .= GIVEWrapDataWithTrTd($this->m_name, 'm_name');
+		$str .= GIVEWrapDataWithTrTd($this->suf, 'suf');
+		$str .= GIVEWrapDataWithTrTd($this->w_phone, 'w_phone');
+		$str .= GIVEWrapDataWithTrTd($this->m_phone, 'm_phone');
+		$str .= GIVEWrapDataWithTrTd($this->mail, 'mail');
 		
 		$str .= '</table>';
 		return $str;

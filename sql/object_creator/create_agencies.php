@@ -48,11 +48,11 @@ function create_agencies($conn)
     foreach($results as $temp)
     {
         //crete program objects
-        $temp['program'] = create_programs($conn, $temp[$id]);
+        $temp['program'] = create_programs($conn, $temp['id']);
         //p contact object
-        $temp['p_contact'] = create_p_contacts($conn, $temp[$id]);
+        $temp['p_contact'] = create_p_contacts($conn, $temp['p_contact']);
         //addr object
-        $temp['addr'] = create_addrs($conn, $temp[$id]);
+        $temp['addr'] = create_addrs($conn, $temp['addr']);
         
         //Create Agency Object to Hold Everything
         $agency = new GIVEAgency($temp);

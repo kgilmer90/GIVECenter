@@ -1,5 +1,7 @@
 <?php
 
+include_once('GIVEToHTML.php');
+
 class GIVEAddr
 {
 	//public $id;							//INT
@@ -17,30 +19,11 @@ class GIVEAddr
 	{
 		$str = "<table id=\"$id\">".PHP_EOL;
 		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="street">'.PHP_EOL;
-		$str .= $this->street.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="city">'.PHP_EOL;
-		$str .= $this->city.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="state_us">'.PHP_EOL;
-		$str .= $this->state_us.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
+		$str .= GIVEWrapDataWithTrTd($this->street, 'street');
+		$str .= GIVEWrapDataWithTrTd($this->city, 'city');
+		$str .= GIVEWrapDataWithTrTd($this->state_us, 'state_us');
+		$str .= GIVEWrapDataWithTrTd($this->zip, 'zip');
 	
-		$str .= '<tr>'.PHP_EOL;
-		$str .= '<td title="zip">'.PHP_EOL;
-		$str .= $this->zip.PHP_EOL;
-		$str .= '</td>'.PHP_EOL;
-		$str .= '</tr>'.PHP_EOL;
-		
 		$str .= '</table>';
 		return $str;
 	}

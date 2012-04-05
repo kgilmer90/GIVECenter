@@ -1,13 +1,17 @@
 <?php
 /*
- *  TODO: Do we want this?
+ *  Create_Issues.php
+ * ***********************************************************************  *
+ * 
+ * ***********************************************************************  *
  */
 
 include_once('../../php/GIVE/GIVEAddr.php');
  
 /**
- *  Returns Issue Objects in array 
+ *  Returns Issue strings in array for specific program 
  * @param MySQLDatabaseConn $conn   database connection object
+ * @param int $program_id   id for program to find issues for
  * @return array      Array containing all the issue objects
  */
 function create_issues($conn)
@@ -22,7 +26,7 @@ function create_issues($conn)
 
     foreach($results as $temp)
     {
-        $issue = new GIVEAgency($temp);
+//        FIXME Create string array
         array_push($issue_array,$issue);
     }
 
