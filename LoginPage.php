@@ -2,15 +2,25 @@
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 session_start(); 
 
-$except =  array();
+//to hold various errors states
+$error = array();
 
-//check the get variable passed to the URL
-if(isset($_GET['except'])) {
-	$except['type'] = $_GET['except'];
+//set to 'failed' if previous login attempt yielded no matches for the uname/pass combo
+if(isset($_GET['login'])) {
+	$error['login'] = $_GET['login'];
 }
-//check the session variable containing the exception message
-if(isset($_SESSION['except'])) {
-	$except['msg'] = $_SESSION['except'];
+//set to 'true' if user was redirected to the login page via another page's logout button
+if(isset($_GET['logout'])) {
+	$error['logout'] = $_GET['logout'];
+}
+//set to 'conn' if an exception was thrown during login connecting to the database
+//set to 'query' if an exception was thrown during login querying the database
+if(isset($_GET['except'])) {
+	$error['except'] = $_GET['except'];
+}
+//set to the error code resulting from an exception during login
+if(isset($_GET['code'])) {
+	$error['code'] = $_GET['code'];
 }
 
 ?>

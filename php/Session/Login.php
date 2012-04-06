@@ -25,11 +25,9 @@ try {
 	}
 }
 catch(MySQLDatabaseConnException $e) {
-	$_SESSION['except'] = $e->__toString();
-	header('Location: ../../LoginPage.php?except=conn');
+	header('Location: ../../LoginPage.php?except=conn&code='.$e->getCode());
 }
 catch(MySQLQueryFailedException $e) {
-	$_SESSION['except'] = $e->__toString();
-	header('Location: ../../LoginPage.php?except=query');
+	header('Location: ../../LoginPage.php?except=query&code='.$e->getCode());
 }
 ?>
