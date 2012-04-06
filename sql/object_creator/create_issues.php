@@ -1,31 +1,29 @@
 <?php
 /*
- *  Do we want this?
+ *  Create_Issues.php
+ * ***********************************************************************  *
+ * 
+ * ***********************************************************************  *
  */
 
 include_once('../../php/GIVE/GIVEAddr.php');
  
 /**
- *  Returns Issue Objects in array 
+ *  Returns Issue strings in array for specific program 
  * @param MySQLDatabaseConn $conn   database connection object
+ * @param int $program_id   id for program to find issues for
  * @return array      Array containing all the issue objects
  */
-function create_issues($conn)
+function create_issues($conn,$program_id)
 {
-    $issue_array = array();
-
-    $query = "";
-
+    $query = "SELECT issues.name
+                FROM issues,program_issues
+                WHERE program_issues.program_id=$program_id
+                AND program_issues.issue_id=issues.id";
     $conn->query($query);
 
-    $results = $conn->fetchAllAsAssoc();
+    $results = $conn->fetchAllAsNumeric();
 
-    foreach($results as $temp)
-    {
-        $issue = new GIVEAgency($temp);
-        array_push($issue_array,$issue);
-    }
-
-    return $issue_array;
+    return $results;
 }
 ?>
