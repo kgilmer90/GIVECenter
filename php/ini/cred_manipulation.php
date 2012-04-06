@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 /*
  * Functions for:
  * Adding, Changing, Removing
@@ -74,7 +72,5 @@ function check_user($conn, $uname, $passwd)
     
     return $verified;
 }
-
-?>
 
 ?>

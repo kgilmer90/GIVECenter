@@ -5,11 +5,9 @@
  * 
  * Used as the action property of the login form in LoginPage.php.
  */
-session_start();
-
 include_once('../ini/cred_manipulation.php');
 include_once('../ini/GIVECenterIni.php');
-include_once('../MySQLDatabaseConn.php');
+include_once('../MySQLDatabase/MySQLDatabaseConn.php');
 
 $uname = $_POST['username'];
 $passwd = $_POST['password'];
@@ -20,18 +18,18 @@ try {
 	
 	if(check_user($conn, $uname, $passwd)) {
 		$_SESSION['username'] = $uname;
-		header('../../html_css/HomepageJS.php');
+		header('Location: ../Homepage.php');
 	}
 	else {
-		header('../../html_css/LoginPage.php?login=failed');
+		header('../../LoginPage.php?login=failed');
 	}
 }
 catch(MySQLDatabaseConnException $e) {
-	$_SESSION['except'] = $e;
-	header('../../html_css/LoginPage.php?except=conn');
+	$_SESSION['except'] = $e->__toString();
+	header('Location: ../../LoginPage.php?except=conn');
 }
 catch(MySQLQueryFailedException $e) {
-	$_SESSION['except'] = $e;
-	header('../../html_css/LoginPage.php?except=query');
+	$_SESSION['except'] = $e->__toString();
+	header('Location: ../../LoginPage.php?except=query');
 }
 ?>

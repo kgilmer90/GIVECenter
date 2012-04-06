@@ -1,3 +1,32 @@
+<?php 
+include_once('php/GIVE/GIVEToHTML.php');
+
+session_start();
+
+//if not properly logged in, redirect to login page
+if(!isset($_SESSION['username'])) {
+	header('Location: LoginPage.php');
+}
+
+//by default, restrict queries
+$restrict_queries = true;
+
+//queries are unrestricted only if $_SESSION['username'] == 'admin'
+if($_SESSION['username'] == 'admin') {
+	$restrict_queries = false;
+}
+
+$all_agencies;
+if($restrict_queries) {
+	//$all_agencies = some_function_to_obtain_restricted_data();
+}
+else {
+	//$all_agencies = some_function_to_obtain_unrestricted_data();
+}
+
+//echo the agency data to the page as a hidden table
+//GIVEAgenciesToHTMLTable($all_agencies);
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -78,7 +107,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	position: absoulte;
 	width: 75%;
 	float: left;
-	background-image: url(gradientHORIZ.png);
+	background-image: url(img/gradientHORIZ.png);
 	height: 100%;
 }
 .results {
@@ -160,20 +189,20 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <![endif]-->
 </head>
 
-<script src="Navigation.js" type="text/javascript"></script>
+<script type="text/javascript" src="js/Navigation.js"></script>
 
 <body onload="hidestuff('results')">
 <div class="container" id="content">
   <div align="center"></div>
   <!-- <div class="header">
-    <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
+    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
      </div> -->
   <div class="sidebar1">
     <div align="center">
       <ul class="nav">
-        <li><a href="file:///C:/Users/Karen/GIVECenter/html_css/Admin.html">Admin</a></li>
-        <li><a href="file:///C:/Users/Karen/GIVECenter/html_css/BrowseAll.html">Browse All</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><a href="Admin.php">Admin</a></li>
+        <li><a href="BrowseAll.php">Browse All</a></li>
+        <li><a href="Session/Logout.php">Logout</a></li>
         <li>
           <form id="form2" name="form2" method="post" action="">
             <label for="search"></label>
@@ -200,8 +229,8 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
       <!-- end .sidebar1 --></div>
   </div>
   <div class="content" id="content"> 
-    <!-- <h1 align="center"><img src="giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
-    <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+    <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
+    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
     <div class ="results" id="results">
     <div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
       <h1 align="center">&nbsp;</h1>

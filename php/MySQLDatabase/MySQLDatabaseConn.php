@@ -40,18 +40,18 @@ class MySQLDatabaseConn
 	public function __construct($server, $databaseName, $username, $password, $newlink = false, $clientFlags = 0)
 	{
 		$this->dbname = $databaseName;
-		$this->dblink = mysql_connect($server, $username, $password, $newlink, $clientFlags);
+		$this->dblink = @mysql_connect($server, $username, $password, $newlink, $clientFlags);
 		
 		$this->setErrors();
 		
-		if($this->dblink == false) {
-			throw new MySQLDatabaseConnException($this->errorStr."\n".$server.' '.$username, $this->errorCode);
+		if(!$this->dblink) {
+			throw new MySQLDatabaseConnException($this->errorStr, $this->errorCode);
 		}
 		
 		$result = mysql_select_db($this->dbname, $this->resource);
 		$this->setErrors();
-		if($result == false) {
-			throw new MySQLDatabaseConnException($this->errorStr."\n".$server.' '.$username, $this->errorCode);
+		if(!$result) {
+			throw new MySQLDatabaseConnException($this->errorStr, $this->errorCode);
 		}
 	}
 	

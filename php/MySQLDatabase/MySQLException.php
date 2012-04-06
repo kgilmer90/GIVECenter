@@ -1,6 +1,6 @@
 <?php
 
-class MySQLDatabaseConnException extends Exception
+class MySQLException extends Exception
 {
 	/**
 	 * MySQLDatabaseConnException constructor, occurs when a MySQL database

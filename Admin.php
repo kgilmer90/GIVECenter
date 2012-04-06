@@ -1,3 +1,17 @@
+<?php
+session_start();
+
+//if not properly logged in, redirect to login page
+if(!isset($_SESSION['username'])) {
+	header('Location: LoginPage.php');
+}
+else if($_SESSION['username'] != 'admin') {
+	header('Location: LoginPage.php');
+}
+
+//echo the agency data to the page as a hidden table
+//GIVEAgenciesToHTMLTable($all_agencies);
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -66,6 +80,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	background-color: #FFF;
 }
 .sidebar2 {
+	visibility:hidden;
 	float: left;
 	width: 12.5%;
 	padding-top: 90px;
@@ -76,20 +91,46 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	position: absoulte;
 	width: 75%;
 	float: left;
-	background-image: url(gradientHORIZ.png);
+	background-image: url(img/gradientHORIZ.png);
 	height: 100%;
 }
 
-.agencyColumn {
-	width: 50%;
+.editAgency {
+	width: 20%;
 	float: left;
-}
-.programColumn {
-	width: 49%;
-	float: right;
+	border: thin solid #000;
+	height: 250px;
+	padding: 20px;
+	margin: 20px;
 }
 
+.editProgram {
+	width: 20%;
+	float: left;
+	border: thin solid #000;
+	height: 250px;
+	padding: 20px;
+	margin: 20px;
+}
 
+.addNew {
+	width: 20%;
+	float: left;
+	border: thin solid #000;
+	height: 250px;
+	padding: 20px;
+	margin: 20px;
+}
+
+.orBox {
+	float: left;
+	width: 3%;
+	height: 250px;
+	padding-top: 120px;
+	padding-bottom: 120px;
+	padding-left:5px;
+	padding-right:5px;
+}
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
 	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
@@ -139,18 +180,16 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 
 </head>
 
-<body>
-<div class="container" id="content">
+<body onload="alert('You have selected the &quot;Administrator&quot; option. Use this option only to add, delete, or edit programs or agencies and their descriptions.')"><div class="container" id="content">
   <div align="center"></div>
   <!-- <div class="header">
-    <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
+    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
      </div> -->
   <div class="sidebar1">
     <div align="center">
       <ul class="nav">
-        <li><a href="file:///C:/Users/Karen/GIVECenter/html_css/Admin.html">Admin</a></li>
-        <li><a href="#">Browse All</a></li>
-        <li><a href="#">Logout</a></li>
+        <li><a href="#">Admin</a></li>
+        <li><a href="php/Session/Logout.php">Logout</a></li>
         <li>
           <form id="form2" name="form2" method="post" action="">
             <label for="search"></label>
@@ -177,26 +216,51 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
       <!-- end .sidebar1 --></div>
   </div>
   <div class="content" id="content"> 
-    <!-- <h1 align="center"><img src="giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
-    <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-    <div align="right"><a href="file:///C:/Users/Karen/GIVECenter/html_css/HomepageJS.html"style="color: #009">Return to Advanced Search</a></div>
+    <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
+    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
     <h1 align="center">&nbsp;</h1>
-    <h1 align="center">Browse All</h1>
-    <h1 align="center">&nbsp;</h1>
+    <h1 align="center">ADMIN</h1>
 
-    <div class="agencyColumn" id="agencyColumn">
-    <div align="center">
-    Agencies
-    </div>
+	<div class="editAgency" id="editAgency">
+    <div align="center">Select Agency to Edit
+        <p align="center">&nbsp;</p>
+
+    <select>
+    	<option>Agency1</option>
+    	<option>Agency2</option>
+        <option>Agency3</option>
+    	<option>Agency4</option>
+        <option>Agency5</option>
+    	<option>Agency6</option>
+    </select></div>
+    
     </div>
     
-    <div class="programColumn" id="programColumn">
-    <div align="center">
-    Programs
+    <div class="orBox" id="orBox">
+    <div align="center">OR</div>
     </div>
-    </div>
+    
+    <div class="editProgram" id="editProgram">
+    <div align="center">Select Program to Edit
+    	<p align="center">&nbsp;</p>
 
-	
+        <select>
+    	<option>Program1</option>
+    	<option>Program2</option>
+        <option>Program3</option>
+    	<option>Program4</option>
+        <option>Program5</option>
+    	<option>Program6</option>
+    </select></div>
+    </div>
+    
+    <div class="orBox" id="orBox">
+    <div align="center">OR</div>
+    </div>
+    
+    <div class="addNew" id="addNew">
+    <div align="center">Select</div>
+    </div>
  
   </div>
   <div align="center" class="container"><!-- end .container --></div>

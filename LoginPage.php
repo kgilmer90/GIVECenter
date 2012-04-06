@@ -1,17 +1,38 @@
+<?php
+include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
+session_start(); 
+
+$except =  array();
+
+//check the get variable passed to the URL
+if(isset($_GET['except'])) {
+	$except['type'] = $_GET['except'];
+}
+//check the session variable containing the exception message
+if(isset($_SESSION['except'])) {
+	$except['msg'] = $_SESSION['except'];
+}
+
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+<script language="text/Javascript" src="js/Navigation.js"></script>
 <style type="text/css">
 <!--
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
 	background: #cccccc;
 	margin: 0;
-	padding: 0;
 	color: #000;
+	padding-top: 0;
+	padding-bottom: 0;
+	padding-left: 12.5%;
+	padding-right: 12.5%;
 }
+
 /* ~~ Element/tag selectors ~~ */
 ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
 	padding: 0;
@@ -25,6 +46,7 @@ h1, h2, h3, h4, h5, h6, p {
 a img { /* this selector removes the default blue border displayed in some browsers around an image when it is surrounded by a link */
 	border: none;
 }
+
 /* ~~ Styling for your site's links must remain in this order - including the group of selectors that create the hover effect. ~~ */
 a:link {
 	color:#414958;
@@ -40,6 +62,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 .header {
 	background: #6F7D94;
 }
+
 /* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
 .container {
 	width: 80%;
@@ -49,6 +72,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	overflow: hidden; /* this declaration makes the .container clear all floated columns within it. */
 	background-color: #cccccc;
 }
+
 /* ~~ These are the columns for the layout. ~~ 
 
 1) Padding is only placed on the top and/or bottom of the divs. The elements within these divs have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
@@ -60,71 +84,68 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 4) If you prefer your nav on the right instead of the left, simply float these columns the opposite direction (all right instead of all left) and they'll render in reverse order. There's no need to move the divs around in the HTML source.
 
 */
+
+/************************************ADDED FROM ORIGINAL CSS FILE**************************************/
+body {
+text-align: center;
+font-family: Arial;
+background-color: rgb(185, 179, 175);}
+h1 {
+text-align: center;
+color: #ee3e80;}
+h2 {
+text-align: center;
+color: #0088dd;}
+p.loginform { 
+margin: auto;
+text-align: center;
+width: 250px;
+border: 3px dotted #0088dd;
+}
+/****************************************END ORIGINAL CSS FILE*****************************************/
+
+
+
+
+
+
+
 .sidebar1 {
 	float: right;
-	width: 12.5%;
+	width: 13%;
 	background-color: #FFF;
 }
 .sidebar2 {
-	visibility:hidden;
 	float: left;
-	width: 12.5%;
+	width: 10%;
 	padding-top: 90px;
+	padding-left: 10px
+	padding-right: 10px;
 	background-color: #FF9;
 	background-color: #cccccc;
 }
 .content {
-	position: absoulte;
-	width: 75%;
+	width: 100%;
 	float: left;
-	background-image: url(gradientHORIZ.png);
-	height: 100%;
+	background-image: url(img/gradientHORIZ.png);
+	height: 100%;	
 }
 
-.editAgency {
-	width: 20%;
-	float: left;
-	border: thin solid #000;
-	height: 250px;
-	padding: 20px;
-	margin: 20px;
+.form1 {
+	background-color: #FFF;
+	border: thin solid #000; 
 }
 
-.editProgram {
-	width: 20%;
-	float: left;
-	border: thin solid #000;
-	height: 250px;
-	padding: 20px;
-	margin: 20px;
-}
-
-.addNew {
-	width: 20%;
-	float: left;
-	border: thin solid #000;
-	height: 250px;
-	padding: 20px;
-	margin: 20px;
-}
-
-.orBox {
-	float: left;
-	width: 3%;
-	height: 250px;
-	padding-top: 120px;
-	padding-bottom: 120px;
-	padding-left:5px;
-	padding-right:5px;
-}
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
-.content ul, .content ol {
+.content ul, .content ol { 
 	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
 }
+
 /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 ul.nav {
 	list-style: none; /* this removes the list marker */
-	border-top: 1px solid #666; /* this creates the top border for the links - all others are placed using a bottom border on the LI *//* this creates the space between the navigation on the content below */
+	border-top: 1px solid #666; /* this creates the top border for the links - all others are placed using a bottom border on the LI */
+	 /* this creates the space between the navigation on the content below */
 }
 ul.nav li {
 	border-bottom: 1px solid #666; /* this creates the button separation */
@@ -140,6 +161,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	background: #6666aa;
 	color: #FFF;
 }
+
 /* ~~miscellaneous float/clear classes~~ */
 .fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
 	float: right;
@@ -156,100 +178,45 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	line-height: 0px;
 }
 -->
-</style>
-<!--[if lte IE 7]>
+</style><!--[if lte IE 7]>
 <style>
 .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
 ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
 </style>
 <![endif]-->
-
 </head>
 
-<body onload="alert('You have selected the &quot;Administrator&quot; option. Use this option only to add, delete, or edit programs or agencies and their descriptions.')"><div class="container" id="content">
-  <div align="center"></div>
-  <!-- <div class="header">
-    <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
-     </div> -->
-  <div class="sidebar1">
-    <div align="center">
-      <ul class="nav">
-        <li><a href="#">Admin</a></li>
-        <li><a href="#">Logout</a></li>
-        <li>
-          <form id="form2" name="form2" method="post" action="">
-            <label for="search"></label>
-            <input name="search" type="text" id="search" value="Search" />
-          </form>
-        </li>
-      </ul>
-      <!-- end .sidebar1 --></div>
-  </div>
-  <div class="sidebar2">
-    <div align="center">
-      <ul class="nav">
-        <li><a href="#">Program1 </a></li>
-        <li><a href="#">Program2 </a></li>
-        <li><a href="#">Program3 </a></li>
-        <li><a href="#">Program4 </a></li>
-        <li><a href="#">Program5 </a></li>
-        <li><a href="#">Program6 </a></li>
-        <li><a href="#">Program7 </a></li>
-        <li><a href="#">Program8 </a></li>
-        <li><a href="#">...</a></li>
-      </ul>
-      
-      <!-- end .sidebar1 --></div>
-  </div>
-  <div class="content" id="content"> 
-    <!-- <h1 align="center"><img src="giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
-    <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+<body>
+
+<div class="container">
+
+  <div class="content">
+   <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
     <h1 align="center">&nbsp;</h1>
-    <h1 align="center">ADMIN</h1>
-
-	<div class="editAgency" id="editAgency">
-    <div align="center">Select Agency to Edit
-        <p align="center">&nbsp;</p>
-
-    <select>
-    	<option>Agency1</option>
-    	<option>Agency2</option>
-        <option>Agency3</option>
-    	<option>Agency4</option>
-        <option>Agency5</option>
-    	<option>Agency6</option>
-    </select></div>
-    
-    </div>
-    
-    <div class="orBox" id="orBox">
-    <div align="center">OR</div>
-    </div>
-    
-    <div class="editProgram" id="editProgram">
-    <div align="center">Select Program to Edit
-    	<p align="center">&nbsp;</p>
-
-        <select>
-    	<option>Program1</option>
-    	<option>Program2</option>
-        <option>Program3</option>
-    	<option>Program4</option>
-        <option>Program5</option>
-    	<option>Program6</option>
-    </select></div>
-    </div>
-    
-    <div class="orBox" id="orBox">
-    <div align="center">OR</div>
-    </div>
-    
-    <div class="addNew" id="addNew">
-    <div align="center">Select</div>
-    </div>
+    <h1 align="center">The GIVE Center</h1>
  
-  </div>
-  <div align="center" class="container"><!-- end .container --></div>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <!-- BEGIN FORM -->
+<form action = "php/Session/Login.php" method="post">
+<h2>Login</h2>
+<br /> <br /> 
+<p class = "loginform">
+Username:<br />
+<input type = "text" name = "username" size = "15" maxlength = "15" required = "required"/> </label>
+<br />
+Password: <br /> 
+<input type= "password" name ="password" size = "15" maxlength = "15" required = "required"/></label>
+<br/>
+<!--  <button onclick="login()">Login</button>-->
+<input type="submit" />
+</form>
+
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
+    </div>
+    <div align="center" class="container"><!-- end .container --></div>
 </div>
 </body>
 </html>
