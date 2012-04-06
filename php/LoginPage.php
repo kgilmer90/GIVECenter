@@ -3,6 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+<script type="text/Javascript" src="Navigation.js"></script>
 <style type="text/css">
 <!--
 body {
@@ -181,7 +182,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <!-- BEGIN FORM -->
-<form action = "http://www.example.com/login.php">
+<form action = "Session/Login.php" method="post">
 <h2>Login</h2>
 <br /> <br /> 
 <p class = "loginform">
@@ -190,9 +191,9 @@ Username:<br />
 <br />
 Password: <br /> 
 <input type= "password" name ="password" size = "15" maxlength = "15" required = "required"/></label>
-</br>
- <button onclick="login()">Login</button>
-
+<br/>
+<!--  <button onclick="login()">Login</button>-->
+<input type="submit" />
 </form>
 
       <p>&nbsp;</p>
