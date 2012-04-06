@@ -40,28 +40,23 @@ function main()
     * 
     *      
     ****************************************************************************/
-
-    $agency = array();      //	Agency array holds unique array names
-    $agency_num = 0;        //  Number of Unique Agencies, used during program creation for agency_id
-    $line_number = 1;       //  Line Number lets us know, if failure, where in the file it occured
-
+    
+    $pointers['agency']=0;          //  agency -> db pointer for last agency made
+    $pointers['addr']=0;            //  addr -> db pointer for last add made
+    $pointers['pcontact']=0;        //  pcontact -> db pointer for last pro contact made
+    $pointers['line_number']=1;     //  Line Number lets us know, if failure, where in the file it occured.  Also used for Program_id
+    $pointers['last_agency']='';    //  last agency -> holds name of last agency for checking
+    
+    $bull['pcontact']=false;
+    $bull['addr']=false;
+    
     while($line = fgets($fh))
     {
         line_handler($line);
-        $line_number++;		
+        $pointers['line_number']++;		
     }
     fclose($fh);
-
 }
-/*
-$agency = compact("name");
-$program = compact("name","desript","season","times","issues","notes","ref");
-$student_contact = compact("mail");
-$pro_contact = compact("title","f_name","m_name","l_name","suf","w_phone","m_phone","mail");
-$agency_addr = compact("street");
-*/
-
-
 
 /*****************************************************************************
  * ***************************************************************************
@@ -69,37 +64,29 @@ $agency_addr = compact("street");
  * ***************************************************************************
  *****************************************************************************/
 
-
 function line_handler($line)
 {
-//    global $agency, $agency_num;
-    
 //  Break of Line to match CSV, separating fields
-    $input = explode(',',$line);
+    $input = explode(';',$line);
     
 //  Set exploded into the new array on each iteration
     $items=array();
     foreach($input as $temp)
     {
-        array_push($items, $temp, $_ = null);
+        if($temp=='')$temp=null;
+        array_push($items, $temp);
     }
-    
 //  insert data into database!
-    get_query_1($items[0]);
-    get_query_2($items);
-//  query 3 doesnt exist because there isnt any student info at the moment
-    get_query_4($items);
-    get_query_5($items);
+    get_query_1($items[0]); //  Agency Table
+    get_query_4($items);    //  Pro Contact Table
+    get_query_5($items);    //  Addr Table
+    get_query_2($items);    //  Program Table
 }
 
-
-
-
 /**
- *  Query is used for handling the agency information.  It creates a new agency
- * if it does not already exists, and shares the agency id if it does
- * @param type $newagency   agency name to look for
- * @param type $agency      array of existing agency names numerical indexed
+ *  Query is used for handling the agency information
+ * @global type $pointers   pointers and similar info
+ * @param type $newagency   agency to check for, usually $items[0]
  */
 function get_query_1($newagency)
 {
@@ -109,75 +96,108 @@ function get_query_1($newagency)
  * the query is based on whether the current line has an agency
  * name that is unique, or one that already exists.
  * 
- * if the agency doesn't already exist, create a new entry for it and 
- * 
- * else the agency already exists, link it to the existing one by way of
- * using the agency_id 
+ * if the agency doesn't already exist, insert into database, increment the 
+ * agency id counter, and the last agency created
  ******************************************************************************/
-    global $agency, $agency_num, $line_number;
+    global $pointers;
     //  agency_num holds the number of agencies and will be used for association with the correct agency
     
     //  Case of new agency, and the agency is used
-    if (!in_array($newagency,$agency))
+    if ($newagency==$pointers['last_agency'])
     {   
-        $agency[$agency_num]=$newagency;
-        $query1 = "INSERT INTO agency(name)VALUES(".$items[0].")";
-        $agency_num ++;
+        $query1 = "INSERT INTO agency(name)VALUES(".$newagency.")";
+        $pointers['last_agency']=$newagency;
+        $pointers['agency'] ++;
         
-        mysql_query($query1) or die("query1 failed on $line_number ".mysql_error());
+        mysql_query($query1) or die("query1 failed on ".$pointers['line_number'].mysql_error());
     }
-    
-    //  Case of existing agency, and a new agency is not created
-    else
-    {} 
 }
 
+/**
+ *  Inserts Program Data into database
+ * @global type $pointers   array holding pointers to ids and simmilar info
+ * @global type $bull   bool array for whether addr & pcontact are set
+ * @param type $items   array holding incoming data to be added
+ */
 function get_query_2($items)
 {
-    global $line_number;
+    global $pointers,$bull;
     
-    $query2 = "INSERT INTO program(name,desript,season,times,issues,notes,ref,agency)
-                VALUES($items[1],$items[2],$items[3],$items[4],$items[5],$items[6],$items[7],$agency_num)";
+    $bull['pcontact'] ? $contact_id = $pointers['pcontact'] : $contact_id = null;
+    $bull['addr'] ? $addr_id = $pointers['addr'] : $addr_id = null;
     
-    mysql_query($query2) or die("query2 failed on $line_number ".mysql_error());
+    $query2 = "INSERT INTO program(name,desript,agency,addr,p_contact)
+                VALUES($items[1],$items[2],".$pointers['agency'].",$addr_id,$contact_id)";
+    
+    mysql_query($query2) or die("query2 failed on ".$pointers['line_number'].mysql_error());
 }
 
-function get_query_3()
+/**
+ *  Inserts p contact info when set, then updates appropriate pointers and bools
+ * @global type $pointers   array holding pointers to ids and simmilar info
+ * @global type $bull   bool array for whether addr & pcontact are set
+ * @param type $items   array holding incoming data to be added
+ */
+function get_query_4($items)
 {
-    global $line_number;
+    global $pointers,$bull;
     
-    $query3 = "INSERT INTO student_contact(mail)
-                VALUES($items[8])";
-    
-    mysql_query($query3) or die("query3 failed on $line_number ".mysql_error());
+    //  Case for there is a new contact
+    if($items[10]!= null || $items[12]!=null)
+    {
+        $query4 = "INSERT INTO pro_contact(title,f_name,m_name,l_name,suf,w_phone,m_phone,mail,program_id)
+                VALUES($items[3],$items[4],$items[5],$items[6],$items[7],".phone_format($items[8]).",".phone_format($items[9]).",$items[10],".($pointers['line-number']-1).")";
+        mysql_query($query4) or die("query4 failed on ".$pointers['line_number'].mysql_error());
+        
+        $bull['pcontact']=true;
+        $pointers['pcontact']++;
+    }
+    else
+    {
+        $bull['pcontact']=false;
+    }
 }
 
-function get_query_4()
+/**
+ *  inserts address when set, and updates appropriate bool and pointer values
+ * @global type $pointers   array holding pointers to ids and simmilar info
+ * @global type $bull   bool array for whether addr & pcontact are set
+ * @param type $items   array holding incoming data to be added
+ */
+function get_query_5($items)
 {
-    global $line_number;
+    global $pointers,$bull ;
     
-    $query4 = "INSERT INTO pro_contact(title,f_name,m_name,l_name,suf,w_phone,m_phone,mail,program_id)
-                VALUES($items[9],$items[10],$items[11],$items[12],$items[13],$items[14],$items[15],$items[16],$line_number)";
-    
-    mysql_query($query4) or die("query4 failed on $line_number ".mysql_error());
+    if($items[11]!=null)
+    {
+        $query5 = "INSERT INTO agency_addr(street)
+                VALUES($items[11])";
+        mysql_query($query5) or die("query5 failed on ".$pointers['line_number'].mysql_error());
+        
+        $bull['addr']=true;
+        $pointers['addr'] ++;
+    }
+    else
+    {
+        $bull['addr']=false;
+    }   
 }
 
-function get_query_5()
-{
-    global $line_number;
-    
-    $query5 = "INSERT INTO agency_addr(street)
-                VALUES($items[17])";
-    
-    mysql_query($query5) or die("query5 failed on $line_number ".mysql_error());
-}
-
+/**
+ *  Function takes phone numbers and makes them database friendly
+ * @param type $input
+ * @return type 
+ */
 function phone_format($input)
 {
     //  Checks for proper formatting of phone number
-    //regex removes '-' from xxx-xxx-xxxx or () from (xxx)-xxx-xxxx
-    $pattern = '/(\-|\(|\))/g';
+    //  regex removes '-' from xxx-xxx-xxxx or () from
+    //  (xxx)-xxx-xxxx or "" from "xxx-xxx-xxxx"
+    
+    $pattern = '/(\-|\(|\)|\")/g';
     $replace = '';
     
     preg_replace($pattern,$replace,$input);
+    
+    return $input;
 }
