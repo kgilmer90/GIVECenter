@@ -73,7 +73,7 @@ function line_handler($line)
     $items=array();
     foreach($input as $temp)
     {
-        if($temp=='')$temp=null;
+        if($temp=='')$temp='null';
         array_push($items, $temp);
     }
 //  insert data into database!
