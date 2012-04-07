@@ -40,6 +40,7 @@ class MySQLDatabaseConn
 	public function __construct($server, $databaseName, $username, $password, $newlink = false, $clientFlags = 0)
 	{
 		$this->dbname = $databaseName;
+		//@ symbol suppresses system error messages
 		$this->dblink = @mysql_connect($server, $username, $password, $newlink, $clientFlags);
 		
 		$this->setErrors();

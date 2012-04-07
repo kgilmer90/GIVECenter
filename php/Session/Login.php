@@ -18,16 +18,19 @@ try {
 	
 	if(check_user($conn, $uname, $passwd)) {
 		$_SESSION['username'] = $uname;
-		header('Location: ../Homepage.php');
+		$conn->close();
+		header('Location: ../../Homepage.php');
 	}
 	else {
-		header('../../LoginPage.php?login=failed');
+		header('Location: ../../LoginPage.php?login=failed');
 	}
 }
 catch(MySQLDatabaseConnException $e) {
+	$conn->close();
 	header('Location: ../../LoginPage.php?except=conn&code='.$e->getCode());
 }
 catch(MySQLQueryFailedException $e) {
+	$conn->close();
 	header('Location: ../../LoginPage.php?except=query&code='.$e->getCode());
 }
 ?>

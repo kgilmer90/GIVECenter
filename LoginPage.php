@@ -2,7 +2,7 @@
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 session_start(); 
 
-//to hold various errors states
+//to hold various error states
 $error = array();
 
 //set to 'failed' if previous login attempt yielded no matches for the uname/pass combo
