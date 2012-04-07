@@ -10,7 +10,8 @@
  * ************************************************************************ *
  */
 
-include_once('../../php/GIVE/GIVEAddr.php');
+include_once('../../php/GIVE/GIVEAgency.php');
+include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
  
 /**
  *  Creates Objects for all the agencies and their information and returns them

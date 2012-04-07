@@ -12,6 +12,7 @@
  */
  
 include_once('../../php/GIVE/GIVEAddr.php');
+include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
  *  Creates and Returns Single Object Holding Address information

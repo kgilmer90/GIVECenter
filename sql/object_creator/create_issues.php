@@ -7,6 +7,7 @@
  */
 
 include_once('../../php/GIVE/GIVEAddr.php');
+include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
  
 /**
  *  Returns Issue strings in array for specific program 
