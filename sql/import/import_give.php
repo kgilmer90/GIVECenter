@@ -6,7 +6,7 @@
  * import_me.csv 
  * and then pass it into the give database
  */
-include_once '../queries/queries_for_ian.php';
+include_once '../queries/camel.php';
 main();
 
 function main()
@@ -194,7 +194,7 @@ function phone_format($input)
     //  regex removes '-' from xxx-xxx-xxxx or () from
     //  (xxx)-xxx-xxxx or "" from "xxx-xxx-xxxx"
     
-    $pattern = '/(\-|\(|\)|\")/g';
+    $pattern = '/(\-|\(|\)|\")/';
     $replace = '';
     
     preg_replace($pattern,$replace,$input);
