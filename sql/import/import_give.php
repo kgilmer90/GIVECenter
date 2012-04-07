@@ -7,6 +7,7 @@
  * and then pass it into the give database
  */
 include_once '../queries/camel.php';
+include_once '../../php/ini/GIVECenterini.php';
 main();
 
 function main()
@@ -14,12 +15,13 @@ function main()
     /****************************************************************************
     * Connect to Database, show error if unsuccessful
     ****************************************************************************/
-    $db_host="localhost"; 
-    $db_user="bgs";
-    $db_pass="dki2012!";
+    $db_host=$GIVE_MYSQL_SERVER; 
+    $db_dbname=$GIVE_MYSQL_DATABASE;
+    $db_user=$GIVE_MYSQL_UNAME;
+    $db_pass=$GIVE_MYSQL_PASS;
 
     mysql_connect($db_host,$db_user,$db_pass) or die("db connection error".mysql_error()."\n".error_art());
-    mysql_select_db("give_ctr_agencies") or die("db select error".mysql_error()."\n".error_art());
+    mysql_select_db($db_dbname) or die("db select error".mysql_error()."\n".error_art());
 
     /****************************************************************************
     * Open CSV file containing information to upload, die if fail
@@ -129,7 +131,7 @@ function get_query_2($items)
     $bull['addr'] ? $addr_id = $pointers['addr'] : $addr_id = 'null';
     
     $query2 = "INSERT INTO program(name,desript,agency,addr,p_contact)
-                VALUES($items[1],$items[2],".$pointers['agency'].",$addr_id,$contact_id)";
+                VALUES($items[1],$items[2],".$pointers['agency'].",".$pointers['addr'].",".$pointers['pcontact'].")";
     
     mysql_query($query2) or die("query2-program failed on ".$pointers['line'].mysql_error());
     $pointers["program_id"]++;
@@ -148,8 +150,8 @@ function get_query_4($items)
     //  Case for there is a new contact
     if($items[10]!= 'null' || $items[12]!='null')
     {
-        $query4 = "INSERT INTO pro_contact(title,f_name,m_name,l_name,suf,w_phone,m_phone,mail,program_id)
-                VALUES($items[3],$items[4],$items[5],$items[6],$items[7],".phone_format($items[8]).",".phone_format($items[9]).",$items[10],".$pointers['program_id'].")";
+        $query4 = "INSERT INTO pro_contact(title,f_name,m_name,l_name,suf,w_phone,m_phone,mail)
+                VALUES($items[3],$items[4],$items[5],$items[6],$items[7],".phone_format($items[8]).",".phone_format($items[9]).",$items[10])";
         mysql_query($query4) or die("query4-pcontact failed on ".$pointers['line'].mysql_error());
         
         $bull['pcontact']=true;
@@ -173,7 +175,7 @@ function get_query_5($items)
     
     if($items[11]!='null')
     {
-        $query5 = "INSERT INTO agency_addr(street)
+        $query5 = "INSERT INTO addr(street)
                 VALUES($items[11])";
         mysql_query($query5) or die("query5-addr failed on ".$pointers['line'].mysql_error());
         
