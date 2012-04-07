@@ -102,15 +102,16 @@ font-family: Arial;
 background-color: rgb(185, 179, 175);}
 h1 {
 text-align: center;
-color: #ee3e80;}
+color: #000
+;}
 h2 {
 text-align: center;
-color: #0088dd;}
-p.loginform { 
-margin: auto;
-text-align: center;
-width: 250px;
-border: 3px dotted #0088dd;
+color: #000;}
+p.loginform {
+	margin: auto;
+	text-align: center;
+	width: 250px;
+	border: thin solid #000;
 }
 /****************************************END ORIGINAL CSS FILE*****************************************/
 
@@ -208,20 +209,23 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <!-- BEGIN FORM -->
-<form action = "php/Session/Login.php" method="post">
-<h2>Login</h2>
-<br /> <br /> 
+
+    <form action = "php/Session/Login.php" method="post">
+<h2>Login:</h2>
 <p class = "loginform">
-Username:<br />
+<br />
+ Username: 
 <input type = "text" name = "username" size = "15" maxlength = "15" required = "required"/> </label>
 <br />
-Password: <br /> 
+Password:  
 <input type= "password" name ="password" size = "15" maxlength = "15" required = "required"/></label>
-<br/>
+<br/><br />
 <!--  <button onclick="login()">Login</button>-->
-<input type="submit" />
+<input type="submit" /><br />
 </form>
 
+      <p>&nbsp;</p>
+      <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
       <p>&nbsp;</p>
