@@ -2,6 +2,7 @@
 
 include_once('GIVEAddr.php');
 include_once('GIVEProContact.php');
+include_once('GIVEProgram.php');
 include_once('GIVEToHTML.php');
 
 class GIVEAgency
@@ -13,17 +14,17 @@ class GIVEAgency
 	public $addr;					//GIVEAddr
 	public $programs;				//GIVEProgram array
 	
-	public function __construct($args)
+	public function __construct($args = array())
 	{
-		$this->id = $args['id'];
-		$this->name = $args['name'];
-		$this->descript = $args['descript'];
-		$this->mail = $args['mail'];
-		$this->phone = $args['phone'];
-		$this->fax = $args['fax'];
-		$this->p_contact = $args['p_contact'];
-		$this->addr = $args['addr'];
-		$this->programs = $args['programs'];
+		$this->id = isset($args['id']) ? $args['id'] : '';
+		$this->name = isset($args['name']) ? $args['name'] : '';
+		$this->descript = isset($args['descript']) ? $args['descript'] : '';
+		$this->mail = isset($args['mail']) ? $args['mail'] : '';
+		$this->phone = isset($args['phone']) ? $args['phone'] : '';
+		$this->fax = isset($args['fax']) ? $args['fax'] : '';
+		$this->p_contact = isset($args['p_contact']) ? $args['p_contact'] : new GIVEProContact();
+		$this->addr = isset($args['addr']) ? $args['addr'] : new GIVEAddr();
+		$this->programs = isset($args['programs']) ? $args['programs'] : array(0 => new GIVEProgram());
 	}
 	public function toHTMLTable($id)
 	{	

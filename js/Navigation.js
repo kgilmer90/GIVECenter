@@ -40,6 +40,24 @@ function init()
 //**************************************************
 ////////////////////////////////////////////////////
 //
+//		GIVE AGENCY AND PROGRAM SEARCHING
+//
+////////////////////////////////////////////////////
+//**************************************************
+
+var leftSidebarId = "leftsidebar";
+
+function addProgramToSidebar(program_id) {
+	
+	var table = document.getElementById(leftSideBarId);
+	
+	var listItem = document.createElement("li");
+	var program = document.createElement("a");
+}
+
+//**************************************************
+////////////////////////////////////////////////////
+//
 //		GIVE AGENCY AND PROGRAM INITIALIZATION
 //
 ////////////////////////////////////////////////////

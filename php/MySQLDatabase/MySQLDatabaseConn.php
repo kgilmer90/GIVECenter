@@ -253,7 +253,7 @@ class MySQLDatabaseConn
 		$this->setErrors();
 		
 		if($this->resource == false) {
-			throw new MySQLQueryFailedException($this->lastQuery."\n".$this->errorStr, $this->errorCode);
+			throw new MySQLQueryFailedException($this->errorStr.' for Query: '.$this->lastQuery, $this->errorCode);
 		}
 		
 		$this->rows = mysql_affected_rows($this->resource);
@@ -268,8 +268,8 @@ class MySQLDatabaseConn
 		}
 	}
 	/**
-	 * Sets the error code and string with the most recent
-	 * mysql error codes.
+	 * Sets the error code and error string with the most recent
+	 * error code from mysql_errno() and error string from mysql_error().
 	 */
 	private function setErrors()
 	{

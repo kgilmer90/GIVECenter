@@ -1,5 +1,6 @@
 <?php
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
+
 session_start(); 
 
 //to hold various error states
