@@ -13,3 +13,12 @@ DELETE FROM program;
 DELETE FROM program_issues;
 DELETE FROM pro_contact;
 DELETE FROM student_contact;
+
+alter table addr AUTO_INCREMENT = 1;
+alter table agency AUTO_INCREMENT = 1;
+alter table contact_history AUTO_INCREMENT = 1;
+alter table issues AUTO_INCREMENT = 1;
+alter table program AUTO_INCREMENT = 1;
+alter table program_issues AUTO_INCREMENT = 1;
+alter table pro_contact AUTO_INCREMENT = 1;
+alter table student_contact AUTO_INCREMENT = 1;

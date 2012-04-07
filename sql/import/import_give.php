@@ -51,19 +51,20 @@ function main()
     
     global $pointers, $bull;
     
-    $pointers['agency']=0;          //  agency -> db pointer for last agency made
-    $pointers['addr']=0;            //  addr -> db pointer for last add made
-    $pointers['pcontact']=0;        //  pcontact -> db pointer for last pro contact made
+    $pointers['agency']=1;          //  agency -> db pointer for last agency made
+    $pointers['addr']=1;            //  addr -> db pointer for last add made
+    $pointers['pcontact']=1;        //  pcontact -> db pointer for last pro contact made
     $pointers['line']=1;     //  Line Number lets us know, if failure, where in the file it occured.  Also used for Program_id
     $pointers['last_agency']='';    //  last agency -> holds name of last agency for checking
-    $pointers['program_id']=0;      //  holds id for current program bring created
+    $pointers['program_id']=1;      //  holds id for current program bring created
     
     $bull['pcontact']=false;
     $bull['addr']=false;
     
     while($line = fgets($fh))
     {
-        //global $pointers;
+        $line = trim($line);     
+        
         line_handler($line);
         $pointers['line']++;		
     }
@@ -142,7 +143,7 @@ function get_query_2($items)
     global $pointers,$bull;
     
     $bull['pcontact'] ? $contact_id = $pointers['pcontact'] : $contact_id = 'null';
-    $bull['addr'] == '0' ? $addr_id = $pointers['addr'] : $addr_id = 'null';
+    $bull['addr'] ? $addr_id = $pointers['addr'] : $addr_id = 'null';
     
     $query2 = "INSERT INTO program(name,descript,agency,addr,p_contact)
                 VALUES($items[1],$items[2],".$pointers['agency'].",".$pointers['addr'].",".$pointers['pcontact'].")";
@@ -190,8 +191,8 @@ function get_query_5($items)
 {
     global $pointers,$bull ;
     
-    if($items[11]!='null')
-    {
+    if($items[11] != 'null')
+    {     
         $query5 = "INSERT INTO addr(street)
                 VALUES($items[11])";
         mysql_query($query5) or die("query5-addr failed on ".$pointers['line'].mysql_error().$query5);
