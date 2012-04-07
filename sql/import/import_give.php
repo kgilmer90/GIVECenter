@@ -123,8 +123,8 @@ function get_query_2($items)
 {
     global $pointers,$bull;
     
-    $bull['pcontact'] ? $contact_id = $pointers['pcontact'] : $contact_id = null;
-    $bull['addr'] ? $addr_id = $pointers['addr'] : $addr_id = null;
+    $bull['pcontact'] ? $contact_id = $pointers['pcontact'] : $contact_id = 'null';
+    $bull['addr'] ? $addr_id = $pointers['addr'] : $addr_id = 'null';
     
     $query2 = "INSERT INTO program(name,desript,agency,addr,p_contact)
                 VALUES($items[1],$items[2],".$pointers['agency'].",$addr_id,$contact_id)";
@@ -143,7 +143,7 @@ function get_query_4($items)
     global $pointers,$bull;
     
     //  Case for there is a new contact
-    if($items[10]!= null || $items[12]!=null)
+    if($items[10]!= 'null' || $items[12]!='null')
     {
         $query4 = "INSERT INTO pro_contact(title,f_name,m_name,l_name,suf,w_phone,m_phone,mail,program_id)
                 VALUES($items[3],$items[4],$items[5],$items[6],$items[7],".phone_format($items[8]).",".phone_format($items[9]).",$items[10],".($pointers['line-number']-1).")";
@@ -168,7 +168,7 @@ function get_query_5($items)
 {
     global $pointers,$bull ;
     
-    if($items[11]!=null)
+    if($items[11]!='null')
     {
         $query5 = "INSERT INTO agency_addr(street)
                 VALUES($items[11])";
