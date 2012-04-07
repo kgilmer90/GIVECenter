@@ -44,16 +44,18 @@ function main()
     $pointers['agency']=0;          //  agency -> db pointer for last agency made
     $pointers['addr']=0;            //  addr -> db pointer for last add made
     $pointers['pcontact']=0;        //  pcontact -> db pointer for last pro contact made
-    $pointers['line_number']=1;     //  Line Number lets us know, if failure, where in the file it occured.  Also used for Program_id
+    $pointers['line']=1;     //  Line Number lets us know, if failure, where in the file it occured.  Also used for Program_id
     $pointers['last_agency']='';    //  last agency -> holds name of last agency for checking
+    $pointers['program_id']=0;      //  holds id for current program bring created
     
     $bull['pcontact']=false;
     $bull['addr']=false;
     
     while($line = fgets($fh))
     {
+        global $pointers;
         line_handler($line);
-        $pointers['line_number']++;		
+        $pointers['line']++;		
     }
     fclose($fh);
 }
@@ -109,7 +111,7 @@ function get_query_1($newagency)
         $pointers['last_agency']=$newagency;
         $pointers['agency'] ++;
         
-        mysql_query($query1) or die("query1 failed on ".$pointers['line_number'].mysql_error());
+        mysql_query($query1) or die("query1-agency failed on ".$pointers['line'].mysql_error());
     }
 }
 
@@ -129,7 +131,8 @@ function get_query_2($items)
     $query2 = "INSERT INTO program(name,desript,agency,addr,p_contact)
                 VALUES($items[1],$items[2],".$pointers['agency'].",$addr_id,$contact_id)";
     
-    mysql_query($query2) or die("query2 failed on ".$pointers['line_number'].mysql_error());
+    mysql_query($query2) or die("query2-program failed on ".$pointers['line'].mysql_error());
+    $pointers["program_id"]++;
 }
 
 /**
@@ -146,8 +149,8 @@ function get_query_4($items)
     if($items[10]!= 'null' || $items[12]!='null')
     {
         $query4 = "INSERT INTO pro_contact(title,f_name,m_name,l_name,suf,w_phone,m_phone,mail,program_id)
-                VALUES($items[3],$items[4],$items[5],$items[6],$items[7],".phone_format($items[8]).",".phone_format($items[9]).",$items[10],".($pointers['line-number']-1).")";
-        mysql_query($query4) or die("query4 failed on ".$pointers['line_number'].mysql_error());
+                VALUES($items[3],$items[4],$items[5],$items[6],$items[7],".phone_format($items[8]).",".phone_format($items[9]).",$items[10],".$pointers['program_id'].")";
+        mysql_query($query4) or die("query4-pcontact failed on ".$pointers['line'].mysql_error());
         
         $bull['pcontact']=true;
         $pointers['pcontact']++;
@@ -172,7 +175,7 @@ function get_query_5($items)
     {
         $query5 = "INSERT INTO agency_addr(street)
                 VALUES($items[11])";
-        mysql_query($query5) or die("query5 failed on ".$pointers['line_number'].mysql_error());
+        mysql_query($query5) or die("query5-addr failed on ".$pointers['line'].mysql_error());
         
         $bull['addr']=true;
         $pointers['addr'] ++;
