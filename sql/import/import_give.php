@@ -5,6 +5,10 @@
  * program will read in data from 
  * import_me.csv 
  * and then pass it into the give database
+ * 
+ * 
+ * NOTE! The CSV File needs to have an extra row of dummy info after the last
+ * one so that it recognizes when there is a null in the last row
  */
 include_once '../queries/camel.php';
 include_once '../../../php/ini/GIVECenterIni.php';
