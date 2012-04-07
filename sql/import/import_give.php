@@ -7,11 +7,7 @@
  * and then pass it into the give database
  */
 include_once '../queries/camel.php';
-<<<<<<< HEAD:sql/import/import_give_ian.php
 include_once '../../php/ini/GIVECenterini.php';
-=======
-
->>>>>>> cf1b6ddcf388a2778cb34a730d811e3a3f9aff71:sql/import/import_give.php
 main();
 
 function main()
