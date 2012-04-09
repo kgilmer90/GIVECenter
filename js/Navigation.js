@@ -45,14 +45,191 @@ function init()
 ////////////////////////////////////////////////////
 //**************************************************
 
-var leftSidebarId = "leftsidebar";
+var leftSidebar = document.getElementById("leftSideBar");
 
-function addProgramToSidebar(program_id) {
+/**
+ * Search one string for another.
+ * @param stringToSearch - string being searched
+ * @param searchTerms - string to see if stringToSearch contains
+ * @returns starting index of searchTerms in stringToSearch or -1 if not found
+ */
+function stringSearch(stringToSearch, searchTerms) {
+	return stringToSearch.indexOf(searchTerms);
+}
+
+/**
+ * Search one string for another regardless of upper or lower case.
+ * @param stringToSearch - string being searched
+ * @param searchTerms - string to see if stringToSearch contains
+ * @returns starting index of searchTerms in stringToSearch or -1 if not found
+ */
+function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
+	var s = stringToSearch.toLowerCase();
+	var t = searchTerms.toLowerCase();
+	return stringSearch(s, t);
+}
+
+/**
+ * Matches a search string to a list of programs whose names
+ * contain the string. Search is case insensitive.
+ * @param searchTerms - search string
+ * @returns GIVEProgram array of programs whose names match the terms
+ */
+function searchByProgramName(searchTerms) {
 	
-	var table = document.getElementById(leftSideBarId);
+	var program_search_results = [];
 	
-	var listItem = document.createElement("li");
-	var program = document.createElement("a");
+	var i;
+	for(i in programs) {
+		
+		//GIVEProgram reference and program name
+		var p = programs[i];
+		var name = p.name;
+		
+		//if name contains the search terms anywhere in the string,
+		//add the program to the list of search results
+		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
+			program_search_results.push(p);
+		}
+	}
+	return program_search_results;
+}
+
+/**
+ * Matches a search string to a list of agencies whose names
+ * contain the string. Search is case insensitive.
+ * @param searchTerms - search string
+ * @returns GIVEAgency array of agencies whose names match the terms
+ */
+function searchByAgencyName(searchTerms) {
+	
+	var agency_search_results = [];
+	
+	var i;
+	for(i in agencies) {
+		
+		//GIVEAgency reference and name
+		var a = agencies[i];
+		var name = a.name;
+		
+		//if name contains the search terms anywhere in the string,
+		//add the program to the list of search results
+		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
+			agency_search_results.push(a);
+		}
+	}
+	return agency_search_results;
+}
+
+/**
+ * Removes a node from the DOM tree. First removes all 
+ * event handlers to prevent memory leaks in IE, then
+ * removes the node itself.
+ * @param node - reference to the DOM node to remove
+ */
+function removeNode(node) {
+	
+	//set all event handlers null to avoid memory leaks in IE
+	node.onclick = null;
+	node.ondblclick = null;
+	node.onmousedown = null;
+	node.onmousemove = null;	
+	node.onmouseover = null;
+	node.onmouseout = null;
+	node.onmouseup = null;
+	node.onkeydown = null;
+	node.onkeypress = null;
+	node.onkeyup = null;
+	
+	//remove the node from the DOM tree
+	node.parentNode.removeChild(node);
+}
+
+/**
+ * Removes all elements from the left side bar.
+ */
+function clearLeftSideBar() {
+	
+	while(leftSideBar.hasChildNodes()) {
+		removeNode(leftSideBar.childNodes[0]);
+	}
+}
+/**
+ * Displays the information contained within the GIVEProgram object.
+ * @param index - index in the global programs array where the 
+ * GIVEProgram object can be found.
+ */
+function displayProgramInfo(index) {
+	if(index < programs.length) {
+		
+	}
+}
+
+/**
+ * Displays the information contained within the GIVEAgency object.
+ * @param index - index in the global programs array where the 
+ * GIVEProgram object can be found.
+ */
+function displayAgencyInfo(index) {
+	if(index < agencies.length) {
+		
+	}
+}
+
+/**
+ * Adds an array of GIVEProgram objects to the left side bar.
+ * Sets the onclick handler to display the object's contents.
+ * @param programsArray - GIVEProgram array to add to the sidebar
+ */
+function addProgramsToSidebar(programsArray) {
+	
+	var i;
+	for(i in programsArray) {
+		
+		//create a new <a> tag
+		var a = document.createElement("a");
+		
+		//set the id and onclick handler
+		a.id = "leftSideBar_program" + i;
+		a.onclick = displayProgramInfo(i);
+		
+		//create a new <li> tag to hold the <a> tag
+		var li = document.createElement("li");
+		
+		//add the <a> tag as a child of <li>
+		li.appendChild(a);
+		
+		//add the <li> tag as a child of leftSideBar
+		leftSideBar.appendChild(li);
+	}
+}
+
+/**
+ * Adds an array of GIVEAgency objects to the left side bar.
+ * Sets the onclick handler to display the object's contents.
+ * @param agenciesArray - GIVEAgency array to add to the sidebar
+ */
+function addAgenciesToSidebar(agenciesArray) {
+	
+	var i;
+	for(i in agenciesArray) {
+		
+		//create a new <a> tag
+		var a = document.createElement("a");
+		
+		//set the id and onclick handler
+		a.id = "leftSideBar_agency" + i;
+		a.onclick = displayAgencyInfo(i);
+		
+		//create a new <li> tag to hold the <a> tag
+		var li = document.createElement("li");
+		
+		//add the <a> tag as a child of <li>
+		li.appendChild(a);
+		
+		//add the <li> tag as a child of leftSideBar
+		leftSideBar.appendChild(li);
+	}
 }
 
 //**************************************************
