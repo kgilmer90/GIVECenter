@@ -9,27 +9,17 @@ include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 function create_new_p_contact($conn,$info_array)
 {
-    $query = "";
+    $query = "INSERT INTO pro_contact(l_name,f_name,m_name,sug,m_phone,w_phone,mail)
+                VALUES ($info_array[title],$info_array[l_name],$info_array[f_name],$info_array[m_name],$info_array[suf],$info_array[m_phone],$info_array[w_phone],$info_array[mail]";
     
     $conn->query($query);
+    
+    $p_id = "SELECT id
+                    FROM pro_contacts
+                    SORT id DESC
+                    Limit 1,1";
+    // get id of last program inserted
+    
+    return $p_id;
 }
-
-/*
-CREATE TABLE contact_history(
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT KEY,
-	contact_id INT,
-	program_id INT) ENGINE INNODB;
- 
- CREATE TABLE pro_contact(
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT KEY,
-	title VARCHAR(30),
-	l_name VARCHAR(30),
-	f_name VARCHAR(30),
-	m_name VARCHAR(30),
-	suf VARCHAR(3),
-	m_phone CHAR(10),
-	w_phone CHAR(10),
-	mail VARCHAR(40)) ENGINE INNODB;
-*/
-
 ?>

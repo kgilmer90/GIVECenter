@@ -41,6 +41,8 @@ function create_agencies($conn)
      * 
      *  In the case of programs where there are multiple programs, we will be
      *  storing an array of objects, more specifically a reference to them.
+     * 
+     *  TODO: Add Way to Pass Limited vs Full
      */
     
     
@@ -63,3 +65,4 @@ function create_agencies($conn)
     return $agency_array;
 }
 ?>
+

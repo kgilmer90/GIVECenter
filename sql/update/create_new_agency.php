@@ -9,21 +9,21 @@ include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 function create_new_agency($conn,$info_array)
 {
-    $query = "";
+    $addr_id = create_new_addr($conn, $info_array['addr']);
+    $p_id = create_new_p_contact($conn, $info_array['p_contact']);
+        
+    $query = "INSERT INTO (name,descript,p_contact_id,addr,mail,phone,fax)
+                VALUES (".$info_array['name'].",".$info_array['descript'].",
+                $p_id,$addr_id,".$info_array['mail'].",".$info_array['phone'].",".$info_array['fax'].")";
     
     $conn->query($query);
+    
+     $agency_id = "SELECT id
+                    FROM agency
+                    SORT id DESC
+                    Limit 1,1";
+    // get id of last program inserted
+    
+    return $agency_id;
 }
-
-/*
- CREATE TABLE agency(
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	name VARCHAR(20),
-	descript VARCHAR(1000),
-	p_contact_id INT UNSIGNED, 
-	addr INT UNSIGNED,
-	mail VARCHAR(40),
-	phone CHAR(10),
-	fax CHAR(10)) ENGINE INNODB;
- */
-
 ?>

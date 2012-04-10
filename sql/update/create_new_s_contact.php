@@ -9,25 +9,18 @@ include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 function create_new_s_contact($conn,$info_array)
 {
-    $query = "";
-    
+    $query = "INSERT INTO student_contact(l_name,f_name,m_name,sug,m_phone,w_phone,mail)
+                VALUES ($info_array[l_name],$info_array[f_name],$info_array[m_name],$info_array[suf],$info_array[m_phone],$info_array[w_phone],$info_array[mail])";
     $conn->query($query);
+    
+    $s_id = "SELECT id
+                    FROM student_contacts
+                    SORT id DESC
+                    Limit 1,1";
+    // get id of last program inserted
+    
+    return $s_id;
+    
+    // TODO: Make to work with contact_history table
 }
-
-/*
- CREATE TABLE contact_history(
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT KEY,
-	contact_id INT,
-	program_id INT) ENGINE INNODB;
- 
- CREATE TABLE student_contact(
-	id INT UNSIGNED NOT NULL AUTO_INCREMENT KEY,
-	l_name VARCHAR(20),
-	f_name VARCHAR(20),
-	m_name VARCHAR(20),
-	suf CHAR(3),
-	m_phone CHAR(10),
-	w_phone CHAR(10),
-	mail VARCHAR(40)) ENGINE INNODB;
- */
 ?>
