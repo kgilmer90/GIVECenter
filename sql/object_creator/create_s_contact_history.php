@@ -11,7 +11,7 @@
  * ************************************************************************ *
  */
 
-include_once('../../php/GIVE/GIVEAddr.php');
+include_once('../../php/GIVE/GIVEStudentContact.php');
 include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
