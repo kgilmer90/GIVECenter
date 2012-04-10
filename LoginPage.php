@@ -219,7 +219,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <input type = "text" name = "username" size = "15" maxlength = "15" required = "required"/> </label>
 <br />
 Password:  
-<input type= "password" name ="password" size = "15" maxlength = "15" required = "required"/></label>
+<input type= "password" name ="password" size = "15" maxlength = "15" /></label>
 <br/><br />
 <!--  <button onclick="login()">Login</button>-->
 <input type="submit" /><br />

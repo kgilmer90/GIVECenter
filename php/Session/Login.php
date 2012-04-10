@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 /**
  * Login.php
  * 
@@ -22,6 +22,7 @@ try {
 		header('Location: ../../Homepage.php');
 	}
 	else {
+		$conn->close();
 		header('Location: ../../LoginPage.php?login=failed');
 	}
 }

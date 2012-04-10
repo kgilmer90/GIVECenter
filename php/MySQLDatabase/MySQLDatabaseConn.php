@@ -49,7 +49,7 @@ class MySQLDatabaseConn
 			throw new MySQLDatabaseConnException($this->errorStr, $this->errorCode);
 		}
 		
-		$result = mysql_select_db($this->dbname, $this->resource);
+		$result = mysql_select_db($this->dbname, $this->dblink);
 		$this->setErrors();
 		if(!$result) {
 			throw new MySQLDatabaseConnException($this->errorStr, $this->errorCode);
@@ -252,7 +252,7 @@ class MySQLDatabaseConn
 		
 		$this->setErrors();
 		
-		if($this->resource == false) {
+		if(!$this->resource) {
 			throw new MySQLQueryFailedException($this->errorStr.' for Query: '.$this->lastQuery, $this->errorCode);
 		}
 		

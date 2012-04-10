@@ -1,4 +1,6 @@
-<?php 
+<?php
+session_start(); 
+/*
 include_once('php/GIVE/GIVEToHTML.php');
 
 session_start();
@@ -26,6 +28,7 @@ else {
 
 //echo the agency data to the page as a hidden table
 //GIVEAgenciesToHTMLTable($all_agencies);
+ */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -200,9 +203,15 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   <div class="sidebar1">
     <div align="center">
       <ul class="nav">
-        <li><a href="Admin.php">Admin</a></li>
+      <?
+	      if($_SESSION['username'] == 'admin') {
+	      	?>
+	      	<li><a href="Admin.php">Admin</a></li>
+	      	<?php
+	      }
+      ?>
         <li><a href="BrowseAll.php">Browse All</a></li>
-        <li><a href="Session/Logout.php">Logout</a></li>
+        <li><a href="php/Session/Logout.php">Logout</a></li>
         <li>
           <form id="form2" name="form2" method="post" action="">
             <label for="search"></label>
@@ -215,14 +224,14 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   <div class="sidebar2">
     <div align="center">
       <ul class="nav">
-        <li><a href="#">Program1 </a></li>
-        <li><a href="#">Program2 </a></li>
-        <li><a href="#">Program3 </a></li>
-        <li><a href="#">Program4 </a></li>
-        <li><a href="#">Program5 </a></li>
-        <li><a href="#">Program6 </a></li>
-        <li><a href="#">Program7 </a></li>
-        <li><a href="#">Program8 </a></li>
+        <li><a href="javascript:displayProgramInfo(1)">Program1 </a></li>
+        <li><a onclick="displayProgramInfo(2)">Program2 </a></li>
+        <li><a onclick="displayProgramInfo(3)">Program3 </a></li>
+        <li><a onclick="displayProgramInfo(4)">Program4 </a></li>
+        <li><a onclick="displayProgramInfo(5)">Program5 </a></li>
+        <li><a onclick="displayProgramInfo(6)">Program6 </a></li>
+        <li><a onclick="displayProgramInfo(7)">Program7 </a></li>
+        <li><a onclick="displayProgramInfo(8)">Program8 </a></li>
         <li><a href="#">...</a></li>
       </ul>
       

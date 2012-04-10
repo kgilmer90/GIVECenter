@@ -1,11 +1,30 @@
 // JavaScript Document
 
+var results_display = false;
+var interests_display = true;
+
 function hidestuff(boxid){
+	
+	if(boxid == 'results') {
+		results_display = false;
+	}
+	else if(boxid == 'interests') {
+		interests_display = false;
+	}
+	
    	document.getElementById(boxid).style.visibility="hidden";
   	document.getElementById(boxid).style.position= "absolute";
   	document.getElementById(boxid).style.display="none";
 }
 function showstuff(boxid){
+	
+	if(boxid == 'results') {
+		results_display = true;
+	}
+	else if(boxid == 'interests') {
+		interests_display = true;
+	}
+	
   	document.getElementById(boxid).style.visibility="visible";
 	document.getElementById(boxid).style.position= "relative";
 	document.getElementById(boxid).style.display="block";
@@ -24,11 +43,6 @@ function clearChoices()
 {
 	 document.getElementById('form1').reset();
 	 document.getElementById('form3').reset();
-}
-
-function login()
-{
-	location.href='file:///C:/Users/Karen/GIVECenter/html_css/HomepageJS.html';
 }
 
 function init()
@@ -160,9 +174,13 @@ function clearLeftSideBar() {
  * GIVEProgram object can be found.
  */
 function displayProgramInfo(index) {
-	if(index < programs.length) {
+	alert("displayProgramInfo(" + index + ") & interests_display == " + interests_display + " & results_display == " + results_display);
+//	if(index < programs.length) {
+		if(!results_display) {
+			searchtoresults();
+		}
 		
-	}
+//	}
 }
 
 /**

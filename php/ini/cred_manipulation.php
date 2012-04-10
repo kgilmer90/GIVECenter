@@ -59,18 +59,22 @@ function change_pass($conn, $uname, $old_passwd, $new_passwd)
  * @return type $varified boolean that returns if user and pass are correct
  */
 function check_user($conn, $uname, $passwd)
-{
-    $verified = false;
-    
-    $query = "SELECT uname FROM users WHERE uname = $uname AND passwd = ".md5($passwd);
-    
-    $conn->query($query);
-            
-    if ($conn->numRows() == 1) {
-        $verified = true;
+{   
+    $query = "SELECT uname FROM users WHERE uname = '$uname' AND passwd = '".md5($passwd)."'";
+	    
+    try {
+	    $conn->query($query);
+	            
+	    if ($conn->numRows() == 1) {
+	        return true;
+	    }
+	    else {
+	    	return false;
+	    }
     }
-    
-    return $verified;
+    catch(MySQLQueryFailedException $e) {
+    	return -1;
+    }
 }
 
 ?>
