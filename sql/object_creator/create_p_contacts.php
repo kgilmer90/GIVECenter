@@ -13,8 +13,8 @@
  */
 
 
-include_once('../../php/GIVE/GIVEProContact.php');
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEProContact.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
  * Creates pro contact object, and returns object

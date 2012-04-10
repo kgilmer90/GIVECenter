@@ -1,7 +1,8 @@
 <?php
-session_start(); 
-/*
-include_once('php/GIVE/GIVEToHTML.php');
+include_once(dirname(__FILE__).'/php/ini/GIVECenterIni.php');
+include_once(dirname(__FILE__).'/php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/php/GIVE/GIVEToHTML.php');
+include_once(dirname(__FILE__).'/sql/object_creator/create_agencies.php');
 
 session_start();
 
@@ -9,7 +10,7 @@ session_start();
 if(!isset($_SESSION['username'])) {
 	header('Location: LoginPage.php');
 }
-
+/*
 //by default, restrict queries
 $restrict_queries = true;
 
@@ -25,10 +26,7 @@ if($restrict_queries) {
 else {
 	//$all_agencies = some_function_to_obtain_unrestricted_data();
 }
-
-//echo the agency data to the page as a hidden table
-//GIVEAgenciesToHTMLTable($all_agencies);
- */
+*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -225,13 +223,13 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     <div align="center">
       <ul class="nav">
         <li><a href="javascript:displayProgramInfo(1)">Program1 </a></li>
-        <li><a onclick="displayProgramInfo(2)">Program2 </a></li>
-        <li><a onclick="displayProgramInfo(3)">Program3 </a></li>
-        <li><a onclick="displayProgramInfo(4)">Program4 </a></li>
-        <li><a onclick="displayProgramInfo(5)">Program5 </a></li>
-        <li><a onclick="displayProgramInfo(6)">Program6 </a></li>
-        <li><a onclick="displayProgramInfo(7)">Program7 </a></li>
-        <li><a onclick="displayProgramInfo(8)">Program8 </a></li>
+        <li><a href="javascript:displayProgramInfo(2)">Program2 </a></li>
+        <li><a href="javascript:displayProgramInfo(3)">Program3 </a></li>
+        <li><a href="javascript:displayProgramInfo(4)">Program4 </a></li>
+        <li><a href="javascript:displayProgramInfo(5)">Program5 </a></li>
+        <li><a href="javascript:displayProgramInfo(6)">Program6 </a></li>
+        <li><a href="javascript:displayProgramInfo(7)">Program7 </a></li>
+        <li><a href="javascript:displayProgramInfo(8)">Program8 </a></li>
         <li><a href="#">...</a></li>
       </ul>
       
@@ -251,12 +249,12 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
         <p align="center">Description</p>
         </label>
         </b>
-        <p align="center">text</p>
-        <p align="center">text</p>
-        <p align="center">text</p>
-        <p align="center">text</p>
-        <p align="center">text</p>
-        <p align="center">text</p>
+        <p align="center">text 1</p>
+        <p align="center">text 2</p>
+        <p align="center">text 3</p>
+        <p align="center">text 4</p>
+        <p align="center">text 5</p>
+        <p align="center">text 6</p>
       </div>
       <div class="column2"> <b>
         <label>
@@ -397,5 +395,13 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div align="center" class="container"><!-- end .container --></div>
 </div>
+<?php 
+	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+	
+	$all_agencies = create_agencies($conn);
+	
+	//echo the agency data to the page as a hidden table
+	GIVEAgenciesToHTMLTable($all_agencies, true);
+?>
 </body>
 </html>

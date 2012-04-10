@@ -11,8 +11,8 @@
  * ************************************************************************ *
  */
 
-include_once('../../php/GIVE/GIVEStudentContact.php');
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEStudentContact.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
  *  Creates array of objects containing all student contacts for a specified

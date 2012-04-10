@@ -21,8 +21,8 @@
  
 //  Todo: Add funcionality for specific and all
 
-include_once('../../php/GIVE/GIVEProgram.php');
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEProgram.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
  
 function create_programs($conn,$agency_id)
 {

@@ -1,8 +1,8 @@
 <?php
 
-include_once('MySQLException.php');
-include_once('MySQLDatabaseConnException.php');
-include_once('MySQLQueryFailedException.php');
+include_once(dirname(__FILE__).'/MySQLException.php');
+include_once(dirname(__FILE__).'/MySQLDatabaseConnException.php');
+include_once(dirname(__FILE__).'/MySQLQueryFailedException.php');
 
 class MySQLDatabaseConn
 {	

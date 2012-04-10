@@ -9,7 +9,7 @@
 
 
 
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 function create_new_issue($conn,$info_array)
 {

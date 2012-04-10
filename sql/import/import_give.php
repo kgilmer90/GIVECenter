@@ -10,8 +10,8 @@
  * NOTE! The CSV File needs to have an extra row of dummy info after the last
  * one so that it recognizes when there is a null in the last row
  */
-include_once '../queries/camel.php';
-include_once '../../../php/ini/GIVECenterIni.php';
+include_once(dirname(__FILE__).'/../queries/camel.php');
+include_once(dirname(__FILE__).'/../../../php/ini/GIVECenterIni.php');
 
 $pointers = array();
 $bull = array();

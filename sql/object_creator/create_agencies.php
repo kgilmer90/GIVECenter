@@ -10,8 +10,9 @@
  * ************************************************************************ *
  */
 
-include_once('../../php/GIVE/GIVEAgency.php');
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../queries/camel.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEAgency.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
  
 /**
  *  Creates Objects for all the agencies and their information and returns them

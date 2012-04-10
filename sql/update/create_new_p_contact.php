@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 function create_new_p_contact($conn,$info_array)
 {

@@ -1,6 +1,6 @@
 <?php
 
-include_once('GIVEProgram.php');
+include_once(dirname(__FILE__).'/GIVEProgram.php');
 
 class GIVEContactHistory
 {

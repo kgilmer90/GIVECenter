@@ -5,9 +5,9 @@ session_start();
  * 
  * Used as the action property of the login form in LoginPage.php.
  */
-include_once('../ini/cred_manipulation.php');
-include_once('../ini/GIVECenterIni.php');
-include_once('../MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'../ini/cred_manipulation.php');
+include_once(dirname(__FILE__).'../ini/GIVECenterIni.php');
+include_once(dirname(__FILE__).'../MySQLDatabase/MySQLDatabaseConn.php');
 
 $uname = $_POST['username'];
 $passwd = $_POST['password'];

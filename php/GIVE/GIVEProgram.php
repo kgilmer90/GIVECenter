@@ -1,10 +1,10 @@
 <?php
 
-include_once('GIVEAddr.php');
-include_once('GIVEAgency.php');
-include_once('GIVEProContact.php');
-include_once('GIVEStudentContact.php');
-include_once('GIVEToHTML.php');
+include_once(dirname(__FILE__).'/GIVEAddr.php');
+include_once(dirname(__FILE__).'/GIVEAgency.php');
+include_once(dirname(__FILE__).'/GIVEProContact.php');
+include_once(dirname(__FILE__).'/GIVEStudentContact.php');
+include_once(dirname(__FILE__).'/GIVEToHTML.php');
 
 class GIVEProgram
 {

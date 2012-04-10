@@ -5,7 +5,7 @@
  * 
  */
 
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 function create_new_program_existing_agency($conn,$info_array)
 {

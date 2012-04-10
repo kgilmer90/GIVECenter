@@ -7,8 +7,8 @@
  * Users & Passwords
  *
  */
-include ('../MySQLDatabase/MySQLDatabaseConn.php');
-include ('GIVECenterIni.php');
+include_once(dirname(__FILE__).'/../MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/GIVECenterIni.php');
 
 /**
  * Function Adds User for initial login to the site
