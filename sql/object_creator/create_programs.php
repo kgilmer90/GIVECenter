@@ -3,7 +3,7 @@
  * Create_Programs.php
  * 
  * ************************************************************************ *
- * Functions for creating array objects for either ALL agencies or just     *
+ * Functions for creating array objects for either ALL programs or just     *
  * a specific one                                                           *
  *                                                                          *
  * create_programs($conn,$agency_id)                                        *
