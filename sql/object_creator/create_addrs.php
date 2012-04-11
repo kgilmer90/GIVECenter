@@ -22,7 +22,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  * @return addr    object containing address information
  */ 
 function create_addr($conn,$id){
-    if($id == null) return null;
+    if($id == null){ return null; }
     
     $query = "SELECT id,street,city,state,zip
                 FROM addr
