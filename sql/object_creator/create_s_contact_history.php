@@ -32,10 +32,10 @@ function contact_history_s($conn,$id)
                 AND contact_history.program_id = $id";
     $conn->query($query);
 
-    $results = $conn->fetchAllAsAssoc();
-    if($conn->numRows()==0){
+	if($conn->numRows()==0){
         return null;
     }
+    $results = $conn->fetchAllAsAssoc();
 
     foreach($results as $temp)
     {

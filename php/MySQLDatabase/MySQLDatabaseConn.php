@@ -100,7 +100,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchRowAsAssoc()
 	{
-		return $this->fetchArray(MySQLDatabaseConn::FETCH_ASSOC);
+		return $this->fetchRowAsArray(MySQLDatabaseConn::FETCH_ASSOC);
 	}
 	/**
 	 * Fetches a row from the query's dataset as a numerically-indexed array.
@@ -109,7 +109,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchRowAsNumeric()
 	{
-		return $this->fetchRowArray(MySQLDatabaseConn::FETCH_NUM);
+		return $this->fetchRowAsArray(MySQLDatabaseConn::FETCH_NUM);
 	}
 	/**
 	 * Fetches a row from the query's dataset as an object, similar to

@@ -34,10 +34,10 @@ function create_programs($conn,$agency_id,$type)
 
     $conn->query($query);
 
-    $results = $conn->fetchAllAsAssoc();
-    if($conn->numRows()==0){
+	if($conn->numRows()==0){
         return null;
     }
+    $results = $conn->fetchAllAsAssoc();
     
     if($conn->numRows()==0){
         return null;
@@ -85,10 +85,10 @@ function create_all_programs($conn,$type)
 
     $conn->query($query);
 
-    $results = $conn->fetchAllAsAssoc();
-    if($conn->numRows()==0){
+	if($conn->numRows()==0){
         return null;
     }
+    $results = $conn->fetchAllAsAssoc();
     
     if($conn->numRows()==0){
         return null;

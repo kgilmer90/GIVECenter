@@ -74,11 +74,11 @@ function create_all_s_contacts($conn)
     
     $conn->query($query);
 
-    $results = $conn->fetchAllAsAssoc();
-    if($conn->numRows()==0){
+	if($conn->numRows()==0){
         return null;
     }
-
+    $results = $conn->fetchAllAsAssoc();
+    
     foreach($results as $temp)
     {
         $p = new GIVEAgency($temp);
@@ -102,10 +102,10 @@ function create_all_s_contacts_limited($conn)
     
     $conn->query($query);
 
-    $results = $conn->fetchAllAsAssoc();
-    if($conn->numRows()==0){
+	if($conn->numRows()==0){
         return null;
     }
+    $results = $conn->fetchAllAsAssoc();
 
     foreach($results as $temp)
     {

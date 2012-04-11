@@ -398,10 +398,10 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <?php 
 	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
 	
-	$all_agencies = create_agencies($conn);
+	$all_agencies = create_agencies($conn, true);
 	
 	//echo the agency data to the page as a hidden table
-	GIVEAgenciesToHTMLTable($all_agencies, true);
+	GIVEAgenciesToHTMLTable($all_agencies);
 ?>
 </body>
 </html>
