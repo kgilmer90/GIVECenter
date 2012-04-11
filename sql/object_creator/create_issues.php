@@ -24,6 +24,10 @@ function create_issues($conn,$program_id)
     $conn->query($query);
 
     $results = $conn->fetchAllAsNumeric();
+    
+    if($conn->numRows()==0){
+        return null;
+    }
 
     return $results;
 }
