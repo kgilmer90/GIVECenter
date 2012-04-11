@@ -28,7 +28,7 @@ function create_agencies($conn)
      */
     $agency_array = array();        
 
-    $query = "SELECT id,name,descript,mail,phone,fax,p_contact,addr
+    $query = "SELECT id,name,descript,mail,phone,fax,p_contact_id,addr
                 FROM agency";      
     $conn->query($query);          
  
