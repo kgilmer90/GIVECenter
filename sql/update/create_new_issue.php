@@ -11,6 +11,13 @@
 
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
+/**
+ *  Function to create program_issues for seleted program
+ * @param type $conn    database connection
+ * @param type $program_id  Id of program to add issues for
+ * @param type $issue_id    Array of Id's for Issues to associate with program
+ * @return int Nothing to return
+ */
 function create_new_issue_assoc($conn,$program_id,$issue_id)
 {
     foreach ($issue_id as $temp)
