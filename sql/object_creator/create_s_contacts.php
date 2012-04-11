@@ -23,16 +23,14 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  */
 function create_s_contact($conn,$id)
 {
+    if($id == null) return null;
+    
     $query = "SELECT id,l_name,f_name,m_name,suf,w_phone,m_phone,mail
                 FROM student_contact
                 WHERE id=$id";
     $conn->query($query);
 
     $results = $conn->fetchRowAsAssoc();
-    
-    if($conn->numRows()==0){
-        return null;
-    }
 
     $s = new GIVEAgency($results);
     
@@ -47,6 +45,8 @@ function create_s_contact($conn,$id)
  */
 function create_s_contact_limited($conn,$id)
 {
+    if($id == null) return null;
+    
     $query = "SELECT id,l_name,f_name,m_name,suf,w_phone,mail
                 FROM student_contact
                 WHERE id=$id";
@@ -54,9 +54,6 @@ function create_s_contact_limited($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchRowAsAssoc();
-    if($conn->numRows()==0){
-        return null;
-    }
 
     $s = new GIVEAgency($results);
     
