@@ -23,12 +23,11 @@ function create_issues($conn,$program_id)
                 AND program_issues.issue_id=issues.id";
     $conn->query($query);
 
-    $results = $conn->fetchAllAsNumeric();
-    
     if($conn->numRows()==0){
         return null;
-    }
-
+    }    
+    
+    $results = $conn->fetchAllAsNumeric();
     return $results;
 }
 
@@ -44,12 +43,10 @@ function create_all_issues($conn)
     
     $conn->query($query);
 
-    $results = $conn->fetchAllAsAssoc();
-    
     if($conn->numRows()==0){
         return null;
     }
-    
+    $results = $conn->fetchAllAsAssoc();
     return $results;
 }
 ?>

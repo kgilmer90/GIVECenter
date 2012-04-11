@@ -50,12 +50,10 @@ function create_all_addrs($conn){
                 FROM addr";
   
     $conn->query($query);
+    if($conn->numRows()==0){
+        return null;}
 
     $results = $conn->fetchAllAsAssoc();
-    if($conn->numRows()==0){
-        return null;
-    }
-
     foreach($results as $temp)
     {
         $addr = new GIVEAddr($temp);
