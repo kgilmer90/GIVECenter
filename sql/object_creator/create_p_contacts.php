@@ -25,6 +25,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
 function create_p_contact($conn,$id)
 {
     if($id == null) return null;
+    
     $query = "SELECT id,title,l_name,f_name,m_name,suf,w_phone,m_phone,mail
                 FROM pro_contact
                 WHERE id=$id";
@@ -32,9 +33,6 @@ function create_p_contact($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchRowAsAssoc();
-    if($conn->numRows()==0){
-        return null;
-    }
     
     $p = new GIVEAgency($results);
 
@@ -50,6 +48,7 @@ function create_p_contact($conn,$id)
 function create_p_contact_limited($conn,$id)
 {
     if($id == null) return null;
+    
     $query = "SELECT id,title,l_name,f_name,m_name,suf,w_phone,mail
                 FROM pro_contact
                 WHERE id=$id";
@@ -57,9 +56,6 @@ function create_p_contact_limited($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchRowAsAssoc();
-    if($conn->numRows()==0){
-        return null;
-    }
     
     $p = new GIVEAgency($results);
 

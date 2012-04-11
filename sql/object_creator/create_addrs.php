@@ -22,6 +22,8 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  * @return addr    object containing address information
  */ 
 function create_addr($conn,$id){
+    if($id == null) return null;
+    
     $query = "SELECT id,street,city,state,zip
                 FROM addr
                 WHERE id=$id";
@@ -29,9 +31,6 @@ function create_addr($conn,$id){
     $conn->query($query);
 
     $results = $conn->fetchRowAsAssoc();
-    if($conn->numRows()==0){
-        return null;
-    }
 
     $addr = new GIVEAddr($results);
     
