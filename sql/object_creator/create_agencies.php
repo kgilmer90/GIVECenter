@@ -55,9 +55,9 @@ function create_agencies($conn)
         //crete program objects
         $temp['program'] = create_programs($conn, $temp['id']);
         //p contact object
-        $temp['p_contact'] = create_p_contacts($conn, $temp['p_contact']);
+        $temp['p_contact_id'] = create_p_contact($conn, $temp['p_contact_id']);
         //addr object
-        $temp['addr'] = create_addrs($conn, $temp['addr']);
+        $temp['addr'] = create_addr($conn, $temp['addr']);
         
         //Create Agency Object to Hold Everything
         $agency = new GIVEAgency($temp);
