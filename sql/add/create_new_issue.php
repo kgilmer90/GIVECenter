@@ -18,7 +18,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  * @param type $issue_id    Array of Id's for Issues to associate with program
  * @return int Nothing to return
  */
-function create_new_issue_assoc($conn,$program_id,$issue_id)
+function create_new_issue($conn,$program_id,$issue_id)
 {
     foreach ($issue_id as $temp)
     {
