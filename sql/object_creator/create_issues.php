@@ -17,7 +17,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  */
 function create_issues($conn,$program_id)
 {
-    $query = "SELECT issues.name
+    $query = "SELECT name.issues
                 FROM issues,program_issues
                 WHERE program_issues.program_id=$program_id
                 AND program_issues.issue_id=issues.id";
@@ -29,6 +29,27 @@ function create_issues($conn,$program_id)
         return null;
     }
 
+    return $results;
+}
+
+/**
+ *  Returns All issues in a Numerical Sock Array For Displaying Choices
+ * @param type $conn
+ * @return $results     Issues numerical sock array
+ */
+function create_all_issues($conn)
+{
+    $query = "SELECT *issues
+                FROM issues";
+    
+    $conn->query($query);
+
+    $results = $conn->fetchAllAsAssoc();
+    
+    if($conn->numRows()==0){
+        return null;
+    }
+    
     return $results;
 }
 ?>

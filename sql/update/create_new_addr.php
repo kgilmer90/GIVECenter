@@ -8,6 +8,12 @@
 
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
+/**
+ *  Function for creating new address for either a program or agency and inserting into the db
+ * @param type $conn
+ * @param type $info_array Nested Sock Array of addr, Should be $info_array['addr']
+ * @return string $addr_id of the address inserted
+ */
 function create_new_addr($conn,$info_array)
 {
     $query = "INSERT INTO addr(street,city,state_us,zip)
