@@ -18,10 +18,7 @@ function create_new_agency($conn,$info_array)
     
     $conn->query($query);
     
-     $agency_id = "SELECT id
-                    FROM agency
-                    SORT id DESC
-                    Limit 1,1";
+     $agency_id = "SELECT id FROM agency SORT id DESC Limit 1,1";
     // get id of last program inserted
     
     return $agency_id;
