@@ -10,6 +10,7 @@
  * ************************************************************************ *
  */
 
+include_once(dirname(__FILE__).'/object_creater.php');
 include_once(dirname(__FILE__).'/../queries/camel.php');
 include_once(dirname(__FILE__).'/../../php/GIVE/GIVEAgency.php');
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');

@@ -28,7 +28,7 @@ function create_programs($conn,$agency_id)
 {
     $program_array = array();
 
-    $query = "SELECT id,referal,season,time,name,duration,notes,issues,addr,agency,p_contact,s_contact,descript
+    $query = "SELECT id,referal,season,times,name,duration,notes,issues,addr,agency,p_contact,s_contact,descript
                 FROM program
                 WHERE agency=$agency_id";
 
