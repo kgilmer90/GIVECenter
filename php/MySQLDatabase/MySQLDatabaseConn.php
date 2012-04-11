@@ -164,7 +164,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchAllAsAssoc()
 	{
-		return fetchAllAsArray(MySQLDatabaseConn::FETCH_ASSOC);
+		return $this->fetchAllAsArray(MySQLDatabaseConn::FETCH_ASSOC);
 	}
 	/**
 	 * Fetches all rows from the query's dataset as a numerically-indexed 2D array.
@@ -173,7 +173,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchAllAsNumeric()
 	{
-		return fetchAllAsArray(MySQLDatabaseConn::FETCH_NUM);
+		return $this->fetchAllAsArray(MySQLDatabaseConn::FETCH_NUM);
 	}
 	/**
 	 * Fetches all data available for the SQL query and returns it as a
