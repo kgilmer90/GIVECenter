@@ -24,7 +24,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
 function create_addr($conn,$id){
     if($id == null){ return null; }
     
-    $query = "SELECT id,street,city,state,zip
+    $query = "SELECT id,street,city,state_us,zip
                 FROM addr
                 WHERE id=$id";
   

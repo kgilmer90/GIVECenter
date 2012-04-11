@@ -18,9 +18,9 @@ include_once(dirname(__FILE__).'/GIVEStudentContact.php');
 function GIVEAgenciesToHTMLTable($agencies, $hidden = true, $display = 'none')
 {
 	$visibility = ($hidden) ? 'hidden' : 'visible';
-	echo '<table id="agency_table" style="visibility='.$visibility.';display='.$display.';"';
+	echo '<table id="agency_table" style="visibility:'.$visibility.';display:'.$display.';"';
 	
-	$i = 1;
+	$i = 0;
 	foreach($agencies as $agency) {
 		
 		echo GIVEWrapDataWithTrTd($agency->toHTMLTable('agency'.$i));

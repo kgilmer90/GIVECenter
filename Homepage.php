@@ -10,29 +10,19 @@ session_start();
 if(!isset($_SESSION['username'])) {
 	header('Location: LoginPage.php');
 }
-/*
-//by default, restrict queries
-$restrict_queries = true;
-
-//queries are unrestricted only if $_SESSION['username'] == 'admin'
-if($_SESSION['username'] == 'admin') {
-	$restrict_queries = false;
+try {
+	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
 }
-
-$all_agencies;
-if($restrict_queries) {
-	//$all_agencies = some_function_to_obtain_restricted_data();
+catch(MySQLDatabaseConnException $e) {
+	header('Location: Homepage.php?except=conn');
 }
-else {
-	//$all_agencies = some_function_to_obtain_unrestricted_data();
-}
-*/
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+<script type="text/javascript" src="js/Navigation.js"></script>
 <style type="text/css">
 <!--
 body {
@@ -190,9 +180,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <![endif]-->
 </head>
 
-<script type="text/javascript" src="js/Navigation.js"></script>
-
-<body onload="hidestuff('results')">
+<body onload="init()">
 <div class="container" id="content">
   <div align="center"></div>
   <!-- <div class="header">
@@ -396,12 +384,18 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   <div align="center" class="container"><!-- end .container --></div>
 </div>
 <?php 
-	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
-	
-	$all_agencies = create_agencies($conn, true);
-	
-	//echo the agency data to the page as a hidden table
-	GIVEAgenciesToHTMLTable($all_agencies);
+
+//by default, restrict queries
+$unrestricted_queries = false;
+
+//queries are unrestricted only if $_SESSION['username'] == 'admin'
+if($_SESSION['username'] == 'admin') {
+	$unrestricted_queries = true;
+}
+$all_agencies = create_agencies($conn, $unrestricted_queries);
+
+//echo the agency data to the page as a hidden table
+GIVEAgenciesToHTMLTable($all_agencies);
 ?>
 </body>
 </html>

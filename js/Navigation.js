@@ -1,5 +1,10 @@
 // JavaScript Document
 
+var agencies = [];		//global agencies array, contains all agencies
+var programs = [];		//global programs array, contains all programs
+
+var leftSidebar = document.getElementById("leftSideBar");
+
 var results_display = false;
 var interests_display = true;
 
@@ -49,6 +54,12 @@ function init()
 {
 	initAgenciesAndPrograms();
 	hidestuff('results');
+	
+	alert("Alerting Agencies");
+	var i;
+	for(i in agencies) {
+		alert("Agency" + i + ": " + agencies[i]);
+	}
 }
 
 //**************************************************
@@ -58,8 +69,6 @@ function init()
 //
 ////////////////////////////////////////////////////
 //**************************************************
-
-var leftSidebar = document.getElementById("leftSideBar");
 
 /**
  * Search one string for another.
@@ -257,9 +266,6 @@ function addAgenciesToSidebar(agenciesArray) {
 //
 ////////////////////////////////////////////////////
 //**************************************************
-var agencies = [];		//global agencies array, contains all agencies
-var programs = [];		//global programs array, contains all programs
-
 /**
 * HTML <body> onload function.
 * All database query results are stored on the page as a hidden table.
@@ -267,10 +273,10 @@ var programs = [];		//global programs array, contains all programs
 */
 function initAgenciesAndPrograms() {
 
-	var i = 1;
+	var i = 0;
 	//get the main table and count how many <tr> tags exist (number of agencies)
 	var agency_count = document.getElementById("agency_table").rows.length;
-	for(i = 1; i <= agency_count; i++) {
+	for(i = 0; i < agency_count; i++) {
 	
 		//get the table for each agency and construct a GIVEAgency object from it
 		var tableId = "agency" + i;
@@ -385,7 +391,7 @@ function TableIdToGIVEProgramsArray(table_id) {
 	
 	var i;
 	var count = document.getElementById(table_id).rows.length;
-	for(i = 1; i <= count; i++) {
+	for(i = 0; i < count; i++) {
 	
 	//get the table for each program and construct a GIVEProgram object from it
 	var program = TableIdToGIVEProgram(table_id + i);

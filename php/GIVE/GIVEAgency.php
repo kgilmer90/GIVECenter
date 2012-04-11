@@ -40,10 +40,12 @@ class GIVEAgency
 		$str .= GIVEWrapDataWithTrTd($this->addr->toHTMLTable($id.'_addr'), 'addr');
 		
 		$i = 0;
+		$str .= "<table id=\"$id"."_program\">".PHP_EOL;
 		foreach($this->programs as $program) {
-			$str .= GIVEWrapDataWithTrTd($program->toHTMLTable("program$i"), "program$i");
+			$str .= GIVEWrapDataWithTrTd($program->toHTMLTable($id.'_program'.$i), 'program'.$i);
 			$i++;
 		}
+		$str .= '</table>';
 		
 		$str .= '</table>';
 		return $str;

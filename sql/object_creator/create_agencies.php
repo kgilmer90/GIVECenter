@@ -48,10 +48,8 @@ function create_agencies($conn,$type)
      */
     if($conn->numRows()==0){
         return null;
-    
-    $results = $conn->fetchAllAsAssoc();  
-    
     }
+    $results = $conn->fetchAllAsAssoc();  
     
     foreach($results as $temp)
     {

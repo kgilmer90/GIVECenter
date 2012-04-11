@@ -255,8 +255,6 @@ class MySQLDatabaseConn
 		if(!$this->resource) {
 			throw new MySQLQueryFailedException($this->errorStr.' for Query: '.$this->lastQuery, $this->errorCode);
 		}
-		
-		$this->rows = mysql_affected_rows($this->resource);
 	}
 	/**
 	 * Called when object reaches end of scope, ensures database connection is closed.
