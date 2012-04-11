@@ -33,6 +33,9 @@ function contact_history_s($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchAllAsAssoc();
+    if($conn->numRows()==0){
+        return null;
+    }
 
     foreach($results as $temp)
     {
@@ -60,6 +63,9 @@ function contact_history_s_limited($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchAllAsAssoc();
+    if($conn->numRows()==0){
+        return null;
+    }
 
     foreach($results as $temp)
     {

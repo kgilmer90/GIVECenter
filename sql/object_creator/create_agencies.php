@@ -21,7 +21,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  * @param MySQLDatabaseConn $conn
  * @return array 
  */
-function create_agencies($conn)
+function create_agencies($conn,$type)
 {
     /*
      * Setup for function whereby we will create the query, pass it and store
@@ -48,14 +48,22 @@ function create_agencies($conn)
      */
     
     
-    $results = $conn->fetchAllAsAssoc();   
+    $results = $conn->fetchAllAsAssoc();  
+    if($conn->numRows()==0){
+        return null;
+    }
     
     foreach($results as $temp)
     {
         //crete program objects
-        $temp['program'] = create_programs($conn, $temp['id']);
+        $temp['program'] = create_programs($conn, $temp['id'],$type);
         //p contact object
-        $temp['p_contact_id'] = create_p_contact($conn, $temp['p_contact_id']);
+        if($type){
+            $temp['p_contact_id'] = create_p_contact($conn, $temp['p_contact_id']);}
+            
+        else{
+            $temp['p_contact_id'] = create_p_contact_limited($conn, $temp['p_contact']);
+        }
         //addr object
         $temp['addr'] = create_addr($conn, $temp['addr']);
         
@@ -67,4 +75,3 @@ function create_agencies($conn)
     return $agency_array;
 }
 ?>
-

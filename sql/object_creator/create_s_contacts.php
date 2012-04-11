@@ -29,6 +29,10 @@ function create_s_contact($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchRowAsAssoc();
+    
+    if($conn->numRows()==0){
+        return null;
+    }
 
     $s = new GIVEAgency($results);
     
@@ -41,7 +45,7 @@ function create_s_contact($conn,$id)
  * @param $id   which contact information to create an object for
  * @return      object containing specified contacts information
  */
-function create_s_contacts_limited($conn,$id)
+function create_s_contact_limited($conn,$id)
 {
     $query = "SELECT id,l_name,f_name,m_name,suf,w_phone,mail
                 FROM student_contact
@@ -50,6 +54,9 @@ function create_s_contacts_limited($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchRowAsAssoc();
+    if($conn->numRows()==0){
+        return null;
+    }
 
     $s = new GIVEAgency($results);
     
@@ -71,6 +78,9 @@ function create_all_s_contacts($conn)
     $conn->query($query);
 
     $results = $conn->fetchAllAsAssoc();
+    if($conn->numRows()==0){
+        return null;
+    }
 
     foreach($results as $temp)
     {
@@ -96,6 +106,9 @@ function create_all_s_contacts_limited($conn)
     $conn->query($query);
 
     $results = $conn->fetchAllAsAssoc();
+    if($conn->numRows()==0){
+        return null;
+    }
 
     foreach($results as $temp)
     {
