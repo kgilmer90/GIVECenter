@@ -43,10 +43,10 @@ class GIVEProgram
 		$str .= GIVEWrapDataWithTrTd($this->name, 'name');
 		$str .= GIVEWrapDataWithTrTd($this->descript, 'descript');
 		$str .= GIVEWrapDataWithTrTd($this->duration, 'duration');
-		$str .= GIVEWrapDataWithTrTd($this->issuesToHTMLTable('issues'));
-		$str .= GIVEWrapDataWithTrTd($this->addr->toHTMLTable('addr'));
-		$str .= GIVEWrapDataWithTrTd($this->p_contact->toHTMLTable('p_contact'));
-		$str .= GIVEWrapDataWithTrTd($this->s_contact->toHTMLTable('s_contact'));
+		$str .= GIVEWrapDataWithTrTd($this->issuesToHTMLTable($id.'_issues'));
+		$str .= GIVEWrapDataWithTrTd($this->addr->toHTMLTable($id.'_addr'));
+		$str .= GIVEWrapDataWithTrTd($this->p_contact->toHTMLTable($id.'_p_contact'));
+		$str .= GIVEWrapDataWithTrTd($this->s_contact->toHTMLTable($id.'_s_contact'));
 		
 		$str .= '</table>';
 		return $str;

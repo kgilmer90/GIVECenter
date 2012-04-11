@@ -29,7 +29,7 @@ if(isset($_GET['code'])) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Login to GIVE Center Volunteer Matching!</title>
 <script language="text/Javascript" src="js/Navigation.js"></script>
 <style type="text/css">
 <!--

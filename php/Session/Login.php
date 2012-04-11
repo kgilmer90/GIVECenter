@@ -17,8 +17,9 @@ try {
 	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
 	
 	if(check_user($conn, $uname, $passwd)) {
-		$_SESSION['username'] = $uname;
 		$conn->close();
+		$_SESSION['username'] = $uname;
+		$_SESSION['admin'] = ($uname == $GIVE_UNAME_ADMIN) ? true : false;
 		header('Location: ../../Homepage.php');
 	}
 	else {

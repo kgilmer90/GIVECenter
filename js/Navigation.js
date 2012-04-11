@@ -3,10 +3,10 @@
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
 
-var leftSidebar = document.getElementById("leftSideBar");
-
 var results_display = false;
 var interests_display = true;
+
+var LEFT_SIDE_BAR_MAX_ELEMENTS = 15;
 
 function hidestuff(boxid){
 	
@@ -17,9 +17,15 @@ function hidestuff(boxid){
 		interests_display = false;
 	}
 	
+	/*
    	document.getElementById(boxid).style.visibility="hidden";
   	document.getElementById(boxid).style.position= "absolute";
   	document.getElementById(boxid).style.display="none";
+  	*/
+	var e = document.getElementById(boxid);
+	e.style.visibility="hidden";
+  	e.style.position= "absolute";
+  	e.style.display="none";
 }
 function showstuff(boxid){
 	
@@ -30,9 +36,15 @@ function showstuff(boxid){
 		interests_display = true;
 	}
 	
+	/*
   	document.getElementById(boxid).style.visibility="visible";
 	document.getElementById(boxid).style.position= "relative";
 	document.getElementById(boxid).style.display="block";
+	*/
+	var e = document.getElementById(boxid);
+	e.style.visibility="visible";
+	e.style.position= "relative";
+	e.style.display="block";
 }
 function searchtoresults()
 {
@@ -54,12 +66,6 @@ function init()
 {
 	initAgenciesAndPrograms();
 	hidestuff('results');
-	
-	alert("Alerting Agencies");
-	var i;
-	for(i in agencies) {
-		alert("Agency" + i + ": " + agencies[i]);
-	}
 }
 
 //**************************************************
@@ -173,6 +179,8 @@ function removeNode(node) {
  */
 function clearLeftSideBar() {
 	
+	var leftSideBar = document.getElementById("leftSideBar");
+	
 	while(leftSideBar.hasChildNodes()) {
 		removeNode(leftSideBar.childNodes[0]);
 	}
@@ -183,13 +191,12 @@ function clearLeftSideBar() {
  * GIVEProgram object can be found.
  */
 function displayProgramInfo(index) {
-	alert("displayProgramInfo(" + index + ") & interests_display == " + interests_display + " & results_display == " + results_display);
-//	if(index < programs.length) {
+	if(index < programs.length) {
 		if(!results_display) {
 			searchtoresults();
 		}
 		
-//	}
+	}
 }
 
 /**
@@ -208,7 +215,9 @@ function displayAgencyInfo(index) {
  * Sets the onclick handler to display the object's contents.
  * @param programsArray - GIVEProgram array to add to the sidebar
  */
-function addProgramsToSidebar(programsArray) {
+function addProgramsToLeftSideBar(programsArray) {
+	
+	var leftSideBar = document.getElementById("leftSideBar");
 	
 	var i;
 	for(i in programsArray) {
@@ -218,7 +227,7 @@ function addProgramsToSidebar(programsArray) {
 		
 		//set the id and onclick handler
 		a.id = "leftSideBar_program" + i;
-		a.onclick = displayProgramInfo(i);
+		a.href = displayProgramInfo(i);
 		
 		//create a new <li> tag to hold the <a> tag
 		var li = document.createElement("li");
@@ -236,7 +245,9 @@ function addProgramsToSidebar(programsArray) {
  * Sets the onclick handler to display the object's contents.
  * @param agenciesArray - GIVEAgency array to add to the sidebar
  */
-function addAgenciesToSidebar(agenciesArray) {
+function addAgenciesToLeftSideBar(agenciesArray) {
+	
+	var leftSideBar = document.getElementById("leftSideBar");
 	
 	var i;
 	for(i in agenciesArray) {
@@ -339,7 +350,6 @@ function TableIdToGIVEAgency(table_id) {
 * @returns GIVEAddr object representing the table data
 */
 function TableIdToGIVEAddr(table_id) {
-
 	//retreive the DOM element within the GIVEAgency table id
 	var addr_DOM_element = document.getElementById(table_id);
 	
@@ -423,7 +433,8 @@ function TableIdToGIVEProgram(table_id) {
 	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[7].innerHTML);
 	
 	//retrieve the DOM element for the following tables and repeat the process above
-	var issues 		= TableIdToIssuesArray(table_id + "_issue");
+//	var issues 		= TableIdToIssuesArray(table_id + "_issue");
+	var issues = [];
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
 	var s_contact 	= TableIdToGIVEStudentContact(table_id + "_s_contact");

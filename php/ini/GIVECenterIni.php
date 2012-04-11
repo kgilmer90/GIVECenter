@@ -5,6 +5,9 @@ $GIVE_MYSQL_DATABASE = 'give_ctr_agencies';
 $GIVE_MYSQL_UNAME = 'bgs';
 $GIVE_MYSQL_PASS = 'dki2012!';
 
+$GIVE_UNAME_ADMIN = 'admin';
+$GIVE_UNAME_GUEST = 'guest';
+
 $GIVE_INSTALL_SYSTEM = 'windows';
 
 $GIVE_INSTALL_PATH;

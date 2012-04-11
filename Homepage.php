@@ -21,7 +21,7 @@ catch(MySQLDatabaseConnException $e) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>GIVE Center Volunteer Matching</title>
 <script type="text/javascript" src="js/Navigation.js"></script>
 <style type="text/css">
 <!--
@@ -190,7 +190,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     <div align="center">
       <ul class="nav">
       <?
-	      if($_SESSION['username'] == 'admin') {
+	      if($_SESSION['admin']) {
 	      	?>
 	      	<li><a href="Admin.php">Admin</a></li>
 	      	<?php
@@ -209,7 +209,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div class="sidebar2">
     <div align="center">
-      <ul class="nav">
+      <ul class="nav" id="leftSideBar">
         <li><a href="javascript:displayProgramInfo(1)">Program1 </a></li>
         <li><a href="javascript:displayProgramInfo(2)">Program2 </a></li>
         <li><a href="javascript:displayProgramInfo(3)">Program3 </a></li>
@@ -388,8 +388,8 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 //by default, restrict queries
 $unrestricted_queries = false;
 
-//queries are unrestricted only if $_SESSION['username'] == 'admin'
-if($_SESSION['username'] == 'admin') {
+//queries are unrestricted only if $_SESSION['admin'] == true
+if($_SESSION['admin']) {
 	$unrestricted_queries = true;
 }
 $all_agencies = create_agencies($conn, $unrestricted_queries);
