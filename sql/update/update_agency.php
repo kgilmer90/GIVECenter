@@ -7,14 +7,13 @@
  * TODO: Update Agency Function
  */
 
-
+function update_agency($conn,$agency_id,$agency)
+{
+    $query = "DELETE FROM agency
+        WHERE id = $agency_id";
+    $conn->query($query);
+    
+    $new_agency = create_new_agency($conn, $agency);
+    return $new_agency;
+}
 ?>
-CREATE TABLE agency(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20),
-    descript VARCHAR(1000),
-    p_contact_id INT UNSIGNED, 
-    addr INT UNSIGNED,
-    mail VARCHAR(40),
-    phone CHAR(10),
-    fax CHAR(10)) ENGINE INNODB;

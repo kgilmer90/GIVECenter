@@ -14,7 +14,3 @@ function update_hours($conn,$program_id,$new_hours)
     create_new_hours($conn, $program_id, $new_hours);
 }
 ?>
-CREATE TABLE hours(
-    program_id INT UNSIGNED NOT NULL,
-    hours INT NOT NULL,
-    PRIMARY KEY(program_id,hours)) ENGINE INNODB;
