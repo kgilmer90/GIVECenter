@@ -7,20 +7,13 @@
  * TODO: UPDATE S Contact Function
  */
 
-function update_s_contact($conn,$program_id,$new_s_contact)
+function update_s_contact($conn,$s_id,$new_s_contact)
 {
-
+    $conn = "DELETE FROM student_contact
+        WHERE id = $s_id";
+    $conn->query($conn);
     
-    
+    $new_s_id = create_new_s_contact($conn, $new_s_contact);
+    return $new_s_id;
 }
 ?>
-
-CREATE TABLE student_contact(
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT KEY,
-    l_name VARCHAR(20),
-    f_name VARCHAR(20),
-    m_name VARCHAR(20),
-    suf CHAR(3),
-    m_phone CHAR(10),
-    w_phone CHAR(10),
-    mail VARCHAR(40)) ENGINE INNODB;
