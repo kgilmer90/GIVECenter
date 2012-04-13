@@ -231,6 +231,7 @@ function addProgramsToLeftSideBar(programsArray) {
 		a.id = "leftSideBar_program" + i;
 		a.href = "javascript:displayProgramInfo(" + i + ")";
 		
+		//create text node to hold the visible description
 		var t = document.createTextNode(programsArray[i].name);
 		a.appendChild(t);
 		
