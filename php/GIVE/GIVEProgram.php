@@ -24,7 +24,8 @@ class GIVEProgram
 		$this->referal = isset($args['referal']) ? $args['referal'] : '';
 		$this->season = isset($args['season']) ? $args['season'] : '';
 		$this->times = isset($args['times']) ?$args['times'] : '';
-		$this->descript = isset($args['name']) ? $args['name'] : '';
+		$this->name = isset($args['name']) ? $args['name'] : '';
+		$this->descript = isset($args['descript']) ? $args['descript'] : '';
 		$this->duration = isset($args['duration']) ? $args['duration'] : '';
 		$this->notes = isset($args['notes']) ? $args['notes'] : '';
 		$this->issues = isset($args['issues']) ? $args['issues'] : array(0 => '', 1 => '', 2 => '');

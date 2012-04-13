@@ -50,17 +50,17 @@ function create_agencies($conn,$type)
         return null;
     }
     $results = $conn->fetchAllAsAssoc();  
-    
+   
     foreach($results as $temp)
     {
-        //crete program objects
-        $temp['program'] = create_programs($conn, $temp['id'],$type);
+        //create program objects
+        $temp['programs'] = create_programs($conn, $temp['id'],$type);
         //p contact object
         if($type){
-            $temp['p_contact_id'] = create_p_contact($conn, $temp['p_contact_id']);}
+            $temp['p_contact'] = create_p_contact($conn, $temp['p_contact_id']);}
             
         else{
-            $temp['p_contact_id'] = create_p_contact_limited($conn, $temp['p_contact_id']);
+            $temp['p_contact'] = create_p_contact_limited($conn, $temp['p_contact_id']);
         }
         //addr object
         $temp['addr'] = create_addr($conn, $temp['addr']);

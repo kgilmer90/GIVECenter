@@ -23,9 +23,9 @@ function hidestuff(boxid){
   	document.getElementById(boxid).style.display="none";
   	*/
 	var e = document.getElementById(boxid);
-	e.style.visibility="hidden";
-  	e.style.position= "absolute";
-  	e.style.display="none";
+	e.style.visibility = "hidden";
+  	e.style.position = "absolute";
+  	e.style.display = "none";
 }
 function showstuff(boxid){
 	
@@ -65,6 +65,8 @@ function clearChoices()
 function init()
 {
 	initAgenciesAndPrograms();
+	clearLeftSideBar();
+	addProgramsToLeftSideBar(programs);
 	hidestuff('results');
 }
 
@@ -227,7 +229,10 @@ function addProgramsToLeftSideBar(programsArray) {
 		
 		//set the id and onclick handler
 		a.id = "leftSideBar_program" + i;
-		a.href = displayProgramInfo(i);
+		a.href = "javascript:displayProgramInfo(" + i + ")";
+		
+		var t = document.createTextNode(programsArray[i].name);
+		a.appendChild(t);
 		
 		//create a new <li> tag to hold the <a> tag
 		var li = document.createElement("li");
