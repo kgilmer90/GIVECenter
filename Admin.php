@@ -1,4 +1,4 @@
-<?php
+<?php /*
 session_start();
 
 //if not properly logged in, redirect to login page
@@ -10,7 +10,7 @@ else if($_SESSION['username'] != 'admin') {
 }
 
 //echo the agency data to the page as a hidden table
-//GIVEAgenciesToHTMLTable($all_agencies);
+//GIVEAgenciesToHTMLTable($all_agencies); */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -95,8 +95,15 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	height: 100%;
 }
 
+.choices{
+	width:90%;	
+	align:center;
+	height:100%;
+	
+}
+
 .editAgency {
-	width: 20%;
+	width: 19%;
 	float: left;
 	border: thin solid #000;
 	height: 250px;
@@ -105,7 +112,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 }
 
 .editProgram {
-	width: 20%;
+	width: 19%;
 	float: left;
 	border: thin solid #000;
 	height: 250px;
@@ -114,7 +121,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 }
 
 .addNew {
-	width: 20%;
+	width: 19%;
 	float: left;
 	border: thin solid #000;
 	height: 250px;
@@ -220,7 +227,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">ADMIN</h1>
-
+<div align="center">
 	<div class="editAgency" id="editAgency">
     <div align="center">Select Agency to Edit
         <p align="center">&nbsp;</p>
@@ -232,8 +239,12 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     	<option>Agency4</option>
         <option>Agency5</option>
     	<option>Agency6</option>
-    </select></div>
-    
+    </select>
+    	<p align="center">&nbsp;</p>
+    	<p align="center">&nbsp;</p>
+
+     <button>Submit</button></div>
+
     </div>
     
     <div class="orBox" id="orBox">
@@ -251,7 +262,11 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     	<option>Program4</option>
         <option>Program5</option>
     	<option>Program6</option>
-    </select></div>
+    </select>
+        	<p align="center">&nbsp;</p>
+    	<p align="center">&nbsp;</p>
+
+    <button>Submit</button></div>
     </div>
     
     <div class="orBox" id="orBox">
@@ -259,9 +274,15 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     </div>
     
     <div class="addNew" id="addNew">
-    <div align="center">Select</div>
+    <div align="center">Select
+    	<p align="center">&nbsp;</p>
+    	<p align="center">&nbsp;</p>
+
+    <button>Add New Agency</button>
+        	<p align="center">&nbsp;</p>
+
+    <button>Add New Program</button></div>
     </div>
- 
   </div>
   <div align="center" class="container"><!-- end .container --></div>
 </div>

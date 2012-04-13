@@ -1,37 +1,4 @@
-<?php
-include_once('php/GIVE/GIVEToHTML.php');
 
-session_start();
-
-//if not properly logged in, redirect to login page
-if(!isset($_SESSION['username'])) {
-header('Location: LoginPage.php');
-}
-
-//by default, restrict queries
-$restrict_queries = true;
-
-//queries are unrestricted only if $_SESSION['username'] == 'admin'
-if($_SESSION['username'] == 'admin') {
-$restrict_queries = false;
-}
-
-$all_agencies;
-if($restrict_queries) {
-//$all_agencies = some_function_to_obtain_restricted_data();
-}
-else {
-//$all_agencies = some_function_to_obtain_unrestricted_data();
-}
-
-//echo the agency data to the page as a hidden table
-//GIVEAgenciesToHTMLTable($all_agencies);
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
 <style type="text/css">
 <!--
 body {
@@ -95,15 +62,13 @@ width: 12.5%;
 background-color: #FFF;
 }
 .sidebar2 {
-	float: left;
-	width: 12.5%;
-	padding-top: 90px;
-	/* padding-left: 10px
+float: left;
+width: 12.5%;
+padding-top: 90px;
+/* padding-left: 10px
 padding-right: 10px; */
 background-color: #FF9;
-	background-color: #cccccc;
-	overflow: scroll;
-	height: 250px;
+background-color: #cccccc;
 }
 .content {
 position: absoulte;
@@ -142,6 +107,58 @@ border-right-color: #000;
 .column2 {
 width: 49%;
 float: right;
+}
+
+.content {
+	position: absoulte;
+	width: 75%;
+	float: left;
+	background-image: url(img/gradientHORIZ.png);
+	height: 100%;
+}
+
+.choices{
+	width:90%;	
+	align:center;
+	height:100%;
+	
+}
+
+.editAgency {
+	width: 19%;
+	float: left;
+	border: thin solid #000;
+	height: 250px;
+	padding: 20px;
+	margin: 20px;
+}
+
+.editProgram {
+	width: 19%;
+	float: left;
+	border: thin solid #000;
+	height: 250px;
+	padding: 20px;
+	margin: 20px;
+}
+
+.addNew {
+	width: 19%;
+	float: left;
+	border: thin solid #000;
+	height: 250px;
+	padding: 20px;
+	margin: 20px;
+}
+
+.orBox {
+	float: left;
+	width: 3%;
+	height: 250px;
+	padding-top: 120px;
+	padding-bottom: 120px;
+	padding-left:5px;
+	padding-right:5px;
 }
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
@@ -188,199 +205,3 @@ line-height: 0px;
 .content { margin-right: -1px; } /* this 1px negative margin can be placed on any of the columns in this layout with the same corrective effect. */
 ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
 </style>
-<![endif]-->
-</head>
-
-<script type="text/javascript" src="js/Navigation.js"></script>
-
-<body onload="hidestuff('results')">
-<div class="container" id="content">
-<div align="center"></div>
-<!-- <div class="header">
-<div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-</div> -->
-<div class="sidebar1">
-<div align="center">
-<ul class="nav">
-<li><a href="Admin.php">Admin</a></li>
-<li><a href="BrowseAll.php">Browse All</a></li>
-<li><a href="Session/Logout.php">Logout</a></li>
-<li>
-<form id="form2" name="form2" method="post" action="">
-<label for="search"></label>
-<input name="search" type="text" id="search" value="Search" />
-</form>
-</li>
-</ul>
-<!-- end .sidebar1 --></div>
-</div>
-<div class="sidebar2">
-<div align="center">
-<ul class="nav">
-<li><a href="#">Program1 </a></li>
-<li><a href="#">Program2 </a></li>
-<li><a href="#">Program3 </a></li>
-<li><a href="#">Program4 </a></li>
-<li><a href="#">Program5 </a></li>
-<li><a href="#">Program6 </a></li>
-<li><a href="#">Program7 </a></li>
-<li><a href="#">Program8 </a></li>
-<li><a href="#">...</a></li>
-</ul>
-<!-- end .sidebar1 --></div>
-</div>
-<div class="content" id="content">
-<!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1> -->
-<div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-<div class ="results" id="results">
-<div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
-<h1 align="center">&nbsp;</h1>
-<div align="center"></div>
-<h1 align="center">Program Name</h1>
-<div class="column1"> <b>
-<label>
-<p align="center">&nbsp;</p>
-<p align="center">Description</p>
-</label>
-</b>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-</div>
-<div class="column2"> <b>
-<label>
-<p align="center">&nbsp;</p>
-<p align="center">Contact Information</p>
-</label>
-</b>
-<p align="center"> Name: <em>insertNameHere</em>
-<p align="center">Email: <em>insertEmailHere</em>
-<p align="center">Phone: <em>insertNumberHere</em>
-</div>
-</p>
-</p>
-</div>
-<!--********************* BETWEEN CONTENT PAGES ***************************** -->
-<div class = "interests" id="interests">
-<div align="center">
-<h1 align="center">&nbsp;</h1>
-<h1 align="center">Select Your Interests</h1>
-<form id="form1" name="form1" method="post" action="">
-<div align="center">
-<table class="form1">
-<tr>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
-</tr>
-<tr>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
-</tr>
-<tr>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
-</tr>
-<tr>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
-<td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
-</tr>
-</table>
-</div>
-</form>
-<p align="center">&nbsp; </p>
-<p align="center">&nbsp;</p>
-<div align="center">
-<label><b>Select All Hours Available:</b></label>
-<form id="form3" name="form3" method="post" action="">
-<table width="150" class="form3">
-<tr>
-<div align="left">
-
-<td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_0" />
-Morning</label></td>
-</tr>
-<tr>
-<td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_1" />
-Afternoon</label></td>
-</tr>
-<tr>
-<td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_2" />
-Evening</label></td>
-</tr>
-<tr>
-<td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_3" />
-Night</label></td>
-</table>
-<p>
-</form>
-</div>
-<button onclick="searchtoresults()">Submit</button>
-<button onclick="clearChoices()"> Clear Choices </button>
-
-</div>
-</div>
-</div>
-</div>
-<div align="center" class="container"><!-- end .container --></div>
-</div>
-</body>
-</html>

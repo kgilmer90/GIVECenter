@@ -1,32 +1,4 @@
-<?php
-include_once('php/GIVE/GIVEToHTML.php');
 
-session_start();
-
-//if not properly logged in, redirect to login page
-if(!isset($_SESSION['username'])) {
-header('Location: LoginPage.php');
-}
-
-//by default, restrict queries
-$restrict_queries = true;
-
-//queries are unrestricted only if $_SESSION['username'] == 'admin'
-if($_SESSION['username'] == 'admin') {
-$restrict_queries = false;
-}
-
-$all_agencies;
-if($restrict_queries) {
-//$all_agencies = some_function_to_obtain_restricted_data();
-}
-else {
-//$all_agencies = some_function_to_obtain_unrestricted_data();
-}
-
-//echo the agency data to the page as a hidden table
-//GIVEAgenciesToHTMLTable($all_agencies);
-?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -95,15 +67,13 @@ width: 12.5%;
 background-color: #FFF;
 }
 .sidebar2 {
-	float: left;
-	width: 12.5%;
-	padding-top: 90px;
-	/* padding-left: 10px
+float: left;
+width: 12.5%;
+padding-top: 90px;
+/* padding-left: 10px
 padding-right: 10px; */
 background-color: #FF9;
-	background-color: #cccccc;
-	overflow: scroll;
-	height: 250px;
+background-color: #cccccc;
 }
 .content {
 position: absoulte;
@@ -113,13 +83,12 @@ background-image: url(img/gradientHORIZ.png);
 height: 100%;
 }
 .results {
-visibility: hidden;
-display: none;
 width: 100%;
 float: left;
 height: 100%;
 }
 .interests {
+visibility: hidden;
 width: 100%;
 float: left;
 height: 100%;
@@ -193,7 +162,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <script type="text/javascript" src="js/Navigation.js"></script>
 
-<body onload="hidestuff('results')">
+<body>
 <div class="container" id="content">
 <div align="center"></div>
 <!-- <div class="header">
@@ -236,11 +205,14 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
 <h1 align="center">&nbsp;</h1>
 <div align="center"></div>
-<h1 align="center">Program Name</h1>
+<h1 align="center">ADD/EDIT PROGRAM/AGENCY</h1>
 <div class="column1"> <b>
 <label>
 <p align="center">&nbsp;</p>
+<p align="center">Title: <input name="title" type="text" size="15" /></p>
+<br/>
 <p align="center">Description</p>
+
 </label>
 </b>
 <p align="center">text</p>
@@ -256,9 +228,15 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <p align="center">Contact Information</p>
 </label>
 </b>
-<p align="center"> Name: <em>insertNameHere</em>
-<p align="center">Email: <em>insertEmailHere</em>
-<p align="center">Phone: <em>insertNumberHere</em>
+<div align="justify">
+<p>First Name: <input name="title" type="text" size="30" /></p>
+<p>Last Name: <input name="title" type="text" size="30" /> </p>
+<p>Middle Name: <input name="title" type="text" size="30" /> </p>
+<p>Suffix: <input name="title" type="text" size="3" /></p>
+<p>Mobile Phone: <input name="title" type="text" size="10" /> </p>
+<p>Work Phone: <input name="title" type="text" size="10" /> </p>
+<p>Email: <input name="title" type="text" size="40" /> </p>
+</div>
 </div>
 </p>
 </p>
