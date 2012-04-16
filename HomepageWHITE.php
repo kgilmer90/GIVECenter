@@ -1,8 +1,5 @@
-<?php
-include_once(dirname(__FILE__).'/php/ini/GIVECenterIni.php');
-include_once(dirname(__FILE__).'/php/MySQLDatabase/MySQLDatabaseConn.php');
-include_once(dirname(__FILE__).'/php/GIVE/GIVEToHTML.php');
-include_once(dirname(__FILE__).'/sql/object_creator/create_agencies.php');
+<?php 
+/*include_once('php/GIVE/GIVEToHTML.php');
 
 session_start();
 
@@ -10,24 +7,36 @@ session_start();
 if(!isset($_SESSION['username'])) {
 	header('Location: LoginPage.php');
 }
-try {
-	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+
+//by default, restrict queries
+$restrict_queries = true;
+
+//queries are unrestricted only if $_SESSION['username'] == 'admin'
+if($_SESSION['username'] == 'admin') {
+	$restrict_queries = false;
 }
-catch(MySQLDatabaseConnException $e) {
-	header('Location: Homepage.php?except=conn');
+
+$all_agencies;
+if($restrict_queries) {
+	//$all_agencies = some_function_to_obtain_restricted_data();
 }
+else {
+	//$all_agencies = some_function_to_obtain_unrestricted_data();
+}
+
+//echo the agency data to the page as a hidden table
+//GIVEAgenciesToHTMLTable($all_agencies); */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>GIVE Center Volunteer Matching</title>
-<script type="text/javascript" src="js/Navigation.js"></script>
+<title>Untitled Document</title>
 <style type="text/css">
 <!--
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
-	background: #cccccc;
+	background-image: url(img/gradientHORIZ.png);
 	margin: 0;
 	padding: 0;
 	color: #000;
@@ -62,12 +71,15 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 }
 /* ~~ this container surrounds all other divs giving them their percentage-based width ~~ */
 .container {
-	width: 80%;
+	width: 65%;
 	max-width: 1260px;/* a max-width may be desirable to keep this layout from getting too wide on a large monitor. This keeps line length more readable. IE6 does not respect this declaration. */
-	min-width: 780px;
-	margin: 0 auto; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
+	min-width: 780px; /* the auto value on the sides, coupled with the width, centers the layout. It is not needed if you set the .container's width to 100%. */
 	overflow: hidden; /* this declaration makes the .container clear all floated columns within it. */
-	background-color: #cccccc;
+	background-color: #FFF;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
 }
 /* ~~ These are the columns for the layout. ~~ 
 
@@ -82,37 +94,41 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 */
 .sidebar1 {
 	float: right;
-	width: 12.5%;
+	width: 12%;
 	background-color: #FFF;
 }
 .sidebar2 {
 	float: left;
-	width: 12.5%;
-	padding-top: 90px;
-	/*	padding-left: 10px
-	padding-right: 10px; */
-	background-color: #FF9;
-	background-color: #cccccc;
-	overflow: scroll;
-	height: 250px;
+	width: 12%;
+	/*padding-top: 90px;
+		padding-left: 10px
+	padding-right: 10px; 
+	background-color: #FF9; 
+	background-color: #cccccc; */
 }
 .content {
-	position: absoulte;
-	width: 75%;
-	float: left;
-	background-image: url(img/gradientHORIZ.png);
+	width: 100%;
+	float: none;
+	background-color: FFF;
 	height: 100%;
+	text-align: center;
+	display: block;
+	margin-right: auto;
+	margin-left: auto;
+}
+.filler {
+	position:absolute;
+	width:6%;
+	float:left;	
 }
 .results {
 	visibility: hidden;
 	display: none;
-	width: 100%;
-	float: left;
+	width: 70%;
 	height: 100%;
 }
 .interests {
-	width: 100%;
-	float: left;
+	width: 70%;
 	height: 100%;
 }
 .form1 {
@@ -124,19 +140,21 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	border: thin solid #000;
 }
 .column1 {
-	width: 50%;
+	background-color: #FFF;
+	width: 40%;
 	float: left;
 	border-right-width: thin;
 	border-right-style: solid;
 	border-right-color: #000;
 }
 .column2 {
-	width: 49%;
+	background-color: #FFF;
+	width: 39%;
 	float: right;
 }
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
-	padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
+	padding: 0 0px 0px 0px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
 }
 /* ~~ The navigation list styles (can be removed if you choose to use a premade flyout menu like Spry) ~~ */
 ul.nav {
@@ -160,7 +178,6 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 /* ~~miscellaneous float/clear classes~~ */
 .fltrt {  /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
 	float: right;
-	margin-left: 8px;
 }
 .fltlft { /* this class can be used to float an element left in your page. The floated element must precede the element it should be next to on the page. */
 	float: left;
@@ -182,24 +199,25 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <![endif]-->
 </head>
 
-<body onload="init()">
-<div class="container" id="content">
+<script type="text/javascript" src="js/Navigation.js"></script>
+
+<body onload="hidestuff('results')">
+<div class="container" id="container">
   <div align="center"></div>
   <!-- <div class="header">
     <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
      </div> -->
-  <div class="sidebar1">
+  
+  <div class="content" id="content"> 
+    <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
+    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+    
+    <div class="sidebar1">
     <div align="center">
       <ul class="nav">
-      <?
-	      if($_SESSION['admin']) {
-	      	?>
-	      	<li><a href="Admin.php">Admin</a></li>
-	      	<?php
-	      }
-      ?>
+        <li><a href="Admin.php">Admin</a></li>
         <li><a href="BrowseAll.php">Browse All</a></li>
-        <li><a href="php/Session/Logout.php">Logout</a></li>
+        <li><a href="Session/Logout.php">Logout</a></li>
         <li>
           <form id="form2" name="form2" method="post" action="">
             <label for="search"></label>
@@ -211,23 +229,22 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div class="sidebar2">
     <div align="center">
-      <ul class="nav" id="leftSideBar">
-        <li><a href="javascript:displayProgramInfo(1)">Program1 </a></li>
-        <li><a href="javascript:displayProgramInfo(2)">Program2 </a></li>
-        <li><a href="javascript:displayProgramInfo(3)">Program3 </a></li>
-        <li><a href="javascript:displayProgramInfo(4)">Program4 </a></li>
-        <li><a href="javascript:displayProgramInfo(5)">Program5 </a></li>
-        <li><a href="javascript:displayProgramInfo(6)">Program6 </a></li>
-        <li><a href="javascript:displayProgramInfo(7)">Program7 </a></li>
-        <li><a href="javascript:displayProgramInfo(8)">Program8 </a></li>
+      <ul class="nav">
+        <li><a href="#">Program1 </a></li>
+        <li><a href="#">Program2 </a></li>
+        <li><a href="#">Program3 </a></li>
+        <li><a href="#">Program4 </a></li>
+        <li><a href="#">Program5 </a></li>
+        <li><a href="#">Program6 </a></li>
+        <li><a href="#">Program7 </a></li>
+        <li><a href="#">Program8 </a></li>
         <li><a href="#">...</a></li>
       </ul>
       
       <!-- end .sidebar1 --></div>
   </div>
-  <div class="content" id="content"> 
-    <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
-    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+    <div class="filler" id="filler">
+    </div>
     <div class ="results" id="results">
     <div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
       <h1 align="center">&nbsp;</h1>
@@ -239,12 +256,12 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
         <p align="center">Description</p>
         </label>
         </b>
-        <p align="center">text 1</p>
-        <p align="center">text 2</p>
-        <p align="center">text 3</p>
-        <p align="center">text 4</p>
-        <p align="center">text 5</p>
-        <p align="center">text 6</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
+        <p align="center">text</p>
       </div>
       <div class="column2"> <b>
         <label>
@@ -264,12 +281,13 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     
     <!--********************* BETWEEN CONTENT PAGES ***************************** -->
     
-    <div class = "interests" id="interests">
+    <div class = "interests" id="interests" width="100%">
     <div align="center">
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">Select Your Interests</h1>
     <form id="form1" name="form1" method="post" action="">
-        <div align="center">
+        <div align="center" width="100%">
+        <div class="form1">
           <table class="form1">
             <tr>
               <td width="200"><label>
@@ -299,7 +317,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
                   <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
                   Animals</div>
                 </label></td>
-              <td width="200"><label>
+              <td width="200" align="center"><label>
                 <div align="center">
                   <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
                   Outdoors</div>
@@ -340,7 +358,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
                 </label></td>
             </tr>
           </table>
-        </div>
+        </div></div>
       </form>
       <p align="center">&nbsp; </p>
       <p align="center">&nbsp;</p>
@@ -380,24 +398,10 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     </div>
       
       
-      </div>
+  </div>
     </div>
   </div>
-  <div align="center" class="container"><!-- end .container --></div>
+<div align="center" class="container"><!-- end .container --></div>
 </div>
-<?php 
-
-//by default, restrict queries
-$unrestricted_queries = false;
-
-//queries are unrestricted only if $_SESSION['admin'] == true
-if($_SESSION['admin']) {
-	$unrestricted_queries = true;
-}
-$all_agencies = create_agencies($conn, $unrestricted_queries);
-
-//echo the agency data to the page as a hidden table
-GIVEAgenciesToHTMLTable($all_agencies);
-?>
 </body>
 </html>
