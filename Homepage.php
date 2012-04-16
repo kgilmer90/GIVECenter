@@ -1,4 +1,4 @@
-<?php
+<?php /*
 include_once('php/GIVE/GIVEToHTML.php');
 
 session_start();
@@ -16,13 +16,13 @@ try
 catch(MySQLDatabaseConnException $e)
 {
 	header('Location: LoginPage.php?except=conn&code='.$e->code());
-}
+} */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Homepage</title>
 <style type="text/css">
 <!--
 body {
@@ -89,12 +89,11 @@ background-color: #FFF;
 	float: left;
 	width: 12.5%;
 	padding-top: 90px;
-	/* padding-left: 10px
-padding-right: 10px; */
-background-color: #FF9;
+	background-color: #FF9;
 	background-color: #cccccc;
-	overflow: scroll;
-	height: 250px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 400px;
 }
 .content {
 position: absoulte;
@@ -134,6 +133,11 @@ border-right-color: #000;
 width: 49%;
 float: right;
 }
+
+input.hint {
+    color: grey;
+}
+
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
 padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
@@ -197,10 +201,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Session/Logout.php">Logout</a></li>
 <li>
-<form id="form2" name="form2" method="post" action="">
-<label for="search"></label>
-<input name="search" type="text" id="search" value="Search" />
-</form>
+<input type="text" class="hint" value="Search..."
+    onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+    onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
 </li>
 </ul>
 <!-- end .sidebar1 --></div>
