@@ -3,16 +3,17 @@
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
 
-var results_display = false;
-var interests_display = true;
+var DISPLAY_INTERESTS = 0;
+var DISPLAY_RESULTS = 1;
+var display_mode = DISPLAY_INTERESTS;
 
 function hidestuff(boxid){
 	
 	if(boxid == 'results') {
-		results_display = false;
+		display_mode = DISPLAY_INTERESTS;
 	}
 	else if(boxid == 'interests') {
-		interests_display = false;
+		display_mode = DISPLAY_RESULTS;
 	}
 	var e = document.getElementById(boxid);
 	e.style.visibility = "hidden";
@@ -22,10 +23,10 @@ function hidestuff(boxid){
 function showstuff(boxid){
 	
 	if(boxid == 'results') {
-		results_display = true;
+		display_mode = DISPLAY_RESULTS;
 	}
 	else if(boxid == 'interests') {
-		interests_display = true;
+		display_mode = DISPLAY_INTERESTS;
 	}
 
 	var e = document.getElementById(boxid);
@@ -182,13 +183,13 @@ function clearLeftSideBar() {
 	}
 }
 /**
- * Displays the information contained within the GIVEProgram object.
+ * Displays the information contained within a GIVEProgram object at a specified index.
  * @param index - index in the global programs array where the 
  * GIVEProgram object can be found.
  */
 function displayProgramInfo(index) {
 	if(index < programs.length) {
-		if(!results_display) {
+		if(display_mode != DISPLAY_RESULTS) {
 			searchtoresults();
 		}
 		
@@ -196,12 +197,15 @@ function displayProgramInfo(index) {
 }
 
 /**
- * Displays the information contained within the GIVEAgency object.
- * @param index - index in the global programs array where the 
- * GIVEProgram object can be found.
+ * Displays the information contained within the GIVEAgency object at a specified.
+ * @param index - index in the global agencies array where the 
+ * GIVEAgency object can be found.
  */
 function displayAgencyInfo(index) {
 	if(index < agencies.length) {
+		if(display_mode != DISPLAY_INTERESTS) {
+			backtosearch();
+		}
 		
 	}
 }
@@ -209,8 +213,8 @@ function displayAgencyInfo(index) {
 /**
  * Adds an array of GIVEProgram objects to the left side bar.
  * Sets the onclick handler to display the object's contents.
- * @param programsArray - array of integer indexes corresponding
- * to the GIVEProgram objects' indicies in the global programs array
+ * @param programIndicies - array of integers corresponding
+ * to the GIVEProgram objects at indicies in the global programs array
  * to add to the sidebar
  */
 function addProgramsToLeftSideBar(programIndicies) {
@@ -248,21 +252,30 @@ function addProgramsToLeftSideBar(programIndicies) {
 /**
  * Adds an array of GIVEAgency objects to the left side bar.
  * Sets the onclick handler to display the object's contents.
- * @param agenciesArray - GIVEAgency array to add to the sidebar
+ * @param agencyIndicies - array of integers corresponding
+ * to the GIVEAgency objects at indicies in the global agencies array
+ * to add to the sidebar
  */
-function addAgenciesToLeftSideBar(agenciesArray) {
+function addAgenciesToLeftSideBar(agencyIndices) {
 	
-	var leftSideBar = document.getElementById("leftSideBar");
+var leftSideBar = document.getElementById("leftSideBar");
 	
 	var i;
-	for(i in agenciesArray) {
+	for(i in agencyIndices) {
+		
+		var index = agencyIndices[i];
+		var a = agencies[index];
 		
 		//create a new <a> tag
 		var a = document.createElement("a");
 		
 		//set the id and onclick handler
 		a.id = "leftSideBar_agency" + i;
-		a.onclick = displayAgencyInfo(i);
+		a.href = "javascript:displayAgencyInfo(" + index + ")";
+		
+		//create text node to hold the visible description
+		var t = document.createTextNode(a.name);
+		a.appendChild(t);
 		
 		//create a new <li> tag to hold the <a> tag
 		var li = document.createElement("li");
