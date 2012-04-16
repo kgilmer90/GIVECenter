@@ -1,36 +1,37 @@
 <?php
 
-include_once('GIVEAddr.php');
-include_once('GIVEAgency.php');
-include_once('GIVEProContact.php');
-include_once('GIVEStudentContact.php');
-include_once('GIVEToHTML.php');
+include_once(dirname(__FILE__).'/GIVEAddr.php');
+include_once(dirname(__FILE__).'/GIVEAgency.php');
+include_once(dirname(__FILE__).'/GIVEProContact.php');
+include_once(dirname(__FILE__).'/GIVEStudentContact.php');
+include_once(dirname(__FILE__).'/GIVEToHTML.php');
 
 class GIVEProgram
 {
 	public $id;										//INT
 	public $referal;								//BOOL
 	public $season;									//BINARY(4)
-	public $times;									//BINARY(24)
+	public $hours;									//BINARY(24)
 	public $name, $descript, $duration, $notes;		//STRING
 	public $issues;									//STRING array
 	public $addr;									//GIVEAddr
 	public $p_contact;								//GIVEProContact
 	public $s_contact;								//GIVEStudentContact
 	
-	public function __construct($args)
+	public function __construct($args = array())
 	{
-		$this->id = $args['id'];
-		$this->referal = $args['referal'];
-		$this->season = $args['season'];
-		$this->times = $args['times'];
-		$this->descript = $args['name'];
-		$this->duration = $args['duration'];
-		$this->notes = $args['notes'];
-		$this->issues = $args['issues'];
-		$this->addr = $args['addr'];
-		$this->p_contact = $args['p_contact'];
-		$this->s_contact = $args['s_contact'];
+		$this->id = isset($args['id']) ? $args['id'] : '';
+		$this->referal = isset($args['referal']) ? $args['referal'] : '';
+		$this->season = isset($args['season']) ? $args['season'] : '';
+		$this->hours = isset($args['hours']) ? $args['hours'] : '';
+		$this->name = isset($args['name']) ? $args['name'] : '';
+		$this->descript = isset($args['descript']) ? $args['descript'] : '';
+		$this->duration = isset($args['duration']) ? $args['duration'] : '';
+		$this->notes = isset($args['notes']) ? $args['notes'] : '';
+		$this->issues = isset($args['issues']) ? $args['issues'] : array(0 => '', 1 => '', 2 => '');
+		$this->addr = isset($args['addr']) ? $args['addr'] : new GIVEAddr();
+		$this->p_contact = isset($args['p_contact']) ? $args['p_contact'] : new GIVEProContact();
+		$this->s_contact = isset($args['s_contact']) ? $args['s_contact'] : new GIVEStudentContact();
 	}
 	public function toHTMLTable($id)
 	{	
@@ -39,14 +40,14 @@ class GIVEProgram
 		$str .= GIVEWrapDataWithTrTd($this->id, 'id');
 		$str .= GIVEWrapDataWithTrTd($this->referal, 'referal');
 		$str .= GIVEWrapDataWithTrTd($this->season, 'season');
-		$str .= GIVEWrapDataWithTrTd($this->times, 'times');
+		$str .= GIVEWrapDataWithTrTd($this->hours, 'hours');
 		$str .= GIVEWrapDataWithTrTd($this->name, 'name');
 		$str .= GIVEWrapDataWithTrTd($this->descript, 'descript');
 		$str .= GIVEWrapDataWithTrTd($this->duration, 'duration');
-		$str .= GIVEWrapDataWithTrTd($this->issuesToHTMLTable('issues'));
-		$str .= GIVEWrapDataWithTrTd($this->addr->toHTMLTable('addr'));
-		$str .= GIVEWrapDataWithTrTd($this->p_contact->toHTMLTable('p_contact'));
-		$str .= GIVEWrapDataWithTrTd($this->s_contact->toHTMLTable('s_contact'));
+		$str .= GIVEWrapDataWithTrTd($this->issuesToHTMLTable($id.'_issues'));
+		$str .= GIVEWrapDataWithTrTd($this->addr->toHTMLTable($id.'_addr'));
+		$str .= GIVEWrapDataWithTrTd($this->p_contact->toHTMLTable($id.'_p_contact'));
+		$str .= GIVEWrapDataWithTrTd($this->s_contact->toHTMLTable($id.'_s_contact'));
 		
 		$str .= '</table>';
 		return $str;

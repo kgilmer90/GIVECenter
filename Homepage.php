@@ -5,27 +5,18 @@ session_start();
 
 //if not properly logged in, redirect to login page
 if(!isset($_SESSION['username'])) {
-header('Location: LoginPage.php');
+	header('Location: LoginPage.php');
 }
 
-//by default, restrict queries
-$restrict_queries = true;
-
-//queries are unrestricted only if $_SESSION['username'] == 'admin'
-if($_SESSION['username'] == 'admin') {
-$restrict_queries = false;
+$conn;
+try
+{
+	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
 }
-
-$all_agencies;
-if($restrict_queries) {
-//$all_agencies = some_function_to_obtain_restricted_data();
+catch(MySQLDatabaseConnException $e)
+{
+	header('Location: LoginPage.php?except=conn&code='.$e->code());
 }
-else {
-//$all_agencies = some_function_to_obtain_unrestricted_data();
-}
-
-//echo the agency data to the page as a hidden table
-//GIVEAgenciesToHTMLTable($all_agencies);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -382,5 +373,9 @@ Night</label></td>
 </div>
 <div align="center" class="container"><!-- end .container --></div>
 </div>
+<?php
+	GIVEFetchAndEcho($conn);
+	$conn->close();
+?>
 </body>
 </html>

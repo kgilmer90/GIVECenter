@@ -11,8 +11,8 @@
  * ************************************************************************ *
  */
 
-include_once('../../php/GIVE/GIVEAddr.php');
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEStudentContact.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
  *  Creates array of objects containing all student contacts for a specified
@@ -32,6 +32,9 @@ function contact_history_s($conn,$id)
                 AND contact_history.program_id = $id";
     $conn->query($query);
 
+	if($conn->numRows()==0){
+        return null;
+    }
     $results = $conn->fetchAllAsAssoc();
 
     foreach($results as $temp)
@@ -60,6 +63,9 @@ function contact_history_s_limited($conn,$id)
     $conn->query($query);
 
     $results = $conn->fetchAllAsAssoc();
+    if($conn->numRows()==0){
+        return null;
+    }
 
     foreach($results as $temp)
     {

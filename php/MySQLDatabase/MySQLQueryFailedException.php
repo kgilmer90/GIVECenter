@@ -1,6 +1,6 @@
 <?php
 
-include_once('MySQLException.php');
+include_once(dirname(__FILE__).'/MySQLException.php');
 
 class MySQLQueryFailedException extends MySQLException
 {

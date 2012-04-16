@@ -1,19 +1,17 @@
 <?php
 
-include_once('GIVEToHTML.php');
+include_once(dirname(__FILE__).'/GIVEToHTML.php');
 
 class GIVEAddr
 {
-	//public $id;							//INT
 	public $street, $city, $state_us, $zip;	//STRING
 	
-	public function __construct($args)
+	public function __construct($args = array())
 	{
-		//$this->id = $args['id'];
-		$this->street = $args['street'];
-		$this->city = $args['city'];
-		$this->state_us = $args['state_us'];
-		$this->zip = $args['zip'];
+		$this->street = isset($args['street']) ? $args['street'] : '';
+		$this->city = isset($args['city']) ? $args['city'] : '';
+		$this->state_us = isset($args['state_us']) ? $args['state_us'] : '';
+		$this->zip = isset($args['zip']) ? $args['zip'] : '';
 	}
 	public function toHTMLTable($id)
 	{

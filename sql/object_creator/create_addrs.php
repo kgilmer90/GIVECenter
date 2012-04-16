@@ -11,7 +11,8 @@
  * ************************************************************************ *
  */
  
-include_once('../../php/GIVE/GIVEAddr.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEAddr.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
  *  Creates and Returns Single Object Holding Address information
@@ -21,7 +22,9 @@ include_once('../../php/GIVE/GIVEAddr.php');
  * @return addr    object containing address information
  */ 
 function create_addr($conn,$id){
-    $query = "SELECT id,street,city,state,zip
+    if($id == null){ return null; }
+    
+    $query = "SELECT id,street,city,state_us,zip
                 FROM addr
                 WHERE id=$id";
   
@@ -47,9 +50,10 @@ function create_all_addrs($conn){
                 FROM addr";
   
     $conn->query($query);
+    if($conn->numRows()==0){
+        return null;}
 
     $results = $conn->fetchAllAsAssoc();
-
     foreach($results as $temp)
     {
         $addr = new GIVEAddr($temp);

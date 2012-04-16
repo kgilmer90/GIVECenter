@@ -1,5 +1,6 @@
 <?php
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
+
 session_start(); 
 
 //to hold various error states
@@ -28,7 +29,7 @@ if(isset($_GET['code'])) {
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Login to GIVE Center Volunteer Matching!</title>
 <script language="text/Javascript" src="js/Navigation.js"></script>
 <style type="text/css">
 <!--
@@ -218,7 +219,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <input type = "text" name = "username" size = "15" maxlength = "15" required = "required"/> </label>
 <br />
 Password:  
-<input type= "password" name ="password" size = "15" maxlength = "15" required = "required"/></label>
+<input type= "password" name ="password" size = "15" maxlength = "15" /></label>
 <br/><br />
 <!--  <button onclick="login()">Login</button>-->
 <input type="submit" /><br />

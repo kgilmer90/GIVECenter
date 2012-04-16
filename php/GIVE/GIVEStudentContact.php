@@ -1,6 +1,6 @@
 <?php
 
-include_once('GIVEToHTML.php');
+include_once(dirname(__FILE__).'/GIVEToHTML.php');
 
 class GIVEStudentContact
 {
@@ -8,15 +8,15 @@ class GIVEStudentContact
 	public $m_phone, $w_phone;					//STRING
 	public $mail;								//STRING
 	
-	public function __construct($args)
+	public function __construct($args = array())
 	{
-		$this->l_name = $args['l_name'];
-		$this->f_name = $args['f_name'];
-		$this->m_name = $args['m_name'];
-		$this->suf = $args['suf'];
-		$this->w_phone = $args['w_phone'];
-		$this->m_phone = $args['m_phone'];
-		$this->mail = $args['mail'];
+		$this->l_name = isset($args['l_name']) ? $args['l_name'] : '';
+		$this->f_name = isset($args['f_name']) ? $args['f_name'] : '';
+		$this->m_name = isset($args['m_name']) ? $args['m_name'] : '';
+		$this->suf = isset($args['suf']) ? $args['suf'] : '';
+		$this->w_phone = isset($args['w_phone']) ? $args['w_phone'] : '';
+		$this->m_phone = isset($args['m_phone']) ? $args['m_phone'] : '';
+		$this->mail = isset($args['mail']) ? $args['mail'] : '';
 	}
 	public function toHTMLTable($id)
 	{

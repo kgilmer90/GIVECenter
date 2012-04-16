@@ -1,14 +1,37 @@
 // JavaScript Document
 
+var agencies = [];		//global agencies array, contains all agencies
+var programs = [];		//global programs array, contains all programs
+
+var results_display = false;
+var interests_display = true;
+
 function hidestuff(boxid){
-   	document.getElementById(boxid).style.visibility="hidden";
-  	document.getElementById(boxid).style.position= "absolute";
-  	document.getElementById(boxid).style.display="none";
+	
+	if(boxid == 'results') {
+		results_display = false;
+	}
+	else if(boxid == 'interests') {
+		interests_display = false;
+	}
+	var e = document.getElementById(boxid);
+	e.style.visibility = "hidden";
+  	e.style.position = "absolute";
+  	e.style.display = "none";
 }
 function showstuff(boxid){
-  	document.getElementById(boxid).style.visibility="visible";
-	document.getElementById(boxid).style.position= "relative";
-	document.getElementById(boxid).style.display="block";
+	
+	if(boxid == 'results') {
+		results_display = true;
+	}
+	else if(boxid == 'interests') {
+		interests_display = true;
+	}
+
+	var e = document.getElementById(boxid);
+	e.style.visibility="visible";
+	e.style.position= "relative";
+	e.style.display="block";
 }
 function searchtoresults()
 {
@@ -26,15 +49,230 @@ function clearChoices()
 	 document.getElementById('form3').reset();
 }
 
-function login()
-{
-	location.href='file:///C:/Users/Karen/GIVECenter/html_css/HomepageJS.html';
-}
-
 function init()
 {
 	initAgenciesAndPrograms();
+	clearLeftSideBar();
+	
+	var indicies =[];
+	var i;
+	for(i in programs) {
+		indicies.push(i);
+	}
+	
+	addProgramsToLeftSideBar(indicies);
 	hidestuff('results');
+}
+
+//**************************************************
+////////////////////////////////////////////////////
+//
+//		GIVE AGENCY AND PROGRAM SEARCHING
+//
+////////////////////////////////////////////////////
+//**************************************************
+
+/**
+ * Search one string for another.
+ * @param stringToSearch - string being searched
+ * @param searchTerms - string to see if stringToSearch contains
+ * @returns starting index of searchTerms in stringToSearch or -1 if not found
+ */
+function stringSearch(stringToSearch, searchTerms) {
+	return stringToSearch.indexOf(searchTerms);
+}
+
+/**
+ * Search one string for another regardless of upper or lower case.
+ * @param stringToSearch - string being searched
+ * @param searchTerms - string to see if stringToSearch contains
+ * @returns starting index of searchTerms in stringToSearch or -1 if not found
+ */
+function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
+	var s = stringToSearch.toLowerCase();
+	var t = searchTerms.toLowerCase();
+	return stringSearch(s, t);
+}
+
+/**
+ * Matches a search string to a list of programs whose names
+ * contain the string. Search is case insensitive.
+ * @param searchTerms - search string
+ * @returns GIVEProgram array of programs whose names match the terms
+ */
+function searchByProgramName(searchTerms) {
+	
+	var program_search_results = [];
+	
+	var i;
+	for(i in programs) {
+		
+		//GIVEProgram reference and program name
+		var p = programs[i];
+		var name = p.name;
+		
+		//if name contains the search terms anywhere in the string,
+		//add the program to the list of search results
+		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
+			program_search_results.push(p);
+		}
+	}
+	return program_search_results;
+}
+
+/**
+ * Matches a search string to a list of agencies whose names
+ * contain the string. Search is case insensitive.
+ * @param searchTerms - search string
+ * @returns GIVEAgency array of agencies whose names match the terms
+ */
+function searchByAgencyName(searchTerms) {
+	
+	var agency_search_results = [];
+	
+	var i;
+	for(i in agencies) {
+		
+		//GIVEAgency reference and name
+		var a = agencies[i];
+		var name = a.name;
+		
+		//if name contains the search terms anywhere in the string,
+		//add the program to the list of search results
+		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
+			agency_search_results.push(a);
+		}
+	}
+	return agency_search_results;
+}
+
+/**
+ * Removes a node from the DOM tree. First removes all 
+ * event handlers to prevent memory leaks in IE, then
+ * removes the node itself.
+ * @param node - reference to the DOM node to remove
+ */
+function removeNode(node) {
+	
+	//set all event handlers null to avoid memory leaks in IE
+	node.onclick = null;
+	node.ondblclick = null;
+	node.onmousedown = null;
+	node.onmousemove = null;	
+	node.onmouseover = null;
+	node.onmouseout = null;
+	node.onmouseup = null;
+	node.onkeydown = null;
+	node.onkeypress = null;
+	node.onkeyup = null;
+	
+	//remove the node from the DOM tree
+	node.parentNode.removeChild(node);
+}
+
+/**
+ * Removes all elements from the left side bar.
+ */
+function clearLeftSideBar() {
+	
+	var leftSideBar = document.getElementById("leftSideBar");
+	
+	while(leftSideBar.hasChildNodes()) {
+		removeNode(leftSideBar.childNodes[0]);
+	}
+}
+/**
+ * Displays the information contained within the GIVEProgram object.
+ * @param index - index in the global programs array where the 
+ * GIVEProgram object can be found.
+ */
+function displayProgramInfo(index) {
+	if(index < programs.length) {
+		if(!results_display) {
+			searchtoresults();
+		}
+		
+	}
+}
+
+/**
+ * Displays the information contained within the GIVEAgency object.
+ * @param index - index in the global programs array where the 
+ * GIVEProgram object can be found.
+ */
+function displayAgencyInfo(index) {
+	if(index < agencies.length) {
+		
+	}
+}
+
+/**
+ * Adds an array of GIVEProgram objects to the left side bar.
+ * Sets the onclick handler to display the object's contents.
+ * @param programsArray - array of integer indexes corresponding
+ * to the GIVEProgram objects' indicies in the global programs array
+ * to add to the sidebar
+ */
+function addProgramsToLeftSideBar(programIndicies) {
+	
+	var leftSideBar = document.getElementById("leftSideBar");
+	
+	var i;
+	for(i in programIndicies) {
+		
+		var index = programIndicies[i];
+		var p = programs[index];
+		
+		//create a new <a> tag
+		var a = document.createElement("a");
+		
+		//set the id and onclick handler
+		a.id = "leftSideBar_program" + i;
+		a.href = "javascript:displayProgramInfo(" + index + ")";
+		
+		//create text node to hold the visible description
+		var t = document.createTextNode(p.name);
+		a.appendChild(t);
+		
+		//create a new <li> tag to hold the <a> tag
+		var li = document.createElement("li");
+		
+		//add the <a> tag as a child of <li>
+		li.appendChild(a);
+		
+		//add the <li> tag as a child of leftSideBar
+		leftSideBar.appendChild(li);
+	}
+}
+
+/**
+ * Adds an array of GIVEAgency objects to the left side bar.
+ * Sets the onclick handler to display the object's contents.
+ * @param agenciesArray - GIVEAgency array to add to the sidebar
+ */
+function addAgenciesToLeftSideBar(agenciesArray) {
+	
+	var leftSideBar = document.getElementById("leftSideBar");
+	
+	var i;
+	for(i in agenciesArray) {
+		
+		//create a new <a> tag
+		var a = document.createElement("a");
+		
+		//set the id and onclick handler
+		a.id = "leftSideBar_agency" + i;
+		a.onclick = displayAgencyInfo(i);
+		
+		//create a new <li> tag to hold the <a> tag
+		var li = document.createElement("li");
+		
+		//add the <a> tag as a child of <li>
+		li.appendChild(a);
+		
+		//add the <li> tag as a child of leftSideBar
+		leftSideBar.appendChild(li);
+	}
 }
 
 //**************************************************
@@ -44,9 +282,6 @@ function init()
 //
 ////////////////////////////////////////////////////
 //**************************************************
-var agencies = [];		//global agencies array, contains all agencies
-var programs = [];		//global programs array, contains all programs
-
 /**
 * HTML <body> onload function.
 * All database query results are stored on the page as a hidden table.
@@ -54,10 +289,10 @@ var programs = [];		//global programs array, contains all programs
 */
 function initAgenciesAndPrograms() {
 
-	var i = 1;
+	var i = 0;
 	//get the main table and count how many <tr> tags exist (number of agencies)
 	var agency_count = document.getElementById("agency_table").rows.length;
-	for(i = 1; i <= agency_count; i++) {
+	for(i = 0; i < agency_count; i++) {
 	
 		//get the table for each agency and construct a GIVEAgency object from it
 		var tableId = "agency" + i;
@@ -120,7 +355,6 @@ function TableIdToGIVEAgency(table_id) {
 * @returns GIVEAddr object representing the table data
 */
 function TableIdToGIVEAddr(table_id) {
-
 	//retreive the DOM element within the GIVEAgency table id
 	var addr_DOM_element = document.getElementById(table_id);
 	
@@ -172,7 +406,7 @@ function TableIdToGIVEProgramsArray(table_id) {
 	
 	var i;
 	var count = document.getElementById(table_id).rows.length;
-	for(i = 1; i <= count; i++) {
+	for(i = 0; i < count; i++) {
 	
 	//get the table for each program and construct a GIVEProgram object from it
 	var program = TableIdToGIVEProgram(table_id + i);
@@ -204,7 +438,8 @@ function TableIdToGIVEProgram(table_id) {
 	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[7].innerHTML);
 	
 	//retrieve the DOM element for the following tables and repeat the process above
-	var issues 		= TableIdToIssuesArray(table_id + "_issue");
+//	var issues 		= TableIdToIssuesArray(table_id + "_issue");
+	var issues = [];
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
 	var s_contact 	= TableIdToGIVEStudentContact(table_id + "_s_contact");
@@ -408,12 +643,12 @@ function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, ma
 * @param GIVEStudentContact s_contact - program's student contact person
 * @return GIVEProgram object with fields initialized to function arguments
 */
-function GIVEProgram (id, referal, season, times, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
+function GIVEProgram (id, referal, season, hours, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
 	var program = {
 		id 			: id,
 		referal		: referal,
 		season		: season,
-		times		: times,
+		hours		: hours,
 		name		: name, 
 		descript	: descript,
 		duration	: duration,
@@ -426,7 +661,7 @@ function GIVEProgram (id, referal, season, times, name, descript, duration, note
 		toString 	: function() {
 			
 			var str = "id=" + this.id + ",referal=" + this.referal + 
-				",season=" + this.season + ",times=" + this.times + ",name=" + 
+				",season=" + this.season + ",hours=" + this.hours+ ",name=" + 
 				this.name + ",descript=" + this.descript + ",duration=" + 
 				this.duration + ",notes=" + this.notes + "<br />";
 	

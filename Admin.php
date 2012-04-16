@@ -5,8 +5,9 @@ session_start();
 if(!isset($_SESSION['username'])) {
 	header('Location: LoginPage.php');
 }
-else if($_SESSION['username'] != 'admin') {
-	header('Location: LoginPage.php');
+//if logged in but not as admin, redirect to homepage
+else if(!$_SESSION['admin']) {
+	header('Location: Homepage.php');
 }
 
 //echo the agency data to the page as a hidden table

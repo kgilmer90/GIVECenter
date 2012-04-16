@@ -13,7 +13,8 @@
  */
 
 
-include_once('../../php/GIVE/GIVEAddr.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEProContact.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
  * Creates pro contact object, and returns object
@@ -23,6 +24,8 @@ include_once('../../php/GIVE/GIVEAddr.php');
  */ 
 function create_p_contact($conn,$id)
 {
+    if($id == null) return null;
+    
     $query = "SELECT id,title,l_name,f_name,m_name,suf,w_phone,m_phone,mail
                 FROM pro_contact
                 WHERE id=$id";
@@ -44,6 +47,8 @@ function create_p_contact($conn,$id)
  */ 
 function create_p_contact_limited($conn,$id)
 {
+    if($id == null) return null;
+    
     $query = "SELECT id,title,l_name,f_name,m_name,suf,w_phone,mail
                 FROM pro_contact
                 WHERE id=$id";
@@ -71,6 +76,9 @@ function create_all_p_contacts($conn)
 
     $conn->query($query);
 
+    if($conn->numRows()==0){
+        return null;
+    }
     $results = $conn->fetchAllAsAssoc();
 
     foreach($results as $temp)
@@ -96,6 +104,9 @@ function create_all_p_contacts_limited($conn)
 
     $conn->query($query);
 
+	if($conn->numRows()==0){
+        return null;
+    }
     $results = $conn->fetchAllAsAssoc();
 
     foreach($results as $temp)

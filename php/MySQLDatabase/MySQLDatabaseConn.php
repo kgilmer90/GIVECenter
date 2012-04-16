@@ -1,8 +1,8 @@
 <?php
 
-include_once('MySQLException.php');
-include_once('MySQLDatabaseConnException.php');
-include_once('MySQLQueryFailedException.php');
+include_once(dirname(__FILE__).'/MySQLException.php');
+include_once(dirname(__FILE__).'/MySQLDatabaseConnException.php');
+include_once(dirname(__FILE__).'/MySQLQueryFailedException.php');
 
 class MySQLDatabaseConn
 {	
@@ -49,7 +49,7 @@ class MySQLDatabaseConn
 			throw new MySQLDatabaseConnException($this->errorStr, $this->errorCode);
 		}
 		
-		$result = mysql_select_db($this->dbname, $this->resource);
+		$result = mysql_select_db($this->dbname, $this->dblink);
 		$this->setErrors();
 		if(!$result) {
 			throw new MySQLDatabaseConnException($this->errorStr, $this->errorCode);
@@ -100,7 +100,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchRowAsAssoc()
 	{
-		return $this->fetchArray(MySQLDatabaseConn::FETCH_ASSOC);
+		return $this->fetchRowAsArray(MySQLDatabaseConn::FETCH_ASSOC);
 	}
 	/**
 	 * Fetches a row from the query's dataset as a numerically-indexed array.
@@ -109,7 +109,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchRowAsNumeric()
 	{
-		return $this->fetchRowArray(MySQLDatabaseConn::FETCH_NUM);
+		return $this->fetchRowAsArray(MySQLDatabaseConn::FETCH_NUM);
 	}
 	/**
 	 * Fetches a row from the query's dataset as an object, similar to
@@ -164,7 +164,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchAllAsAssoc()
 	{
-		return fetchAllAsArray(MySQLDatabaseConn::FETCH_ASSOC);
+		return $this->fetchAllAsArray(MySQLDatabaseConn::FETCH_ASSOC);
 	}
 	/**
 	 * Fetches all rows from the query's dataset as a numerically-indexed 2D array.
@@ -173,7 +173,7 @@ class MySQLDatabaseConn
 	 */
 	public function fetchAllAsNumeric()
 	{
-		return fetchAllAsArray(MySQLDatabaseConn::FETCH_NUM);
+		return $this->fetchAllAsArray(MySQLDatabaseConn::FETCH_NUM);
 	}
 	/**
 	 * Fetches all data available for the SQL query and returns it as a
@@ -252,11 +252,9 @@ class MySQLDatabaseConn
 		
 		$this->setErrors();
 		
-		if($this->resource == false) {
-			throw new MySQLQueryFailedException($this->lastQuery."\n".$this->errorStr, $this->errorCode);
+		if(!$this->resource) {
+			throw new MySQLQueryFailedException($this->errorStr.' for Query: '.$this->lastQuery, $this->errorCode);
 		}
-		
-		$this->rows = mysql_affected_rows($this->resource);
 	}
 	/**
 	 * Called when object reaches end of scope, ensures database connection is closed.
@@ -268,8 +266,8 @@ class MySQLDatabaseConn
 		}
 	}
 	/**
-	 * Sets the error code and string with the most recent
-	 * mysql error codes.
+	 * Sets the error code and error string with the most recent
+	 * error code from mysql_errno() and error string from mysql_error().
 	 */
 	private function setErrors()
 	{

@@ -12,7 +12,8 @@
  * *******************************************************************  *
  */
  
-include_once('../../php/GIVE/GIVEAddr.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEStudentContact.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 /**
  *  Creates all student contact objects
@@ -22,6 +23,8 @@ include_once('../../php/GIVE/GIVEAddr.php');
  */
 function create_s_contact($conn,$id)
 {
+    if($id == null) return null;
+    
     $query = "SELECT id,l_name,f_name,m_name,suf,w_phone,m_phone,mail
                 FROM student_contact
                 WHERE id=$id";
@@ -40,8 +43,10 @@ function create_s_contact($conn,$id)
  * @param $id   which contact information to create an object for
  * @return      object containing specified contacts information
  */
-function create_s_contacts_limited($conn,$id)
+function create_s_contact_limited($conn,$id)
 {
+    if($id == null) return null;
+    
     $query = "SELECT id,l_name,f_name,m_name,suf,w_phone,mail
                 FROM student_contact
                 WHERE id=$id";
@@ -69,8 +74,11 @@ function create_all_s_contacts($conn)
     
     $conn->query($query);
 
+	if($conn->numRows()==0){
+        return null;
+    }
     $results = $conn->fetchAllAsAssoc();
-
+    
     foreach($results as $temp)
     {
         $p = new GIVEAgency($temp);
@@ -94,6 +102,9 @@ function create_all_s_contacts_limited($conn)
     
     $conn->query($query);
 
+	if($conn->numRows()==0){
+        return null;
+    }
     $results = $conn->fetchAllAsAssoc();
 
     foreach($results as $temp)

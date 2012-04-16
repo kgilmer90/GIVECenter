@@ -10,7 +10,10 @@
  * ************************************************************************ *
  */
 
-include_once('../../php/GIVE/GIVEAddr.php');
+include_once(dirname(__FILE__).'/object_creater.php');
+include_once(dirname(__FILE__).'/../queries/camel.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEAgency.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
  
 /**
  *  Creates Objects for all the agencies and their information and returns them
@@ -18,7 +21,7 @@ include_once('../../php/GIVE/GIVEAddr.php');
  * @param MySQLDatabaseConn $conn
  * @return array 
  */
-function create_agencies($conn)
+function create_agencies($conn,$type)
 {
     /*
      * Setup for function whereby we will create the query, pass it and store
@@ -26,7 +29,7 @@ function create_agencies($conn)
      */
     $agency_array = array();        
 
-    $query = "SELECT id,name,descript,mail,phone,fax,p_contact,addr
+    $query = "SELECT id,name,descript,mail,phone,fax,p_contact_id,addr
                 FROM agency";      
     $conn->query($query);          
  
@@ -40,19 +43,27 @@ function create_agencies($conn)
      * 
      *  In the case of programs where there are multiple programs, we will be
      *  storing an array of objects, more specifically a reference to them.
+     * 
+     *  
      */
-    
-    
-    $results = $conn->fetchAllAsAssoc();   
-    
+    if($conn->numRows()==0){
+        return null;
+    }
+    $results = $conn->fetchAllAsAssoc();  
+   
     foreach($results as $temp)
     {
-        //crete program objects
-        $temp['program'] = create_programs($conn, $temp['id']);
+        //create program objects
+        $temp['programs'] = create_programs($conn, $temp['id'],$type);
         //p contact object
-        $temp['p_contact'] = create_p_contacts($conn, $temp['p_contact']);
+        if($type){
+            $temp['p_contact'] = create_p_contact($conn, $temp['p_contact_id']);}
+            
+        else{
+            $temp['p_contact'] = create_p_contact_limited($conn, $temp['p_contact_id']);
+        }
         //addr object
-        $temp['addr'] = create_addrs($conn, $temp['addr']);
+        $temp['addr'] = create_addr($conn, $temp['addr']);
         
         //Create Agency Object to Hold Everything
         $agency = new GIVEAgency($temp);

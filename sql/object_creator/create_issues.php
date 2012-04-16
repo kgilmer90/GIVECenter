@@ -6,7 +6,8 @@
  * ***********************************************************************  *
  */
 
-include_once('../../php/GIVE/GIVEAddr.php');
+include_once(dirname(__FILE__).'/../../php/GIVE/GIVEAddr.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
  
 /**
  *  Returns Issue strings in array for specific program 
@@ -22,8 +23,30 @@ function create_issues($conn,$program_id)
                 AND program_issues.issue_id=issues.id";
     $conn->query($query);
 
+    if($conn->numRows()==0){
+        return null;
+    }    
+    
     $results = $conn->fetchAllAsNumeric();
+    return $results;
+}
 
+/**
+ *  Returns All issues in a Numerical Sock Array For Displaying Choices
+ * @param type $conn
+ * @return $results     Issues numerical sock array
+ */
+function create_all_issues($conn)
+{
+    $query = "SELECT issues.*
+                FROM issues";
+    
+    $conn->query($query);
+
+    if($conn->numRows()==0){
+        return null;
+    }
+    $results = $conn->fetchAllAsAssoc();
     return $results;
 }
 ?>
