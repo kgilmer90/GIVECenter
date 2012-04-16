@@ -643,12 +643,12 @@ function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, ma
 * @param GIVEStudentContact s_contact - program's student contact person
 * @return GIVEProgram object with fields initialized to function arguments
 */
-function GIVEProgram (id, referal, season, times, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
+function GIVEProgram (id, referal, season, hours, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
 	var program = {
 		id 			: id,
 		referal		: referal,
 		season		: season,
-		times		: times,
+		hours		: hours,
 		name		: name, 
 		descript	: descript,
 		duration	: duration,
@@ -661,7 +661,7 @@ function GIVEProgram (id, referal, season, times, name, descript, duration, note
 		toString 	: function() {
 			
 			var str = "id=" + this.id + ",referal=" + this.referal + 
-				",season=" + this.season + ",times=" + this.times + ",name=" + 
+				",season=" + this.season + ",hours=" + this.hours+ ",name=" + 
 				this.name + ",descript=" + this.descript + ",duration=" + 
 				this.duration + ",notes=" + this.notes + "<br />";
 	

@@ -533,9 +533,6 @@ Night</label></td>
 </div>
 <?php 
 
-//by default, restrict queries
-$unrestricted_queries = false;
-
 //establish a database connection
 $conn;
 try {
@@ -545,11 +542,10 @@ catch(MySQLDatabaseConnException $e) {
 	header('Location: Homepage.php?except=conn');
 }
 
-//queries are unrestricted only if $_SESSION['admin'] == true
-if($_SESSION['admin']) {
-	$unrestricted_queries = true;
-}
-$all_agencies = create_agencies($conn, $unrestricted_queries);
+//$_SESSSION['admin'] is true if logged in as admin, false otherwise
+//passing true to create_agencies() returns all available data
+//false returns data sanitized of sensitive personal information
+$all_agencies = create_agencies($conn, $_SESSION['admin']);
 
 //echo the agency data to the page as a hidden table
 GIVEAgenciesToHTMLTable($all_agencies);

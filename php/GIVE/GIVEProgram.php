@@ -11,7 +11,7 @@ class GIVEProgram
 	public $id;										//INT
 	public $referal;								//BOOL
 	public $season;									//BINARY(4)
-	public $times;									//BINARY(24)
+	public $hours;									//BINARY(24)
 	public $name, $descript, $duration, $notes;		//STRING
 	public $issues;									//STRING array
 	public $addr;									//GIVEAddr
@@ -23,7 +23,7 @@ class GIVEProgram
 		$this->id = isset($args['id']) ? $args['id'] : '';
 		$this->referal = isset($args['referal']) ? $args['referal'] : '';
 		$this->season = isset($args['season']) ? $args['season'] : '';
-		$this->times = isset($args['times']) ?$args['times'] : '';
+		$this->hours = isset($args['hours']) ? $args['hours'] : '';
 		$this->name = isset($args['name']) ? $args['name'] : '';
 		$this->descript = isset($args['descript']) ? $args['descript'] : '';
 		$this->duration = isset($args['duration']) ? $args['duration'] : '';
@@ -40,7 +40,7 @@ class GIVEProgram
 		$str .= GIVEWrapDataWithTrTd($this->id, 'id');
 		$str .= GIVEWrapDataWithTrTd($this->referal, 'referal');
 		$str .= GIVEWrapDataWithTrTd($this->season, 'season');
-		$str .= GIVEWrapDataWithTrTd($this->times, 'times');
+		$str .= GIVEWrapDataWithTrTd($this->hours, 'hours');
 		$str .= GIVEWrapDataWithTrTd($this->name, 'name');
 		$str .= GIVEWrapDataWithTrTd($this->descript, 'descript');
 		$str .= GIVEWrapDataWithTrTd($this->duration, 'duration');
