@@ -23,6 +23,7 @@
 
 include_once(dirname(__FILE__).'/../../php/GIVE/GIVEProgram.php');
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/create_season.php');
  
 function create_programs($conn,$agency_id,$type)
 {

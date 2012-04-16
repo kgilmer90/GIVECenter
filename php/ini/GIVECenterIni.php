@@ -17,5 +17,4 @@ if($GIVE_INSTALL_SYSTEM == 'windows') {
 else if($GIVE_INSTALL_SYSTEM == 'linux') {
 	$GIVE_INSTALL_PATH = '/var/opt/lampp/htdocs/GIVECenter/';
 }
-
 ?>

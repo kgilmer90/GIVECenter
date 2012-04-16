@@ -5,7 +5,28 @@ include_once(dirname(__FILE__).'/GIVEContactHistory.php');
 include_once(dirname(__FILE__).'/GIVEProContact.php');
 include_once(dirname(__FILE__).'/GIVEProgram.php');
 include_once(dirname(__FILE__).'/GIVEStudentContact.php');
+include_once(dirname(__FILE__).'/../ini/GIVECenterIni.php');
+include_once(dirname(__FILE__).'/../MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../sql/object_creator/create_agencies.php');
 
+/**
+ * Fetches all necessary data from the database and echoes
+ * it to the document in the form of a hidden HTML table.
+ * Serves as a one-stop-shop function for getting data
+ * from the server to the client.
+ * @param string $urlRedirectOnError - url to redirect the
+ * user to in the event of an error connecting to the database
+ */
+function GIVEFetchAndEcho($conn)
+{
+	//$_SESSSION['admin'] is true if logged in as admin, false otherwise
+	//passing true to create_agencies() returns all available data
+	//false returns data sanitized of sensitive personal information
+	$all_agencies = create_agencies($conn, $_SESSION['admin']);
+	
+	//echo the agency data to the page as a hidden table
+	GIVEAgenciesToHTMLTable($all_agencies);
+}
 /**
  * Prints an array of GIVEAgencies to a document in the form
  * of an HTML table -- the table is hidden and not displayed by default,

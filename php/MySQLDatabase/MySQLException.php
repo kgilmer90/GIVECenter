@@ -21,6 +21,14 @@ class MySQLException extends Exception
 	{
 		return __CLASS__ . ": [{$this->code}]: [{$this->message}]";
 	}
+	public function code()
+	{
+		return $this->code;
+	}
+	public function message()
+	{
+		return $this->message;
+	}
 }
 
 ?>

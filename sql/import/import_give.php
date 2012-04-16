@@ -11,7 +11,7 @@
  * one so that it recognizes when there is a null in the last row
  */
 include_once(dirname(__FILE__).'/../queries/camel.php');
-include_once(dirname(__FILE__).'/../../../php/ini/GIVECenterIni.php');
+include_once(dirname(__FILE__).'/../../php/ini/GIVECenterIni.php');
 
 $pointers = array();
 $bull = array();

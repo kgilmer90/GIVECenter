@@ -1,14 +1,21 @@
 <?php
-include_once(dirname(__FILE__).'/php/ini/GIVECenterIni.php');
-include_once(dirname(__FILE__).'/php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once(dirname(__FILE__).'/php/GIVE/GIVEToHTML.php');
-include_once(dirname(__FILE__).'/sql/object_creator/create_agencies.php');
 
 session_start();
 
 //if not properly logged in, redirect to login page
 if(!isset($_SESSION['username'])) {
 	header('Location: LoginPage.php');
+}
+
+$conn;
+try
+{
+	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+}
+catch(MySQLDatabaseConnException $e)
+{
+	header('Location: LoginPage.php?except=conn&code='.$e->code());
 }
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -532,23 +539,8 @@ Night</label></td>
 <div align="center" class="container"><!-- end .container --></div>
 </div>
 <?php 
-
-//establish a database connection
-$conn;
-try {
-	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
-}
-catch(MySQLDatabaseConnException $e) {
-	header('Location: Homepage.php?except=conn');
-}
-
-//$_SESSSION['admin'] is true if logged in as admin, false otherwise
-//passing true to create_agencies() returns all available data
-//false returns data sanitized of sensitive personal information
-$all_agencies = create_agencies($conn, $_SESSION['admin']);
-
-//echo the agency data to the page as a hidden table
-GIVEAgenciesToHTMLTable($all_agencies);
+	GIVEFetchAndEcho($conn);
+	$conn->close();
 ?>
 </body>
 </html>

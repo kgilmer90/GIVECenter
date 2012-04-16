@@ -18,7 +18,8 @@ class GIVEIssues
 		$i = 0;
 		foreach($this->issues as $issue)
 		{
-			$str .= GIVEWrapDataWithTrTd();
+			$str .= GIVEWrapDataWithTrTd($issue['id'], 'id');
+			$str .= GIVEWrapDataWithTrTd($issue['name'], 'name');
 			$i++;
 		}
 		$str .= '</table>';
