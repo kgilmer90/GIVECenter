@@ -62,6 +62,12 @@ function create_programs($conn,$agency_id,$type)
         //  Issues Object
         $temp['issues'] = create_issues($conn, $temp['id']);
         
+        //  Seasons Object
+        $temp['seasons'] = create_seasons($conn, $temp['id']);
+        
+        //  Hours Object
+        $temp['hours'] = create_hours($conn, $temp['id']);
+        
         //Create Program Object to Hold Everything
         $program = new GIVEProgram($temp);
         array_push($program_array,$program);

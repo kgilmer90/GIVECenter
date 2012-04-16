@@ -1,0 +1,38 @@
+<?php
+
+/*
+ * 
+ * TODO: Will this work on hours issues and seasons?
+ */
+
+/**
+ *  Update function that should work for all tables except issues hours & seasons 
+ * @param type $conn    database connection
+ * @param type $table   table to update
+ * @param type $id      id of table entry
+ * @param type $info_array  information to update 
+ */
+function update_generic($conn,$table,$id,$info_array)
+{
+    $set = "";
+    if ($info_array['id']) unset ($info_array['id']);
+    
+    foreach($info_array as $k => $v)
+    {
+        if (isNumeric($v)) {
+            $set .= "$k = $v,";
+        }
+        elseif(!isSet($v)){
+            $set .= "$k = '$v',";
+        }
+    }
+    
+    $set = substr($set, 0, strlen($set)-1); 
+    
+    $query = "UPDATE $table
+                SET $set
+                WHERE id = $id";
+    
+    $conn->query($query);
+}
+?>

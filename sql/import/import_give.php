@@ -55,9 +55,9 @@ function main()
     
     global $pointers, $bull;
     
-    $pointers['agency']=1;          //  agency -> db pointer for last agency made
-    $pointers['addr']=1;            //  addr -> db pointer for last add made
-    $pointers['pcontact']=1;        //  pcontact -> db pointer for last pro contact made
+    $pointers['agency']=0;          //  agency -> db pointer for last agency made
+    $pointers['addr']=0;            //  addr -> db pointer for last add made
+    $pointers['pcontact']=0;        //  pcontact -> db pointer for last pro contact made
     $pointers['line']=1;     //  Line Number lets us know, if failure, where in the file it occured.  Also used for Program_id
     $pointers['last_agency']='';    //  last agency -> holds name of last agency for checking
     $pointers['program_id']=1;      //  holds id for current program bring created

@@ -19,7 +19,7 @@ include_once(dirname(__FILE__).'/GIVECenterIni.php');
 function add_user($conn, $uname, $passwd)
 {
     $query = "INSERT INTO users ('uname','passwd')
-                VALUES ($uname, $passwd)";
+                VALUES ('$uname', '$passwd')";
     
     $conn->query($query);
 }
@@ -32,7 +32,7 @@ function add_user($conn, $uname, $passwd)
 function remove_user($conn,$uname,$passwd)
 {
     $query = "DELETE FROM users
-                WHERE uname = $uname AND passwd = $passwd";
+                WHERE uname = '$uname' AND passwd = '$passwd'";
     $conn->query($query);    
 }
 
@@ -47,7 +47,7 @@ function change_pass($conn, $uname, $old_passwd, $new_passwd)
 {
     $query = "UPDATE users
                 SET passwd = ".md5($new_passwd)."
-                WHERE uname = $uname AND passwd = ".md5($old_passwd);
+                WHERE uname = '$uname' AND passwd = ".md5($old_passwd);
     $conn->query($query);
 }
 
