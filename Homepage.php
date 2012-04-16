@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__).'/php/GIVE/GIVEToHTML.php');
+include_once('php/GIVE/GIVEToHTML.php');
 
 session_start();
 
@@ -22,8 +22,7 @@ catch(MySQLDatabaseConnException $e)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>GIVE Center Volunteer Matching</title>
-<script type="text/javascript" src="js/Navigation.js"></script>
+<title>Untitled Document</title>
 <style type="text/css">
 <!--
 body {
@@ -183,174 +182,10 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <![endif]-->
 </head>
 
-<body onload="init()">
+<script type="text/javascript" src="js/Navigation.js"></script>
+
+<body onload="hidestuff('results')">
 <div class="container" id="content">
-  <div align="center"></div>
-  <!-- <div class="header">
-    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
-     </div> -->
-  <div class="sidebar1">
-    <div align="center">
-      <ul class="nav">
-      <?
-	      if($_SESSION['admin']) {
-	      	?>
-	      	<li><a href="Admin.php">Admin</a></li>
-	      	<?php
-	      }
-      ?>
-        <li><a href="BrowseAll.php">Browse All</a></li>
-        <li><a href="php/Session/Logout.php">Logout</a></li>
-        <li>
-          <form id="form2" name="form2" method="post" action="">
-            <label for="search"></label>
-            <input name="search" type="text" id="search" value="Search" />
-          </form>
-        </li>
-      </ul>
-      <!-- end .sidebar1 --></div>
-  </div>
-  <div class="sidebar2">
-    <div align="center">
-      <ul class="nav" id="leftSideBar">
-        <li><a href="javascript:displayProgramInfo(1)">Program1 </a></li>
-        <li><a href="javascript:displayProgramInfo(2)">Program2 </a></li>
-        <li><a href="javascript:displayProgramInfo(3)">Program3 </a></li>
-        <li><a href="javascript:displayProgramInfo(4)">Program4 </a></li>
-        <li><a href="javascript:displayProgramInfo(5)">Program5 </a></li>
-        <li><a href="javascript:displayProgramInfo(6)">Program6 </a></li>
-        <li><a href="javascript:displayProgramInfo(7)">Program7 </a></li>
-        <li><a href="javascript:displayProgramInfo(8)">Program8 </a></li>
-        <li><a href="#">...</a></li>
-      </ul>
-      
-      <!-- end .sidebar1 --></div>
-  </div>
-  <div class="content" id="content"> 
-    <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
-    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-    <div class ="results" id="results">
-    <div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
-      <h1 align="center">&nbsp;</h1>
-      <div align="center"></div>
-      <h1 align="center">Program Name</h1>
-      <div class="column1"> <b>
-        <label>
-        <p align="center">&nbsp;</p>
-        <p align="center">Description</p>
-        </label>
-        </b>
-        <p align="center">text 1</p>
-        <p align="center">text 2</p>
-        <p align="center">text 3</p>
-        <p align="center">text 4</p>
-        <p align="center">text 5</p>
-        <p align="center">text 6</p>
-      </div>
-      <div class="column2"> <b>
-        <label>
-        <p align="center">&nbsp;</p>
-        <p align="center">Contact Information</p>
-        </label>
-        </b>
-        <p align="center"> Name: <em>insertNameHere</em>
-        
-        <p align="center">Email: <em>insertEmailHere</em>
-        
-        <p align="center">Phone: <em>insertNumberHere</em> 
-      </div>
-      </p>
-      </p>
-    </div>
-    
-    <!--********************* BETWEEN CONTENT PAGES ***************************** -->
-    
-    <div class = "interests" id="interests">
-    <div align="center">
-    <h1 align="center">&nbsp;</h1>
-    <h1 align="center">Select Your Interests</h1>
-    <form id="form1" name="form1" method="post" action="">
-        <div align="center">
-          <table class="form1">
-            <tr>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Elderly</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Animals</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Outdoors</div>
-                </label></td>
-            </tr>
-            <tr>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Elderly</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Animals</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Outdoors</div>
-                </label></td>
-            </tr>
-            <tr>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Elderly</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Animals</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Outdoors</div>
-                </label></td>
-            </tr>
-            <tr>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Elderly</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Animals</div>
-                </label></td>
-              <td width="200"><label>
-                <div align="center">
-                  <input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-                  Outdoors</div>
-                </label></td>
-            </tr>
-          </table>
-        </div>
-      </form>
-      <p align="center">&nbsp; </p>
-      <p align="center">&nbsp;</p>
-      <div align="center">
-        <label><b>Select All Hours Available:</b></label>
-        <form id="form3" name="form3" method="post" action="">
-          <table width="150" class="form3">
-            <tr>
-            <div align="left">
 <div align="center"></div>
 <!-- <div class="header">
 <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
@@ -538,7 +373,7 @@ Night</label></td>
 </div>
 <div align="center" class="container"><!-- end .container --></div>
 </div>
-<?php 
+<?php
 	GIVEFetchAndEcho($conn);
 	$conn->close();
 ?>
