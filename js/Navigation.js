@@ -6,8 +6,6 @@ var programs = [];		//global programs array, contains all programs
 var results_display = false;
 var interests_display = true;
 
-var LEFT_SIDE_BAR_MAX_ELEMENTS = 15;
-
 function hidestuff(boxid){
 	
 	if(boxid == 'results') {
@@ -55,7 +53,14 @@ function init()
 {
 	initAgenciesAndPrograms();
 	clearLeftSideBar();
-	addProgramsToLeftSideBar(programs);
+	
+	var indicies =[];
+	var i;
+	for(i in programs) {
+		indicies.push(i);
+	}
+	
+	addProgramsToLeftSideBar(indicies);
 	hidestuff('results');
 }
 
@@ -204,24 +209,29 @@ function displayAgencyInfo(index) {
 /**
  * Adds an array of GIVEProgram objects to the left side bar.
  * Sets the onclick handler to display the object's contents.
- * @param programsArray - GIVEProgram array to add to the sidebar
+ * @param programsArray - array of integer indexes corresponding
+ * to the GIVEProgram objects' indicies in the global programs array
+ * to add to the sidebar
  */
-function addProgramsToLeftSideBar(programsArray) {
+function addProgramsToLeftSideBar(programIndicies) {
 	
 	var leftSideBar = document.getElementById("leftSideBar");
 	
 	var i;
-	for(i in programsArray) {
+	for(i in programIndicies) {
+		
+		var index = programIndicies[i];
+		var p = programs[index];
 		
 		//create a new <a> tag
 		var a = document.createElement("a");
 		
 		//set the id and onclick handler
 		a.id = "leftSideBar_program" + i;
-		a.href = "javascript:displayProgramInfo(" + i + ")";
+		a.href = "javascript:displayProgramInfo(" + index + ")";
 		
 		//create text node to hold the visible description
-		var t = document.createTextNode(programsArray[i].name);
+		var t = document.createTextNode(p.name);
 		a.appendChild(t);
 		
 		//create a new <li> tag to hold the <a> tag
