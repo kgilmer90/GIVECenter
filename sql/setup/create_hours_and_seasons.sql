@@ -10,3 +10,8 @@ INSERT INTO seasons(season) VALUES ("Spring");
 INSERT INTO seasons(season) VALUES ("Summer");
 INSERT INTO seasons(season) VALUES ("Fall");
 INSERT INTO seasons(season) VALUES ("Winter");
+
+INSERT INTO issues(name) VALUES ("Children");
+INSERT INTO issues(name) VALUES ("Elderly");
+INSERT INTO issues(name) VALUES ("Poverty");
+INSERT INTO issues(name) VALUES ("Healthcare");
