@@ -35,5 +35,5 @@ CREATE TABLE program_seasons(
 CREATE TABLE seasons(
     id INT UNSIGNED NOT NULL PRIMARY KEY,
     season VARCHAR(10)) ENGINE INNODB;  
-/*
+*/
 ?>
