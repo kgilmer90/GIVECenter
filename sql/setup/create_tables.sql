@@ -29,9 +29,8 @@ CREATE TABLE image_paths(
     name VARCHAR(20)) ENGINE INNODB;
 
 CREATE TABLE hours(
-    program_id INT UNSIGNED NOT NULL,
-    hours INT NOT NULL,
-    PRIMARY KEY(program_id,hours)) ENGINE INNODB;
+    id INT UNSIGNED NOT NULL PRIMARY KEY,
+    hours VARCHAR(10) NOT NULL) ENGINE INNODB;
 	
 CREATE TABLE issues(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -57,10 +56,13 @@ CREATE TABLE program(
     s_contact INT UNSIGNED NOT NULL,
     descript VARCHAR(400),
     referal BOOL,
-    season BINARY(4),
-    times BINARY(24),	
     notes VARCHAR(400),
     duration VARCHAR(50)) ENGINE INNODB;
+
+CREATE TABLE program_hours(
+    hours_id INT UNSIGNED NOT NULL,
+    program_id INT UNSIGNED NOT NULL,
+    PRIMARY KEY(hours_id,program_id)) ENGINE INNODB;
 
 CREATE TABLE program_issues(
     program_id INT UNSIGNED NOT NULL,

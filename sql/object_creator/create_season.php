@@ -13,17 +13,27 @@
  */
 function create_seasons($conn,$program_id)
 {
-    $query = "SELECT seasons.season
+    $query = "SELECT seasons.id,seasons.season
         FROM seasons,program_seasons
-        WHERE program = $program_id AND seasons.id = program_seasons.season_id";
+        WHERE program_seasons.program_id = $program_id AND seasons.seasons.id = program_seasons.season_id";
     
     $conn->query($query);
     
     if($conn->numRows()==0){
         return null;
     }
-    $results = $conn->fetchAllAsNumeric();
+    $results = $conn->fetchAllAsAssoc();
     
     return $results;
 }
+
+/*
+CREATE TABLE program_seasons(
+    program_id INT UNSIGNED,
+    season_id INT UNSIGNED,
+    PRIMARY KEY(program_id,season_id)) ENGINE INNODB;
+CREATE TABLE seasons(
+    id INT UNSIGNED NOT NULL PRIMARY KEY,
+    season VARCHAR(10)) ENGINE INNODB;  
+/*
 ?>
