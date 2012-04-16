@@ -22,7 +22,7 @@
     /**
      *  Queries db for hours 
      * @param type $conn
-     * @return type NUm'd Sock Array of Hours:
+     * @return type NUm'd Sock Array of Hours:id,hours
      */
     function get_hours($conn)
     {
