@@ -232,27 +232,42 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div align="center"></div>
 <h1 align="center">Program Name</h1>
 <div class="column1"> <b>
-<label>
 <p align="center">&nbsp;</p>
 <p align="center">Description</p>
-</label>
+
+<p id="descript">
+</p>
+
 </b>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
 </div>
 <div class="column2"> <b>
-<label>
 <p align="center">&nbsp;</p>
 <p align="center">Contact Information</p>
+<label>
 </label>
 </b>
-<p align="center"> Name: <em>insertNameHere</em>
-<p align="center">Email: <em>insertEmailHere</em>
-<p align="center">Phone: <em>insertNumberHere</em>
+<table width="400" border="0">
+  <tr>
+    <td>Name: </td>
+    <td id="name"></td>
+  </tr>
+  <tr>
+    <td>Mobile Phone:</td>
+    <td id="m_phone"></td>
+  </tr>
+  <tr>
+    <td>Work Phone: </td>
+    <td id="w_phone"></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td id="mail"></td>
+  </tr>
+  <tr>
+    <td>Fax Number:</td>
+    <td id="fax"></td>
+  </tr>
+</table>
 </div>
 </p>
 </p>
