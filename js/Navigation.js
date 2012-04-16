@@ -16,12 +16,6 @@ function hidestuff(boxid){
 	else if(boxid == 'interests') {
 		interests_display = false;
 	}
-	
-	/*
-   	document.getElementById(boxid).style.visibility="hidden";
-  	document.getElementById(boxid).style.position= "absolute";
-  	document.getElementById(boxid).style.display="none";
-  	*/
 	var e = document.getElementById(boxid);
 	e.style.visibility = "hidden";
   	e.style.position = "absolute";
@@ -35,12 +29,7 @@ function showstuff(boxid){
 	else if(boxid == 'interests') {
 		interests_display = true;
 	}
-	
-	/*
-  	document.getElementById(boxid).style.visibility="visible";
-	document.getElementById(boxid).style.position= "relative";
-	document.getElementById(boxid).style.display="block";
-	*/
+
 	var e = document.getElementById(boxid);
 	e.style.visibility="visible";
 	e.style.position= "relative";
