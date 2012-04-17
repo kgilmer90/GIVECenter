@@ -130,8 +130,11 @@ border-right-style: solid;
 border-right-color: #000;
 }
 .column2 {
-width: 49%;
-float: right;
+	width: 49%;
+	height: 100%;
+	float: right;
+	overflow-x: scroll;
+	overflow-y: hidden;
 }
 
 input.hint {
@@ -227,7 +230,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1> -->
 <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
 <div class ="results" id="results">
-<div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
+<div align="left"><a href="javascript:backtosearch()"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <h1 align="center">&nbsp;</h1>
 <div align="center"></div>
 <h1 align="center">Program Name</h1>

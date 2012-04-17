@@ -96,20 +96,13 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	height: 100%;
 }
 
-.choices{
-	width:90%;	
-	align:center;
-	height:100%;
-	
-}
-
 .editAgency {
 	width: 19%;
 	float: left;
 	border: thin solid #000;
 	height: 250px;
-	padding: 20px;
-	margin: 20px;
+	padding: 3%;
+	margin: 3%;
 }
 
 .editProgram {
@@ -117,8 +110,8 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	float: left;
 	border: thin solid #000;
 	height: 250px;
-	padding: 20px;
-	margin: 20px;
+	padding: 3%;
+	margin: 3%;
 }
 
 .addNew {
@@ -126,8 +119,8 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	float: left;
 	border: thin solid #000;
 	height: 250px;
-	padding: 20px;
-	margin: 20px;
+	padding: 3%;
+	margin: 3%;
 }
 
 .orBox {
@@ -136,8 +129,11 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	height: 250px;
 	padding-top: 120px;
 	padding-bottom: 120px;
-	padding-left:5px;
-	padding-right:5px;
+
+}
+
+input.hint {
+    color: grey;
 }
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
@@ -190,19 +186,18 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 
 <body onload="alert('You have selected the &quot;Administrator&quot; option. Use this option only to add, delete, or edit programs or agencies and their descriptions.')"><div class="container" id="content">
   <div align="center"></div>
-  <!-- <div class="header">
-    <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
-     </div> -->
   <div class="sidebar1">
     <div align="center">
       <ul class="nav">
         <li><a href="#">Admin</a></li>
+        <li><a href="BrowseAll.php">Browse All</a></li>
+        <li><a href="Homepage.php">Homepage</a></li>
         <li><a href="php/Session/Logout.php">Logout</a></li>
+
         <li>
-          <form id="form2" name="form2" method="post" action="">
-            <label for="search"></label>
-            <input name="search" type="text" id="search" value="Search" />
-          </form>
+          <input type="text" class="hint" value="Search..."
+    onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+    onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
         </li>
       </ul>
       <!-- end .sidebar1 --></div>
@@ -224,8 +219,8 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
       <!-- end .sidebar1 --></div>
   </div>
   <div class="content" id="content"> 
-    <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
     <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+    <div align="center"><b>Change Banner:  </b> <input type="file" /></div>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">ADMIN</h1>
 <div align="center">
