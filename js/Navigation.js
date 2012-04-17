@@ -188,16 +188,36 @@ function clearLeftSideBar() {
  * GIVEProgram object can be found.
  */
 function displayProgramInfo(index) {
+	
+	//valid index
 	if(index < programs.length) {
+		//switch display mode so program info is visible
 		if(display_mode != DISPLAY_RESULTS) {
 			searchtoresults();
 		}
+		var p = programs[index];
 		
+		document.getElementById("program_name").innerHTML = (p.name) ? p.name : "";
+		document.getElementById("program_descript").innerHTML = (p.descript) ? p.descript : "";
+		
+		var pcon = p.p_contact;
+		
+		var str = (pcon.title) ? pcon.title + " " : "";
+		str += (pcon.f_name) ? pcon.f_name + " " : "";
+		str += (pcon.m_name) ? pcon.m_name + " " : "";
+		str += (pcon.l_name) ? pcon.l_name + " " : "";
+		
+		document.getElementById("name").innerHTML = str;
+		
+		document.getElementById("m_phone").innerHTML = (pcon.m_phone) ? pcon.m_phone : "";
+		document.getElementById("w_phone").innerHTML = (pcon.w_phone) ? pcon.w_phone : "";
+		document.getElementById("mail").innerHTML = (pcon.mail) ? pcon.mail : "";
+		document.getElementById("fax").innerHTML = (pcon.fax) ? pcon.fax : "";
 	}
 }
 
 /**
- * Displays the information contained within the GIVEAgency object at a specified.
+ * Displays the information contained within the GIVEAgency object at a specified index.
  * @param index - index in the global agencies array where the 
  * GIVEAgency object can be found.
  */

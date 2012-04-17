@@ -188,7 +188,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <script type="text/javascript" src="js/Navigation.js"></script>
 
-<body onload="hidestuff('results')">
+<body onload="init()">
 <div class="container" id="content">
 <div align="center"></div>
 <!-- <div class="header">
@@ -210,7 +210,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </div>
 <div class="sidebar2">
 <div align="center">
-<ul class="nav">
+<ul class="nav" id="leftSideBar">
 <li><a href="#">Program1 </a></li>
 <li><a href="#">Program2 </a></li>
 <li><a href="#">Program3 </a></li>
@@ -230,10 +230,10 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
 <h1 align="center">&nbsp;</h1>
 <div align="center"></div>
-<h1 align="center">Program Name</h1>
+<h1 align="center" id="program_name">Program Name</h1>
 <div class="column1"> <b>
 <p align="center">&nbsp;</p>
-<p align="center">Description</p>
+<p align="center" id="program_descript">Description</p>
 
 <p id="descript">
 </p>
