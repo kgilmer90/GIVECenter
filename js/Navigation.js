@@ -3,16 +3,17 @@
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
 
-var results_display = false;
-var interests_display = true;
+var DISPLAY_INTERESTS = 0;
+var DISPLAY_RESULTS = 1;
+var display_mode = DISPLAY_INTERESTS;
 
 function hidestuff(boxid){
 	
 	if(boxid == 'results') {
-		results_display = false;
+		display_mode = DISPLAY_INTERESTS;
 	}
 	else if(boxid == 'interests') {
-		interests_display = false;
+		display_mode = DISPLAY_RESULTS;
 	}
 	var e = document.getElementById(boxid);
 	e.style.visibility = "hidden";
@@ -22,10 +23,10 @@ function hidestuff(boxid){
 function showstuff(boxid){
 	
 	if(boxid == 'results') {
-		results_display = true;
+		display_mode = DISPLAY_RESULTS;
 	}
 	else if(boxid == 'interests') {
-		interests_display = true;
+		display_mode = DISPLAY_INTERESTS;
 	}
 
 	var e = document.getElementById(boxid);
@@ -100,24 +101,40 @@ function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
  * @param searchTerms - search string
  * @returns GIVEProgram array of programs whose names match the terms
  */
-function searchByProgramName(searchTerms) {
+function searchProgram(searchTerms) {
 	
-	var program_search_results = [];
+	var matching_program_indicies = [];
+	
+	if(!searchTerms) {
+		var i;
+		for(i in programs) {
+			matching_program_indicies.push(i);
+		}
+	}
 	
 	var i;
 	for(i in programs) {
 		
 		//GIVEProgram reference and program name
 		var p = programs[i];
-		var name = p.name;
 		
 		//if name contains the search terms anywhere in the string,
 		//add the program to the list of search results
-		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
-			program_search_results.push(p);
+		if(caseInsensitiveStringSearch(p.name, searchTerms) >= 0) {
+			matching_program_indicies.push(i);
+		}
+		else if(p.descript) {
+			if(caseInsensitiveStringSearch(p.descript, searchTerms) >= 0) {
+				matching_program_indicies.push(i);
+			}
 		}
 	}
-	return program_search_results;
+	clearLeftSideBar();
+	addProgramsToLeftSideBar(matching_program_indicies);
+	if(matching_program_indicies.length > 0) {
+		displayProgramInfo(matching_program_indicies[0]);
+	}
+	return false;
 }
 
 /**
@@ -126,24 +143,33 @@ function searchByProgramName(searchTerms) {
  * @param searchTerms - search string
  * @returns GIVEAgency array of agencies whose names match the terms
  */
-function searchByAgencyName(searchTerms) {
+function searchAgency(searchTerms) {
 	
-	var agency_search_results = [];
+	var matching_agency_indicies = [];
 	
 	var i;
 	for(i in agencies) {
 		
 		//GIVEAgency reference and name
 		var a = agencies[i];
-		var name = a.name;
 		
 		//if name contains the search terms anywhere in the string,
 		//add the program to the list of search results
-		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
-			agency_search_results.push(a);
+		if(caseInsensitiveStringSearch(a.name, searchTerms) >= 0) {
+			matching_agency_indicies.push(i);
+		}
+		else if(a.descript) {
+			if(caseInsensitiveStringSearch(a.descript, searchTerms) >= 0) {
+				matching_agency_indicies.push(i);
+			}
 		}
 	}
-	return agency_search_results;
+	clearLeftSideBar();
+	addAgenciesToLeftSideBar(matching_agency_indicies);
+	if(matching_agency_indicies.length > 0) {
+		displayProgramInfo(matching_agency_indicies[0]);
+	}
+	return false;
 }
 
 /**
@@ -182,40 +208,94 @@ function clearLeftSideBar() {
 	}
 }
 /**
- * Displays the information contained within the GIVEProgram object.
+ * Displays the information contained within a GIVEProgram object at a specified index.
  * @param index - index in the global programs array where the 
  * GIVEProgram object can be found.
  */
 function displayProgramInfo(index) {
+	
+	//valid index
 	if(index < programs.length) {
-		if(!results_display) {
+		//switch display mode so program info is visible
+		if(display_mode != DISPLAY_RESULTS) {
 			searchtoresults();
+		}
+		var p = programs[index];
+		
+		document.getElementById("display_name").innerHTML = (p.name) ? p.name : "";
+		document.getElementById("display_descript").innerHTML = (p.descript) ? p.descript : "";
+		
+		var pcon = p.p_contact;
+		
+		var str = (pcon.title) ? pcon.title + " " : "";
+		str += (pcon.f_name) ? pcon.f_name + " " : "";
+		str += (pcon.m_name) ? pcon.m_name + " " : "";
+		str += (pcon.l_name) ? pcon.l_name + " " : "";
+		
+		document.getElementById("display_p_contact_name").innerHTML = str; 
+		
+		document.getElementById("display_p_contact_m_phone").innerHTML = (pcon.m_phone) ? pcon.m_phone : "";
+		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone && pcon.w_phone != 0) ? pcon.w_phone : "";
+		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
+		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
+	}
+}
+
+/**
+ * Displays the information contained within the GIVEAgency object at a specified index.
+ * @param index - index in the global agencies array where the 
+ * GIVEAgency object can be found.
+ */
+function displayAgencyInfo(index) {
+	if(index < agencies.length) {
+		if(display_mode != DISPLAY_INTERESTS) {
+			backtosearch();
 		}
 		
 	}
 }
 
-/**
- * Displays the information contained within the GIVEAgency object.
- * @param index - index in the global programs array where the 
- * GIVEProgram object can be found.
- */
-function displayAgencyInfo(index) {
-	if(index < agencies.length) {
-		
+function displayInfo(objectType, index) {
+	if(objectType == 'program') {
+		displayProgramInfo(index);
+	}
+	else if(objectType == 'agency') {
+		displayAgencyInfo(index);
+	}
+}
+
+function addToLeftSideBar(objectType, arrayIndicies) {
+	
+	if(objectType == 'programs') {
+		addProgramsToLeftSideBar(arrayIndicies);
+	}
+	else if(objectType == 'agencies') {
+		addAgenciesToLeftSideBar(arrayIndicies);
 	}
 }
 
 /**
  * Adds an array of GIVEProgram objects to the left side bar.
  * Sets the onclick handler to display the object's contents.
- * @param programsArray - array of integer indexes corresponding
- * to the GIVEProgram objects' indicies in the global programs array
+ * @param programIndicies - array of integers corresponding
+ * to the GIVEProgram objects at indicies in the global programs array
  * to add to the sidebar
  */
 function addProgramsToLeftSideBar(programIndicies) {
 	
 	var leftSideBar = document.getElementById("leftSideBar");
+	
+	if(programIndicies.length == 0) {
+		var a = document.createElement("a");
+		a.id = "leftSideBar_program" + i;
+		a.href = "javascript:void(0)";
+		var t = document.createTextNode("No Matches");
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		leftSideBar.appendChild(li);
+		return;
+	}
 	
 	var i;
 	for(i in programIndicies) {
@@ -248,21 +328,41 @@ function addProgramsToLeftSideBar(programIndicies) {
 /**
  * Adds an array of GIVEAgency objects to the left side bar.
  * Sets the onclick handler to display the object's contents.
- * @param agenciesArray - GIVEAgency array to add to the sidebar
+ * @param agencyIndicies - array of integers corresponding
+ * to the GIVEAgency objects at indicies in the global agencies array
+ * to add to the sidebar
  */
-function addAgenciesToLeftSideBar(agenciesArray) {
+function addAgenciesToLeftSideBar(agencyIndices) {
 	
 	var leftSideBar = document.getElementById("leftSideBar");
+
+	if(agencyIndicies.length == 0) {
+		var a = document.createElement("a");
+		a.id = "leftSideBar_agency" + i;
+		a.href = "javascript:void(0)";
+		var t = document.createTextNode("No Matches");
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		leftSideBar.appendChild(li);
+	}
 	
 	var i;
-	for(i in agenciesArray) {
+	for(i in agencyIndices) {
+		
+		var index = agencyIndices[i];
+		var a = agencies[index];
 		
 		//create a new <a> tag
 		var a = document.createElement("a");
 		
 		//set the id and onclick handler
 		a.id = "leftSideBar_agency" + i;
-		a.onclick = displayAgencyInfo(i);
+		a.href = "javascript:displayAgencyInfo(" + index + ")";
+		
+		//create text node to hold the visible description
+		var t = document.createTextNode(a.name);
+		a.appendChild(t);
 		
 		//create a new <li> tag to hold the <a> tag
 		var li = document.createElement("li");

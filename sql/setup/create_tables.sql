@@ -90,5 +90,5 @@ CREATE TABLE student_contact(
 
 CREATE TABLE users(
     uname VARCHAR(30) NOT NULL,
-    passwd VARCHAR(30),
+    passwd VARCHAR(32),
     PRIMARY KEY(uname,passwd)) ENGINE INNODB;

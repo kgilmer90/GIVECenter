@@ -14,8 +14,7 @@ include_once(dirname(__FILE__).'/../../sql/object_creator/create_agencies.php');
  * it to the document in the form of a hidden HTML table.
  * Serves as a one-stop-shop function for getting data
  * from the server to the client.
- * @param string $urlRedirectOnError - url to redirect the
- * user to in the event of an error connecting to the database
+ * @param MySQLDatabaseConn $conn - valid connection to the database
  */
 function GIVEFetchAndEcho($conn)
 {

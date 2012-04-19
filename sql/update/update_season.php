@@ -7,7 +7,7 @@
 
 function update_season($conn,$program_id,$new_seasons)
 {
-    $query="DELETE FROM seasons
+    $query="DELETE FROM program_seasons
             WHERE program_id = $program_id";
     $conn->query($query);
     

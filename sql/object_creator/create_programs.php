@@ -23,13 +23,13 @@
 
 include_once(dirname(__FILE__).'/../../php/GIVE/GIVEProgram.php');
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
-include_once(dirname(__FILE__).'/create_season.php');
- 
+include_once(dirname(__FILE__).'/object_creater.php');
+
 function create_programs($conn,$agency_id,$type)
 {
     $program_array = array();
 
-    $query = "SELECT id,referal,season,times,name,duration,notes,addr,agency,p_contact,s_contact,descript
+    $query = "SELECT id,referal,name,duration,notes,addr,agency,p_contact,s_contact,descript
                 FROM program
                 WHERE agency=$agency_id";
 

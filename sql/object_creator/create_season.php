@@ -15,7 +15,7 @@ function create_seasons($conn,$program_id)
 {
     $query = "SELECT seasons.id,seasons.season
         FROM seasons,program_seasons
-        WHERE program_seasons.program_id = $program_id AND seasons.seasons.id = program_seasons.season_id";
+        WHERE program_seasons.program_id = $program_id AND seasons.id = program_seasons.season_id";
     
     $conn->query($query);
     
