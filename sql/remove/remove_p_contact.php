@@ -6,4 +6,8 @@
  * 
  * remove p contact and set null in program/agency
  */
+
+function remove_p_contact($conn,$p_id){
+    
+}
 ?>
