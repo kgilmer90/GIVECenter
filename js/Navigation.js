@@ -103,7 +103,14 @@ function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
  */
 function searchByProgramName(searchTerms) {
 	
-	var program_search_results = [];
+	var matching_program_indicies = [];
+	
+	if(!searchTerms) {
+		var i;
+		for(i in programs) {
+			matching_program_indicies.push(i);
+		}
+	}
 	
 	var i;
 	for(i in programs) {
@@ -115,10 +122,12 @@ function searchByProgramName(searchTerms) {
 		//if name contains the search terms anywhere in the string,
 		//add the program to the list of search results
 		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
-			program_search_results.push(p);
+			matching_program_indicies.push(i);
 		}
 	}
-	return program_search_results;
+	clearLeftSideBar();
+	addProgramsToLeftSideBar(matching_program_indicies);
+	return false;
 }
 
 /**
@@ -230,6 +239,25 @@ function displayAgencyInfo(index) {
 	}
 }
 
+function displayInfo(objectType, index) {
+	if(objectType == 'program') {
+		displayProgramInfo(index);
+	}
+	else if(objectType == 'agency') {
+		displayAgencyInfo(index);
+	}
+}
+
+function addToLeftSideBar(objectType, arrayIndicies) {
+	
+	if(objectType == 'programs') {
+		addProgramsToLeftSideBar(arrayIndicies);
+	}
+	else if(objectType == 'agencies') {
+		addAgenciesToLeftSideBar(arrayIndicies);
+	}
+}
+
 /**
  * Adds an array of GIVEProgram objects to the left side bar.
  * Sets the onclick handler to display the object's contents.
@@ -240,6 +268,18 @@ function displayAgencyInfo(index) {
 function addProgramsToLeftSideBar(programIndicies) {
 	
 	var leftSideBar = document.getElementById("leftSideBar");
+	
+	if(programIndicies.length == 0) {
+		var a = document.createElement("a");
+		a.id = "leftSideBar_program" + i;
+		a.href = "javascript:void(0)";
+		var t = document.createTextNode("No Matches");
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		leftSideBar.appendChild(li);
+		return;
+	}
 	
 	var i;
 	for(i in programIndicies) {
@@ -278,7 +318,18 @@ function addProgramsToLeftSideBar(programIndicies) {
  */
 function addAgenciesToLeftSideBar(agencyIndices) {
 	
-var leftSideBar = document.getElementById("leftSideBar");
+	var leftSideBar = document.getElementById("leftSideBar");
+
+	if(agencyIndicies.length == 0) {
+		var a = document.createElement("a");
+		a.id = "leftSideBar_agency" + i;
+		a.href = "javascript:void(0)";
+		var t = document.createTextNode("No Matches");
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		leftSideBar.appendChild(li);
+	}
 	
 	var i;
 	for(i in agencyIndices) {
