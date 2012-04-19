@@ -34,7 +34,7 @@ function create_p_contact($conn,$id)
 
     $results = $conn->fetchRowAsAssoc();
     
-    $p = new GIVEAgency($results);
+    $p = new GIVEProContact($results);
 
     return $p;
 }
