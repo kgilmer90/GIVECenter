@@ -20,10 +20,16 @@ function remove_s_contact_latest($conn,$p_id){
     $query3 = "DELETE FROM contact_history
         WHERE id = ".$contact['id'];
     
+    $query4 = "UPDATE program
+        SET s_contact = 'null'
+        WHERE id = $p_id";
+    
     $conn->query($query1);
     $contact = $conn->getRowAsAssoc();
+    
     $conn->query($query2);
     $conn->query($query3);
+    $conn->query($query4);
 }
 
 function remove_s_contact_by_id($conn,$s_id){

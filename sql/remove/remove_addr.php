@@ -7,15 +7,15 @@
  * TODO: Set Addr point in program to null
  */
 
-    function remove_addr($conn,$addr_id,$program_id)
+    function remove_addr_from_program($conn,$addr_id,$program_id)
     {
-        $query="DELETE FROM addr
+        $query1="DELETE FROM addr
                 WHERE id = $addr_id";
-        $conn->query($query);
         
-        $query = "UPDATE program
+        $query2 = "UPDATE program
                     SET addr = 'NULL'
                     WHERE id = $program_id";
-        $conn->query($query);
+        $conn->query($query1);
+        $conn->query($query2);
     }
 ?>
