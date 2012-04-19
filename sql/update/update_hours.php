@@ -7,7 +7,7 @@
 
 function update_hours($conn,$program_id,$new_hours)
 {
-    $query="DELETE FROM hours
+    $query="DELETE FROM program_hours
             WHERE program_id = $program_id";
     $conn->query($query);
     

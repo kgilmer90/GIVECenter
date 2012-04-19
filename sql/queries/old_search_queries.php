@@ -8,7 +8,7 @@
  * 		$[]	advanced_search1($[])
  * 		$[]	advanced_search2($[])
  * 
- *      TODO: CONVERT SEARCH TO JS
+ *      
  */
  ?>
 

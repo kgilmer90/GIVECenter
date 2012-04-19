@@ -1,8 +1,8 @@
 <?php
 
 /*
+ *      Generic Will Work on All Updates Except Images, Hours, Issues, & Seasons
  * 
- * TODO: Will this work on hours issues and seasons?
  */
 
 /**
