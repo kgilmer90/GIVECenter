@@ -57,7 +57,7 @@ function create_p_contact_limited($conn,$id)
 
     $results = $conn->fetchRowAsAssoc();
     
-    $p = new GIVEAgency($results);
+    $p = new GIVEProContact($results);
 
     return $p;
 }
@@ -83,7 +83,7 @@ function create_all_p_contacts($conn)
 
     foreach($results as $temp)
     {
-        $p = new GIVEAgency($temp);
+        $p = new GIVEProContact($temp);
         array_push($p_array,$p);
     }
 
@@ -111,7 +111,7 @@ function create_all_p_contacts_limited($conn)
 
     foreach($results as $temp)
     {
-        $p = new GIVEAgency($temp);
+        $p = new GIVEProContact($temp);
         array_push($p_array,$p);
     }
 

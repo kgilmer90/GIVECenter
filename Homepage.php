@@ -22,7 +22,7 @@ catch(MySQLDatabaseConnException $e)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>Homepage</title>
 <style type="text/css">
 <!--
 body {
@@ -89,12 +89,11 @@ background-color: #FFF;
 	float: left;
 	width: 12.5%;
 	padding-top: 90px;
-	/* padding-left: 10px
-padding-right: 10px; */
-background-color: #FF9;
+	background-color: #FF9;
 	background-color: #cccccc;
-	overflow: scroll;
-	height: 250px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	height: 400px;
 }
 .content {
 position: absoulte;
@@ -134,6 +133,11 @@ border-right-color: #000;
 width: 49%;
 float: right;
 }
+
+input.hint {
+    color: grey;
+}
+
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
 padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
@@ -184,7 +188,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <script type="text/javascript" src="js/Navigation.js"></script>
 
-<body onload="hidestuff('results')">
+<body onload="init()">
 <div class="container" id="content">
 <div align="center"></div>
 <!-- <div class="header">
@@ -197,17 +201,16 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Session/Logout.php">Logout</a></li>
 <li>
-<form id="form2" name="form2" method="post" action="">
-<label for="search"></label>
-<input name="search" type="text" id="search" value="Search" />
-</form>
+<input type="text" class="hint" value="Search..."
+    onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+    onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
 </li>
 </ul>
 <!-- end .sidebar1 --></div>
 </div>
 <div class="sidebar2">
 <div align="center">
-<ul class="nav">
+<ul class="nav" id="leftSideBar">
 <li><a href="#">Program1 </a></li>
 <li><a href="#">Program2 </a></li>
 <li><a href="#">Program3 </a></li>
@@ -227,29 +230,44 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div align="right"><a href="javascript:backtosearch()"style="color: #009">Return to Advanced Search</a></div>
 <h1 align="center">&nbsp;</h1>
 <div align="center"></div>
-<h1 align="center">Program Name</h1>
+<h1 align="center" id="program_name">Program Name</h1>
 <div class="column1"> <b>
-<label>
 <p align="center">&nbsp;</p>
-<p align="center">Description</p>
-</label>
+<p align="center" id="program_descript">Description</p>
+
+<p id="descript">
+</p>
+
 </b>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
-<p align="center">text</p>
 </div>
 <div class="column2"> <b>
-<label>
 <p align="center">&nbsp;</p>
 <p align="center">Contact Information</p>
+<label>
 </label>
 </b>
-<p align="center"> Name: <em>insertNameHere</em>
-<p align="center">Email: <em>insertEmailHere</em>
-<p align="center">Phone: <em>insertNumberHere</em>
+<table width="400" border="0">
+  <tr>
+    <td>Name: </td>
+    <td id="name"></td>
+  </tr>
+  <tr>
+    <td>Mobile Phone:</td>
+    <td id="m_phone"></td>
+  </tr>
+  <tr>
+    <td>Work Phone: </td>
+    <td id="w_phone"></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td id="mail"></td>
+  </tr>
+  <tr>
+    <td>Fax Number:</td>
+    <td id="fax"></td>
+  </tr>
+</table>
 </div>
 </p>
 </p>
