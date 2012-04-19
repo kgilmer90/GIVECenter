@@ -204,7 +204,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Session/Logout.php">Logout</a></li>
 <li>
-<form action="javascript:void(0)" onsubmit="javascript:searchByProgramName(this.searchBar.value)">
+<form action="javascript:void(0)" onsubmit="javascript:searchProgram(this.searchBar.value)">
 <input type="text" class="hint" value="Search..." name="searchBar" id="searchBar"
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
     onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
@@ -216,6 +216,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class="sidebar2">
 <div align="center">
 <ul class="nav" id="leftSideBar">
+<!--  
 <li><a href="#">Program1 </a></li>
 <li><a href="#">Program2 </a></li>
 <li><a href="#">Program3 </a></li>
@@ -225,6 +226,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="#">Program7 </a></li>
 <li><a href="#">Program8 </a></li>
 <li><a href="#">...</a></li>
+-->
 </ul>
 <!-- end .sidebar1 --></div>
 </div>
@@ -235,10 +237,10 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div align="left"><a href="javascript:backtosearch()"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <h1 align="center">&nbsp;</h1>
 <div align="center"></div>
-<h1 align="center" id="program_name">Program Name</h1>
+<h1 align="center" id="display_name">Program Name</h1>
 <div class="column1"> <b>
 <p align="center">&nbsp;</p>
-<p align="center" id="program_descript">Description</p>
+<p align="center" id="display_descript">Description</p>
 
 <p id="descript">
 </p>
@@ -254,23 +256,23 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <table width="400" border="0">
   <tr>
     <td>Name: </td>
-    <td id="name"></td>
+    <td id="display_p_contact_name"></td>
   </tr>
   <tr>
     <td>Mobile Phone:</td>
-    <td id="m_phone"></td>
+    <td id="display_p_contact_m_phone"></td>
   </tr>
   <tr>
     <td>Work Phone: </td>
-    <td id="w_phone"></td>
+    <td id="display_p_contact_w_phone"></td>
   </tr>
   <tr>
     <td>Email:</td>
-    <td id="mail"></td>
+    <td id="display_p_contact_mail"></td>
   </tr>
   <tr>
     <td>Fax Number:</td>
-    <td id="fax"></td>
+    <td id="display_p_contact_fax"></td>
   </tr>
 </table>
 </div>
