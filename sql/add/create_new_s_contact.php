@@ -7,20 +7,30 @@
 
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
-function create_new_s_contact($conn,$info_array)
+function create_new_s_contact($conn,$info_array,$program_id)
 {
-    $query = "INSERT INTO student_contact(l_name,f_name,m_name,sug,m_phone,w_phone,mail)
+    //  Create Student Contact
+    $query1 = "INSERT INTO student_contact(l_name,f_name,m_name,sug,m_phone,w_phone,mail)
                 VALUES (".$info_array['l_name'].",".$info_array['f_name'].",".$info_array['m_name'].",".$info_array['suf'].",".$info_array['m_phone'].",".$info_array['w_phone'].",".$info_array['mail'].")";
-    $conn->query($query);
+    $conn->query($query1);
     
-    $s_id = "SELECT id
-                    FROM student_contacts
-                    SORT id DESC
-                    Limit 1,1";
-    // get id of last program inserted
+    //  Get id of last contact created
+    $query2 = "SELECT id
+        FROM student_contacts
+        SORT id DESC
+        Limit 1,1";
+    $contact_id = $conn->query($query2);
     
-    return $s_id;
+    //  Update Contact History Table to include the Latest Entry
+    $query3 = "INSERT INTO contact_history(contact_id,program_id)
+        VALUES ($contact_id,$program_id)";
+    $conn->query($query3);
     
-    // TODO: Make to work with contact_history table
-}s
+    // return id of last contact inserted
+    return $contact_id;
+}
+/*CREATE TABLE contact_history(
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT KEY,
+    contact_id INT,
+    program_id INT) ENGINE INNODB;*/
 ?>
