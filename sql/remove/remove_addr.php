@@ -4,7 +4,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  * 
- * TODO: Set Addr point in program to null
  */
 
     function remove_addr_from_program($conn,$addr_id,$program_id)
