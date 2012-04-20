@@ -101,24 +101,40 @@ function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
  * @param searchTerms - search string
  * @returns GIVEProgram array of programs whose names match the terms
  */
-function searchByProgramName(searchTerms) {
+function searchProgram(searchTerms) {
 	
-	var program_search_results = [];
+	var matching_program_indicies = [];
+	
+	if(!searchTerms) {
+		var i;
+		for(i in programs) {
+			matching_program_indicies.push(i);
+		}
+	}
 	
 	var i;
 	for(i in programs) {
 		
 		//GIVEProgram reference and program name
 		var p = programs[i];
-		var name = p.name;
 		
 		//if name contains the search terms anywhere in the string,
 		//add the program to the list of search results
-		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
-			program_search_results.push(p);
+		if(caseInsensitiveStringSearch(p.name, searchTerms) >= 0) {
+			matching_program_indicies.push(i);
+		}
+		else if(p.descript) {
+			if(caseInsensitiveStringSearch(p.descript, searchTerms) >= 0) {
+				matching_program_indicies.push(i);
+			}
 		}
 	}
-	return program_search_results;
+	clearLeftSideBar();
+	addProgramsToLeftSideBar(matching_program_indicies);
+	if(matching_program_indicies.length > 0) {
+		displayProgramInfo(matching_program_indicies[0]);
+	}
+	return false;
 }
 
 /**
@@ -127,24 +143,33 @@ function searchByProgramName(searchTerms) {
  * @param searchTerms - search string
  * @returns GIVEAgency array of agencies whose names match the terms
  */
-function searchByAgencyName(searchTerms) {
+function searchAgency(searchTerms) {
 	
-	var agency_search_results = [];
+	var matching_agency_indicies = [];
 	
 	var i;
 	for(i in agencies) {
 		
 		//GIVEAgency reference and name
 		var a = agencies[i];
-		var name = a.name;
 		
 		//if name contains the search terms anywhere in the string,
 		//add the program to the list of search results
-		if(caseInsensitiveStringSearch(name, searchTerms) >= 0) {
-			agency_search_results.push(a);
+		if(caseInsensitiveStringSearch(a.name, searchTerms) >= 0) {
+			matching_agency_indicies.push(i);
+		}
+		else if(a.descript) {
+			if(caseInsensitiveStringSearch(a.descript, searchTerms) >= 0) {
+				matching_agency_indicies.push(i);
+			}
 		}
 	}
-	return agency_search_results;
+	clearLeftSideBar();
+	addAgenciesToLeftSideBar(matching_agency_indicies);
+	if(matching_agency_indicies.length > 0) {
+		displayProgramInfo(matching_agency_indicies[0]);
+	}
+	return false;
 }
 
 /**
@@ -197,8 +222,8 @@ function displayProgramInfo(index) {
 		}
 		var p = programs[index];
 		
-		document.getElementById("program_name").innerHTML = (p.name) ? p.name : "";
-		document.getElementById("program_descript").innerHTML = (p.descript) ? p.descript : "";
+		document.getElementById("display_name").innerHTML = (p.name) ? p.name : "";
+		document.getElementById("display_descript").innerHTML = (p.descript) ? p.descript : "";
 		
 		var pcon = p.p_contact;
 		
@@ -207,12 +232,12 @@ function displayProgramInfo(index) {
 		str += (pcon.m_name) ? pcon.m_name + " " : "";
 		str += (pcon.l_name) ? pcon.l_name + " " : "";
 		
-		document.getElementById("name").innerHTML = str;
+		document.getElementById("display_p_contact_name").innerHTML = str; 
 		
-		document.getElementById("m_phone").innerHTML = (pcon.m_phone) ? pcon.m_phone : "";
-		document.getElementById("w_phone").innerHTML = (pcon.w_phone) ? pcon.w_phone : "";
-		document.getElementById("mail").innerHTML = (pcon.mail) ? pcon.mail : "";
-		document.getElementById("fax").innerHTML = (pcon.fax) ? pcon.fax : "";
+		document.getElementById("display_p_contact_m_phone").innerHTML = (pcon.m_phone) ? pcon.m_phone : "";
+		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone && pcon.w_phone != 0) ? pcon.w_phone : "";
+		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
+		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
 	}
 }
 
@@ -230,6 +255,25 @@ function displayAgencyInfo(index) {
 	}
 }
 
+function displayInfo(objectType, index) {
+	if(objectType == 'program') {
+		displayProgramInfo(index);
+	}
+	else if(objectType == 'agency') {
+		displayAgencyInfo(index);
+	}
+}
+
+function addToLeftSideBar(objectType, arrayIndicies) {
+	
+	if(objectType == 'programs') {
+		addProgramsToLeftSideBar(arrayIndicies);
+	}
+	else if(objectType == 'agencies') {
+		addAgenciesToLeftSideBar(arrayIndicies);
+	}
+}
+
 /**
  * Adds an array of GIVEProgram objects to the left side bar.
  * Sets the onclick handler to display the object's contents.
@@ -240,6 +284,18 @@ function displayAgencyInfo(index) {
 function addProgramsToLeftSideBar(programIndicies) {
 	
 	var leftSideBar = document.getElementById("leftSideBar");
+	
+	if(programIndicies.length == 0) {
+		var a = document.createElement("a");
+		a.id = "leftSideBar_program" + i;
+		a.href = "javascript:void(0)";
+		var t = document.createTextNode("No Matches");
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		leftSideBar.appendChild(li);
+		return;
+	}
 	
 	var i;
 	for(i in programIndicies) {
@@ -278,7 +334,18 @@ function addProgramsToLeftSideBar(programIndicies) {
  */
 function addAgenciesToLeftSideBar(agencyIndices) {
 	
-var leftSideBar = document.getElementById("leftSideBar");
+	var leftSideBar = document.getElementById("leftSideBar");
+
+	if(agencyIndicies.length == 0) {
+		var a = document.createElement("a");
+		a.id = "leftSideBar_agency" + i;
+		a.href = "javascript:void(0)";
+		var t = document.createTextNode("No Matches");
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		leftSideBar.appendChild(li);
+	}
 	
 	var i;
 	for(i in agencyIndices) {
