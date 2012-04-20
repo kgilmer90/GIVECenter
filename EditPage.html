@@ -67,6 +67,7 @@ width: 12.5%;
 background-color: #FFF;
 }
 .sidebar2 {
+visibility: hidden;
 float: left;
 width: 12.5%;
 padding-top: 90px;
@@ -129,6 +130,10 @@ padding: 2%;
 input.hint
 {
 	color:grey;
+}
+.topRow
+{
+	width:100%;	
 }
 
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
@@ -193,11 +198,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="Admin.php">Admin</a></li>
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Session/Logout.php">Logout</a></li>
-<li>
 <input type="text" class="hint" value="Search..."
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
     onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
-</li>
 </ul>
 <!-- end .sidebar1 --></div>
 </div>
@@ -224,7 +227,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <h1 align="center">&nbsp;</h1>
 <div align="center"></div>
 <h1 align="center">ADD/EDIT PROGRAM/AGENCY</h1>
-<div class="getData">
+<div class="topRow">
 <div class="column1">
 <label>
 <p align="center">&nbsp;</p>
@@ -265,14 +268,64 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td>&nbsp;</td>
     <td><textarea name="descript" id="descript" cols="25" rows="20"></textarea></td>
   </tr>
+  </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  </tr>
+    <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><b>Address</b></td>
+  </tr>
+  </tr>
+    <tr>
+    <td>Street: </td>
+    <td><input name="street" type="text" id="street" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td><input name="city" id= "city" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>State:</td>
+    <td><input name="state_us" id="state_us" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>Zip:</td>
+    <td><input name="zip" id="zip" type="text" size="5" /></td>
+  </tr>
 </table>
 </label>
+<p align="center">&nbsp;</p>
+<div align="center"><strong>Referral Type:</strong>
+<form id="form2" name="form2" method="post" action="">
+  <table width="100">
+    <tr>
+      <td><label>
+        <input type="radio" name="ref_type_full" value="radio" id="ref_type_full" />
+        Full</label></td>
+    </tr>
+    <tr>
+      <td><label>
+        <input type="radio" name="ref_type_lim" value="radio" id="ref_type_lim" />
+        Limited</label></td>
+    </tr>
+  </table>
+</form></div>
+<p align="center">&nbsp;</p>
+
+
 
 </div>
 <div class="column2"> <b>
 <label>
 <p align="center">&nbsp;</p>
-<p align="center">Contact Information</p>
+<p align="center">Professional Contact Information</p>
 </label>
 </b>
 <table width="400" border="0">
@@ -309,7 +362,79 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td><input name="fax" id="fax" type="text" size="10" /></td>
   </tr>
 </table>
-</div></div></div>
+
+
+<label>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<b>
+<p align="center">Student Contact Information</p>
+</label>
+</b>
+<table width="400" border="0">
+  <tr>
+    <td>First Name: </td>
+    <td><input name="s_f_name" id="s_f_name" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>Last Name:</td>
+    <td><input name="s_l_name" id= "s_l_name" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>Middle Name:</td>
+    <td><input name="s_m_name" id="s_m_name" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>Suffix: </td>
+    <td><input name="s_suf" id="s_suf" type="text" size="3" /></td>
+  </tr>
+  <tr>
+    <td>Mobile Phone:</td>
+    <td><input name="s_m_phone" id="s_m_phone" type="text" size="10" /></td>
+  </tr>
+  <tr>
+    <td>Work Phone: </td>
+    <td><input name="s_w_phone" id="s_w_phone" type="text" size="10" /></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><input name="s_mail" type="text" id="s_mail" size="30" maxlength="40" /></td>
+  </tr>
+</table>
+
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp;</p>
+<div align="center">
+<label><b>Select All Relevant Seasons:</b></label>
+<form id="seasons" name="seasons" method="post" action="">
+<table width="150" class="form3">
+<tr>
+<div align="left">
+
+<td><label>
+<input type="checkbox" name="winter" value="checkbox" id="winter" />
+Winter</label></td>
+</tr>
+<tr>
+<td><label>
+<input type="checkbox" name="spring" value="checkbox" id="spring" />
+Spring</label></td>
+</tr>
+<tr>
+<td><label>
+<input type="checkbox" name="summer" value="checkbox" id="summer" />
+Summer</label></td>
+</tr>
+<tr>
+<td><label>
+<input type="checkbox" name="fall" value="checkbox" id="fall" />
+Fall</label></td>
+</table>
+<p>
+</form>
+
+
+</div></div></div></div>
 <div class="getInterests">
 	<h1 align="center">&nbsp;</h1>
     <div align="center">
