@@ -38,7 +38,7 @@ function GIVEFetchAndEcho($conn)
 function GIVEAgenciesToHTMLTable($agencies, $hidden = true, $display = 'none')
 {
 	$visibility = ($hidden) ? 'hidden' : 'visible';
-	echo '<table id="agency_table" style="visibility:'.$visibility.';display:'.$display.';"';
+	echo '<table id="agency_table" style="visibility:'.$visibility.';display:'.$display.';">';
 	
 	$i = 0;
 	foreach($agencies as $agency) {
