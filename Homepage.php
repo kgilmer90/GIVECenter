@@ -287,7 +287,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="Admin.php">Admin</a></li>
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Session/Logout.php">Logout</a></li>
-<form action="javascript:void(0)" onsubmit="javascript:searchProgram(this.searchBar.value)">
+<form action="javascript:void(0)" onsubmit="javascript:searchInfo()">
 <input type="text" class="hint" value="Search..." name="searchBar" id="searchBar"
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
     onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
@@ -299,7 +299,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class="sidebar2">
 <div align="center">
 <ul class="nav1" id="toggleNav">
-<li><a href="javascript:toggleLeftSideBarDisplay()" id="toggle" >View Agencies</a></li>
+<li><a href="javascript:toggleLeftSideBarDisplay()" id="toggle" >View Programs</a></li>
 </ul>
 <ul class="nav" id="leftSideBar">
 <!--  

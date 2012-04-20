@@ -59,13 +59,10 @@ function init()
 	initAgenciesAndPrograms();
 	clearLeftSideBar();
 	
-	var indicies =[];
-	var i;
-	for(i in programs) {
-		indicies.push(i);
-	}
+	left_sidebar_display = LEFT_SIDEBAR_AGENCY;
+	searchAgency();
 	
-	addProgramsToLeftSideBar(indicies);
+	showstuff('interests');
 	hidestuff('results');
 }
 
@@ -116,7 +113,7 @@ function searchInfo() {
  */
 function searchProgram(searchTerms) {
 	
-	var matching_program_indicies = [];
+	var matching_program_indices = [];
 	
 	if(!searchTerms) {
 		searchTerms = '';
@@ -125,7 +122,7 @@ function searchProgram(searchTerms) {
 	if(searchTerms == '') {
 		var i;
 		for(i in programs) {
-			matching_program_indicies.push(i);
+			matching_program_indices.push(i);
 		}
 	}
 	else
@@ -139,19 +136,19 @@ function searchProgram(searchTerms) {
 			//if name contains the search terms anywhere in the string,
 			//add the program to the list of search results
 			if(caseInsensitiveStringSearch(p.name, searchTerms) >= 0) {
-				matching_program_indicies.push(i);
+				matching_program_indices.push(i);
 			}
 			else if(p.descript) {
 				if(caseInsensitiveStringSearch(p.descript, searchTerms) >= 0) {
-					matching_program_indicies.push(i);
+					matching_program_indices.push(i);
 				}
 			}
 		}
 	}
 	clearLeftSideBar();
-	addProgramsToLeftSideBar(matching_program_indicies);
-	if(matching_program_indicies.length > 0) {
-		displayProgramInfo(matching_program_indicies[0]);
+	addProgramsToLeftSideBar(matching_program_indices);
+	if(matching_program_indices.length > 0) {
+		displayProgramInfo(matching_program_indices[0]);
 	}
 }
 
@@ -163,7 +160,7 @@ function searchProgram(searchTerms) {
  */
 function searchAgency(searchTerms) {
 	
-	var matching_agency_indicies = [];
+	var matching_agency_indices = [];
 	
 	if(!searchTerms) {
 		searchTerms = '';
@@ -172,7 +169,7 @@ function searchAgency(searchTerms) {
 	if(searchTerms == '') {
 		var i;
 		for(i in agencies) {
-			matching_agency_indicies.push(i);
+			matching_agency_indices.push(i);
 		}
 	}
 	else
@@ -186,19 +183,19 @@ function searchAgency(searchTerms) {
 			//if name contains the search terms anywhere in the string,
 			//add the program to the list of search results
 			if(caseInsensitiveStringSearch(a.name, searchTerms) >= 0) {
-				matching_agency_indicies.push(i);
+				matching_agency_indices.push(i);
 			}
 			else if(a.descript) {
 				if(caseInsensitiveStringSearch(a.descript, searchTerms) >= 0) {
-					matching_agency_indicies.push(i);
+					matching_agency_indices.push(i);
 				}
 			}
 		}
 	}
 	clearLeftSideBar();
-	addAgenciesToLeftSideBar(matching_agency_indicies);
-	if(matching_agency_indicies.length > 0) {
-		displayAgencyInfo(matching_agency_indicies[0]);
+	addAgenciesToLeftSideBar(matching_agency_indices);
+	if(matching_agency_indices.length > 0) {
+		displayAgencyInfo(matching_agency_indices[0]);
 	}
 }
 
@@ -344,12 +341,12 @@ function toggleLeftSideBarDisplay() {
 	if(left_sidebar_display == LEFT_SIDEBAR_AGENCY) {
 		left_sidebar_display = LEFT_SIDEBAR_PROGRAM;
 		document.getElementById('toggle').innerHTML = 'View Agencies';
-		searchInfo();
+		searchProgram();
 	}
 	else if(left_sidebar_display == LEFT_SIDEBAR_PROGRAM) {
 		left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 		document.getElementById('toggle').innerHTML = 'View Programs';
-		searchInfo();
+		searchAgency();
 	}
 }
 
