@@ -1,5 +1,5 @@
 <?php
-include_once('php/GIVE/GIVEToHTML.php');
+/*include_once('php/GIVE/GIVEToHTML.php');
 
 session_start();
 
@@ -16,7 +16,7 @@ try
 catch(MySQLDatabaseConnException $e)
 {
 	header('Location: LoginPage.php?except=conn&code='.$e->code());
-}
+} */
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -31,6 +31,13 @@ background: #cccccc;
 margin: 0;
 padding: 0;
 color: #000;
+scrollbar-face-color: #EEEEEE;
+scrollbar-highlight-color: #FFFFFF;
+scrollbar-3dlight-color: #CCCCCC;
+scrollbar-darkshadow-color: #FFFFFF;
+scrollbar-shadow-color: #AAAAAA;
+scrollbar-arrow-color: #000000;
+scrollbar-track-color: #EEEEEE;
 }
 /* ~~ Element/tag selectors ~~ */
 ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
@@ -94,6 +101,13 @@ background-color: #FFF;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: 400px;
+	scrollbar-face-color: #EEEEEE;
+scrollbar-highlight-color: #FFFFFF;
+scrollbar-3dlight-color: #CCCCCC;
+scrollbar-darkshadow-color: #FFFFFF;
+scrollbar-shadow-color: #AAAAAA;
+scrollbar-arrow-color: #000000;
+scrollbar-track-color: #EEEEEE;
 }
 .content {
 position: absoulte;
@@ -164,6 +178,43 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 background: #6666aa;
 color: #FFF;
 }
+
+/********************AGENCY /PROGRAM TOGGLE NAV*************/
+
+ul.nav1 {
+	list-style: none; /* this creates the top border for the links - all others are placed using a bottom border on the LI *//* this creates the space between the navigation on the content below */
+	background-color: #666;
+	border-top-width: 3px;
+	border-right-width: 1px;
+	border-bottom-width: 3px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+}
+ul.nav1 li {
+border-bottom: 1px solid #666; /* this creates the button separation */
+}
+ul.nav1 a, ul.nav1 a:visited { /* grouping these selectors makes sure that your links retain their button look even after being visited */
+padding: 5px 5px 5px 15px;
+display: block; /* this gives the link block properties causing it to fill the whole LI containing it. This causes the entire area to react to a mouse click. */
+text-decoration: none;
+background: #CCCCFF;
+color: #FFFFF;
+}
+ul.nav1 a:hover, ul.nav1 a:active, ul.nav1 a:focus { /* this changes the background and text color for both mouse and keyboard navigators */
+background: #6666aa;
+color: #FFF;
+}
+
+
+/********************END AGENCY /PROGRAM TOGGLE NAV*************/
+
 /* ~~miscellaneous float/clear classes~~ */
 .fltrt { /* this class can be used to float an element right in your page. The floated element must precede the element it should be next to on the page. */
 float: right;
@@ -215,6 +266,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </div>
 <div class="sidebar2">
 <div align="center">
+<ul class="nav1" id="toggleNav">
+<li><a href="#" id="toggle">View Agency </a></li>
+</ul>
 <ul class="nav" id="leftSideBar">
 <!--  
 <li><a href="#">Program1 </a></li>
@@ -397,7 +451,6 @@ Night</label></td>
 </div>
 </div>
 <div align="center" class="container"><!-- end .container --></div>
-</div>
 <?php
 	GIVEFetchAndEcho($conn);
 	$conn->close();

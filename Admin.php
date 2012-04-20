@@ -26,6 +26,7 @@ body {
 	margin: 0;
 	padding: 0;
 	color: #000;
+	
 }
 /* ~~ Element/tag selectors ~~ */
 ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
@@ -220,7 +221,8 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div class="content" id="content"> 
     <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-    <div align="center"><b>Change Banner:  </b> <input type="file" /></div>
+    <div align="center"><b>Change Banner:  </b> <input type="file" />
+    <input type="submit" value="Send"></div>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">ADMIN</h1>
 <div align="center">
@@ -274,8 +276,8 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     	<p align="center">&nbsp;</p>
     	<p align="center">&nbsp;</p>
 
-    <button>Add New Agency</button>
-        	<p align="center">&nbsp;</p>
+	<input type="button" value="Add New Agency" onclick="location.href=EditPage.html">        	
+    <p align="center">&nbsp;</p>
 
     <button>Add New Program</button></div>
     </div>
