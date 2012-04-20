@@ -1,5 +1,5 @@
 <?php
-/*include_once('php/GIVE/GIVEToHTML.php');
+include_once('php/GIVE/GIVEToHTML.php');
 
 session_start();
 
@@ -16,7 +16,7 @@ try
 catch(MySQLDatabaseConnException $e)
 {
 	header('Location: LoginPage.php?except=conn&code='.$e->code());
-} */
+}
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -255,7 +255,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Session/Logout.php">Logout</a></li>
 <li>
-<form action="javascript:void(0)" onsubmit="javascript:searchProgram(this.searchBar.value)">
+<form action="javascript:void(0)" onsubmit="javascript:searchInfo()">
 <input type="text" class="hint" value="Search..." name="searchBar" id="searchBar"
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
     onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
@@ -267,7 +267,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class="sidebar2">
 <div align="center">
 <ul class="nav1" id="toggleNav">
-<li><a href="#" id="toggle">View Agency </a></li>
+<li><a href="javascript:toggleLeftSideBarDisplay()" id="toggle" >View Agencies</a></li>
 </ul>
 <ul class="nav" id="leftSideBar">
 <!--  
