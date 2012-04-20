@@ -424,7 +424,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 
 <div align="center"><h4>Link to Agency / Program(s): </h4><br />
-<a href="#" style="color:#00C" id="link_to_prog_agency">Programs Here... </a>
+<ul id="link_to_prog_agency">
+<li><a href="#" style="color:#00C">Programs Here...</a></li>
+</ul>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 

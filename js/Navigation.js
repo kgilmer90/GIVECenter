@@ -253,6 +253,8 @@ function displayProgramInfo(index) {
 		document.getElementById("display_descript").innerHTML = (p.descript) ? p.descript : "";
 		
 		var pcon = p.p_contact;
+		var scon = p.s_contact;
+		var addr = p.addr;
 		
 		var str = (pcon.title) ? pcon.title + " " : "";
 		str += (pcon.f_name) ? pcon.f_name + " " : "";
@@ -265,6 +267,18 @@ function displayProgramInfo(index) {
 		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone && pcon.w_phone != 0) ? pcon.w_phone : "";
 		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
 		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
+		
+		str = (addr.city) ? addr.city : "";
+		str += (str && addr.state_us) ? ", " + addr.state_us : "";
+		str += (str && addr.zip) ? " " + addr.zip : "";
+		
+		document.getElementById("display_address_street").innerHTML = (addr.street) ? addr.street : "";
+		document.getElementById("display_address_city").innerHTML = str;
+		
+		document.getElementById("display_s_contact_m_phone").innerHTML = (scon.m_phone) ? scon.m_phone : "";
+		document.getElementById("display_s_contact_w_phone").innerHTML = (scon.w_phone && scon.w_phone != 0) ? scon.w_phone : "";
+		document.getElementById("display_s_contact_mail").innerHTML = (scon.mail) ? scon.mail : "";
+		document.getElementById("display_s_contact_fax").innerHTML = (scon.fax) ? scon.fax : "";
 	}
 }
 
