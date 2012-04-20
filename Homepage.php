@@ -170,6 +170,8 @@ border: thin solid #D6D6D6;
 	margin-right: 5%;
 	margin-bottom: 1%;
 	margin-left: 1%;
+	overflow-x: scroll;
+	overflow-y:hidden;
 }
 
 .studContact {
@@ -182,6 +184,8 @@ border: thin solid #D6D6D6;
 	margin-right: 5%;
 	margin-bottom: 5%;
 	margin-left: 1%;
+	overflow-x: scroll;
+	overflow-y:hidden;
 }
 
 input.hint {
@@ -324,11 +328,11 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <p align="center">&nbsp;</p>
 <div align="center"></div>
 <h1 align="center" id="display_name">Program Name</h1>
-<div class="column1"> <b>
+<div class="column1"><b>
 <p align="center">&nbsp;</p>
-<p align="center" id="display_descript">Description</p></b>
+<p align="center" id="descript">Description</p></b>
 <div align="left">
-<p id="descript">
+<p id="display_descript">
 </p>
 
 </div>
