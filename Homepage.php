@@ -31,13 +31,7 @@ background: #cccccc;
 margin: 0;
 padding: 0;
 color: #000;
-scrollbar-face-color: #EEEEEE;
-scrollbar-highlight-color: #FFFFFF;
-scrollbar-3dlight-color: #CCCCCC;
-scrollbar-darkshadow-color: #FFFFFF;
-scrollbar-shadow-color: #AAAAAA;
-scrollbar-arrow-color: #000000;
-scrollbar-track-color: #EEEEEE;
+
 }
 /* ~~ Element/tag selectors ~~ */
 ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
@@ -100,13 +94,6 @@ width: 12.5%;
 	overflow-y: scroll;
 	overflow-x: hidden;
 	height: 400px;
-	scrollbar-face-color: #EEEEEE;
-scrollbar-highlight-color: #FFFFFF;
-scrollbar-3dlight-color: #CCCCCC;
-scrollbar-darkshadow-color: #FFFFFF;
-scrollbar-shadow-color: #AAAAAA;
-scrollbar-arrow-color: #000000;
-scrollbar-track-color: #EEEEEE;
 }
 .content {
 position: absoulte;
@@ -323,6 +310,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class="content" id="content">
 <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1> -->
 <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+<div align="right"><a href="helpPage.html" target="_blank"><img src="help.png" alt="helpButton" name="helpButton" width="4%" height="4%" style="padding: 1%;"/></a></div>
 <div class ="results" id="results">
 <div align="left"><a href="javascript:backtosearch()"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <p align="center">&nbsp;</p>
