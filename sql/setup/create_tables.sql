@@ -80,9 +80,9 @@ CREATE TABLE seasons(
 
 CREATE TABLE student_contact(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT KEY,
-    l_name VARCHAR(20),
-    f_name VARCHAR(20),
-    m_name VARCHAR(20),
+    l_name VARCHAR(30),
+    f_name VARCHAR(30),
+    m_name VARCHAR(30),
     suf CHAR(3),
     m_phone CHAR(10),
     w_phone CHAR(10),
