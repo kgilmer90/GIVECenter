@@ -90,7 +90,6 @@ background-color: #cccccc;
 .sidebar1 {
 float: right;
 width: 12.5%;
-background-color: #FFF;
 }
 .sidebar2 {
 	float: left;
@@ -114,14 +113,12 @@ position: absoulte;
 width: 75%;
 float: left;
 background-image: url(img/gradientHORIZ.png);
-height: 100%;
 }
 .results {
 visibility: hidden;
 display: none;
 width: 100%;
 float: left;
-height: 100%;
 }
 .interests {
 width: 100%;
@@ -137,18 +134,54 @@ background-color: #FFF;
 border: thin solid #000;
 }
 .column1 {
-width: 50%;
+width: 40%;
 float: left;
-border-right-width: thin;
-border-right-style: solid;
-border-right-color: #000;
+border: thin solid #D6D6D6;
+	background-color: #FFF;
+	padding: 1%;
+		height: 40%;
+	margin-right: 1%;
+	margin-bottom: 1%;
+	margin-left: 5%;
+	overflow-x: hidden;
+	overflow-y: scroll;
+
+}
+.address {
+width: 40%;
+float: left;
+border: thin solid #D6D6D6;
+	background-color: #FFF;
+	padding: 1%;
+		height: 20%;
+	margin-right: 1%;
+	margin-bottom: 5%;
+	margin-left: 5%;
+
+
 }
 .column2 {
-	width: 49%;
-	height: 100%;
+	width: 40%;
 	float: right;
-	overflow-x: scroll;
-	overflow-y: hidden;
+	background-color: #FFF;
+	padding: 1%;
+	border: thin solid #D6D6D6;
+	height: 30%;
+	margin-right: 5%;
+	margin-bottom: 1%;
+	margin-left: 1%;
+}
+
+.studContact {
+	width: 40%;
+	float: right;
+	background-color: #FFF;
+	padding: 1%;
+	border: thin solid #D6D6D6;
+	height: 30%;
+	margin-right: 5%;
+	margin-bottom: 5%;
+	margin-left: 1%;
 }
 
 input.hint {
@@ -254,13 +287,12 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="Admin.php">Admin</a></li>
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Session/Logout.php">Logout</a></li>
-<li>
-<form action="javascript:void(0)" onsubmit="javascript:searchInfo()">
+<form action="javascript:void(0)" onsubmit="javascript:searchProgram(this.searchBar.value)">
 <input type="text" class="hint" value="Search..." name="searchBar" id="searchBar"
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
     onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
 </form>
-</li>
+
 </ul>
 <!-- end .sidebar1 --></div>
 </div>
@@ -289,18 +321,19 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
 <div class ="results" id="results">
 <div align="left"><a href="javascript:backtosearch()"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
-<h1 align="center">&nbsp;</h1>
+<p align="center">&nbsp;</p>
 <div align="center"></div>
 <h1 align="center" id="display_name">Program Name</h1>
 <div class="column1"> <b>
 <p align="center">&nbsp;</p>
-<p align="center" id="display_descript">Description</p>
-
+<p align="center" id="display_descript">Description</p></b>
+<div align="left">
 <p id="descript">
 </p>
 
-</b>
 </div>
+</div>
+
 <div class="column2"> <b>
 <p align="center">&nbsp;</p>
 <p align="center">Contact Information</p>
@@ -328,10 +361,71 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td>Fax Number:</td>
     <td id="display_p_contact_fax"></td>
   </tr>
+    <tr>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+  </tr>
 </table>
+</div>
+
+<div class="studContact"> <b>
+<p align="center">&nbsp;</p>
+<p align="center">Student Contact Information</p>
+<label>
+</label>
+</b>
+<table width="400" border="0">
+  <tr>
+    <td>Name: </td>
+    <td id="display_s_contact_name"></td>
+  </tr>
+  <tr>
+    <td>Mobile Phone:</td>
+    <td id="display_s_contact_m_phone"></td>
+  </tr>
+  <tr>
+    <td>Work Phone: </td>
+    <td id="display_s_contact_w_phone"></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td id="display_s_contact_mail"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+    <tr>
+    <td></td>
+    <td></td>
+  </tr>
+</table>
+</div>
+
+<div class="address"> <b>
+<p align="center">&nbsp;</p>
+<p align="center" id="display_address">Address</p></b>
+<div align="left">
+<p id="display_address_street">
+<p id="display_address_city">
+
+</p></div>
 </div>
 </p>
 </p>
+
+
+<div align="center"><h4>Link to Agency / Program(s): </h4><br />
+<a href="#" style="color:#00C" id="link_to_prog_agency">Programs Here... </a>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+
+</div>
+
 </div>
 <!--********************* BETWEEN CONTENT PAGES ***************************** -->
 <div class = "interests" id="interests">
@@ -448,6 +542,9 @@ Night</label></td>
 
 </div>
 </div>
+
+
+
 </div>
 </div>
 <div align="center" class="container"><!-- end .container --></div>
