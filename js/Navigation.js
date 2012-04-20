@@ -7,6 +7,10 @@ var DISPLAY_INTERESTS = 0;
 var DISPLAY_RESULTS = 1;
 var display_mode = DISPLAY_INTERESTS;
 
+var LEFT_SIDEBAR_AGENCY = 0;
+var LEFT_SIDEBAR_PROGRAM = 1;
+var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
+
 function hidestuff(boxid){
 	
 	if(boxid == 'results') {
@@ -111,21 +115,22 @@ function searchProgram(searchTerms) {
 			matching_program_indicies.push(i);
 		}
 	}
-	
-	var i;
-	for(i in programs) {
-		
-		//GIVEProgram reference and program name
-		var p = programs[i];
-		
-		//if name contains the search terms anywhere in the string,
-		//add the program to the list of search results
-		if(caseInsensitiveStringSearch(p.name, searchTerms) >= 0) {
-			matching_program_indicies.push(i);
-		}
-		else if(p.descript) {
-			if(caseInsensitiveStringSearch(p.descript, searchTerms) >= 0) {
+	else {
+		var i;
+		for(i in programs) {
+			
+			//GIVEProgram reference and program name
+			var p = programs[i];
+			
+			//if name contains the search terms anywhere in the string,
+			//add the program to the list of search results
+			if(caseInsensitiveStringSearch(p.name, searchTerms) >= 0) {
 				matching_program_indicies.push(i);
+			}
+			else if(p.descript) {
+				if(caseInsensitiveStringSearch(p.descript, searchTerms) >= 0) {
+					matching_program_indicies.push(i);
+				}
 			}
 		}
 	}
@@ -147,20 +152,29 @@ function searchAgency(searchTerms) {
 	
 	var matching_agency_indicies = [];
 	
-	var i;
-	for(i in agencies) {
-		
-		//GIVEAgency reference and name
-		var a = agencies[i];
-		
-		//if name contains the search terms anywhere in the string,
-		//add the program to the list of search results
-		if(caseInsensitiveStringSearch(a.name, searchTerms) >= 0) {
+	if(!searchTerms) {
+		var i;
+		for(i in agencies) {
 			matching_agency_indicies.push(i);
 		}
-		else if(a.descript) {
-			if(caseInsensitiveStringSearch(a.descript, searchTerms) >= 0) {
+	}
+	else
+	{
+		var i;
+		for(i in agencies) {
+			
+			//GIVEAgency reference and name
+			var a = agencies[i];
+			
+			//if name contains the search terms anywhere in the string,
+			//add the program to the list of search results
+			if(caseInsensitiveStringSearch(a.name, searchTerms) >= 0) {
 				matching_agency_indicies.push(i);
+			}
+			else if(a.descript) {
+				if(caseInsensitiveStringSearch(a.descript, searchTerms) >= 0) {
+					matching_agency_indicies.push(i);
+				}
 			}
 		}
 	}
@@ -254,7 +268,13 @@ function displayAgencyInfo(index) {
 		
 	}
 }
-
+/**
+ * Wrapper function around display<Program|Agency>Info() functions.
+ * @param objectType - type of function to call, pass 'Program' or 'Agency'
+ * to make the appropriate function call
+ * @param index - index of the object in the programs or agencies array
+ * to display on screen
+ */
 function displayInfo(objectType, index) {
 	if(objectType == 'program') {
 		displayProgramInfo(index);
@@ -264,6 +284,13 @@ function displayInfo(objectType, index) {
 	}
 }
 
+/**
+ * Wrapper function around add<Programs|Agencies>ToLeftSideBar() functions.
+ * @param objectType - type of function to call, pass 'Programs' or 'Agencies'
+ * to make the appropriate function call
+ * @param arrayIndicies - array of the indicies within the programs
+ * or agencies array to add to the side bar
+ */
 function addToLeftSideBar(objectType, arrayIndicies) {
 	
 	if(objectType == 'programs') {
@@ -271,6 +298,23 @@ function addToLeftSideBar(objectType, arrayIndicies) {
 	}
 	else if(objectType == 'agencies') {
 		addAgenciesToLeftSideBar(arrayIndicies);
+	}
+}
+
+/**
+ * Toggles between displaying programs on the left
+ * side bar and agencies.
+ */
+function toggleLeftSideBarDisplay() {
+	if(left_sidebar_display == LEFT_SIDEBAR_AGENCY) {
+		left_sidebar_display = LEFT_SIDEBAR_PROGRAM;
+		document.getElementById('toggle').innerHTML = 'View Agencies';
+		searchProgram(null);
+	}
+	else if(left_sidebar_display == LEFT_SIDEBAR_PROGRAM) {
+		left_sidebar_display = LEFT_SIDEBAR_AGENCY;
+		document.getElementById('toggle').innerHTML = 'View Programs';
+		searchAgency(null);
 	}
 }
 
@@ -284,6 +328,10 @@ function addToLeftSideBar(objectType, arrayIndicies) {
 function addProgramsToLeftSideBar(programIndicies) {
 	
 	var leftSideBar = document.getElementById("leftSideBar");
+	
+	if(!programIndicies) {
+		programIndicies = [];
+	}
 	
 	if(programIndicies.length == 0) {
 		var a = document.createElement("a");
@@ -335,6 +383,10 @@ function addProgramsToLeftSideBar(programIndicies) {
 function addAgenciesToLeftSideBar(agencyIndices) {
 	
 	var leftSideBar = document.getElementById("leftSideBar");
+	
+	if(!agencyIndicies) {
+		agencyIndicies = [];
+	}
 
 	if(agencyIndicies.length == 0) {
 		var a = document.createElement("a");
