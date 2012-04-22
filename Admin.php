@@ -183,6 +183,51 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 </style>
 <![endif]-->
 
+
+<script language="javascript" type="text/javascript">
+function editAgency(getID)
+{
+	location = "editPage.html?mode=edit&what=agency&id=getID";
+	document.getElementById("editHeader").innerHTML = "Edit Agency";
+	document.getElementById("agencyDescrip").style.visibility="hidden";
+	document.getElementById("agencyOpt").style.visibility="hidden";
+	document.getElementById("agencyDescrip").style.display="none";
+	document.getElementById("agencyOpt").style.display="none";
+}
+
+function editProgram(getID)
+{
+	location = "editPage.html?mode=edit&what=program&id=getID";
+	document.getElementById("editHeader").innerHTML = "Edit Program";
+	document.getElementById("agencyDescrip").style.visibility="visible";
+	document.getElementById("agencyOpt").style.visibility="visible";
+	document.getElementById("agencyDescrip").style.display="block";
+	document.getElementById("agencyOpt").style.display="block";
+
+}
+
+function addAgency(getID)
+{
+	location = "editPage.html?mode=add&what=agency&id=getID";
+	document.getElementById("editHeader").innerHTML = "Edit Program";
+	document.getElementById("agencyDescrip").style.visibility="hidden";
+	document.getElementById("agencyOpt").style.visibility="hidden";
+	document.getElementById("agencyDescrip").style.display="none";
+	document.getElementById("agencyOpt").style.display="none";
+}
+
+function addProgram(getID)
+{
+	location = "editPage.html?mode=add&what=program&id=getID";
+	document.getElementById("editHeader").innerHTML = "Edit Program";
+	document.getElementById("agencyDescrip").style.visibility="visible";
+	document.getElementById("agencyOpt").style.visibility="visible";
+	document.getElementById("agencyDescrip").style.display="block";
+	document.getElementById("agencyOpt").style.display="block";
+}
+
+</script>
+
 </head>
 
 <body onload="alert('You have selected the &quot;Administrator&quot; option. Use this option only to add, delete, or edit programs or agencies and their descriptions.')"><div class="container" id="content">
@@ -241,7 +286,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     	<p align="center">&nbsp;</p>
     	<p align="center">&nbsp;</p>
 
-     <button>Submit</button></div>
+     <button onclick="editAgency()">Submit</button></div>
 
     </div>
     
@@ -264,7 +309,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
         	<p align="center">&nbsp;</p>
     	<p align="center">&nbsp;</p>
 
-    <button>Submit</button></div>
+    <button onclick ="editProgram()">Submit</button></div>
     </div>
     
     <div class="orBox" id="orBox">
@@ -276,10 +321,10 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     	<p align="center">&nbsp;</p>
     	<p align="center">&nbsp;</p>
 
-	<input type="button" value="Add New Agency" onclick="location.href=EditPage.html">        	
+	<button onclick="addAgency()">Add New Agency</button>
     <p align="center">&nbsp;</p>
 
-    <button>Add New Program</button></div>
+    <button onclic="addProgram()">Add New Program</button></div>
     </div>
   </div>
   <div align="center" class="container"><!-- end .container --></div>
