@@ -41,7 +41,7 @@ if($_POST['update']){     //  EDIT CONDITION
         $update['addr']['state_us'] = $_POST['state_us'];
         $update['addr']['zip'] = $_POST['zip'];
         
-        update_generic($conn, 'addr', $_POST['addr']['id'], $update['addr']);
+        update_generic($conn, 'addr', $_POST['addr_id'], $update['addr']);
     }
     
     if($_POST['agency_id']){
@@ -53,7 +53,7 @@ if($_POST['update']){     //  EDIT CONDITION
         $update['agency']['phone'] = $_POST;
         $update['agency']['fax'] = $_POST;
    
-        update_generic($conn, 'agency', $_POST['agency']['id'], $_POST['agency']);
+        update_generic($conn, 'agency', $_POST['agency_id'], $_POST['agency']);
     }
     
     if($_POST['hours_id']){
@@ -83,14 +83,14 @@ if($_POST['update']){     //  EDIT CONDITION
     }
     
     if($_POST['program_id']){
-        $update['program']['agency'] = $update['agency']['id'];
-        $update['program']['addr'] = $update['addr']['id'];
-        $update['program']['name'] = $update;
-        $update['program']['p_contact'] = $update['p_contact']['id'];
-        $update['program']['s_contact'] = $update['s_contact']['id'];
-        $update['program']['descript'];
+        $update['program']['agency'] = $_POST['agency']['id'];
+        $update['program']['addr'] = $_POST['addr']['id'];
+        $update['program']['name'] = $_POST['name'];
+        $update['program']['p_contact'] = $_POST['p_contact']['id'];
+        $update['program']['s_contact'] = $_POST['s_contact']['id'];
+        $update['program']['descript'] = $_POST['descript'];
         $update['program']['referal'] = $_POST['ref_type'];
-        $update['program']['notes'];
+        $update['program']['notes'] = $_POST['notes'];
         $update['program']['duration'];
         
         update_generic($conn, 'program', $_POST['program_id'], $_POST['program']);
@@ -105,7 +105,7 @@ if($_POST['update']){     //  EDIT CONDITION
         $update['s_contact']['w_name'] = $_POST['s_w_contact'];
         $update['s_contact']['mail'] = $_POST['s_mail'];
         
-        update_generic($conn, 'student_contact',$_POST['s_contact']['id'], $_POST['s_contact']);
+        update_generic($conn, 'student_contact',$_POST['s_contact_id'], $_POST['s_contact']);
     }
     
     if($_POST['season_id']){
@@ -140,7 +140,7 @@ elseif ($_POST['add']){
         $update['addr']['zip'] = $_POST['zip'];
         
         $addr_id = create_new_addr($conn, $update['addr']);
-        $update['program']['addr'] = $addr_id;
+        $update['program_addr'] = $addr_id;
     }
     if($_POST['agency']){
         $update['agency']['name'] = $_POST;
@@ -198,15 +198,15 @@ elseif ($_POST['add']){
         
         create_new_seasons($conn,$_POST['program_id'], $update['season']);
     }
-    if($_POST['program']['name']){
-        $update['program']['agency'] = $update['agency']['id'];
-        $update['program']['addr'] = $update['addr']['id'];
-        $update['program']['name'] = $update;
-        $update['program']['p_contact'] = $update['p_contact']['id'];
-        $update['program']['s_contact'] = $update['s_contact']['id'];
-        $update['program']['descript'];
+    if($_POST['name']){
+        $update['program']['agency'] = $_POST['agency']['id'];
+        $update['program']['addr'] = $_POST['addr']['id'];
+        $update['program']['name'] = $_POST['name'];
+        $update['program']['p_contact'] = $_POST['p_contact']['id'];
+        $update['program']['s_contact'] = $_POST['s_contact']['id'];
+        $update['program']['descript'] = $_POST['descript'];
         $update['program']['referal'] = $_POST['ref_type'];
-        $update['program']['notes'];
+        $update['program']['notes'] = $_POST['notes'];
         $update['program']['duration'];
         
         create_new_program_existing_agency($conn, $update['program']);
