@@ -277,7 +277,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <ul class="nav">
 <li><a href="Admin.php">Admin</a></li>
 <li><a href="BrowseAll.php">Browse All</a></li>
-<li><a href="Session/Logout.php">Logout</a></li>
+<li><a href="php/Session/Logout.php">Logout</a></li>
 <form action="javascript:void(0)" onsubmit="javascript:quickSearch()">
 <input type="text" class="hint" value="Search..." name="searchBar" id="searchBar"
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"

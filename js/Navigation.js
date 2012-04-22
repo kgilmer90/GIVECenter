@@ -62,10 +62,10 @@ function init()
 {
 	initAgenciesAndPrograms();
 	initIssues();
-	clearLeftSideBar();
 	
 	left_sidebar_display = LEFT_SIDEBAR_AGENCY;
-	searchAgency();
+	clearLeftSideBar();
+	addAgenciesToLeftSideBar(agency_search_results);
 	
 	showstuff('interests');
 	hidestuff('results');
@@ -572,7 +572,6 @@ function initAgenciesAndPrograms() {
 			programs.push(agency.programs[j]);
 			program_search_results.push(j);
 		}
-		
 		i++;
 	}
 }
