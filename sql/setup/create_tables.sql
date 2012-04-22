@@ -9,7 +9,7 @@ CREATE TABLE addr(
 
 CREATE TABLE agency(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(20),
+    name VARCHAR(50),
     descript VARCHAR(1000),
     p_contact_id INT UNSIGNED, 
     addr INT UNSIGNED,
@@ -51,7 +51,7 @@ CREATE TABLE program(
     id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     agency INT UNSIGNED NOT NULL,
     addr INT,
-    name VARCHAR(20),
+    name VARCHAR(50),
     p_contact INT UNSIGNED NOT NULL,
     s_contact INT UNSIGNED NOT NULL,
     descript VARCHAR(400),

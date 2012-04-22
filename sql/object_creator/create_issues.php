@@ -17,7 +17,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  */
 function create_issues($conn,$program_id)
 {
-    $query = "SELECT issues.name
+    $query = "SELECT issues.id
                 FROM issues,program_issues
                 WHERE program_issues.program_id=$program_id
                 AND program_issues.issue_id=issues.id";
