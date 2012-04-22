@@ -1,6 +1,28 @@
 <?php
+include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 
-// TODO Need Database connection!
+$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+
+//to hold various error states
+$error = array();
+
+//set to 'failed' if previous login attempt yielded no matches for the uname/pass combo
+if(isset($_GET['login'])) {
+	$error['login'] = $_GET['login'];
+}
+//set to 'true' if user was redirected to the login page via another page's logout button
+if(isset($_GET['logout'])) {
+	$error['logout'] = $_GET['logout'];
+}
+//set to 'conn' if an exception was thrown during login connecting to the database
+//set to 'query' if an exception was thrown during login querying the database
+if(isset($_GET['except'])) {
+	$error['except'] = $_GET['except'];
+}
+//set to the error code resulting from an exception during login
+if(isset($_GET['code'])) {
+	$error['code'] = $_GET['code'];
+}
 
 /*****************************************************************************
  * Edit Condition!
@@ -43,6 +65,8 @@ if($_POST['update']){     //  EDIT CONDITION
     }
     
     if($_POST['issues_id']){
+        $update['issues'];
+        
         update_issues($conn, $_POST['issues']);
     }
     
