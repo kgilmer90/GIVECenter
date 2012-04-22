@@ -15,15 +15,15 @@ function get_banner_latest($conn)
 {
     $query = "SELECT path
         FROM image_paths
-        WHERE type = 'banner'
+        WHERE image_type = 'banner'
         ORDER BY id DESC
         LIMIT 0,1";
         
     $conn->query($query);
     
-    $results = $conn->fetchRowAsNumeric();
+    $results = $conn->fetchRowAsAssoc();
 
-    return $results;
+    return $results['path'];
 }
 
 ?>
