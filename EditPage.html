@@ -136,6 +136,28 @@ input.hint
 	width:100%;	
 }
 
+.textBox
+{
+overflow-y: hidden;
+overflow-x:hidden;	
+}
+
+.layer
+{
+	width:50%;
+}
+
+.column3 {
+width: 45%;
+float: left;
+padding: 2%;
+}
+.column4 {
+width: 45%;
+float: right;
+padding: 2%;
+}
+
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
 padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
@@ -224,24 +246,18 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
 <div class ="results" id="results">
 <div align="left"><a href="Admin.php"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
-<h1 align="center">&nbsp;</h1>
 <div align="center"></div>
 <h1 align="center">ADD/EDIT PROGRAM/AGENCY</h1>
 <div class="topRow">
 <div class="column1">
 <label>
 <p align="center">&nbsp;</p>
-<p align="center">&nbsp;</p>
 <table width="400" border="0">
   <caption>
   </caption>
   <tr>
-    <td>Title:</td>
-    <td><input name="name" id="name" type="text" size="30" maxlength="15" /></td>
-  </tr>
-  <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td>Name</td>
+    <td><input name="name" id="name" type="text" size="30" maxlength="30" /></td>
   </tr>
     <tr>
     <td id="agencyDescrip">Select Agency:</td>
@@ -256,51 +272,24 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     </select>
     </td>
   </tr>
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
   <tr>
     <td>Description: </td>
     <td>&nbsp;</td>
   </tr>
   <tr>
     <td>&nbsp;</td>
-    <td><textarea name="descript" id="descript" cols="25" rows="20"></textarea></td>
-  </tr>
-  </tr>
-    <tr>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-  </tr>
+    <td><div class="textBox"><textarea name="descript" cols="25" rows="16" id="descript"></textarea></div></td>
   </tr>
     <tr>
+    <td>Notes: </td>
     <td>&nbsp;</td>
+  </tr>
+  <tr>
     <td>&nbsp;</td>
+    <td><div class="textBox"><textarea name="notes" cols="25" rows="16" id="notes"></textarea></div></td>
   </tr>
-  <tr>
-    <td></td>
-    <td><b>Address</b></td>
-  </tr>
-  </tr>
-    <tr>
-    <td>Street: </td>
-    <td><input name="street" type="text" id="street" size="30" maxlength="50" /></td>
-  </tr>
-  <tr>
-    <td>City:</td>
-    <td><input name="city" id= "city" type="text" size="30" /></td>
-  </tr>
-  <tr>
-    <td>State:</td>
-    <td><input name="state_us" id="state_us" type="text" size="30" /></td>
-  </tr>
-  <tr>
-    <td>Zip:</td>
-    <td><input name="zip" id="zip" type="text" size="5" /></td>
-  </tr>
-</table>
-</label>
+</table></label>
+
 <p align="center">&nbsp;</p>
 <div align="center"><strong>Referral Type:</strong>
 <form id="form2" name="form2" method="post" action="">
@@ -329,6 +318,10 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </label>
 </b>
 <table width="400" border="0">
+  <tr>
+    <td>Title: </td>
+    <td><input name="title" id="title" type="text" size="30" /></td>
+  </tr>
   <tr>
     <td>First Name: </td>
     <td><input name="f_name" id="f_name" type="text" size="30" /></td>
@@ -402,39 +395,32 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   </tr>
 </table>
 
-<p align="center">&nbsp; </p>
+<label>
+<table width="400" border="0">
 <p align="center">&nbsp;</p>
-<div align="center">
-<label><b>Select All Relevant Seasons:</b></label>
-<form id="seasons" name="seasons" method="post" action="">
-<table width="150" class="form3">
-<tr>
-<div align="left">
+<p align="center"><b>Address</b></p>
 
-<td><label>
-<input type="checkbox" name="winter" value="checkbox" id="winter" />
-Winter</label></td>
-</tr>
-<tr>
-<td><label>
-<input type="checkbox" name="spring" value="checkbox" id="spring" />
-Spring</label></td>
-</tr>
-<tr>
-<td><label>
-<input type="checkbox" name="summer" value="checkbox" id="summer" />
-Summer</label></td>
-</tr>
-<tr>
-<td><label>
-<input type="checkbox" name="fall" value="checkbox" id="fall" />
-Fall</label></td>
+    <tr>
+    <td>Street: </td>
+    <td><input name="street" type="text" id="street" size="30" maxlength="50" /></td>
+  </tr>
+  <tr>
+    <td>City:</td>
+    <td><input name="city" id= "city" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>State:</td>
+    <td><input name="state_us" id="state_us" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>Zip:</td>
+    <td><input name="zip" id="zip" type="text" size="5" /></td>
+  </tr>
 </table>
-<p>
-</form>
+</label>
 
-
-</div></div></div></div>
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp;</p></div></div></div>
 <div class="getInterests">
 	<h1 align="center">&nbsp;</h1>
     <div align="center">
@@ -443,118 +429,219 @@ Fall</label></td>
 <table class="form1">
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Alumni" />
+    Alumni
+  </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Elderly" />
+    Elderly
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Male Issues" />
+    Male Issues
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Recreation" />
+    Recreation
+    </label>
+  </div></td>
 </tr>
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Animals" />
+    Animals
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Environment" />
+    Environment
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Minority Issues" />
+    Minority Issues
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Religious" />
+    Religious
+    </label>
+  </div></td>
 </tr>
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Children" /> 
+    Children</div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Female Issues" />
+    Female Issues
+  </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Office" />
+    Office
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Service Leaders" />
+    Service Leaders
+    </label>
+  </div></td>
 </tr>
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Disabilities" /> 
+    Disabilities
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Fine Arts" />
+    Fine Arts
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Patriotic" />
+    Patriotic
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Technology" />
+    Technology
+    </label>
+  </div></td>
+</tr>
+<tr>  
+  <td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Disasters" />
+    Disasters
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="General Service" />
+    General Service
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Poverty" />
+    Poverty
+    </label>
+  </div></td>
+<td width="200"></td>
+</tr>
+<tr>  
+  <td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Education" />
+    Education
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Health" />
+    </label>Health</div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="PR" />
+    PR
+    </label>
+  </div></td>
+<td width="200"></td>
 </tr>
 </table>
 </form>
+<div class ="layers">
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p>
+<div class = "column3">
 <div align="center">
 <label><b>Select All Hours Available:</b></label>
 <form id="form3" name="form3" method="post" action="">
 <table width="150" class="form3">
 <tr>
-<div align="left">
-
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_0" />
+<input type="checkbox" name="Hours" value="checkbox" id="morning" />
 Morning</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_1" />
+<input type="checkbox" name="Hours" value="checkbox" id="afternoon" />
 Afternoon</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_2" />
+<input type="checkbox" name="Hours" value="checkbox" id="evening" />
 Evening</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="Hours_3" />
+<input type="checkbox" name="Hours" value="checkbox" id="night" />
 Night</label></td>
+</tr>
 </table>
-<p>
-</form>
-<input type="submit" value="Save Changes">
-</p>
-<input type="button" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="alert('Are you sure you want to permanently DELETE this program/agency?')">
+</form></div></div></div>
+  <div class = "column4">
+<label><b>Select All Hours Available:</b></label>
+<form id="form5" name="form3" method="post" action="">
+<table width="150" class="form3">
+      <tr>
+        <td><div align="left">
+          <div align="left">
+            <input type="checkbox" name="winter" value="checkbox" id="winter" />
+            Winter</div></td>
+      </tr>
+      <tr>
+        <td><label>
+          <input type="checkbox" name="spring" value="checkbox" id="spring" />
+          Spring</label></td>
+      </tr>
+      <tr>
+        <td><label>
+          <input type="checkbox" name="summer" value="checkbox" id="summer" />
+          Summer</label></td>
+      </tr>
+      <tr>
+        <td><label>
+          <input type="checkbox" name="fall" value="checkbox" id="fall" />
+          Fall</label></td>
+      </tr>
+    </table>
 
+</form></div>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p>
+<div align="center">
+  <input type="submit" value="Save Changes" />
+  <br />
+<input type="button" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="alert('Are you sure you want to permanently DELETE this program/agency?')"></div>
 
 </div>
-</div>
 </p>
 </p>
-</div>
 </div>
 </div>
 </div>
 <div align="center" class="container"><!-- end .container --></div>
-</div>
 </body>
 </html>

@@ -293,17 +293,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <li><a href="javascript:toggleLeftSideBarDisplay()" id="toggle" >View Programs</a></li>
 </ul>
 <ul class="nav" id="leftSideBar">
-<!--  
-<li><a href="#">Program1 </a></li>
-<li><a href="#">Program2 </a></li>
-<li><a href="#">Program3 </a></li>
-<li><a href="#">Program4 </a></li>
-<li><a href="#">Program5 </a></li>
-<li><a href="#">Program6 </a></li>
-<li><a href="#">Program7 </a></li>
-<li><a href="#">Program8 </a></li>
-<li><a href="#">...</a></li>
--->
+
 </ul>
 <!-- end .sidebar1 --></div>
 </div>
@@ -429,71 +419,144 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <table class="form1">
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Alumni" />
+    Alumni
+  </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Elderly" />
+    Elderly
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Male Issues" />
+    Male Issues
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Recreation" />
+    Recreation
+    </label>
+  </div></td>
 </tr>
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Animals" />
+    Animals
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Environment" />
+    Environment
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Minority Issues" />
+    Minority Issues
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Religious" />
+    Religious
+    </label>
+  </div></td>
 </tr>
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Children" /> 
+    Children</div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Female Issues" />
+    Female Issues
+  </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Office" />
+    Office
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Service Leaders" />
+    Service Leaders
+    </label>
+  </div></td>
 </tr>
 <tr>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Elderly</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Disabilities" /> 
+    Disabilities
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Animals</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Fine Arts" />
+    Fine Arts
+    </label>
+  </div></td>
 <td width="200"><label>
-<div align="center">
-<input type="checkbox" name="selectInterests" value="checkbox" id="selectInterests_0" />
-Outdoors</div>
-</label></td>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Patriotic" />
+    Patriotic
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Technology" />
+    Technology
+    </label>
+  </div></td>
+</tr>
+<tr>  
+  <td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Disasters" />
+    Disasters
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="General Service" />
+    General Service
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Poverty" />
+    Poverty
+    </label>
+  </div></td>
+<td width="200"></td>
+</tr>
+<tr>  
+  <td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Education" />
+    Education
+    </label>
+  </div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="Health" />
+    </label>Health</div></td>
+<td width="200"><label>
+  <div align="left">
+    <input type="checkbox" name="selectInterests" value="checkbox" id="PR" />
+    PR
+    </label>
+  </div></td>
+<td width="200"></td>
 </tr>
 </table>
 </div>
