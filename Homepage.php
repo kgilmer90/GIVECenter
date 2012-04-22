@@ -266,15 +266,6 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <script type="text/javascript" src="js/Navigation.js"></script>
 
-<script language="javascript" type="text/javascript">
-function popitup(url) {
-	newwindow=window.open(url,'name','height=500,width=500');
-	if (window.focus) {newwindow.focus()}
-	return false;
-}
-
-</script>
-
 
 <body onload="init()">
 <div class="container" id="content">

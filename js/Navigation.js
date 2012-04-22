@@ -15,6 +15,12 @@ var LEFT_SIDEBAR_AGENCY = 0;
 var LEFT_SIDEBAR_PROGRAM = 1;
 var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 
+function popitup(url) {
+	newwindow=window.open(url,'name','height=500,width=500');
+	if (window.focus) {newwindow.focus()}
+	return false;
+}
+
 function hidestuff(boxid){
 	
 	if(boxid == 'results') {
@@ -364,7 +370,7 @@ function displayProgramInfo(index) {
 		document.getElementById("display_s_contact_m_phone").innerHTML = (scon.m_phone) ? scon.m_phone : "";
 		document.getElementById("display_s_contact_w_phone").innerHTML = (scon.w_phone && scon.w_phone != 0) ? scon.w_phone : "";
 		document.getElementById("display_s_contact_mail").innerHTML = (scon.mail) ? scon.mail : "";
-		document.getElementById("display_s_contact_fax").innerHTML = (scon.fax) ? scon.fax : "";
+	//	document.getElementById("display_s_contact_fax").innerHTML = (scon.fax) ? scon.fax : "";
 	}
 }
 
@@ -397,7 +403,6 @@ function displayAgencyInfo(index) {
 		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone && pcon.w_phone != 0) ? pcon.w_phone : "";
 		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
 		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
-
 	}
 }
 
