@@ -158,7 +158,7 @@ function advancedSearch() {
 	for(i in matching_issue_ids) {
 		var issue = matching_issue_ids[i];
 		for(j in programs) {
-			var p = programs[j];	
+			var p = programs[j];
 			for(k in p.issues) {
 				var p_issue = p.issues[k];
 				if(issue == p_issue) {
@@ -173,13 +173,9 @@ function advancedSearch() {
 	for(i in matching_program_indices) {
 		var index = matching_program_indices[i];
 		var program = programs[index];
-		for(j in agencies) {
-			var agency = agencies[j];
-			if(agency == program.agency) {
-				matching_agency_indices.push(j);
-			}
-		}
+		matching_agency_indices.push(program.agency.index);
 	}
+	//save the search results
 	agency_search_results = matching_agency_indices;
 	program_search_results = matching_program_indices;
 
@@ -535,9 +531,10 @@ function addAgenciesToLeftSideBar(agencyIndices) {
 	
 	var i;
 	for(i in agencyIndices) {
-		
 		var index = agencyIndices[i];
 		var agency = agencies[index];
+		
+		//alert("Function: addAgencyAgency at index " + index)
 		
 		//create a new <a> tag
 		var a = document.createElement("a");
