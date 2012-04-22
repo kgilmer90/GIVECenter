@@ -533,9 +533,7 @@ function addAgenciesToLeftSideBar(agencyIndices) {
 	for(i in agencyIndices) {
 		var index = agencyIndices[i];
 		var agency = agencies[index];
-		
-		//alert("Function: addAgencyAgency at index " + index)
-		
+				
 		//create a new <a> tag
 		var a = document.createElement("a");
 		
@@ -594,7 +592,6 @@ function initAgenciesAndPrograms() {
 			programs.push(p);
 			p.index = programs.length - 1;
 		}
-		i++;
 	}
 	for(i in programs) {
 		program_search_results.push(i);
