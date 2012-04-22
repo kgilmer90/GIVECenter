@@ -326,6 +326,13 @@ function clearLeftSideBar() {
 		removeNode(leftSideBar.childNodes[0]);
 	}
 }
+function clearProgramAgenciesList() {
+	var list = document.getElementById("link_to_prog_agency");
+	
+	while(list.hasChildNodes()) {
+		removeNode(list.childNodes[0]);
+	}
+}
 /**
  * Displays the information contained within a GIVEProgram object at a specified index.
  * @param index - index in the global programs array where the 
@@ -371,6 +378,17 @@ function displayProgramInfo(index) {
 		document.getElementById("display_s_contact_w_phone").innerHTML = (scon.w_phone && scon.w_phone != 0) ? scon.w_phone : "";
 		document.getElementById("display_s_contact_mail").innerHTML = (scon.mail) ? scon.mail : "";
 	//	document.getElementById("display_s_contact_fax").innerHTML = (scon.fax) ? scon.fax : "";
+		
+		//Create agency link at bottom of display page
+		var list = document.getElementById("link_to_prog_agency");
+		var a = document.createElement("a");
+		a.href = "javascript:displayAgencyInfo(" + index + ")";
+		var t = document.createTextNode(p.agency.name);
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		list.appendChild(li);
+		
 	}
 }
 
@@ -568,16 +586,21 @@ function initAgenciesAndPrograms() {
 		
 		//add to global agencies array
 		agencies.push(agency);
+		agency.index = i;
 		agency_search_results.push(i);
 		
 		//each GIVEAgency contains an array of GIVEPrograms
 		//add each agency's programs to the global programs array
 		var j;
 		for(j in agency.programs) {
-			programs.push(agency.programs[j]);
-			program_search_results.push(j);
+			var p = agency.programs[j];
+			programs.push(p);
+			p.index = programs.length - 1;
 		}
 		i++;
+	}
+	for(i in programs) {
+		program_search_results.push(i);
 	}
 }
 /**
@@ -869,6 +892,7 @@ function GIVEAddr(street, city, state, zip) {
 */
 function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, programs) {
 	var agency = {
+		index		: 0,
 		id 			: id, 
 		name		: name, 
 		descript	: descript, 
@@ -944,6 +968,7 @@ function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, ma
 */
 function GIVEProgram (id, referal, season, hours, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
 	var program = {
+		index 		: 0,
 		id 			: id,
 		referal		: referal,
 		season		: season,
