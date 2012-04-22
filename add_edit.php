@@ -65,9 +65,7 @@ if($_POST['update']){     //  EDIT CONDITION
     }
     
     if($_POST['issues_id']){
-        $update['issues'];
-        
-        update_issues($conn, $_POST['issues']);
+        update_issues($conn, $_POST['selectInterests']);
     }
     
     if($_POST['p_contact_id']){
