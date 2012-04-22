@@ -2,6 +2,10 @@
 
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
+var issues = [];		//global issues array, contains all issues
+
+var agency_search_results = [];
+var program_search_results = [];
 
 var DISPLAY_INTERESTS = 0;
 var DISPLAY_RESULTS = 1;
@@ -57,6 +61,7 @@ function clearChoices()
 function init()
 {
 	initAgenciesAndPrograms();
+	initIssues();
 	clearLeftSideBar();
 	
 	left_sidebar_display = LEFT_SIDEBAR_AGENCY;
@@ -95,14 +100,89 @@ function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
 	var t = searchTerms.toLowerCase();
 	return stringSearch(s, t);
 }
-
-function searchInfo() {
+/**
+ * QuickSearch, searches by program or agency name/description
+ * @returns false - so the form submit doesn't reload the page
+ */
+function quickSearch() {
 	if(left_sidebar_display == LEFT_SIDEBAR_AGENCY) {
 		searchAgency(document.getElementById('searchBar').value);
+		
+		clearLeftSideBar();
+		addProgramsToLeftSideBar(program_search_results);
+		if(program_search_results.length > 0) {
+			displayProgramInfo(program_search_results[0]);
+		}	
 	}
 	else if(left_sidebar_display == LEFT_SIDEBAR_PROGRAM) {
 		searchProgram(document.getElementById('searchBar').value);
+		
+		clearLeftSideBar();
+		addAgenciesToLeftSideBar(agency_search_results);
+		if(agency_search_results.length > 0) {
+			displayAgencyInfo(agency_search_results[0]);
+		}
 	}
+	return false;
+}
+/**
+ * AdvancedSearch, searches by selected interests
+ * @returns false - so the form submit doesn't reload the page
+ */
+function advancedSearch() {
+	var matching_issue_ids = [];
+	
+	var matching_agency_indices = [];
+	var matching_program_indices = [];
+	
+	//collect all selected issue ids
+	var i, j, k;
+	for(i in issues) {
+		var issue = issues[i];
+		var checkbox = document.getElementById(issue.name);
+		
+		if(checkbox.checked) {
+			matching_issue_ids.push(issue.id);
+		}
+	}
+	
+	//loop through each program's issues array
+	//if program contains an issue id equal to a checked issue id,
+	//add program's array index to matches
+	for(i in matching_issue_ids) {
+		var issue = matching_issue_ids[i];
+		for(j in programs) {
+			var p = programs[j];	
+			for(k in p.issues) {
+				var p_issue = p.issues[k];
+				if(issue == p_issue) {
+					matching_program_indices.push(j);
+					break;
+				}
+			}
+		}
+	}
+	//loop through each matching program
+	//add program's agency index to matches
+	for(i in matching_program_indices) {
+		var index = matching_program_indices[i];
+		var program = programs[index];
+		for(j in agencies) {
+			var agency = agencies[j];
+			if(agency == program.agency) {
+				matching_agency_indices.push(j);
+			}
+		}
+	}
+	agency_search_results = matching_agency_indices;
+	program_search_results = matching_program_indices;
+
+	clearLeftSideBar();
+	addProgramsToLeftSideBar(program_search_results);
+	if(program_search_results.length > 0) {
+		displayProgramInfo(program_search_results[0]);
+	}
+	
 	return false;
 }
 /**
@@ -145,11 +225,14 @@ function searchProgram(searchTerms) {
 			}
 		}
 	}
+	/*
 	clearLeftSideBar();
 	addProgramsToLeftSideBar(matching_program_indices);
 	if(matching_program_indices.length > 0) {
 		displayProgramInfo(matching_program_indices[0]);
 	}
+	 */
+	program_search_results = matching_program_indices;
 }
 
 /**
@@ -192,11 +275,14 @@ function searchAgency(searchTerms) {
 			}
 		}
 	}
+	/*
 	clearLeftSideBar();
 	addAgenciesToLeftSideBar(matching_agency_indices);
 	if(matching_agency_indices.length > 0) {
 		displayAgencyInfo(matching_agency_indices[0]);
 	}
+	*/
+	agency_search_results = matching_agency_indices;
 }
 
 /**
@@ -314,38 +400,6 @@ function displayAgencyInfo(index) {
 
 	}
 }
-/**
- * Wrapper function around display<Program|Agency>Info() functions.
- * @param objectType - type of function to call, pass 'Program' or 'Agency'
- * to make the appropriate function call
- * @param index - index of the object in the programs or agencies array
- * to display on screen
- */
-function displayInfo(objectType, index) {
-	if(objectType == 'program') {
-		displayProgramInfo(index);
-	}
-	else if(objectType == 'agency') {
-		displayAgencyInfo(index);
-	}
-}
-
-/**
- * Wrapper function around add<Programs|Agencies>ToLeftSideBar() functions.
- * @param objectType - type of function to call, pass 'Programs' or 'Agencies'
- * to make the appropriate function call
- * @param arrayIndicies - array of the indicies within the programs
- * or agencies array to add to the side bar
- */
-function addToLeftSideBar(objectType, arrayIndicies) {
-	
-	if(objectType == 'programs') {
-		addProgramsToLeftSideBar(arrayIndicies);
-	}
-	else if(objectType == 'agencies') {
-		addAgenciesToLeftSideBar(arrayIndicies);
-	}
-}
 
 /**
  * Toggles between displaying programs on the left
@@ -355,12 +409,22 @@ function toggleLeftSideBarDisplay() {
 	if(left_sidebar_display == LEFT_SIDEBAR_AGENCY) {
 		left_sidebar_display = LEFT_SIDEBAR_PROGRAM;
 		document.getElementById('toggle').innerHTML = 'View Agencies';
-		searchProgram();
+		
+		clearLeftSideBar();
+		addProgramsToLeftSideBar(program_search_results);
+		if(program_search_results.length > 0) {
+			displayProgramInfo(program_search_results[0]);
+		}	
 	}
 	else if(left_sidebar_display == LEFT_SIDEBAR_PROGRAM) {
 		left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 		document.getElementById('toggle').innerHTML = 'View Programs';
-		searchAgency();
+		
+		clearLeftSideBar();
+		addAgenciesToLeftSideBar(agency_search_results);
+		if(agency_search_results.length > 0) {
+			displayAgencyInfo(agency_search_results[0]);
+		}
 	}
 }
 
@@ -499,15 +563,47 @@ function initAgenciesAndPrograms() {
 		
 		//add to global agencies array
 		agencies.push(agency);
+		agency_search_results.push(i);
 		
 		//each GIVEAgency contains an array of GIVEPrograms
 		//add each agency's programs to the global programs array
 		var j;
 		for(j in agency.programs) {
 			programs.push(agency.programs[j]);
+			program_search_results.push(j);
 		}
+		
 		i++;
 	}
+}
+/**
+ * Initializes the global issues array
+ */
+function initIssues() {
+	issues = [
+            {id:5,	name:"Alumni"},
+			{id:6,	name:"Animals"},
+			{id:7,	name:"Children"},
+			{id:8,	name:"Disabilities"},
+			{id:9,	name:"Disasters"},
+			{id:10,	name:"Education"},
+			{id:11,	name:"Elderly"},
+			{id:12,	name:"Environment"},
+			{id:13,	name:"Female Issues"},
+			{id:14, name:"Fine Arts"},
+			{id:15,	name:"General Service"},
+			{id:16,	name:"Health"},
+			{id:17,	name:"Male Issues"},
+			{id:18, name:"Minority Issues"},
+			{id:19,	name:"Office"},
+			{id:20,	name:"Patriotic"},
+			{id:21,	name:"Poverty"},
+			{id:22,	name:"PR"},
+			{id:23,	name:"Recreation"},
+			{id:24,	name:"Religious"},
+			{id:25,	name:"Service Leaders"},
+			{id:26,	name:"Technology"}
+			];
 }
 /**
 * Constructs a GIVEAgency object from a table embedded in the HTML.
