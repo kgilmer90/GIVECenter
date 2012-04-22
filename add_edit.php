@@ -2,6 +2,7 @@
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 
 $conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+$update = array();
 
 //to hold various error states
 $error = array();
@@ -61,7 +62,7 @@ if($_POST['update']){     //  EDIT CONDITION
         if($_POST['Hours_1']){array_push($update['hours'], $_POST['Hours_1']);}
         if($_POST['Hours_2']){array_push($update['hours'], $_POST['Hours_2']);}
         if($_POST['Hours_3']){array_push($update['hours'], $_POST['Hours_3']);}
-        update_hours($conn, $_POST['program']['id'], $_POST['hours']);
+        update_hours($conn, $_POST['program_id'], $_POST['hours']);
     }
     
     if($_POST['issues_id']){
@@ -78,7 +79,7 @@ if($_POST['update']){     //  EDIT CONDITION
         $update['p_contact']['mail'] = $_POST['mail'];
         $update['p_contact']['fax'] = $_POST['fax'];
         
-        update_generic($conn, 'pro_contact', $update['p_contact']['id'], $update['p_contact']);
+        update_generic($conn, 'pro_contact', $_POST['program_id'], $update['p_contact']);
     }
     
     if($_POST['program_id']){
@@ -92,7 +93,7 @@ if($_POST['update']){     //  EDIT CONDITION
         $update['program']['notes'];
         $update['program']['duration'];
         
-        update_generic($conn, 'program', $_POST['program']['id'], $_POST['program']);
+        update_generic($conn, 'program', $_POST['program_id'], $_POST['program']);
     }
     
     if($_POST['student_contact_id']){
@@ -114,7 +115,7 @@ if($_POST['update']){     //  EDIT CONDITION
         if($_POST['summer']){array_push($update['season'], $_POST['summer']);}
         if($_POST['fall']){ array_push($update['season'], $_POST['fall']);}
         
-        update_season($conn, $update['program']['id'], $update['season']);
+        update_season($conn, $_POST['program_id'], $update['season']);
     }
 }
 
@@ -159,10 +160,10 @@ elseif ($_POST['add']){
         if($_POST['Hours_2']){array_push($update['hours'], $_POST['Hours_2']);}
         if($_POST['Hours_3']){array_push($update['hours'], $_POST['Hours_3']);}
         
-        create_new_hours($conn, $update['program']['id'], $update['hours']);
+        create_new_hours($conn, $_POST['program_id'], $update['hours']);
     }
     if($_POST['issue']){
-        create_new_issue($conn, $update['program']['id'], $update['issue']);
+        create_new_issue($conn, $_POST['program_id'], $_POST['selectInterests']);
     }
     if($_POST['pro_contact']){
         $update['p_contact']['f_name'] = $_POST['f_name'];
@@ -186,7 +187,7 @@ elseif ($_POST['add']){
         $update['s_contact']['w_name'] = $_POST['s_w_contact'];
         $update['s_contact']['mail'] = $_POST['s_mail'];
         
-        $s_id = create_new_s_contact($conn, $update['s_contact'], $update['program']['id']);
+        $s_id = create_new_s_contact($conn, $update['s_contact'], $_POST['program_id']);
         $update['program']['s_contact'] = $s_id;
     }
     if($_POST['seasons']){
@@ -195,7 +196,7 @@ elseif ($_POST['add']){
         if($_POST['summer']){array_push($update['season'], $_POST['summer']);}
         if($_POST['fall']){ array_push($update['season'], $_POST['fall']);}
         
-        create_new_seasons($conn,$update['program']['id'], $update['season']);
+        create_new_seasons($conn,$_POST['program_id'], $update['season']);
     }
     if($_POST['program']['name']){
         $update['program']['agency'] = $update['agency']['id'];
