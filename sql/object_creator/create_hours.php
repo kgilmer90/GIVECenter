@@ -21,8 +21,10 @@ function create_hours($conn,$program_id)
     if($conn->numRows()==0){
         return null;
     }
-    $results = $conn->fetchAllAsNumeric();
-    
+	$results = array();
+    while($temp = $conn->fetchRowAsAssoc()) {
+    	array_push($results, $temp['id']);
+    }
     return $results;   
 }
 /*

@@ -123,6 +123,17 @@ function searchtoresults()
 }
 function backtosearch()
 {
+	var i;
+	program_search_results = [];
+	for(i in programs) {
+		program_search_results.push(i);
+	}
+	agency_search_results = [];
+	for(i in agencies) {
+		agency_search_results.push(i);
+	}
+	clearLeftSideBar();
+	addAgenciesToLeftSideBar(agency_search_results);
 	showstuff('interests');
 	hidestuff('results');
 }
@@ -218,6 +229,10 @@ function advancedSearch() {
 		if(checkbox.checked) {
 			matching_issue_ids.push(issue.id);
 		}
+	}
+	
+	if(display_mode != DISPLAY_RESULTS) {
+		searchtoresults();
 	}
 	
 	//loop through each program's issues array
@@ -837,21 +852,20 @@ function TableIdToGIVEProgram(table_id) {
 	var id 			= TableDataFromInnerHTML(program_DOM_element.rows[0].innerHTML);
 	var referal 	= TableDataFromInnerHTML(program_DOM_element.rows[1].innerHTML);
 	var season 		= TableDataFromInnerHTML(program_DOM_element.rows[2].innerHTML);
-	var times 		= TableDataFromInnerHTML(program_DOM_element.rows[3].innerHTML);
-	var name 		= TableDataFromInnerHTML(program_DOM_element.rows[4].innerHTML);
-	var descript 	= TableDataFromInnerHTML(program_DOM_element.rows[5].innerHTML);
-	var duration 	= TableDataFromInnerHTML(program_DOM_element.rows[6].innerHTML);
-	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[7].innerHTML);
+	var name 		= TableDataFromInnerHTML(program_DOM_element.rows[3].innerHTML);
+	var descript 	= TableDataFromInnerHTML(program_DOM_element.rows[4].innerHTML);
+	var duration 	= TableDataFromInnerHTML(program_DOM_element.rows[5].innerHTML);
+	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[6].innerHTML);
 	
 	//retrieve the DOM element for the following tables and repeat the process above
-//	var issues 		= TableIdToIssuesArray(table_id + "_issue");
-	var issues = [];
+	var hours 		= TableIdToHoursArray(table_id, + "_hours");
+	var issues 		= TableIdToIssuesArray(table_id + "_issues");
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
 	var s_contact 	= TableIdToGIVEStudentContact(table_id + "_s_contact");
 	
 	//build and return the complete GIVEProgram object
-	return new GIVEProgram(id, referal, season, times, name, descript, duration, notes, issues, addr, null, p_contact, s_contact);
+	return new GIVEProgram(id, referal, season, hours, name, descript, duration, notes, issues, addr, null, p_contact, s_contact);
 }
 /**
 * Constructs a GIVEStudentContact object from a table embedded in the HTML.
@@ -902,6 +916,26 @@ function TableIdToIssuesArray(table_id) {
 		issues_arr.push(issue);
 	}
 	return issues_arr;
+}
+function TableIdToHoursArray(table_id) {
+
+	var hours_arr = [];
+	
+	//retreive the DOM element within the GIVEAgency table id
+	var issue_DOM_element = document.getElementById(table_id);
+	
+	var i;
+	var count = issue_DOM_element.rows.length;
+	for(i = 0; i < count; i++) {
+	
+	//there's no way to reliably retrieve the data in between <td> </td> tags
+	//using DOM element properties. Instead, obtain the innerHTML for the
+	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+	//the <td> </td> tags and obtain the data within
+	var hour = TableDataFromInnerHTML(issue_DOM_element.rows[i].innerHTML);
+		hours_arr.push(hour);
+	}
+	return hours_arr;
 }
 /**
 * In most cases, content within <td> </td> tags could not be extracted

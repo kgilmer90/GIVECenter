@@ -595,7 +595,7 @@ Night</label></td>
 <p>
 </form>
 </div>
-<button onclick="searchtoresults()">Submit</button>
+<button onclick="advancedSearch()">Submit</button>
 <button onclick="clearChoices()"> Clear Choices </button>
 
 </div>
