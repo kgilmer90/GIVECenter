@@ -11,16 +11,17 @@ if(!isset($_SESSION['username'])) {
 }
 
 $conn;
+$banner_path = "img/giveBannerThin.jpg";
 try
 {
 	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+	$banner_path = get_banner_latest($conn);
 }
 catch(MySQLDatabaseConnException $e)
 {
 	header('Location: LoginPage.php?except=conn&code='.$e->code());
 }
 
-$banner_path = get_banner_latest($conn);
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -173,7 +174,9 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   <div class="sidebar1">
     <div align="center">
       <ul class="nav">
-        <li><a href="Admin.php">Admin</a></li>
+        <?php if($_SESSION['admin']) { ?>
+			<li><a href="Admin.php">Admin</a></li> 
+		<?php }?>
         <li><a href="#">Browse All</a></li>
         <li><a href="php/Session/Logout.php">Logout</a></li>
         <li>

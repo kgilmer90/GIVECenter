@@ -14,16 +14,16 @@ else if(!$_SESSION['admin']) {
 }
 
 $conn;
+$banner_path = "img/giveBannerThin.jpg";
 try
 {
 	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+	$banner_path = get_banner_latest($conn);
 }
 catch(MySQLDatabaseConnException $e)
 {
 	header('Location: LoginPage.php?except=conn&code='.$e->code());
 }
-
-$banner_path = get_banner_latest($conn);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

@@ -27,17 +27,15 @@ if(isset($_GET['code'])) {
 }
 
 $conn;
+$banner_path = "img/giveBannerThin.jpg";
 try
 {
 	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+	$banner_path = get_banner_latest($conn);
 }
 catch(MySQLDatabaseConnException $e)
 {
-	//header('Location: LoginPage.php?except=conn&code='.$e->code());
 }
-
-$banner_path = get_banner_latest($conn);
-
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -217,7 +215,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <div class="container">
 
   <div class="content">
-   <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?>alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+   <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">The GIVE Center</h1>
  
