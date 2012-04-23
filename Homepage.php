@@ -1,5 +1,6 @@
 <?php
 include_once('php/GIVE/GIVEToHTML.php');
+include_once('sql/queries/queries.php');
 
 session_start();
 
@@ -9,14 +10,17 @@ if(!isset($_SESSION['username'])) {
 }
 
 $conn;
+$banner_path = "img/giveBannerThin.jpg";
 try
 {
 	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+	$banner_path = get_banner_latest($conn);
 }
 catch(MySQLDatabaseConnException $e)
 {
 	header('Location: LoginPage.php?except=conn&code='.$e->code());
 }
+
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -276,7 +280,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class="sidebar1">
 <div align="center">
 <ul class="nav">
-<li><a href="Admin.php">Admin</a></li>
+<?php if($_SESSION['admin']) { ?>
+	<li><a href="Admin.php">Admin</a></li> 
+<?php }?>
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="php/Session/Logout.php">Logout</a></li>
 <form action="javascript:void(0)" onsubmit="javascript:quickSearch()">
@@ -299,8 +305,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <!-- end .sidebar1 --></div>
 </div>
 <div class="content" id="content">
-<!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1> -->
-<div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+<div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
 <div align="right"><a href="helpPage.html" onclick="return popitup('helpPage.html')"><img src="help.png" alt="helpButton" name="helpButton" width="4%" height="4%" style="padding: 1%;"/></a></div>
 <div class ="results" id="results">
 <div align="left"><a href="javascript:backtosearch()"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
