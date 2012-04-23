@@ -1,4 +1,29 @@
+<?php
+include_once('php/GIVE/GIVEToHTML.php');
+include_once('sql/queries/queries.php');
 
+session_start();
+
+//if not properly logged in, redirect to login page
+if(!isset($_SESSION['admin'])) {
+	header('Location: Homepage.php');
+}
+if(!$_SESSION['admin']) {
+	header('Location: Homepage.php');
+}
+
+$conn;
+try
+{
+	$conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
+}
+catch(MySQLDatabaseConnException $e)
+{
+	header('Location: LoginPage.php?except=conn&code='.$e->code());
+}
+
+$banner_path = get_banner_latest($conn);
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -211,15 +236,12 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <body>
 <div class="container" id="content">
 <div align="center"></div>
-<!-- <div class="header">
-<div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-</div> -->
 <div class="sidebar1">
 <div align="center">
 <ul class="nav">
 <li><a href="Admin.php">Admin</a></li>
 <li><a href="BrowseAll.php">Browse All</a></li>
-<li><a href="Session/Logout.php">Logout</a></li>
+<li><a href="php/Session/Logout.php">Logout</a></li>
 <input type="text" class="hint" value="Search..."
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
     onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
@@ -242,8 +264,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <!-- end .sidebar1 --></div>
 </div>
 <div class="content" id="content">
-<!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1> -->
-<div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+<div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
 <div class ="results" id="results">
 <div align="left"><a href="Admin.php"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <div align="center"></div>
