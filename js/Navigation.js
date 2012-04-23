@@ -382,6 +382,9 @@ function displayProgramInfo(index) {
 		if(display_mode != DISPLAY_RESULTS) {
 			searchtoresults();
 		}
+		if(left_sidebar_display != LEFT_SIDEBAR_PROGRAM) {
+			toggleLeftSideBarDisplay();
+		}
 		var p = programs[index];
 		
 		document.getElementById("display_name").innerHTML = (p.name) ? p.name : "";
@@ -415,16 +418,17 @@ function displayProgramInfo(index) {
 		document.getElementById("display_s_contact_mail").innerHTML = (scon.mail) ? scon.mail : "";
 	//	document.getElementById("display_s_contact_fax").innerHTML = (scon.fax) ? scon.fax : "";
 		
+		clearProgramAgenciesList();
+		
 		//Create agency link at bottom of display page
 		var list = document.getElementById("link_to_prog_agency");
 		var a = document.createElement("a");
-		a.href = "javascript:displayAgencyInfo(" + index + ")";
+		a.href = "javascript:displayAgencyInfo(" + p.agency.index + ")";
 		var t = document.createTextNode(p.agency.name);
 		a.appendChild(t);
 		var li = document.createElement("li");
 		li.appendChild(a);
 		list.appendChild(li);
-		
 	}
 }
 
@@ -439,12 +443,15 @@ function displayAgencyInfo(index) {
 		if(display_mode != DISPLAY_RESULTS) {
 			searchtoresults();
 		}
-		var a = agencies[index];
+		if(left_sidebar_display != LEFT_SIDEBAR_AGENCY) {
+			toggleLeftSideBarDisplay();
+		}
+		var agency = agencies[index];
 		
-		document.getElementById("display_name").innerHTML = (a.name) ? a.name : "";
-		document.getElementById("display_descript").innerHTML = (a.descript) ? a.descript : "";
+		document.getElementById("display_name").innerHTML = (agency.name) ? agency.name : "";
+		document.getElementById("display_descript").innerHTML = (agency.descript) ? agency.descript : "";
 		
-		var pcon = a.p_contact;
+		var pcon = agency.p_contact;
 		
 		var str = (pcon.title) ? pcon.title + " " : "";
 		str += (pcon.f_name) ? pcon.f_name + " " : "";
@@ -457,6 +464,21 @@ function displayAgencyInfo(index) {
 		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone && pcon.w_phone != 0) ? pcon.w_phone : "";
 		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
 		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
+		
+		clearProgramAgenciesList();
+		var i;
+		var list = document.getElementById("link_to_prog_agency");
+		for(i in agency.programs) {
+			
+			var program = agency.programs[i];
+			var a = document.createElement("a");
+			a.href = "javascript:displayProgramInfo(" + program.index + ")";
+			var t = document.createTextNode(program.name);
+			a.appendChild(t);
+			var li = document.createElement("li");
+			li.appendChild(a);
+			list.appendChild(li);
+		}
 	}
 }
 
