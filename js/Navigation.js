@@ -19,25 +19,25 @@ var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 
 function editAgency(getID)
 {
-	location = "editPage.html?mode=edit&what=agency&id=getID";
+	location = "editPage.html?mode=edit&what=agency&id="+ getID;
 
 }
 
 function editProgram(getID)
 {
-	location = "editPage.html?mode=edit&what=program&id=getID";
+	location = "editPage.html?mode=edit&what=program&id="+ getID;
 
 }
 
 function addAgency(getID)
 {
-	location = "editPage.html?mode=add&what=agency&id=getID";
+	location = "editPage.html?mode=add&what=agency&id="+getID;
 
 }
 
 function addProgram(getID)
 {
-	location = "editPage.html?mode=add&what=program&id=getID";
+	location = "editPage.html?mode=add&what=program&id="+getID;
 
 }
 
@@ -143,7 +143,7 @@ function clearChoices()
 	 document.getElementById('form3').reset();
 }
 
-function init()
+function init(what, id)
 {
 	initAgenciesAndPrograms();
 	initIssues();
@@ -154,6 +154,16 @@ function init()
 	
 	showstuff('interests');
 	hidestuff('results');
+	
+	if(what == 'none' || id == -1) {
+		return;
+	}
+	if(what == 'program') {
+		displayProgramInfo(id);
+	}
+	else if(what == 'agency') {
+		displayAgencyInfo(id);
+	}
 }
 
 //**************************************************

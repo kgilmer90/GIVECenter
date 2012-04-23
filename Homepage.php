@@ -9,6 +9,18 @@ if(!isset($_SESSION['username'])) {
 	header('Location: LoginPage.php');
 }
 
+$what = 'none', $id = -1;
+if(isset($_GET['what'])) {
+	if($_GET['what'] == 'program' || $_GET['what'] == 'agency') {
+		$what = $_GET['what'];
+	}
+}
+if(isset($_GET['id'])) {
+	if(is_numeric($_GET['id']){
+		$id = $_GET['id'];
+	}
+}
+
 $conn;
 $banner_path = "img/giveBannerThin.jpg";
 try
@@ -271,7 +283,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <script type="text/javascript" src="js/Navigation.js"></script>
 
 
-<body onload="init()">
+<body onload="init(<?php echo "$what", $id?>)">
 <div class="container" id="content">
 <div align="center"></div>
 <!-- <div class="header">

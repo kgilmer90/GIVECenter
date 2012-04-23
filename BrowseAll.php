@@ -89,7 +89,6 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 .sidebar1 {
 	float: right;
 	width: 12.5%;
-	background-color: #FFF;
 }
 .sidebar2 {
 	float: left;
@@ -97,6 +96,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	padding-top: 90px;
 	background-color: #FF9;
 	background-color: #cccccc;
+	visibility: hidden;
 }
 .content {
 	position: absoulte;
@@ -178,13 +178,13 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 			<li><a href="Admin.php">Admin</a></li> 
 		<?php }?>
         <li><a href="#">Browse All</a></li>
+        <li><a href="Homepage.php">Homepage</a></li>
         <li><a href="php/Session/Logout.php">Logout</a></li>
-        <li>
-          <form id="form2" name="form2" method="post" action="">
-            <label for="search"></label>
-            <input name="search" type="text" id="search" value="Search" />
-          </form>
-        </li>
+        <form action="javascript:void(0)" onsubmit="javascript:quickSearch()">
+			<input type="text" class="hint" value="Search..." name="searchBar" id="searchBar"
+    		onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
+    		onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
+		</form>
       </ul>
       <!-- end .sidebar1 --></div>
   </div>
@@ -207,20 +207,25 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   <div class="content" id="content"> 
     <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
     <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-    <div align="right"><a href="file:///C:/Users/Karen/GIVECenter/html_css/HomepageJS.html"style="color: #009">Return to Advanced Search</a></div>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">Browse All</h1>
     <h1 align="center">&nbsp;</h1>
 
     <div class="agencyColumn" id="agencyColumn">
     <div align="center">
-    Agencies
+    <b>Agencies</b>
+    <ul id="agencyList">
+
+	</ul>
     </div>
     </div>
     
     <div class="programColumn" id="programColumn">
     <div align="center">
-    Programs
+    <b>Programs</b>
+    <ul id="agencyList">
+
+	</ul>
     </div>
     </div>
 
