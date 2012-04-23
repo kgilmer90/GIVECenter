@@ -631,7 +631,7 @@ CREATE TABLE IF NOT EXISTS `program_hours` (
 
 INSERT INTO `program_hours` (`hours_id`, `program_id`) VALUES
 (1, 1),
-(1, 5);
+(1, 4);
 
 -- --------------------------------------------------------
 
@@ -940,4 +940,4 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`uname`, `passwd`) VALUES
 ('admin', '21232f297a57a5a743894a0e4a801fc3'),
-('guest', '');
+('guest', 'd41d8cd98f00b204e9800998ecf8427e');
