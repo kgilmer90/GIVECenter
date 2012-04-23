@@ -302,5 +302,9 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div align="center" class="container"><!-- end .container --></div>
 </div>
+<?php
+	GIVEFetchAndEcho($conn);
+	$conn->close();
+?>
 </body>
 </html>
