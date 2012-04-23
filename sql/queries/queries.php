@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /*
  * QUERIES FOR ADVANCED SEARCH
