@@ -7,16 +7,16 @@
  * @param type $files  $_FILES variable
  */
 function upload_banner($con, $files){
-    if ($files['filename']['error'] === UPLOAD_ERR_OK)
+    if ($files['banner']['error'] === UPLOAD_ERR_OK)
     {
-            $name = "img/".$files['filename']['name'];
-            move_uploaded_file($files['filename']['tmp_name'], $name) or die("bad move");
+            $name = "img/".$files['banner']['name'];
+            move_uploaded_file($files['banner']['tmp_name'], $name) or die("bad move");
             echo "Uploaded image '$name'<br />";
-            update_banner($con, $files['filename']['name']);
+            update_banner($con, $files['banner']['name']);
     }
 
     else {
-        echo "<p> upload error! lol ".$files['filename']['error']."</p>";
+        echo "<p> upload error! lol ".$files['banner']['error']."</p>";
     }
 }
 
