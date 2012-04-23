@@ -184,7 +184,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <![endif]-->
 
 
-<script language="javascript" type="text/javascript"></script>
+<script type="text/javascript" src="js/Navigation.js"></script>
 
 </head>
 
@@ -282,7 +282,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 	<button onclick="addAgency()">Add New Agency</button>
     <p align="center">&nbsp;</p>
 
-    <button onclic="addProgram()">Add New Program</button></div>
+    <button onclick="addProgram()">Add New Program</button></div>
     </div>
   </div>
   <div align="center" class="container"><!-- end .container --></div>

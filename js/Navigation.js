@@ -15,45 +15,73 @@ var LEFT_SIDEBAR_AGENCY = 0;
 var LEFT_SIDEBAR_PROGRAM = 1;
 var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 
+
+
 function editAgency(getID)
 {
 	location = "editPage.html?mode=edit&what=agency&id=getID";
-	document.getElementById("editHeader").innerHTML = "Edit Agency";
-	document.getElementById("agencyDescrip").style.visibility="hidden";
-	document.getElementById("agencyOpt").style.visibility="hidden";
-	document.getElementById("agencyDescrip").style.display="none";
-	document.getElementById("agencyOpt").style.display="none";
+
 }
 
 function editProgram(getID)
 {
 	location = "editPage.html?mode=edit&what=program&id=getID";
-	document.getElementById("editHeader").innerHTML = "Edit Program";
-	document.getElementById("agencyDescrip").style.visibility="visible";
-	document.getElementById("agencyOpt").style.visibility="visible";
-	document.getElementById("agencyDescrip").style.display="block";
-	document.getElementById("agencyOpt").style.display="block";
 
 }
 
 function addAgency(getID)
 {
 	location = "editPage.html?mode=add&what=agency&id=getID";
-	document.getElementById("editHeader").innerHTML = "Edit Program";
-	document.getElementById("agencyDescrip").style.visibility="hidden";
-	document.getElementById("agencyOpt").style.visibility="hidden";
-	document.getElementById("agencyDescrip").style.display="none";
-	document.getElementById("agencyOpt").style.display="none";
+
 }
 
 function addProgram(getID)
 {
 	location = "editPage.html?mode=add&what=program&id=getID";
-	document.getElementById("editHeader").innerHTML = "Edit Program";
-	document.getElementById("agencyDescrip").style.visibility="visible";
-	document.getElementById("agencyOpt").style.visibility="visible";
-	document.getElementById("agencyDescrip").style.display="block";
-	document.getElementById("agencyOpt").style.display="block";
+
+}
+
+function loadEditPage(mode, what, id) //onload editPage
+{
+	if(mode == "edit")
+	{
+		if(what == "program") //edit program
+		{
+			document.getElementById("editHeader").innerHTML = "Edit Program";
+			document.getElementById("agencyDescrip").style.visibility="visible";
+			document.getElementById("agencyOpt").style.visibility="visible";
+			document.getElementById("agencyDescrip").style.display="block";
+			document.getElementById("agencyOpt").style.display="block";
+		}
+		else //edit agency
+		{
+			document.getElementById("editHeader").innerHTML = "Edit Agency";
+			document.getElementById("agencyDescrip").style.visibility="hidden";
+			document.getElementById("agencyOpt").style.visibility="hidden";
+			document.getElementById("agencyDescrip").style.display="none";
+			document.getElementById("agencyOpt").style.display="none";
+		}
+	}
+	else
+	{
+		if(what = "program") //add program
+		{
+			document.getElementById("editHeader").innerHTML = "Add Program";
+			document.getElementById("agencyDescrip").style.visibility="visible";
+			document.getElementById("agencyOpt").style.visibility="visible";
+			document.getElementById("agencyDescrip").style.display="block";
+			document.getElementById("agencyOpt").style.display="block";
+		}
+		else // add agency
+		{
+			document.getElementById("editHeader").innerHTML = "Add Agency";
+			document.getElementById("agencyDescrip").style.visibility="hidden";
+			document.getElementById("agencyOpt").style.visibility="hidden";
+			document.getElementById("agencyDescrip").style.display="none";
+			document.getElementById("agencyOpt").style.display="none";
+		}
+
+	}
 }
 function popitup(url) {
 	newwindow=window.open(url,'name','height=500,width=500');
