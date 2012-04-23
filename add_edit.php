@@ -91,7 +91,7 @@ if($_POST['update']){     //  EDIT CONDITION
         $update['program']['descript'] = $_POST['descript'];
         $update['program']['referal'] = $_POST['ref_type'];
         $update['program']['notes'] = $_POST['notes'];
-        $update['program']['duration'];
+    //    $update['program']['duration'];
         
         update_generic($conn, 'program', $_POST['program_id'], $_POST['program']);
     }
@@ -207,7 +207,7 @@ elseif ($_POST['add']){
         $update['program']['descript'] = $_POST['descript'];
         $update['program']['referal'] = $_POST['ref_type'];
         $update['program']['notes'] = $_POST['notes'];
-        $update['program']['duration'];
+     // $update['program']['duration'];
         
         create_new_program_existing_agency($conn, $update['program']);
     }
