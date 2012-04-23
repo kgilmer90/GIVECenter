@@ -780,6 +780,47 @@ function addProgramsToBrowseAll() {
 		list.appendChild(li);
 	}
 }
+
+function initAdmin() {
+	alert('You have selected the "Administrator" option. Use this option only to add, delete, or edit programs or agencies and their descriptions.');
+	initAdminAgencyDropdown();
+	initAdminProgramDropdown();
+}
+
+function initAdminAgencyDropdown() {
+	var dropdown = document.getElementById("agencyDropdown");
+	dropdown.options.length = 0;
+	
+	var options = array();
+	
+	var i;
+	for(i in agencies) {
+		var agency = agencies[i];
+		options.append(new Option(agency.name));
+	}
+	for(i in options) {
+		var option = options[i];
+		dropdown.append(option);
+	}
+}
+
+function initAdminProgramDropdown() {
+	var dropdown = document.getElementById("programDropdown");
+	dropdown.options.length = 0;
+	
+	var options = array();
+	
+	var i;
+	for(i in programs) {
+		var program = programs[i];
+		options.append(new Option(program.name));
+	}
+	for(i in options) {
+		var option = options[i];
+		dropdown.append(option);
+	}
+}
+
 /**
 * Constructs a GIVEAgency object from a table embedded in the HTML.
 * @param table_id - table's id property so that the DOM element can be retrieved
