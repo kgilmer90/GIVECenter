@@ -13,7 +13,7 @@
  */
 function create_hours($conn,$program_id)
 {
-    $query = "SELECT hours.id,hours.hours
+    $query = "SELECT hours.id
         FROM hours,program_hours
         WHERE program_hours.program_id = $program_id AND program_hours.hours_id = hours.id";
     $conn->query($query);
@@ -21,9 +21,9 @@ function create_hours($conn,$program_id)
     if($conn->numRows()==0){
         return null;
     }
-    $results = $conn->fetchAllAsAssoc();
+    $results = $conn->fetchAllAsNumeric();
     
-    return $results;    
+    return $results;   
 }
 /*
 CREATE TABLE program_hours(
