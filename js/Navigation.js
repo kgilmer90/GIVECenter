@@ -17,32 +17,36 @@ var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 
 
 
-function editAgency(getID)
+function editAgency()
 {
-	location = "editPage.html?mode=edit&what=agency&id="+ getID;
-
+	var getID = document.getElementById("agencyDropdown").selectedIndex;
+	location = "EditPage.php?mode=edit&what=agency&id="+ getID;
 }
 
-function editProgram(getID)
+function editProgram()
 {
-	location = "editPage.html?mode=edit&what=program&id="+ getID;
-
+	var getID = document.getElementById("programDropdown").selectedIndex;
+	location = "EditPage.php?mode=edit&what=program&id="+ getID;
 }
 
-function addAgency(getID)
+function addAgency()
 {
-	location = "editPage.html?mode=add&what=agency&id="+getID;
-
+	location = "EditPage.php?mode=add&what=agency";
 }
 
-function addProgram(getID)
+function addProgram()
 {
-	location = "editPage.html?mode=add&what=program&id="+getID;
-
+	location = "EditPage.php?mode=add&what=program";
 }
 
 function loadEditPage(mode, what, id) //onload editPage
 {
+	initAgenciesAndPrograms();
+	
+	if(mode == 'none' || what == 'none' || id == -1) {
+		return;
+	}
+	
 	if(mode == "edit")
 	{
 		if(what == "program") //edit program
@@ -741,6 +745,87 @@ function initIssues() {
 			{id:26,	name:"Technology"}
 			];
 }
+function initBrowseAll() {
+	initAgenciesAndPrograms();
+	addAgenciesToBrowseAll();
+	addProgramsToBrowseAll();
+}
+function addAgenciesToBrowseAll() {
+	
+	var list = document.getElementById("agencyList");
+	
+	var i;
+	for(i in agencies) {
+		
+		var agency = agencies[i];
+		var a = document.createElement("a");
+		a.href = "Homepage.php?what=agency&id="+i;
+		var t = document.createTextNode(agency.name);
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		list.appendChild(li);
+	}
+}
+function addProgramsToBrowseAll() {
+	
+	var list = document.getElementById("programList");
+	
+	var i;
+	for(i in programs) {
+		
+		var program = programs[i];
+		var a = document.createElement("a");
+		a.href = "Homepage.php?what=program&id="+i;
+		var t = document.createTextNode(program.name);
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		list.appendChild(li);
+	}
+}
+
+function initAdmin() {
+	alert('You have selected the "Administrator" option. Use this option only to add, delete, or edit programs or agencies and their descriptions.');
+	initAgenciesAndPrograms();
+	initAdminAgencyDropdown();
+	initAdminProgramDropdown();
+}
+
+function initAdminAgencyDropdown() {
+	var dropdown = document.getElementById("agencyDropdown");
+	dropdown.options.length = 0;
+	
+	var options = [];
+	
+	var i;
+	for(i in agencies) {
+		var agency = agencies[i];
+		options.push(new Option(agency.name));
+	}
+	for(i in options) {
+		var option = options[i];
+		dropdown.add(option, null);
+	}
+}
+
+function initAdminProgramDropdown() {
+	var dropdown = document.getElementById("programDropdown");
+	dropdown.options.length = 0;
+	
+	var options = [];
+	
+	var i;
+	for(i in programs) {
+		var program = programs[i];
+		options.push(new Option(program.name));
+	}
+	for(i in options) {
+		var option = options[i];
+		dropdown.add(option, null);
+	}
+}
+
 /**
 * Constructs a GIVEAgency object from a table embedded in the HTML.
 * @param table_id - table's id property so that the DOM element can be retrieved

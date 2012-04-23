@@ -196,12 +196,10 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 </style>
 <![endif]-->
 
-
 <script type="text/javascript" src="js/Navigation.js"></script>
-
 </head>
 
-<body onload="alert('You have selected the &quot;Administrator&quot; option. Use this option only to add, delete, or edit programs or agencies and their descriptions.')"><div class="container" id="content">
+<body onload="initAdmin()"><div class="container" id="content">
   <div align="center"></div>
   <div class="sidebar1">
     <div align="center">
@@ -246,13 +244,15 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     <div align="center">Select Agency to Edit
         <p align="center">&nbsp;</p>
 
-    <select>
+    <select id="agencyDropdown">
+    <!-- 
     	<option>Agency1</option>
     	<option>Agency2</option>
         <option>Agency3</option>
     	<option>Agency4</option>
         <option>Agency5</option>
     	<option>Agency6</option>
+     -->
     </select>
     	<p align="center">&nbsp;</p>
     	<p align="center">&nbsp;</p>
@@ -269,13 +269,15 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     <div align="center">Select Program to Edit
     	<p align="center">&nbsp;</p>
 
-        <select>
+        <select id="programDropdown">
+        <!-- 
     	<option>Program1</option>
     	<option>Program2</option>
         <option>Program3</option>
     	<option>Program4</option>
         <option>Program5</option>
     	<option>Program6</option>
+     	-->
     </select>
         	<p align="center">&nbsp;</p>
     	<p align="center">&nbsp;</p>
@@ -300,5 +302,9 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div align="center" class="container"><!-- end .container --></div>
 </div>
+<?php
+	GIVEFetchAndEcho($conn);
+	$conn->close();
+?>
 </body>
 </html>

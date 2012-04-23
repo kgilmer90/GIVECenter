@@ -12,6 +12,26 @@ if(!$_SESSION['admin']) {
 	header('Location: Homepage.php');
 }
 
+$mode = 'none';
+$what = 'none';
+$id = -1;
+if(isset($_GET['mode'])) {
+	if($_GET['mode'] == 'add' || $_GET['mode'] == 'edit') {
+		$mode = $_GET['mode'];
+	}
+}
+if(isset($_GET['what'])) {
+	if($_GET['what'] == 'program' || $_GET['what'] == 'agency') {
+		$what = $_GET['what'];
+	}
+}
+if(isset($_GET['id'])) {
+	if(is_numeric($_GET['id'])) {
+		$id = $_GET['id'];
+	}
+}
+
+
 $conn;
 $banner_path = "img/giveBannerThin.jpg";
 try
@@ -106,7 +126,6 @@ position: absoulte;
 width: 75%;
 float: left;
 background-image: url(img/gradientHORIZ.png);
-height: 100%;
 }
 .results {
 width: 100%;
@@ -233,7 +252,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <script type="text/javascript" src="js/Navigation.js"></script>
 
-<body>
+<body onload="loadEditPage(<?php echo "'$mode', '$what', $id"; ?>)">
 <div class="container" id="content">
 <div align="center"></div>
 <div class="sidebar1">
@@ -268,7 +287,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class ="results" id="results">
 <div align="left"><a href="Admin.php"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <div align="center"></div>
-<h1 id="editHeader" align="center">jjj</h1>
+<h1 id="editHeader" align="center"></h1>
 <div class="topRow">
 <div class="column1">
 <label>
@@ -438,7 +457,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td><input name="zip" id="zip" type="text" size="5" /></td>
   </tr>
 </table>
-</label>
+</label></div>
 
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p></div></div></div>
@@ -664,5 +683,9 @@ Night</label></td>
 </div>
 </div>
 <div align="center" class="container"><!-- end .container --></div>
+<?php
+	GIVEFetchAndEcho($conn);
+	$conn->close();
+?>
 </body>
 </html>
