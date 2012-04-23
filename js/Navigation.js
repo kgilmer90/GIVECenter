@@ -17,32 +17,36 @@ var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 
 
 
-function editAgency(getID)
+function editAgency()
 {
-	location = "editPage.html?mode=edit&what=agency&id="+ getID;
-
+	var getID = document.getElementById("agencyDropdown").selectedIndex;
+	location = "EditPage.php?mode=edit&what=agency&id="+ getID;
 }
 
-function editProgram(getID)
+function editProgram()
 {
-	location = "editPage.html?mode=edit&what=program&id="+ getID;
-
+	var getID = document.getElementById("programDropdown").selectedIndex;
+	location = "EditPage.php?mode=edit&what=program&id="+ getID;
 }
 
-function addAgency(getID)
+function addAgency()
 {
-	location = "editPage.html?mode=add&what=agency&id="+getID;
-
+	location = "EditPage.php?mode=add&what=agency";
 }
 
-function addProgram(getID)
+function addProgram()
 {
-	location = "editPage.html?mode=add&what=program&id="+getID;
-
+	location = "EditPage.php?mode=add&what=program";
 }
 
 function loadEditPage(mode, what, id) //onload editPage
 {
+	initAgenciesAndPrograms();
+	
+	if(mode == 'none' || what == 'none' || id == -1) {
+		return;
+	}
+	
 	if(mode == "edit")
 	{
 		if(what == "program") //edit program
@@ -783,6 +787,7 @@ function addProgramsToBrowseAll() {
 
 function initAdmin() {
 	alert('You have selected the "Administrator" option. Use this option only to add, delete, or edit programs or agencies and their descriptions.');
+	initAgenciesAndPrograms();
 	initAdminAgencyDropdown();
 	initAdminProgramDropdown();
 }
@@ -791,16 +796,16 @@ function initAdminAgencyDropdown() {
 	var dropdown = document.getElementById("agencyDropdown");
 	dropdown.options.length = 0;
 	
-	var options = array();
+	var options = [];
 	
 	var i;
 	for(i in agencies) {
 		var agency = agencies[i];
-		options.append(new Option(agency.name));
+		options.push(new Option(agency.name));
 	}
 	for(i in options) {
 		var option = options[i];
-		dropdown.append(option);
+		dropdown.add(option, null);
 	}
 }
 
@@ -808,16 +813,16 @@ function initAdminProgramDropdown() {
 	var dropdown = document.getElementById("programDropdown");
 	dropdown.options.length = 0;
 	
-	var options = array();
+	var options = [];
 	
 	var i;
 	for(i in programs) {
 		var program = programs[i];
-		options.append(new Option(program.name));
+		options.push(new Option(program.name));
 	}
 	for(i in options) {
 		var option = options[i];
-		dropdown.append(option);
+		dropdown.add(option, null);
 	}
 }
 
