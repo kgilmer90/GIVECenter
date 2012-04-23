@@ -254,7 +254,6 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <body onload="loadEditPage(<?php echo "'$mode', '$what', $id"; ?>)">
 <div class="container" id="content">
-<div align="center"></div>
 <div class="sidebar1">
 <div align="center">
 <ul class="nav">
@@ -284,9 +283,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </div>
 <div class="content" id="content">
 <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-<div class ="results" id="results">
 <div align="left"><a href="Admin.php"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
-<div align="center"></div>
 <h1 id="editHeader" align="center"></h1>
 <div class="topRow">
 <div class="column1">
@@ -460,9 +457,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </label>
 
 <p align="center">&nbsp; </p>
-<p align="center">&nbsp;</p></div></div></div>
-<div class="getInterests">
-	<h1 align="center">&nbsp;</h1>
+<p align="center">&nbsp;</p></div></div>
     <div align="center">
 <label><b>Select Up to 3 Interests Associated:</b></label>
 <form id="form1" name="form1" method="post" action="">
@@ -639,7 +634,7 @@ Evening</label></td>
 Night</label></td>
 </tr>
 </table>
-</form></div></div></div>
+</form></div></div>
   <div class = "column4">
 <label><b>Select All Hours Available:</b></label>
 <form id="form5" name="form3" method="post" action="">
@@ -679,7 +674,6 @@ Night</label></td>
 </div>
 </p>
 </p>
-</div>
 </div>
 </div>
 <div align="center" class="container"><!-- end .container --></div>
