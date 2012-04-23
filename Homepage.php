@@ -195,6 +195,8 @@ input.hint {
     color: grey;
 }
 
+.table1{font-family:Arial; font-size:11pt;}	
+
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
 padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
@@ -327,9 +329,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class="column1"><b>
 <p align="center">&nbsp;</p>
 <p align="center" id="descript">Description</p></b>
-<div align="left">
+<div align="left"><div class="table1">
 <p id="display_descript">
-</p>
+</p></div>
 
 </div>
 </div>
@@ -340,7 +342,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <label>
 </label>
 </b>
-<table width="400" border="0">
+<table class="table1" width="400" border="0">
   <tr>
     <td>Name: </td>
     <td id="display_p_contact_name"></td>
@@ -378,7 +380,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <label>
 </label>
 </b>
-<table width="400" border="0">
+<table class="table1" width="400" border="0">
   <tr>
     <td>Name: </td>
     <td id="display_s_contact_name"></td>
@@ -410,9 +412,10 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <p align="center">&nbsp;</p>
 <p align="center" id="display_address">Address</p></b>
 <div align="left">
+<div class = "table1">
 <p id="display_address_street">
 <p id="display_address_city">
-
+</div>
 </p></div>
 </div>
 </p>
