@@ -1,6 +1,7 @@
 <?php 
 session_start();
 
+include_once('php/GIVE/GIVEToHTML.php');
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once('sql/queries/queries.php');
 include_once('php/ini/GIVECenterIni.php');
@@ -103,7 +104,6 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	width: 75%;
 	float: left;
 	background-image: url(img/gradientHORIZ.png);
-	height: 100%;
 }
 
 .agencyColumn {
@@ -162,10 +162,10 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it needs to correct extra whiltespace between the links */
 </style>
 <![endif]-->
-
+<script type="text/javascript" src="js/Navigation.js"></script>
 </head>
 
-<body>
+<body onload="initBrowseAll()">
 <div class="container" id="content">
   <div align="center"></div>
   <!-- <div class="header">
@@ -223,7 +223,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     <div class="programColumn" id="programColumn">
     <div align="center">
     <b>Programs</b>
-    <ul id="agencyList">
+    <ul id="programList">
 
 	</ul>
     </div>
@@ -234,5 +234,9 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div align="center" class="container"><!-- end .container --></div>
 </div>
+<?php
+	GIVEFetchAndEcho($conn);
+	$conn->close();
+?>
 </body>
 </html>

@@ -741,6 +741,45 @@ function initIssues() {
 			{id:26,	name:"Technology"}
 			];
 }
+function initBrowseAll() {
+	initAgenciesAndPrograms();
+	addAgenciesToBrowseAll();
+	addProgramsToBrowseAll();
+}
+function addAgenciesToBrowseAll() {
+	
+	var list = document.getElementById("agencyList");
+	
+	var i;
+	for(i in agencies) {
+		
+		var agency = agencies[i];
+		var a = document.createElement("a");
+		a.href = "Homepage.php?what=agency&id="+i;
+		var t = document.createTextNode(agency.name);
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		list.appendChild(li);
+	}
+}
+function addProgramsToBrowseAll() {
+	
+	var list = document.getElementById("programList");
+	
+	var i;
+	for(i in programs) {
+		
+		var program = programs[i];
+		var a = document.createElement("a");
+		a.href = "Homepage.php?what=program&id="+i;
+		var t = document.createTextNode(program.name);
+		a.appendChild(t);
+		var li = document.createElement("li");
+		li.appendChild(a);
+		list.appendChild(li);
+	}
+}
 /**
 * Constructs a GIVEAgency object from a table embedded in the HTML.
 * @param table_id - table's id property so that the DOM element can be retrieved
