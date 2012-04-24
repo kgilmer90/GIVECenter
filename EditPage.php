@@ -457,7 +457,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td><input name="zip" id="zip" type="text" size="5" /></td>
   </tr>
 </table>
-</label></div>
+</label>
 
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p></div></div></div>
