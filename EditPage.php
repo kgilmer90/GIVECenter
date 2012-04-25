@@ -168,7 +168,8 @@ padding: 2%;
 }
 .getInterests
 {
-	width: 100%;
+	width: 90%;
+	padding:10%
 }
 input.hint
 {
@@ -459,8 +460,10 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <p align="center">&nbsp;</p></div></div>
 <div class = "getInterests">
     <div align="center">
-<label><b>Select Up to 3 Interests Associated:</b></label>
+    
 <form id="form1" name="form1" method="post" action="">
+<label><b>Select Up to 3 Interests Associated:</b></label>
+
 <table class="form1">
 <tr>
 <td width="200"><label>
