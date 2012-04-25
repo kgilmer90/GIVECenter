@@ -68,37 +68,22 @@ function update_banner_simple($files){
         Select File: <input type='file' name='banner' size='10' />
         <input type='submit' value='Upload' />
     </form>
- */
-    
-echo <<<_END
-    <html><head><title>PHP Form Upload</title></head><body>
-_END;
+    */
 
 
-if(count($files)){
-    if($files['banner']['type']!= 'image/jpeg') 
-        die ("<p>File must be a jpg<br/>
-                ".$files['banner']['type']."</p></body></html>");
-    
-    $path = '../../img/give_banner.jpg';
-    echo '<p>'.$path.'</p>';
-    
-    echo "<pre>";
-        print_r ($files);
-    echo "</pre>";
-    
-    
-    if(!copy($files['banner']['tmp_name'], $path) ){ 
-        echo "error ".$files['banner']['error'];
-    }
-    else{
-        echo "<img src=$path id='banner' ></img>";
-    }
-}   
+    if(count($files)){
+        if($files['banner']['type']!= 'image/jpeg') 
+            header('../../admin.php?error=bad_file_type');
 
-echo "</body></html>";
+        $path = '../../img/give_banner.jpg';
 
-header('../Admin.php');
+        if(!copy($files['banner']['tmp_name'], $path) ){ 
+            header('../../admin.php?error='.$files['banner']['error'].'copy_fail');
+        }
+        else{
+            header('../../admin.php');
+        }
+    }   
 }
-
+s
 ?>
