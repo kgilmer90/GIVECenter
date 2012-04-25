@@ -287,7 +287,6 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <h1 id="editHeader" align="center"></h1>
 <div class="topRow">
 <div class="column1">
-<form action="" method="post" name="editDBform">
 <label>
 <p align="center">&nbsp;</p>
 <table width="400" border="0">
@@ -330,6 +329,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <p align="center">&nbsp;</p>
 <div align="center"><strong>Referral Type:</strong>
+<form id="form2" name="form2" method="post" action="">
   <table width="100">
     <tr>
       <td><label>
@@ -342,7 +342,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
         Limited</label></td>
     </tr>
   </table>
-</div>
+</form></div>
 <p align="center">&nbsp;</p>
 
 
@@ -461,6 +461,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class = "getInterests">
     <div align="center">
     
+<form id="form1" name="form1" method="post" action="">
 <label><b>Select Up to 3 Interests Associated:</b></label>
 
 <table class="form1">
@@ -606,12 +607,14 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <td width="200"></td>
 </tr>
 </table>
+</form>
 <div class ="layers">
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p>
 <div class = "column3">
 <div align="center">
 <label><b>Select All Hours Available:</b></label>
+<form id="form3" name="form3" method="post" action="">
 <table width="150" class="form3">
 <tr>
 <td><label>
@@ -634,9 +637,10 @@ Evening</label></td>
 Night</label></td>
 </tr>
 </table>
-</div></div>
+</form></div></div>
   <div class = "column4">
 <label><b>Select All Hours Available:</b></label>
+<form id="form5" name="form3" method="post" action="">
 <table width="150" class="form3">
       <tr>
         <td><div align="left">
@@ -661,7 +665,7 @@ Night</label></td>
       </tr>
     </table>
 
-</div>
+</form></div>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
@@ -669,7 +673,7 @@ Night</label></td>
   <input type="submit" value="Save Changes" />
   <br />
 <input type="button" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="alert('Are you sure you want to permanently DELETE this program/agency?')"></div>
-</form>
+
 </div></div>
 </p>
 </p>
