@@ -21,6 +21,9 @@ function update_banner_old($conn,$post){
         FROM image_paths
         WHERE id = ".$post['id'];
     $conn->query($query3);
+    if($conn->fetchRows() == 0)
+        header('../../Admin.php?error=bad_id');
+    
     $file = $conn->fetchRowAsAssoc();
     
     $query4 = "UPDATE image_paths
@@ -31,6 +34,8 @@ function update_banner_old($conn,$post){
     $query5 = "DELETE FROM image_paths
         WHERE id = ".$post['id'];  
     $conn->query($query5);
+    
+    header('../../Admin.php');
 }
 
 function get_banners($conn){
@@ -42,12 +47,6 @@ function get_banners($conn){
     
     $banners = $conn->fetchAllAsAssoc();
     
-    foreach($banners as $temp){
-        echo "<img src=".$temp['path'].">".$temp['id']."</img>";
-        
-    // or
-        
     return $banners;
-    }
 }
 ?>
