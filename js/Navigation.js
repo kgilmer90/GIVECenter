@@ -97,6 +97,8 @@ function fillEditPageForm(what, id) {
 	var descript = document.getElementById('descript');
 	var ref_type_full = document.getElementById('ref_type_full');
 	var ref_type_lim = document.getElementById('ref_type_lim');
+	
+	var p_contact_id = document.getElementById('p_contact_id');
 	var title = document.getElementById('title');
 	var f_name = document.getElementById('f_name');
 	var l_name = document.getElementById('l_name');
@@ -107,6 +109,7 @@ function fillEditPageForm(what, id) {
 	var mail = document.getElementById('mail');
 	var fax = document.getElementById('fax');
 	
+	var s_contact_id = document.getElementById('s_contact_id');
 	var s_f_name = document.getElementById('s_f_name');
 	var s_l_name = document.getElementById('s_l_name');
 	var s_m_name = document.getElementById('s_m_name');
@@ -114,6 +117,7 @@ function fillEditPageForm(what, id) {
 	var s_w_phone= document.getElementById('s_w_phone');
 	var s_mail = document.getElementById('s_mail');
 	
+	var addr_id = document.getElementById('addr_id');
 	var street = document.getElementById('street');
 	var city = document.getElementById('city');
 	var state_us = document.getElementById('state_us');
@@ -125,26 +129,29 @@ function fillEditPageForm(what, id) {
 		elem = agencies[id];
 		
 		fax.value = elem.fax;
+		document.getElementById('agency_id').value = elem.id;
+		document.getElementById('program_id').value = -1;
 	}
 	else if(what == 'program') {
 		elem = programs[id];
 		
+		s_contact_id.value = elem.s_contact.id;
 		s_f_name.value = elem.s_contact.f_name;
 		s_l_name.value = elem.s_contact.l_name;
 		s_f_name.value = elem.s_contact.f_name;
 		s_m_phone.value = elem.s_contact.m_phone;
 		s_w_phone.value = elem.s_contact.w_phone;
 		s_mail.value = elem.s_contact.mail;
+		
+		document.getElementById('agency_id').value = -1;
+		document.getElementById('program_id').value = elem.id;
 	}
 	
+	prog_agency_id.value = elem.id
 	name.value = elem.name;
 	descript.value = elem.descript;
 	
-	street.value = elem.addr.street;
-	city.value = elem.addr.city;
-	state_us.value = elem.addr.state_us;
-	zip.value = elem.addr.zip;
-	
+	p_contact_id.value = elem.p_contact.id;
 	f_name.value = elem.p_contact.f_name;
 	m_name.value = elem.p_contact.m_name;
 	l_name.value = elem.p_contact.l_name;
@@ -153,6 +160,12 @@ function fillEditPageForm(what, id) {
 	w_phone.value = elem.p_contact.w_phone;
 	m_phone.value = elem.p_contact.m_phone;
 	mail.value = elem.p_contact.mail;
+	
+	addr_id.value = elem.addr.id;
+	street.value = elem.addr.street;
+	city.value = elem.addr.city;
+	state_us.value = elem.addr.state_us;
+	zip.value = elem.addr.zip;
 	
 }
 function popitup(url) {
