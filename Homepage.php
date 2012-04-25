@@ -113,7 +113,7 @@ width: 12.5%;
 	height: 400px;
 }
 .content {
-position: absoulte;
+/* position: absolute; */
 width: 75%;
 float: left;
 background-image: url(img/gradientHORIZ.png);

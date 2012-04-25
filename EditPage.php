@@ -122,7 +122,7 @@ background-color: #FF9;
 background-color: #cccccc;
 }
 .content {
-position: absoulte;
+/* position: absoulte; */
 width: 75%;
 float: left;
 background-image: url(img/gradientHORIZ.png);

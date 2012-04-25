@@ -946,13 +946,14 @@ function TableIdToGIVEAddr(table_id) {
 	//using DOM element properties. Instead, obtain the innerHTML for the
 	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
 	//the <td> </td> tags and obtain the data within
-	var street 		= TableDataFromInnerHTML(addr_DOM_element.rows[0].innerHTML);
-	var city 		= TableDataFromInnerHTML(addr_DOM_element.rows[1].innerHTML);
-	var state_us 	= TableDataFromInnerHTML(addr_DOM_element.rows[2].innerHTML);
-	var zip 		= TableDataFromInnerHTML(addr_DOM_element.rows[3].innerHTML);
+	var id 			= TableDataFromInnerHTML(addr_DOM_element.rows[0].innerHTML);
+	var street 		= TableDataFromInnerHTML(addr_DOM_element.rows[1].innerHTML);
+	var city 		= TableDataFromInnerHTML(addr_DOM_element.rows[2].innerHTML);
+	var state_us 	= TableDataFromInnerHTML(addr_DOM_element.rows[3].innerHTML);
+	var zip 		= TableDataFromInnerHTML(addr_DOM_element.rows[4].innerHTML);
 	
 	//build and return the complete GIVEAddr object
-	return new GIVEAddr(street, city, state_us, zip);
+	return new GIVEAddr(id, street, city, state_us, zip);
 }
 /**
 * Constructs a GIVEAProContact object from a table embedded in the HTML.
@@ -968,17 +969,18 @@ function TableIdToGIVEProContact(table_id) {
 	//using DOM element properties. Instead, obtain the innerHTML for the
 	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
 	//the <td> </td> tags and obtain the data within
-	var title 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[0].innerHTML);
-	var l_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[1].innerHTML);
-	var f_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[2].innerHTML);
-	var m_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[3].innerHTML);
-	var suf 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[4].innerHTML);
-	var w_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[5].innerHTML);
-	var m_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[6].innerHTML);
-	var mail 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[7].innerHTML);
+	var id			= TableDataFromInnerHTML(p_contact_DOM_element.rows[0].innerHTML);
+	var title 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[1].innerHTML);
+	var l_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[2].innerHTML);
+	var f_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[3].innerHTML);
+	var m_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[4].innerHTML);
+	var suf 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[5].innerHTML);
+	var w_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[6].innerHTML);
+	var m_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[7].innerHTML);
+	var mail 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[8].innerHTML);
 	
 	//build and return the complete GIVEProContact object
-	return new GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
+	return new GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 /**
 * Constructs an array of GIVEProgram objects from a table embedded in the HTML.
@@ -1044,16 +1046,17 @@ function TableIdToGIVEStudentContact(table_id) {
 	//using DOM element properties. Instead, obtain the innerHTML for the
 	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
 	//the <td> </td> tags and obtain the data within
-	var l_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[0].innerHTML);
-	var f_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[1].innerHTML);
-	var m_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[2].innerHTML);
-	var suf 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[3].innerHTML);
-	var w_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[4].innerHTML);
-	var m_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[5].innerHTML);
-	var mail 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[6].innerHTML);
+	var id 			= TableDataFromInnerHTML(s_contact_DOM_element.rows[0].innerHTML);
+	var l_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[1].innerHTML);
+	var f_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[2].innerHTML);
+	var m_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[3].innerHTML);
+	var suf 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[4].innerHTML);
+	var w_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[5].innerHTML);
+	var m_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[6].innerHTML);
+	var mail 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[7].innerHTML);
 	
 	//build and return the complete GIVEStudentContact object
-	return new GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail);
+	return new GIVEStudentContact(id, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 /**
 * Constructs an array of string objects from a table embedded in the HTML.
@@ -1144,8 +1147,9 @@ function TableDataFromInnerHTML(innerHTML) {
 * @param string zip - US zipcode
 * @return GIVEAddr object with fields initialized to function arguments
 */
-function GIVEAddr(street, city, state, zip) {
+function GIVEAddr(id, street, city, state, zip) {
 	var addr = {
+		id			: id,
 		street 		: street,
 		city 		: city,
 		state_us 	: state,
@@ -1212,8 +1216,9 @@ function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, progr
 * @param string mail - contact person's email address
 * @return GIVEProContact object with fields initialized to function arguments
 */
-function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
+function GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
 	var pcon = {
+		id		: id,
 		title 	: title,
 		l_name 	: l_name,
 		f_name	: f_name,
@@ -1295,8 +1300,9 @@ function GIVEProgram (id, referal, season, hours, name, descript, duration, note
 * @param string mail - contact person's email address
 * @return GIVEStudentContact object with fields initialized to function arguments
 */
-function GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
+function GIVEStudentContact(id, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
 	var scon = {
+		id		: id,
 		l_name 	: l_name,
 		f_name	: f_name,
 		m_name	: m_name,
