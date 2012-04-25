@@ -169,7 +169,6 @@ padding: 2%;
 .getInterests
 {
 	width: 100%;
-	height: 50%;
 }
 input.hint
 {
@@ -458,6 +457,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p></div></div>
+<div class = "getInterests">
     <div align="center">
 <label><b>Select Up to 3 Interests Associated:</b></label>
 <form id="form1" name="form1" method="post" action="">
@@ -671,7 +671,7 @@ Night</label></td>
   <br />
 <input type="button" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="alert('Are you sure you want to permanently DELETE this program/agency?')"></div>
 
-</div>
+</div></div>
 </p>
 </p>
 </div>
