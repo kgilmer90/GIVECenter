@@ -56,6 +56,8 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyOpt").style.visibility="visible";
 			document.getElementById("agencyDescrip").style.display="block";
 			document.getElementById("agencyOpt").style.display="block";
+			
+			fillEditPageForm('program', id);
 		}
 		else //edit agency
 		{
@@ -64,6 +66,8 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyOpt").style.visibility="hidden";
 			document.getElementById("agencyDescrip").style.display="none";
 			document.getElementById("agencyOpt").style.display="none";
+			
+			fillEditPageForm('agency', id);
 		}
 	}
 	else
@@ -86,6 +90,70 @@ function loadEditPage(mode, what, id) //onload editPage
 		}
 
 	}
+}
+function fillEditPageForm(what, id) {
+	
+	var name = document.getElementById('name');
+	var descript = document.getElementById('descript');
+	var ref_type_full = document.getElementById('ref_type_full');
+	var ref_type_lim = document.getElementById('ref_type_lim');
+	var title = document.getElementById('title');
+	var f_name = document.getElementById('f_name');
+	var l_name = document.getElementById('l_name');
+	var m_name = document.getElementById('m_name');
+	var suf = document.getElementById('suf');
+	var m_phone = document.getElementById('m_phone');
+	var w_phone = document.getElementById('w_phone');
+	var mail = document.getElementById('mail');
+	var fax = document.getElementById('fax');
+	
+	var s_f_name = document.getElementById('s_f_name');
+	var s_l_name = document.getElementById('s_l_name');
+	var s_m_name = document.getElementById('s_m_name');
+	var s_m_phone= document.getElementById('s_m_phone');
+	var s_w_phone= document.getElementById('s_w_phone');
+	var s_mail = document.getElementById('s_mail');
+	
+	var street = document.getElementById('street');
+	var city = document.getElementById('city');
+	var state_us = document.getElementById('state_us');
+	var zip = document.getElementById('zip');
+	
+	var elem;
+	
+	if(what == 'agency') {
+		elem = agencies[id];
+		
+		fax.value = elem.fax;
+	}
+	else if(what == 'program') {
+		elem = programs[id];
+		
+		s_f_name.value = elem.s_contact.f_name;
+		s_l_name.value = elem.s_contact.l_name;
+		s_f_name.value = elem.s_contact.f_name;
+		s_m_phone.value = elem.s_contact.m_phone;
+		s_w_phone.value = elem.s_contact.w_phone;
+		s_mail.value = elem.s_contact.mail;
+	}
+	
+	name.value = elem.name;
+	descript.value = elem.descript;
+	
+	street.value = elem.addr.street;
+	city.value = elem.addr.city;
+	state_us.value = elem.addr.state_us;
+	zip.value = elem.addr.zip;
+	
+	f_name.value = elem.p_contact.f_name;
+	m_name.value = elem.p_contact.m_name;
+	l_name.value = elem.p_contact.l_name;
+	title.value = elem.p_contact.title;
+	suf.value = elem.p_contact.suf;
+	w_phone.value = elem.p_contact.w_phone;
+	m_phone.value = elem.p_contact.m_phone;
+	mail.value = elem.p_contact.mail;
+	
 }
 function popitup(url) {
 	newwindow=window.open(url,'name','height=500,width=500');
