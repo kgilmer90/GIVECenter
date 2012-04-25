@@ -81,7 +81,7 @@ function update_banner_simple($files){
             header('../../admin.php?error='.$files['banner']['error'].'copy_fail');
         }
         else{
-            header('../../admin.php?error='.$files['banner']['error']);
+            header('../../admin.php');
         }
     }   
 }
