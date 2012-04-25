@@ -294,6 +294,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   <caption>
   </caption>
   <tr>
+    <td><input name="mode" id="mode" type="text" size="30" style="visibility:hidden;display:none;"/></td>
+  </tr>
+  <tr>
     <td><input name="program_id" id="program_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
   </tr>
   <tr>

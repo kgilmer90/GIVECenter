@@ -57,7 +57,7 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyDescrip").style.display="block";
 			document.getElementById("agencyOpt").style.display="block";
 			
-			fillEditPageForm('program', id);
+			fillEditPageForm('program', 'edit', id);
 		}
 		else //edit agency
 		{
@@ -67,7 +67,7 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyDescrip").style.display="none";
 			document.getElementById("agencyOpt").style.display="none";
 			
-			fillEditPageForm('agency', id);
+			fillEditPageForm('agency', 'edit', id);
 		}
 	}
 	else
@@ -91,7 +91,14 @@ function loadEditPage(mode, what, id) //onload editPage
 
 	}
 }
-function fillEditPageForm(what, id) {
+function fillEditPageForm(what, mode, id) {
+	
+	if(mode == 'add' || mode == 'edit') {
+		document.getElementById('mode').value = mode;
+	}
+	else {
+		return;
+	}
 	
 	var name = document.getElementById('name');
 	var descript = document.getElementById('descript');
@@ -146,8 +153,6 @@ function fillEditPageForm(what, id) {
 		document.getElementById('agency_id').value = -1;
 		document.getElementById('program_id').value = elem.id;
 	}
-	
-	prog_agency_id.value = elem.id
 	name.value = elem.name;
 	descript.value = elem.descript;
 	
