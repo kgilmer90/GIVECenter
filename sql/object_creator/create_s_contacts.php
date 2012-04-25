@@ -32,7 +32,7 @@ function create_s_contact($conn,$id)
 
     $results = $conn->fetchRowAsAssoc();
 
-    $s = new GIVEAgency($results);
+    $s = new GIVEStudentContact($results);
     
     return $s;
 }
@@ -55,7 +55,7 @@ function create_s_contact_limited($conn,$id)
 
     $results = $conn->fetchRowAsAssoc();
 
-    $s = new GIVEAgency($results);
+    $s = new GIVEStudentContact($results);
     
     return $s;
 }
@@ -81,7 +81,7 @@ function create_all_s_contacts($conn)
     
     foreach($results as $temp)
     {
-        $p = new GIVEAgency($temp);
+        $p = new GIVEStudentContact($temp);
         array_push($s_array,$p);
     }
 
@@ -109,7 +109,7 @@ function create_all_s_contacts_limited($conn)
 
     foreach($results as $temp)
     {
-        $p = new GIVEAgency($temp);
+        $p = new GIVEStudentContact($temp);
         array_push($s_array,$p);
     }
 
