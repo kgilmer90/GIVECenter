@@ -235,8 +235,11 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
   </div>
   <div class="content" id="content"> 
     <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-    <div align="center"><b>Change Banner:  </b> <input type="file" />
-    <input type="submit" value="Send"></div>
+    <div align="center"><b>Change Banner:  </b>
+<form method='post' action='sql/update/update_banner.php' enctype='multipart/form-data'>
+        Select File: <input type='file' name='banner' size='10' />
+        <input type='submit' value='Upload' />
+    </form>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">ADMIN</h1>
 <div align="center">
