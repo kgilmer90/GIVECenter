@@ -486,25 +486,25 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <tr>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Alumni" id="Alumni" />
+    <input type="checkbox" name="selectInterests[]" value="5" id="Alumni" />
     Alumni
   </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Elderly" id="Elderly" />
+    <input type="checkbox" name="selectInterests[]" value="11" id="Elderly" />
     Elderly
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Male Issues" id="Male Issues" />
+    <input type="checkbox" name="selectInterests[]" value="17" id="Male Issues" />
     Male Issues
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Recreation" id="Recreation" />
+    <input type="checkbox" name="selectInterests[]" value="23" id="Recreation" />
     Recreation
     </label>
   </div></td>
@@ -512,25 +512,25 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <tr>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Animals" id="Animals" />
+    <input type="checkbox" name="selectInterests[]" value="6" id="Animals" />
     Animals
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Environment" id="Environment" />
+    <input type="checkbox" name="selectInterests[]" value="12" id="Environment" />
     Environment
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Minority Issues" id="Minority Issues" />
+    <input type="checkbox" name="selectInterests[]" value="18" id="Minority Issues" />
     Minority Issues
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Religious" id="Religious" />
+    <input type="checkbox" name="selectInterests[]" value="24" id="Religious" />
     Religious
     </label>
   </div></td>
@@ -538,23 +538,23 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <tr>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Children" id="Children" /> 
+    <input type="checkbox" name="selectInterests[]" value="7" id="Children" /> 
     Children</div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Female Issues" id="Female Issues" />
+    <input type="checkbox" name="selectInterests[]" value="13" id="Female Issues" />
     Female Issues
   </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Office" id="Office" />
+    <input type="checkbox" name="selectInterests[]" value="19" id="Office" />
     Office
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Service Leaders" id="Service Leaders" />
+    <input type="checkbox" name="selectInterests[]" value="25" id="Service Leaders" />
     Service Leaders
     </label>
   </div></td>
@@ -562,24 +562,24 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <tr>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Disabilities" id="Disabilities" /> 
+    <input type="checkbox" name="selectInterests[]" value="8" id="Disabilities" /> 
     Disabilities
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Fine Arts" id="Fine Arts" />
+    <input type="checkbox" name="selectInterests[]" value="14" id="Fine Arts" />
     Fine Arts
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Patriotic" id="Patriotic" />
+    <input type="checkbox" name="selectInterests[]" value="20" id="Patriotic" />
     Patriotic
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Technology" id="Technology" />
+    <input type="checkbox" name="selectInterests[]" value="26" id="Technology" />
     Technology
     </label>
   </div></td>
@@ -587,19 +587,19 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <tr>  
   <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Disasters" id="Disasters" />
+    <input type="checkbox" name="selectInterests[]" value="9" id="Disasters" />
     Disasters
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="General Service" id="General Service" />
+    <input type="checkbox" name="selectInterests[]" value="15" id="General Service" />
     General Service
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Poverty" id="Poverty" />
+    <input type="checkbox" name="selectInterests[]" value="21" id="Poverty" />
     Poverty
     </label>
   </div></td>
@@ -608,17 +608,17 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <tr>  
   <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Education" id="Education" />
+    <input type="checkbox" name="selectInterests[]" value="10" id="Education" />
     Education
     </label>
   </div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="Health" id="Health" />
+    <input type="checkbox" name="selectInterests[]" value="16" id="Health" />
     </label>Health</div></td>
 <td width="200"><label>
   <div align="left">
-    <input type="checkbox" name="selectInterests[]" value="PR" id="PR" />
+    <input type="checkbox" name="selectInterests[]" value="22" id="PR" />
     PR
     </label>
   </div></td>
