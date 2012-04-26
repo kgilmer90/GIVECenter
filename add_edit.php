@@ -38,7 +38,7 @@ if(isset($_GET['code'])) {
  *****************************************************************************/
 
 
-if($_POST['mode']=='update'){     //  EDIT CONDITION
+if($_POST['mode']=='edit'){     //  EDIT CONDITION
     if($_POST['addr_id']){
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
