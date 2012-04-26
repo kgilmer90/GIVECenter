@@ -22,7 +22,7 @@ class GIVEProgram
 	{
 		$this->id = isset($args['id']) ? $args['id'] : '';
 		$this->referal = isset($args['referal']) ? $args['referal'] : '';
-		$this->seasons = isset($args['seasons']) ? $args['seasons'] : '';
+		$this->seasons = isset($args['seasons']) ? $args['seasons'] : array();
 		$this->hours = isset($args['hours']) ? $args['hours'] : array();
 		$this->name = isset($args['name']) ? $args['name'] : '';
 		$this->descript = isset($args['descript']) ? $args['descript'] : '';
@@ -39,11 +39,11 @@ class GIVEProgram
 		
 		$str .= GIVEWrapDataWithTrTd($this->id, 'id');
 		$str .= GIVEWrapDataWithTrTd($this->referal, 'referal');
-		$str .= GIVEWrapDataWithTrTd($this->seasons, 'seasons');
 		$str .= GIVEWrapDataWithTrTd($this->name, 'name');
 		$str .= GIVEWrapDataWithTrTd($this->descript, 'descript');
 		$str .= GIVEWrapDataWithTrTd($this->duration, 'duration');
 		$str .= GIVEWrapDataWithTrTd($this->notes, 'notes');
+		$str .= GIVEWrapDataWithTrTd($this->seasonsToHTMLTable($id.'_seasons'));
 		$str .= GIVEWrapDataWithTrTd($this->hoursToHTMLTable($id.'_hours'));
 		$str .= GIVEWrapDataWithTrTd($this->issuesToHTMLTable($id.'_issues'));
 		$str .= GIVEWrapDataWithTrTd($this->addr->toHTMLTable($id.'_addr'));
@@ -73,6 +73,19 @@ class GIVEProgram
 		$i = 0;
 		foreach($this->hours as $key => $val) {
 			$str .= GIVEWrapDataWithTrTd($val, 'hour'.$i);
+			$i++;
+		}
+		$str .= '</table>'.PHP_EOL;
+		
+		return $str;
+	}
+	private function seasonsToHTMLTable($id)
+	{
+		$str = "<table id=\"$id\">".PHP_EOL;
+		
+		$i = 0;
+		foreach($this->seasons as $key => $val) {
+			$str .= GIVEWrapDataWithTrTd($val, 'season'.$i);
 			$i++;
 		}
 		$str .= '</table>'.PHP_EOL;
