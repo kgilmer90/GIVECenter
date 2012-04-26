@@ -19,7 +19,7 @@ function update_generic($conn,$table,$id,$info_array)
     
     foreach($info_array as $k => $v)
     {
-        if (isNumeric($v)) {
+        if (is_numeric($v)) {
             $set .= "$k = $v,";
         }
         elseif(!isSet($v)){
