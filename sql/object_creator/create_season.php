@@ -13,7 +13,7 @@
  */
 function create_seasons($conn,$program_id)
 {
-    $query = "SELECT seasons.id,seasons.season
+    $query = "SELECT seasons.id
         FROM seasons,program_seasons
         WHERE program_seasons.program_id = $program_id AND seasons.id = program_seasons.season_id";
     
@@ -22,9 +22,13 @@ function create_seasons($conn,$program_id)
     if($conn->numRows()==0){
         return null;
     }
+    $seasons = array();
     $results = $conn->fetchAllAsAssoc();
+    foreach($results as $temp){
+        array_push($seasons,$temp['id']);
+    }
     
-    return $results;
+    return $seasons;
 }
 
 /*

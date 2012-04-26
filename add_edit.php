@@ -65,7 +65,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     if($_POST['Hours']){
         $update['hours'] = $_POST['Hours'];
         
-        update_hours($conn, $_POST['program_id'], $_POST['hours']);
+        update_hours($conn, $_POST['program_id'], $_POST['Hours']);
     }
     
     if($_POST['issues']){
