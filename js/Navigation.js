@@ -394,7 +394,7 @@ function quickSearch() {
  * @returns false - so the form submit doesn't reload the page
  */
 function advancedSearch() {
-	var matching_issue_ids = [];
+	var matching_issues = [];
 	
 	var matching_agency_indices = [];
 	var matching_program_indices = [];
@@ -403,10 +403,12 @@ function advancedSearch() {
 	var i, j, k;
 	for(i in issues) {
 		var issue = issues[i];
-		var checkbox = document.getElementById(issue.name);
-		
-		if(checkbox.checked) {
-			matching_issue_ids.push(issue.id);
+		if(issue != 0) {
+			var checkbox = document.getElementById(issue.name);
+					
+			if(checkbox.checked) {
+				matching_issues.push(issue);
+			}
 		}
 	}
 	
@@ -417,13 +419,13 @@ function advancedSearch() {
 	//loop through each program's issues array
 	//if program contains an issue id equal to a checked issue id,
 	//add program's array index to matches
-	for(i in matching_issue_ids) {
-		var issue = matching_issue_ids[i];
+	for(i in matching_issues) {
+		var issue = matching_issues[i];
 		for(j in programs) {
 			var p = programs[j];
 			for(k in p.issues) {
 				var p_issue = p.issues[k];
-				if(issue == p_issue) {
+				if(issue.id == p_issue) {
 					matching_program_indices.push(j);
 					break;
 				}
