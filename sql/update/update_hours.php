@@ -5,6 +5,8 @@
  * 
  */
 
+include_once('dirname(__FILE__)."../add/create_new_hours.php"');
+
 function update_hours($conn,$program_id,$new_hours)
 {
     $query="DELETE FROM program_hours
