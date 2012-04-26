@@ -1,5 +1,6 @@
 <?php
 include_once ('sql/update/update_banner_old.php');
+include_once ('sql/queries/queries.php');
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once('php/ini/GIVECenterIni.php');
 
@@ -203,32 +204,18 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
 </ul>
 <!-- end .sidebar1 --></div>
 </div>
-<div class="sidebar2">
-<div align="center">
-<ul class="nav">
-<li><a href="#">Program1 </a></li>
-<li><a href="#">Program2 </a></li>
-<li><a href="#">Program3 </a></li>
-<li><a href="#">Program4 </a></li>
-<li><a href="#">Program5 </a></li>
-<li><a href="#">Program6 </a></li>
-<li><a href="#">Program7 </a></li>
-<li><a href="#">Program8 </a></li>
-<li><a href="#">...</a></li>
-</ul>
-<!-- end .sidebar1 --></div>
-</div>
+
 <div class="content" id="content">
     <div align="center">
         <a href="#">
-        <img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" />
+            <img src=<?php echo get_banner_latest($conn); ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" />
         </a>
     </div>
 
     <div align="center"><b>Change Banner: </b>
         <h1 align="center">&nbsp;</h1>
         <h1 align="center">Stored Banners:</h1>
-        
+        <form method="POST">
         <?php
             
         $banners = get_banners($conn);
@@ -237,10 +224,10 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
             echo "<a href='#'>";
             echo "<img src='".$temp['path']."' alt='giveBanner' name='Insert_logo' width='100%'
                 height='90' id='giveBanner' style='background: #8090AB; display:block;' />";
-            echo "</a><input name='setBan1' type='button' value='".$temp['id']."' />";
+            echo "</a><input name='set_banner' type='button' value='".$temp['id']."' />";
         }
-        
         ?> 
+        </form>
     </div>
 </div>
 <?php
