@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-include_once('dirname(__FILE__)."../add/create_new_issue.php"');
+include_once('dirname(__FILE__)."/../add/create_new_issue.php"');
 
 function update_issues($conn,$program_id,$new_issues)
 {
