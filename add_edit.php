@@ -69,7 +69,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     }
     
     if($_POST['selectInterests']){
-        update_issues($conn, $_POST['selectInterests']);
+        update_issues($conn, $_POST['program_id'],$_POST['selectInterests']);
     }
     
     if($_POST['p_contact_id']){    
