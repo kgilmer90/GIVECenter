@@ -49,20 +49,17 @@ if($_POST['mode']=='update'){     //  EDIT CONDITION
         update_generic($conn, 'addr', $_POST['addr_id'], $update['addr']);
     }
     
-    if($_POST['hours_id']){
-        $update['hours'] = array();
-        if($_POST['Hours_0']){array_push($update['hours'], $_POST['Hours_0']);}
-        if($_POST['Hours_1']){array_push($update['hours'], $_POST['Hours_1']);}
-        if($_POST['Hours_2']){array_push($update['hours'], $_POST['Hours_2']);}
-        if($_POST['Hours_3']){array_push($update['hours'], $_POST['Hours_3']);}
+    if($_POST['Hours']){
+        $update['hours'] = $_POST['Hours'];
+        
         update_hours($conn, $_POST['program_id'], $_POST['hours']);
     }
     
-    if($_POST['issues_id']){
+    if($_POST['issues']){
         update_issues($conn, $_POST['selectInterests']);
     }
     
-    if($_POST['p_contact_id']){
+    if($_POST['p_contact_id']){    
         $update['p_contact']['f_name'] = $_POST['f_name'];
         $update['p_contact']['f_name'] = $_POST['l_name'];
         $update['p_contact']['m_name'] = $_POST['m_name'];
@@ -75,7 +72,7 @@ if($_POST['mode']=='update'){     //  EDIT CONDITION
         update_generic($conn, 'pro_contact', $_POST['program_id'], $update['p_contact']);
     }
     
-    if($_POST['student_contact_id']){
+    if($_POST['s_contact_id']){ //might also give errors
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
         $update['s_contact']['f_name'] = $_POST['s_l_name'];
         $update['s_contact']['m_name'] = $_POST['s_m_name'];
@@ -87,17 +84,13 @@ if($_POST['mode']=='update'){     //  EDIT CONDITION
         update_generic($conn, 'student_contact',$_POST['s_contact_id'], $_POST['s_contact']);
     }
     
-    if($_POST['season_id']){
-        $update['season'] = array();
-        if($_POST['winter']){array_push($update['season'], $_POST['winter']);}
-        if($_POST['spring']){array_push($update['season'], $_POST['spring']);}
-        if($_POST['summer']){array_push($update['season'], $_POST['summer']);}
-        if($_POST['fall']){ array_push($update['season'], $_POST['fall']);}
+    if($_POST['season']){
+        $update['season'] = $_POST['season'];
         
         update_season($conn, $_POST['program_id'], $update['season']);
     }
     
-    if($_POST['program']==-1){
+    if($_POST['program_id']==-1){
         $update['agency']['name'] = $_POST['name'];
         $update['agency']['descript'] = $_POST['descript'];
         $update['agency']['p_contact'] = $update['p_contact']['id'];;
@@ -136,7 +129,7 @@ if($_POST['mode']=='update'){     //  EDIT CONDITION
 
 
 elseif ($_POST['mode']=='add'){     
-    if($_POST['addr']){
+    if($_POST['addr_id']){
         //  Need to return addr id
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
@@ -147,18 +140,15 @@ elseif ($_POST['mode']=='add'){
         $addr_id = create_new_addr($conn, $update['addr']);
         $update['program_addr'] = $addr_id;
     }
-    if($_POST['hours']){
-        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
-        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
-        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
-        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
+    if($_POST['Hours']){
+        $update['hours'] = $_POST['Hours'];
         
         create_new_hours($conn, $_POST['program_id'], $update['hours']);
     }
     if($_POST['issue']){
         create_new_issue($conn, $_POST['program_id'], $_POST['selectInterests']);
     }
-    if($_POST['pro_contact']){
+    if($_POST['p_contact_id']){
         $update['p_contact']['f_name'] = $_POST['f_name'];
         $update['p_contact']['f_name'] = $_POST['l_name'];
         $update['p_contact']['m_name'] = $_POST['m_name'];
@@ -171,7 +161,7 @@ elseif ($_POST['mode']=='add'){
         $p_id = create_new_p_contact($conn, $update['pro_contact']);
         $update['program']['p_contact'] = $p_id;
     }
-    if($_POST['student_contact']){
+    if($_POST['s_contact_id']){
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
         $update['s_contact']['f_name'] = $_POST['s_l_name'];
         $update['s_contact']['m_name'] = $_POST['s_m_name'];
@@ -183,11 +173,8 @@ elseif ($_POST['mode']=='add'){
         $s_id = create_new_s_contact($conn, $update['s_contact'], $_POST['program_id']);
         $update['program']['s_contact'] = $s_id;
     }
-    if($_POST['seasons']){
-        if($_POST['winter']){array_push($update['season'], $_POST['winter']);}
-        if($_POST['spring']){array_push($update['season'], $_POST['spring']);}
-        if($_POST['summer']){array_push($update['season'], $_POST['summer']);}
-        if($_POST['fall']){ array_push($update['season'], $_POST['fall']);}
+    if($_POST['season']){
+        $update['season'] = $_POST['season'];
         
         create_new_seasons($conn,$_POST['program_id'], $update['season']);
     }

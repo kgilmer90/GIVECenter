@@ -660,22 +660,22 @@ Night</label></td>
       <tr>
         <td><div align="left">
           <div align="left">
-            <input type="checkbox" name="Winter" value="1" id="Winter" />
+            <input type="checkbox" name="season" value="1" id="Winter" />
             Winter</div></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="Spring" value="2" id="Spring" />
+          <input type="checkbox" name="season" value="2" id="Spring" />
           Spring</label></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="Summer" value="3" id="Summer" />
+          <input type="checkbox" name="season" value="3" id="Summer" />
           Summer</label></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="Fall" value="4" id="Fall" />
+          <input type="checkbox" name="season" value="4" id="Fall" />
           Fall</label></td>
       </tr>
     </table>
