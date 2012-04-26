@@ -139,6 +139,14 @@ elseif ($_POST['mode']=='add'){
         
         $addr_id = create_new_addr($conn, $update['addr']);
         $update['program_addr'] = $addr_id;
+        
+        echo "<pre>";
+        print_r($update['addr']);
+        echo"</pre>";
+        
+        echo "<pre>";
+        print_r($_POST);
+        echo"</pre>";
     }
     if($_POST['Hours']){
         $update['hours'] = $_POST['Hours'];
