@@ -130,7 +130,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['program']['notes'] = $_POST['notes'];
     //    $update['program']['duration'];
         
-        update_generic($conn, 'program', $_POST['program_id'], $_POST['program']);
+        update_generic($conn, 'program', $update['program']['id'], $update['program']);
     }
 }
 
