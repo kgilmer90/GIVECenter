@@ -148,10 +148,10 @@ elseif ($_POST['mode']=='add'){
         $update['program_addr'] = $addr_id;
     }
     if($_POST['hours']){
-        if($_POST['Hours_0']){array_push($update['hours'], $_POST['Hours_0']);}
-        if($_POST['Hours_1']){array_push($update['hours'], $_POST['Hours_1']);}
-        if($_POST['Hours_2']){array_push($update['hours'], $_POST['Hours_2']);}
-        if($_POST['Hours_3']){array_push($update['hours'], $_POST['Hours_3']);}
+        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
+        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
+        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
+        if($_POST['Hours']){array_push($update['hours'], $_POST['Hours']);}
         
         create_new_hours($conn, $_POST['program_id'], $update['hours']);
     }
