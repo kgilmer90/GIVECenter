@@ -15,7 +15,7 @@ function create_new_hours($conn,$program_id,$hours)
 {
     foreach($hours as $temp)
     {
-        $query = "INSERT INTO hours (program_id,hours)
+        $query = "INSERT INTO program_hours (program_id,hours_id)
             VALUES ($program_id,$temp)";
         $conn->query($query);
     }

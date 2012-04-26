@@ -192,7 +192,7 @@ function fillEditPageForm(what, mode, id) {
 		//check the seasons boxes
 		for(i in elem.seasons) {
 			var season_index = elem.seasons[i];
-			var currentSeason= seasons[hour_index];
+			var currentSeason= seasons[season_index];
 			var season_elem = document.getElementById(currentSeason).checked = true;
 		}
 		
@@ -237,7 +237,7 @@ function addAgenciesToEditPageDropdown(program_index) {
 	
 	//set the selected index to the program being edited's agency's index
 	if(program_index >= 0)
-		dropdown.selectedIndex = programs[program_index].agency.index;
+		dropdown.selectedIndex = programs[program_index].agency.index + 1;
 	
 	//change the value of the field holding the agency id for form submission
 	//need to subtract 1 from selectedIndex to account for "No agency" entry
@@ -1113,13 +1113,13 @@ function TableIdToGIVEProgram(table_id) {
 	//the <td> </td> tags and obtain the data within
 	var id 			= TableDataFromInnerHTML(program_DOM_element.rows[0].innerHTML);
 	var referal 	= TableDataFromInnerHTML(program_DOM_element.rows[1].innerHTML);
-	var season 		= TableDataFromInnerHTML(program_DOM_element.rows[2].innerHTML);
-	var name 		= TableDataFromInnerHTML(program_DOM_element.rows[3].innerHTML);
-	var descript 	= TableDataFromInnerHTML(program_DOM_element.rows[4].innerHTML);
-	var duration 	= TableDataFromInnerHTML(program_DOM_element.rows[5].innerHTML);
-	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[6].innerHTML);
+	var name 		= TableDataFromInnerHTML(program_DOM_element.rows[2].innerHTML);
+	var descript 	= TableDataFromInnerHTML(program_DOM_element.rows[3].innerHTML);
+	var duration 	= TableDataFromInnerHTML(program_DOM_element.rows[4].innerHTML);
+	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[5].innerHTML);
 	
 	//retrieve the DOM element for the following tables and repeat the process above
+	var season 		= TableIdToSeasonsArray(table_id + "_seasons");
 	var hours 		= TableIdToHoursArray(table_id + "_hours");
 	var issues 		= TableIdToIssuesArray(table_id + "_issues");
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
@@ -1154,6 +1154,26 @@ function TableIdToGIVEStudentContact(table_id) {
 	
 	//build and return the complete GIVEStudentContact object
 	return new GIVEStudentContact(id, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
+}
+function TableIdToSeasonsArray(table_id) {
+
+	var seasons_arr = [];
+	
+	//retreive the DOM element within the GIVEAgency table id
+	var season_DOM_element = document.getElementById(table_id);
+	
+	var i;
+	var count = season_DOM_element.rows.length;
+	for(i = 0; i < count; i++) {
+	
+	//there's no way to reliably retrieve the data in between <td> </td> tags
+	//using DOM element properties. Instead, obtain the innerHTML for the
+	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
+	//the <td> </td> tags and obtain the data within
+	var season = TableDataFromInnerHTML(season_DOM_element.rows[i].innerHTML);
+		seasons_arr.push(season);
+	}
+	return seasons_arr;
 }
 /**
 * Constructs an array of string objects from a table embedded in the HTML.

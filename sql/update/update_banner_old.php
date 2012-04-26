@@ -12,7 +12,7 @@ function update_banner_old($conn,$post){
 
     $query2 = "SELECT id
         FROM image_paths
-        SORT BY id
+        ORDER BY id
         LIMIT 0,1";
     $conn->query($query2, $conn);
     $id = $conn->fetchRowAsAssoc();
@@ -39,10 +39,12 @@ function update_banner_old($conn,$post){
 }
 
 function get_banners($conn){
+    
     $query = "SELECT id,path
         FROM image_paths
         WHERE image_type = 'banner'
-        SORT BY id DESC";
+        ORDER BY id DESC";
+    
     $conn->query($query);
     
     $banners = $conn->fetchAllAsAssoc();
