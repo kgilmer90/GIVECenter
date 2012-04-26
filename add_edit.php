@@ -2,6 +2,10 @@
 
 include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once('php/ini/GIVECenterIni.php');
+include_once('sql/update/update_generic.php');
+include_once('sql/update/update_hours.php');
+include_once('sql/update/update_issues.php');
+include_once('sql/update/update_season.php');
 
 $conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
 $update = array();
