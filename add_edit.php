@@ -62,17 +62,17 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         echo"</pre>";
     }
     
-    if($_POST['Hours']){
+    if(isset($_POST['Hours'])){
         $update['hours'] = $_POST['Hours'];
         
         update_hours($conn, $_POST['program_id'], $_POST['Hours']);
     }
     
-    if($_POST['selectInterests']){
-        update_issues($conn, $_POST['selectInterests']);
+    if(isset($_POST['selectInterests'])){
+        update_issues($conn, $_POST['program_id'],$_POST['selectInterests']);
     }
     
-    if($_POST['p_contact_id']){    
+    if(isset($_POST['p_contact_id'])){    
         $update['p_contact']['id'] = $_POST['p_contact_id'];
         $update['p_contact']['f_name'] = $_POST['f_name'];
         $update['p_contact']['f_name'] = $_POST['l_name'];
@@ -86,7 +86,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         update_generic($conn, 'pro_contact', $_POST['p_contact_id'], $update['p_contact']);
     }
     
-    if($_POST['s_contact_id']){ //might also give errors
+    if(isset($_POST['s_contact_id'])){ //might also give errors
         $update['s_contact']['id'] = $_POST['s_contact_id'];
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
         $update['s_contact']['f_name'] = $_POST['s_l_name'];
@@ -99,7 +99,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         update_generic($conn, 'student_contact',$_POST['s_contact_id'], $_POST['s_contact']);
     }
     
-    if($_POST['season']){
+    if(isset($_POST['season'])){
         $update['season'] = $_POST['season'];
         
         update_season($conn, $_POST['program_id'], $update['season']);
@@ -146,7 +146,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
 
 
 elseif ($_POST['mode']=='add'){     
-    if($_POST['addr_id']){
+    if(isset($_POST['addr_id'])){
         //  Need to return addr id
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
@@ -158,15 +158,15 @@ elseif ($_POST['mode']=='add'){
         $update['program_addr'] = $addr_id;
         
     }
-    if($_POST['Hours']){
+    if(isset($_POST['Hours'])){
         $update['hours'] = $_POST['Hours'];
         
         create_new_hours($conn, $_POST['program_id'], $update['hours']);
     }
-    if($_POST['issue']){
+    if(isset($_POST['issue'])){
         create_new_issue($conn, $_POST['program_id'], $_POST['selectInterests']);
     }
-    if($_POST['p_contact_id']){
+    if(isset($_POST['p_contact_id'])){
         $update['p_contact']['f_name'] = $_POST['f_name'];
         $update['p_contact']['f_name'] = $_POST['l_name'];
         $update['p_contact']['m_name'] = $_POST['m_name'];
@@ -179,7 +179,7 @@ elseif ($_POST['mode']=='add'){
         $p_id = create_new_p_contact($conn, $update['pro_contact']);
         $update['program']['p_contact'] = $p_id;
     }
-    if($_POST['s_contact_id']){
+    if(isset($_POST['s_contact_id'])){
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
         $update['s_contact']['f_name'] = $_POST['s_l_name'];
         $update['s_contact']['m_name'] = $_POST['s_m_name'];
@@ -191,7 +191,7 @@ elseif ($_POST['mode']=='add'){
         $s_id = create_new_s_contact($conn, $update['s_contact'], $_POST['program_id']);
         $update['program']['s_contact'] = $s_id;
     }
-    if($_POST['season']){
+    if(isset($_POST['season'])){
         $update['season'] = $_POST['season'];
         
         create_new_seasons($conn,$_POST['program_id'], $update['season']);
