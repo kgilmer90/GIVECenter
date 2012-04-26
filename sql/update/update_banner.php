@@ -115,7 +115,7 @@ function update_banner($conn,$files){
         
         $query2 = "SELECT id
             FROM image_paths
-            SORT BY id
+            ORDER BY id
             LIMIT 0,1";
         $conn->query($query2, $conn);
         
