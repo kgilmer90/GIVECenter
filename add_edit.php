@@ -68,24 +68,26 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         update_hours($conn, $_POST['program_id'], $_POST['Hours']);
     }
     
-    if($_POST['issues']){
+    if($_POST['selectInterests']){
         update_issues($conn, $_POST['selectInterests']);
     }
     
     if($_POST['p_contact_id']){    
+        $update['p_contact']['id'] = $_POST['p_contact_id'];
         $update['p_contact']['f_name'] = $_POST['f_name'];
         $update['p_contact']['f_name'] = $_POST['l_name'];
         $update['p_contact']['m_name'] = $_POST['m_name'];
         $update['p_contact']['suf'] = $_POST['suf'];
         $update['p_contact']['m_phone'] = $_POST['m_phone'];
-        $update['p_contact']['w_name'] = $_POST['w_contact'];
+        $update['p_contact']['w_phone'] = $_POST['w_phone'];
         $update['p_contact']['mail'] = $_POST['mail'];
         $update['p_contact']['fax'] = $_POST['fax'];
         
-        update_generic($conn, 'pro_contact', $_POST['program_id'], $update['p_contact']);
+        update_generic($conn, 'pro_contact', $_POST['p_contact_id'], $update['p_contact']);
     }
     
     if($_POST['s_contact_id']){ //might also give errors
+        $update['s_contact']['id'] = $_POST['s_contact_id'];
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
         $update['s_contact']['f_name'] = $_POST['s_l_name'];
         $update['s_contact']['m_name'] = $_POST['s_m_name'];
@@ -104,6 +106,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     }
     
     if($_POST['program_id']==-1){
+        $update['agency']['id'] = $_POST['agency_id'];
         $update['agency']['name'] = $_POST['name'];
         $update['agency']['descript'] = $_POST['descript'];
         $update['agency']['p_contact'] = $update['p_contact']['id'];;
@@ -116,6 +119,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     }
         
     else{
+        $update['program']['id'] = $_POST['program_id'];
         $update['program']['agency'] = $_POST['agency_id'];
         $update['program']['addr'] = $update['addr']['id'];
         $update['program']['name'] = $_POST['name'];

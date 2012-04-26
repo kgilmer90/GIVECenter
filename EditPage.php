@@ -634,22 +634,22 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <table width="150" class="form3">
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="1" id="Morning" />
+<input type="checkbox" name="Hours[]" value="1" id="Morning" />
 Morning</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="2" id="Afternoon" />
+<input type="checkbox" name="Hours[]" value="2" id="Afternoon" />
 Afternoon</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="3" id="Evening" />
+<input type="checkbox" name="Hours[]" value="3" id="Evening" />
 Evening</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="4" id="Night" />
+<input type="checkbox" name="Hours[]" value="4" id="Night" />
 Night</label></td>
 </tr>
 </table>
@@ -660,22 +660,22 @@ Night</label></td>
       <tr>
         <td><div align="left">
           <div align="left">
-            <input type="checkbox" name="season" value="1" id="Winter" />
+            <input type="checkbox" name="season[]" value="1" id="Winter" />
             Winter</div></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="season" value="2" id="Spring" />
+          <input type="checkbox" name="season[]" value="2" id="Spring" />
           Spring</label></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="season" value="3" id="Summer" />
+          <input type="checkbox" name="season[]" value="3" id="Summer" />
           Summer</label></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="season" value="4" id="Fall" />
+          <input type="checkbox" name="season[]" value="4" id="Fall" />
           Fall</label></td>
       </tr>
     </table>
