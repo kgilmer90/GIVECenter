@@ -5,7 +5,7 @@
  * 
  */
 
-include_once('dirname(__FILE__)."/../add/create_new_season.php"');
+include_once(dirname(__FILE__).'/../add/create_new_season.php');
 
 function update_season($conn,$program_id,$new_seasons)
 {
