@@ -47,6 +47,15 @@ if($_POST['mode']=='update'){     //  EDIT CONDITION
         $update['addr']['zip'] = $_POST['zip'];
         
         update_generic($conn, 'addr', $_POST['addr_id'], $update['addr']);
+        
+        
+        echo "<pre>";
+        print_r($update['addr']);
+        echo"</pre>";
+        
+        echo "<pre>";
+        print_r($_POST);
+        echo"</pre>";
     }
     
     if($_POST['Hours']){
@@ -140,13 +149,6 @@ elseif ($_POST['mode']=='add'){
         $addr_id = create_new_addr($conn, $update['addr']);
         $update['program_addr'] = $addr_id;
         
-        echo "<pre>";
-        print_r($update['addr']);
-        echo"</pre>";
-        
-        echo "<pre>";
-        print_r($_POST);
-        echo"</pre>";
     }
     if($_POST['Hours']){
         $update['hours'] = $_POST['Hours'];
