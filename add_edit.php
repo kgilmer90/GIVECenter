@@ -93,10 +93,10 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['s_contact']['m_name'] = $_POST['s_m_name'];
         $update['s_contact']['suf'] = $_POST['s_suf'];
         $update['s_contact']['m_phone'] = $_POST['s_m_phone'];
-        $update['s_contact']['w_name'] = $_POST['s_w_contact'];
+        $update['s_contact']['w_phone'] = $_POST['s_w_phone'];
         $update['s_contact']['mail'] = $_POST['s_mail'];
         
-        update_generic($conn, 'student_contact',$_POST['s_contact_id'], $_POST['s_contact']);
+        update_generic($conn, 'student_contact',$update['s_contact']['id'] , $update['s_contact']);
     }
     
     if(isset($_POST['season'])){
