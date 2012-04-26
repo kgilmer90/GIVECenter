@@ -237,7 +237,7 @@ function addAgenciesToEditPageDropdown(program_index) {
 	
 	//set the selected index to the program being edited's agency's index
 	if(program_index >= 0)
-		dropdown.selectedIndex = programs[program_index].agency.index;
+		dropdown.selectedIndex = programs[program_index].agency.index + 1;
 	
 	//change the value of the field holding the agency id for form submission
 	//need to subtract 1 from selectedIndex to account for "No agency" entry
