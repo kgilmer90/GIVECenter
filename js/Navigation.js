@@ -3,6 +3,9 @@
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
 var issues = [];		//global issues array, contains all issues
+var referal = { limited:0, full:1 }; 	//referal type
+var hours = [0, 'Morning', 'Afternoon', 'Evening', 'Night', 'Graveyard'];
+var seasons = [0, 'Spring', 'Summer', 'Fall', 'Winter'];
 
 var agency_search_results = [];
 var program_search_results = [];
@@ -14,8 +17,6 @@ var display_mode = DISPLAY_INTERESTS;
 var LEFT_SIDEBAR_AGENCY = 0;
 var LEFT_SIDEBAR_PROGRAM = 1;
 var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
-
-
 
 function editAgency()
 {
@@ -41,9 +42,10 @@ function addProgram()
 
 function loadEditPage(mode, what, id) //onload editPage
 {
+	initIssues();
 	initAgenciesAndPrograms();
 	
-	if(mode == 'none' || what == 'none' || id == -1) {
+	if(mode == 'none' || what == 'none') {
 		return;
 	}
 	
@@ -57,6 +59,8 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyDescrip").style.display="block";
 			document.getElementById("agencyOpt").style.display="block";
 			
+			//fill the dropdown menu and set the selected index to the program index
+			addAgenciesToEditPageDropdown(id);
 			fillEditPageForm('program', 'edit', id);
 		}
 		else //edit agency
@@ -70,15 +74,20 @@ function loadEditPage(mode, what, id) //onload editPage
 			fillEditPageForm('agency', 'edit', id);
 		}
 	}
-	else
+	else //mode == 'add'
 	{
-		if(what = "program") //add program
+		if(what == "program") //add program
 		{
 			document.getElementById("editHeader").innerHTML = "Add Program";
 			document.getElementById("agencyDescrip").style.visibility="visible";
 			document.getElementById("agencyOpt").style.visibility="visible";
 			document.getElementById("agencyDescrip").style.display="block";
 			document.getElementById("agencyOpt").style.display="block";
+			
+			//fill the dropdown box and do not set the selected index
+			addAgenciesToEditPageDropdown(-1);
+			//set to anything less than -1 to disregard
+			document.getElementById('program_id').value = -2;
 		}
 		else // add agency
 		{
@@ -87,6 +96,9 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyOpt").style.visibility="hidden";
 			document.getElementById("agencyDescrip").style.display="none";
 			document.getElementById("agencyOpt").style.display="none";
+			
+			//set to anything less than -1 to disregard
+			document.getElementById('program_id').value = -2;
 		}
 
 	}
@@ -142,6 +154,7 @@ function fillEditPageForm(what, mode, id) {
 	else if(what == 'program') {
 		elem = programs[id];
 		
+		//set the student contact info
 		s_contact_id.value = elem.s_contact.id;
 		s_f_name.value = elem.s_contact.f_name;
 		s_l_name.value = elem.s_contact.l_name;
@@ -152,6 +165,37 @@ function fillEditPageForm(what, mode, id) {
 		
 		document.getElementById('agency_id').value = -1;
 		document.getElementById('program_id').value = elem.id;
+		
+		if(elem.referal == referal.full) {
+			ref_type_full.checked = true;
+			ref_type_lim.checked = false;
+		}
+		else if(elem.referal == referal.limited){
+			ref_type_full.checked = false;
+			ref_type_lim.checked = true;
+		}
+		
+		//check the interest boxes
+		var i;
+		for(i in elem.issues) {
+			var issue_index = elem.issues[i];
+			var currentIssue = issues[issue_index];
+			var issue_elem = document.getElementById(currentIssue.name).checked = true;
+		}
+		
+		//check the hours boxes
+		for(i in elem.hours) {
+			var hour_index = elem.hours[i];
+			var currentHour = hours[hour_index];
+			var hour_elem = document.getElementById(currentHour).checked = true;
+		}
+		//check the seasons boxes
+		for(i in elem.seasons) {
+			var season_index = elem.seasons[i];
+			var currentSeason= seasons[hour_index];
+			var season_elem = document.getElementById(currentSeason).checked = true;
+		}
+		
 	}
 	name.value = elem.name;
 	descript.value = elem.descript;
@@ -171,8 +215,43 @@ function fillEditPageForm(what, mode, id) {
 	city.value = elem.addr.city;
 	state_us.value = elem.addr.state_us;
 	zip.value = elem.addr.zip;
-	
 }
+
+function addAgenciesToEditPageDropdown(program_index) {
+	var dropdown = document.getElementById("agencyOpt");
+	dropdown.options.length = 0;
+	
+	var options = [];
+	
+	options.push(new Option('--No Agency--'));
+	
+	var i;
+	for(i in agencies) {
+		var agency = agencies[i];
+		options.push(new Option(agency.name));
+	}
+	for(i in options) {
+		var option = options[i];
+		dropdown.add(option, null);
+	}
+	
+	//set the selected index to the program being edited's agency's index
+	if(program_index >= 0)
+		dropdown.selectedIndex = programs[program_index].agency.index;
+	
+	//change the value of the field holding the agency id for form submission
+	//need to subtract 1 from selectedIndex to account for "No agency" entry
+	dropdown.onchange = function() {
+		var selectedIndex = document.getElementById('agencyOpt').selectedIndex;
+		if(selectedIndex == 0) {
+			location = 'EditPage.php?mode=add&what=agency';
+		}
+		else {
+			document.getElementById('agency_id').value = selectedIndex - 1;
+		}
+	};
+}
+
 function popitup(url) {
 	newwindow=window.open(url,'name','height=500,width=500');
 	if (window.focus) {newwindow.focus()}
@@ -806,7 +885,7 @@ function initAgenciesAndPrograms() {
  * Initializes the global issues array
  */
 function initIssues() {
-	issues = [
+	issues = [0, 0, 0, 0, 0,		//fill in to make retrieval trivial
             {id:5,	name:"Alumni"},
 			{id:6,	name:"Animals"},
 			{id:7,	name:"Children"},
@@ -1041,7 +1120,7 @@ function TableIdToGIVEProgram(table_id) {
 	var notes 		= TableDataFromInnerHTML(program_DOM_element.rows[6].innerHTML);
 	
 	//retrieve the DOM element for the following tables and repeat the process above
-	var hours 		= TableIdToHoursArray(table_id, + "_hours");
+	var hours 		= TableIdToHoursArray(table_id + "_hours");
 	var issues 		= TableIdToIssuesArray(table_id + "_issues");
 	var addr 		= TableIdToGIVEAddr(table_id + "_addr");
 	var p_contact 	= TableIdToGIVEProContact(table_id + "_p_contact");
@@ -1106,17 +1185,17 @@ function TableIdToHoursArray(table_id) {
 	var hours_arr = [];
 	
 	//retreive the DOM element within the GIVEAgency table id
-	var issue_DOM_element = document.getElementById(table_id);
+	var hours_DOM_element = document.getElementById(table_id);
 	
 	var i;
-	var count = issue_DOM_element.rows.length;
+	var count = hours_DOM_element.rows.length;
 	for(i = 0; i < count; i++) {
 	
 	//there's no way to reliably retrieve the data in between <td> </td> tags
 	//using DOM element properties. Instead, obtain the innerHTML for the
 	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
 	//the <td> </td> tags and obtain the data within
-	var hour = TableDataFromInnerHTML(issue_DOM_element.rows[i].innerHTML);
+	var hour = TableDataFromInnerHTML(hours_DOM_element.rows[i].innerHTML);
 		hours_arr.push(hour);
 	}
 	return hours_arr;
@@ -1270,12 +1349,12 @@ function GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone
 * @param GIVEStudentContact s_contact - program's student contact person
 * @return GIVEProgram object with fields initialized to function arguments
 */
-function GIVEProgram (id, referal, season, hours, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
+function GIVEProgram (id, referal, seasons, hours, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
 	var program = {
 		index 		: 0,
 		id 			: id,
 		referal		: referal,
-		season		: season,
+		seasons		: seasons,
 		hours		: hours,
 		name		: name, 
 		descript	: descript,
@@ -1289,7 +1368,7 @@ function GIVEProgram (id, referal, season, hours, name, descript, duration, note
 		toString 	: function() {
 			
 			var str = "id=" + this.id + ",referal=" + this.referal + 
-				",season=" + this.season + ",hours=" + this.hours+ ",name=" + 
+				",season=" + this.seasons + ",hours=" + this.hours+ ",name=" + 
 				this.name + ",descript=" + this.descript + ",duration=" + 
 				this.duration + ",notes=" + this.notes + "<br />";
 	
