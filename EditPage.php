@@ -308,14 +308,16 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   </tr>
     <tr>
     <td id="agencyDescrip">Select Agency:</td>
-    <td id="agencyOpt">    
-    <select>
+    <td>    
+    <select id="agencyOpt">
+    <!-- 
     	<option>Agency1</option>
     	<option>Agency2</option>
         <option>Agency3</option>
     	<option>Agency4</option>
         <option>Agency5</option>
     	<option>Agency6</option>
+     -->
     </select>
     </td>
   </tr>
@@ -632,48 +634,48 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <table width="150" class="form3">
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="morning" />
+<input type="checkbox" name="Hours" value="checkbox" id="Morning" />
 Morning</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="afternoon" />
+<input type="checkbox" name="Hours" value="checkbox" id="Afternoon" />
 Afternoon</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="evening" />
+<input type="checkbox" name="Hours" value="checkbox" id="Evening" />
 Evening</label></td>
 </tr>
 <tr>
 <td><label>
-<input type="checkbox" name="Hours" value="checkbox" id="night" />
+<input type="checkbox" name="Hours" value="checkbox" id="Night" />
 Night</label></td>
 </tr>
 </table>
 </div></div>
   <div class = "column4">
-<label><b>Select All Hours Available:</b></label>
+<label><b>Select All Seasons Available:</b></label>
 <table width="150" class="form3">
       <tr>
         <td><div align="left">
           <div align="left">
-            <input type="checkbox" name="winter" value="checkbox" id="winter" />
+            <input type="checkbox" name="Winter" value="checkbox" id="Winter" />
             Winter</div></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="spring" value="checkbox" id="spring" />
+          <input type="checkbox" name="Spring" value="checkbox" id="Spring" />
           Spring</label></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="summer" value="checkbox" id="summer" />
+          <input type="checkbox" name="Summer" value="checkbox" id="Summer" />
           Summer</label></td>
       </tr>
       <tr>
         <td><label>
-          <input type="checkbox" name="fall" value="checkbox" id="fall" />
+          <input type="checkbox" name="Fall" value="checkbox" id="Fall" />
           Fall</label></td>
       </tr>
     </table>
