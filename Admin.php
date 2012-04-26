@@ -103,7 +103,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	background-color: #cccccc;
 }
 .content {
-	position: absoulte;
+	/*position: absoulte;*/
 	width: 75%;
 	float: left;
 	background-image: url(img/gradientHORIZ.png);

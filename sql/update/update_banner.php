@@ -1,9 +1,16 @@
 <?php
 
-include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 
+
+
+include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
 $conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
-$update = array();
+
+
+
+/****************************************************************************
+ * Check for Login
+ ****************************************************************************/
 
 //to hold various error states
 $error = array();
@@ -26,7 +33,16 @@ if(isset($_GET['code'])) {
 	$error['code'] = $_GET['code'];
 }
 
-upload_banner($conn, $_FILES);
+
+/****************************************************************************
+ * GO!
+ ****************************************************************************/
+
+update_banner($conn, $_FILES);
+
+/****************************************************************************
+ * FUNCTIONS
+ ****************************************************************************/
 
 /**
  *  Function takes image named in form and copies it into the img folder
@@ -34,40 +50,95 @@ upload_banner($conn, $_FILES);
  * @param type $con     Database connection
  * @param type $files  $_FILES variable
  */
-function upload_banner($con, $files){
-    if ($files['banner']['error'] === UPLOAD_ERR_OK)
-    {
-            $name = "img/".$files['banner']['name'];
-            move_uploaded_file($files['banner']['tmp_name'], $name) or die("bad move");
-            echo "Uploaded image '$name'<br />";
-            update_banner($con, $files['banner']['name']);
-    }
-
-    else {
-        echo "<p> upload error! lol ".$files['banner']['error']."</p>";
-    }
-}
-
-/**
- *  Updates GIVE Center Website Banner
- * @param type $con Database connection
- * @param type $path Path to New 
- */
-function update_banner($con,$path)
-{
-    $query = "UPDATE image_paths
-                SET path = $path
-                WHERE name = 'banner'";
-    $con->query($query);
-}
-
+function update_banner_simple($files){
 /*
- <form action="sql/update/update_banner.php" method="post" enctype="multipart/form-data" name="uploadImage" id="uploadImage">
-        <input type="file" name="banner" id="banner" />
-        <input type="submit" value="Send"></div>
-    </form> 
- 
- */
+ *  update_banner.php
+ * 
+ * Simple update just copies the banner in and overwrites the old one so 
+ * no database work is needed
+ * 
+ * Make sure the file is sent to here, and that it labels it banner
+ * 
+ *  DONT FORGET TO ADD PERMISSIONS FOR www-data ON THE TARGET FOLDER
+ * 
+ *  Sample Form:
+ * 
+ * <html><head><title>PHP Form Upload</title></head><body>
+    <form method='post' action='update_banner.php' enctype='multipart/form-data'>
+        Select File: <input type='file' name='banner' size='10' />
+        <input type='submit' value='Upload' />
+    </form>
+    */
 
 
+    if(count($files)){
+        if($files['banner']['type']!= 'image/jpeg') 
+            header('../../admin.php?error=bad_file_type');
+
+        $path = '../../img/give_banner.jpg';
+
+        if(!copy($files['banner']['tmp_name'], $path) ){ 
+            header('../../admin.php?error='.$files['banner']['error'].'copy_fail');
+        }
+        else{
+            header('../../admin.php?error='.$files['banner']['error']);
+        }
+    }   
+}
+
+
+function update_banner($conn,$files){
+/*
+ *  update_banner.php
+ * 
+ * adds banner to database then sets as new banner
+ * 
+ *  DONT FORGET TO ADD PERMISSIONS FOR www-data ON THE TARGET FOLDER
+ * 
+ *  Sample Form:
+ * 
+ * <html><head><title>PHP Form Upload</title></head><body>
+    <form method='post' action='update_banner.php' enctype='multipart/form-data'>
+        Select File: <input type='file' name='banner' size='10' />
+        <input type='submit' value='Upload' />
+    </form>
+    */
+
+
+    if(count($files)){
+        if($files['banner']['type']!= 'image/jpeg') 
+            header('../../admin.php?error=bad_file_type');
+        
+        $query1 = "INSERT INTO image_paths('banner')
+            VALUES(image_type)";
+        $conn->query($query1,$conn);
+        
+        $query2 = "SELECT id
+            FROM image_paths
+            SORT BY id
+            LIMIT 0,1";
+        $conn->query($query2, $conn);
+        
+        $id = $conn->fetchRowAsAssoc();
+        $file = 'img/'.$id['id'];
+        
+        $query3 = "UPDATE image_paths
+            SET path =".$file.
+            "WHERE id =".$id['id'];
+        
+        $conn->query($query3);
+        
+        $path = "../../".$file;
+
+        if(!copy($files['banner']['tmp_name'], $path) ){
+            $query4 = "DELETE FROM image_path
+                WHERE id = ".$id['id'];
+            $conn->query($query4);
+            header('../../admin.php?error='.$files['banner']['error'].'copy_fail');
+        }
+        else{
+            header('../../admin.php');
+        }
+    }   
+}
 ?>

@@ -57,7 +57,7 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyDescrip").style.display="block";
 			document.getElementById("agencyOpt").style.display="block";
 			
-			fillEditPageForm('program', id);
+			fillEditPageForm('program', 'edit', id);
 		}
 		else //edit agency
 		{
@@ -67,7 +67,7 @@ function loadEditPage(mode, what, id) //onload editPage
 			document.getElementById("agencyDescrip").style.display="none";
 			document.getElementById("agencyOpt").style.display="none";
 			
-			fillEditPageForm('agency', id);
+			fillEditPageForm('agency', 'edit', id);
 		}
 	}
 	else
@@ -91,12 +91,21 @@ function loadEditPage(mode, what, id) //onload editPage
 
 	}
 }
-function fillEditPageForm(what, id) {
+function fillEditPageForm(what, mode, id) {
+	
+	if(mode == 'add' || mode == 'edit') {
+		document.getElementById('mode').value = mode;
+	}
+	else {
+		return;
+	}
 	
 	var name = document.getElementById('name');
 	var descript = document.getElementById('descript');
 	var ref_type_full = document.getElementById('ref_type_full');
 	var ref_type_lim = document.getElementById('ref_type_lim');
+	
+	var p_contact_id = document.getElementById('p_contact_id');
 	var title = document.getElementById('title');
 	var f_name = document.getElementById('f_name');
 	var l_name = document.getElementById('l_name');
@@ -107,6 +116,7 @@ function fillEditPageForm(what, id) {
 	var mail = document.getElementById('mail');
 	var fax = document.getElementById('fax');
 	
+	var s_contact_id = document.getElementById('s_contact_id');
 	var s_f_name = document.getElementById('s_f_name');
 	var s_l_name = document.getElementById('s_l_name');
 	var s_m_name = document.getElementById('s_m_name');
@@ -114,6 +124,7 @@ function fillEditPageForm(what, id) {
 	var s_w_phone= document.getElementById('s_w_phone');
 	var s_mail = document.getElementById('s_mail');
 	
+	var addr_id = document.getElementById('addr_id');
 	var street = document.getElementById('street');
 	var city = document.getElementById('city');
 	var state_us = document.getElementById('state_us');
@@ -125,26 +136,27 @@ function fillEditPageForm(what, id) {
 		elem = agencies[id];
 		
 		fax.value = elem.fax;
+		document.getElementById('agency_id').value = elem.id;
+		document.getElementById('program_id').value = -1;
 	}
 	else if(what == 'program') {
 		elem = programs[id];
 		
+		s_contact_id.value = elem.s_contact.id;
 		s_f_name.value = elem.s_contact.f_name;
 		s_l_name.value = elem.s_contact.l_name;
 		s_f_name.value = elem.s_contact.f_name;
 		s_m_phone.value = elem.s_contact.m_phone;
 		s_w_phone.value = elem.s_contact.w_phone;
 		s_mail.value = elem.s_contact.mail;
+		
+		document.getElementById('agency_id').value = -1;
+		document.getElementById('program_id').value = elem.id;
 	}
-	
 	name.value = elem.name;
 	descript.value = elem.descript;
 	
-	street.value = elem.addr.street;
-	city.value = elem.addr.city;
-	state_us.value = elem.addr.state_us;
-	zip.value = elem.addr.zip;
-	
+	p_contact_id.value = elem.p_contact.id;
 	f_name.value = elem.p_contact.f_name;
 	m_name.value = elem.p_contact.m_name;
 	l_name.value = elem.p_contact.l_name;
@@ -153,6 +165,12 @@ function fillEditPageForm(what, id) {
 	w_phone.value = elem.p_contact.w_phone;
 	m_phone.value = elem.p_contact.m_phone;
 	mail.value = elem.p_contact.mail;
+	
+	addr_id.value = elem.addr.id;
+	street.value = elem.addr.street;
+	city.value = elem.addr.city;
+	state_us.value = elem.addr.state_us;
+	zip.value = elem.addr.zip;
 	
 }
 function popitup(url) {
@@ -946,13 +964,14 @@ function TableIdToGIVEAddr(table_id) {
 	//using DOM element properties. Instead, obtain the innerHTML for the
 	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
 	//the <td> </td> tags and obtain the data within
-	var street 		= TableDataFromInnerHTML(addr_DOM_element.rows[0].innerHTML);
-	var city 		= TableDataFromInnerHTML(addr_DOM_element.rows[1].innerHTML);
-	var state_us 	= TableDataFromInnerHTML(addr_DOM_element.rows[2].innerHTML);
-	var zip 		= TableDataFromInnerHTML(addr_DOM_element.rows[3].innerHTML);
+	var id 			= TableDataFromInnerHTML(addr_DOM_element.rows[0].innerHTML);
+	var street 		= TableDataFromInnerHTML(addr_DOM_element.rows[1].innerHTML);
+	var city 		= TableDataFromInnerHTML(addr_DOM_element.rows[2].innerHTML);
+	var state_us 	= TableDataFromInnerHTML(addr_DOM_element.rows[3].innerHTML);
+	var zip 		= TableDataFromInnerHTML(addr_DOM_element.rows[4].innerHTML);
 	
 	//build and return the complete GIVEAddr object
-	return new GIVEAddr(street, city, state_us, zip);
+	return new GIVEAddr(id, street, city, state_us, zip);
 }
 /**
 * Constructs a GIVEAProContact object from a table embedded in the HTML.
@@ -968,17 +987,18 @@ function TableIdToGIVEProContact(table_id) {
 	//using DOM element properties. Instead, obtain the innerHTML for the
 	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
 	//the <td> </td> tags and obtain the data within
-	var title 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[0].innerHTML);
-	var l_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[1].innerHTML);
-	var f_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[2].innerHTML);
-	var m_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[3].innerHTML);
-	var suf 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[4].innerHTML);
-	var w_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[5].innerHTML);
-	var m_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[6].innerHTML);
-	var mail 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[7].innerHTML);
+	var id			= TableDataFromInnerHTML(p_contact_DOM_element.rows[0].innerHTML);
+	var title 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[1].innerHTML);
+	var l_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[2].innerHTML);
+	var f_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[3].innerHTML);
+	var m_name 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[4].innerHTML);
+	var suf 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[5].innerHTML);
+	var w_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[6].innerHTML);
+	var m_phone 	= TableDataFromInnerHTML(p_contact_DOM_element.rows[7].innerHTML);
+	var mail 		= TableDataFromInnerHTML(p_contact_DOM_element.rows[8].innerHTML);
 	
 	//build and return the complete GIVEProContact object
-	return new GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
+	return new GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 /**
 * Constructs an array of GIVEProgram objects from a table embedded in the HTML.
@@ -1044,16 +1064,17 @@ function TableIdToGIVEStudentContact(table_id) {
 	//using DOM element properties. Instead, obtain the innerHTML for the
 	//<tr> </tr> tags, which will include the <td> </td> tags. Then slice off
 	//the <td> </td> tags and obtain the data within
-	var l_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[0].innerHTML);
-	var f_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[1].innerHTML);
-	var m_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[2].innerHTML);
-	var suf 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[3].innerHTML);
-	var w_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[4].innerHTML);
-	var m_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[5].innerHTML);
-	var mail 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[6].innerHTML);
+	var id 			= TableDataFromInnerHTML(s_contact_DOM_element.rows[0].innerHTML);
+	var l_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[1].innerHTML);
+	var f_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[2].innerHTML);
+	var m_name 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[3].innerHTML);
+	var suf 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[4].innerHTML);
+	var w_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[5].innerHTML);
+	var m_phone 	= TableDataFromInnerHTML(s_contact_DOM_element.rows[6].innerHTML);
+	var mail 		= TableDataFromInnerHTML(s_contact_DOM_element.rows[7].innerHTML);
 	
 	//build and return the complete GIVEStudentContact object
-	return new GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail);
+	return new GIVEStudentContact(id, l_name, f_name, m_name, suf, w_phone, m_phone, mail);
 }
 /**
 * Constructs an array of string objects from a table embedded in the HTML.
@@ -1144,8 +1165,9 @@ function TableDataFromInnerHTML(innerHTML) {
 * @param string zip - US zipcode
 * @return GIVEAddr object with fields initialized to function arguments
 */
-function GIVEAddr(street, city, state, zip) {
+function GIVEAddr(id, street, city, state, zip) {
 	var addr = {
+		id			: id,
 		street 		: street,
 		city 		: city,
 		state_us 	: state,
@@ -1212,8 +1234,9 @@ function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, progr
 * @param string mail - contact person's email address
 * @return GIVEProContact object with fields initialized to function arguments
 */
-function GIVEProContact(title, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
+function GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
 	var pcon = {
+		id		: id,
 		title 	: title,
 		l_name 	: l_name,
 		f_name	: f_name,
@@ -1295,8 +1318,9 @@ function GIVEProgram (id, referal, season, hours, name, descript, duration, note
 * @param string mail - contact person's email address
 * @return GIVEStudentContact object with fields initialized to function arguments
 */
-function GIVEStudentContact(l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
+function GIVEStudentContact(id, l_name, f_name, m_name, suf, w_phone, m_phone, mail) {
 	var scon = {
+		id		: id,
 		l_name 	: l_name,
 		f_name	: f_name,
 		m_name	: m_name,

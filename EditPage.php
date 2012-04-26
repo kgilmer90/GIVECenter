@@ -122,7 +122,7 @@ background-color: #FF9;
 background-color: #cccccc;
 }
 .content {
-position: absoulte;
+/* position: absoulte; */
 width: 75%;
 float: left;
 background-image: url(img/gradientHORIZ.png);
@@ -287,12 +287,21 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <h1 id="editHeader" align="center"></h1>
 <div class="topRow">
 <div class="column1">
-<form action="" method="post" name="editDBform">
+<form action="add_edit.php" method="post" name="editDBform">
 <label>
 <p align="center">&nbsp;</p>
 <table width="400" border="0">
   <caption>
   </caption>
+  <tr>
+    <td><input name="mode" id="mode" type="text" size="30" style="visibility:hidden;display:none;"/></td>
+  </tr>
+  <tr>
+    <td><input name="program_id" id="program_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
+  </tr>
+  <tr>
+    <td><input name="agency_id" id="agency_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
+  </tr>
   <tr>
     <td>Name</td>
     <td><input name="name" id="name" type="text" size="30" maxlength="30" /></td>
@@ -356,6 +365,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </b>
 <table width="400" border="0">
   <tr>
+    <td><input name="p_contact_id" id="p_contact_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
+  </tr>
+  <tr>
     <td>Title: </td>
     <td><input name="title" id="title" type="text" size="30" /></td>
   </tr>
@@ -402,6 +414,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </label>
 </b>
 <table width="400" border="0">
+<tr>
+    <td><input name="s_contact_id" id="s_contact_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
+  </tr>
   <tr>
     <td>First Name: </td>
     <td><input name="s_f_name" id="s_f_name" type="text" size="30" /></td>
@@ -436,7 +451,9 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <table width="400" border="0">
 <p align="center">&nbsp;</p>
 <p align="center"><b>Address</b></p>
-
+<tr>
+    <td><input name="addr_id" id="addr_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
+  </tr>
     <tr>
     <td>Street: </td>
     <td><input name="street" type="text" id="street" size="30" maxlength="50" /></td>
