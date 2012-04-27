@@ -117,6 +117,7 @@ function update_banner($conn,$files){
         try{
         $conn->query($query1,$conn);
         echo $query1;
+        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
@@ -124,18 +125,19 @@ function update_banner($conn,$files){
         
         $query2 = "SELECT id
             FROM image_paths
-            ORDER BY id
+            ORDER BY id DESC
             LIMIT 0,1";
         try{
         $conn->query($query2,$conn);
         echo $query2;
+        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
         }
         
         $id = $conn->fetchRowAsAssoc();
-        $file = 'img/'.$id['id'];
+        $file = 'img/'.$id['id'].".jpg";
         
         $query3 = "UPDATE image_paths
             SET path = '$file'  
@@ -144,19 +146,23 @@ function update_banner($conn,$files){
         try{
         $conn->query($query3,$conn);
         echo $query3;
+        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
         }
         
-        $path = "../../img/".$file;
-
+        $path = "../../".$file;
+        echo "copying from copy ".$files['banner']['tmp_name']." to $path";
+        
         if(!copy($files['banner']['tmp_name'], $path) ){
-            $query4 = "DELETE FROM image_path
+            echo "copy failed!<br/>";
+            $query4 = "DELETE FROM image_paths
                 WHERE id = ".$id['id'];
             try{
             $conn->query($query4,$conn);
             echo $query4;
+            echo "<br/>";   
             }
             catch(Exception $e){
                 echo $e;
