@@ -7,21 +7,20 @@
  * remove p contact and set null in program/agency
  */
 
-function remove_p_contact($conn,$p_id){
+function remove_p_contact($conn,$program_id){
     
     $query1 = "SELECT p_contact
         FROM program
-        WHERE id = $p_id";
+        WHERE id = $program_id";
+    $contact_id = $conn->query($query1);
     
     $query2 = "DELETE FROM pro_contact
-        WHERE id = $p_id";
+        WHERE id = $contact_id";
+    $conn->query($query2);
     
     $query3 = "UPDATE program
         SET p_contact = 'null'
-        WHERE id = $p_id";
-    
-    $p_id = $conn->query($query1);
-    $conn->query($query2);
+        WHERE id = $program_id";
     $conn->query($query3);
 }
 
