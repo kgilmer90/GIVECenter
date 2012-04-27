@@ -14,7 +14,17 @@
         $query2 = "UPDATE program
                     SET addr = 'NULL'
                     WHERE id = $program_id";
-        $conn->query($query1);
-        $conn->query($query2);
+        try{
+            $conn->query($query1);    
+        }
+        catch(Exception $e){
+            echo $e;
+        }
+        try{
+            $conn->query($query2);    
+        }
+        catch(Exception $e){
+            echo $e;
+        }
     }
 ?>
