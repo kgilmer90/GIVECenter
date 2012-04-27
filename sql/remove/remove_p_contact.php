@@ -14,13 +14,13 @@ function remove_p_contact($conn,$p_id){
         WHERE id = $p_id";
     
     $query2 = "DELETE FROM pro_contact
-        WHERE id = $id";
+        WHERE id = $p_id";
     
     $query3 = "UPDATE program
         SET p_contact = 'null'
         WHERE id = $p_id";
     
-    $id = $conn->query($query1);
+    $p_id = $conn->query($query1);
     $conn->query($query2);
     $conn->query($query3);
 }
