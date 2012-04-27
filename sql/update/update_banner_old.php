@@ -1,6 +1,8 @@
 <?php
 
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/ini/GIVECenterIni.php');
+
 $conn =0;
 try{
 $conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
@@ -39,7 +41,7 @@ if(isset($_GET['code'])) {
  * Run Update
  * **************************************************************************/
 
-update_banner_old($conn, $_POST);
+update_banner_old($conn, $_POST) or die("bad update!");
 header("../../add_edit.php");
 
 /**

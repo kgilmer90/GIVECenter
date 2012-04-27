@@ -1,6 +1,6 @@
 <?php
-include_once (dirname(__FILE__).'/sql/update/update_banner_old.php');
-include_once (dirname(__FILE__).'/sql/queries/queries.php');
+include_once(dirname(__FILE__).'/sql/update/update_banner_old.php');
+include_once(dirname(__FILE__).'/sql/queries/queries.php');
 include_once(dirname(__FILE__).'/php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once(dirname(__FILE__).'/php/ini/GIVECenterIni.php');
 
