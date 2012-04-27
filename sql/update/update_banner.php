@@ -76,15 +76,15 @@ function update_banner_simple($files){
 
     if(count($files)){
         if($files['banner']['type']!= 'image/jpeg') 
-            header('../../admin.php?error=bad_file_type');
+            header('Location:../../Admin.php?error=bad_file_type');
 
         $path = '../../img/give_banner.jpg';
 
         if(!copy($files['banner']['tmp_name'], $path) ){ 
-            header('../../admin.php?error='.$files['banner']['error'].'copy_fail');
+            header('Location:../../Admin.php?error='.$files['banner']['error'].'copy_fail');
         }
         else{
-            header('../../admin.php?error='.$files['banner']['error']);
+            header('Location:../../Admin.php?error='.$files['banner']['error']);
         }
     }   
 }
@@ -99,25 +99,25 @@ function update_banner($conn,$files){
  *  DONT FORGET TO ADD PERMISSIONS FOR www-data ON THE TARGET FOLDER
  * 
  *  Sample Form:
- */ ?>
+ *
   <html><head><title>PHP Form Upload</title></head><body>
     <form method='post' action='update_banner.php' enctype='multipart/form-data'>
         Select File: <input type='file' name='banner' size='10' />
         <input type='submit' value='Upload' />
     </form>
-   <?php 
+ */
 
 
     if(count($files)){
         if($files['banner']['type']!= 'image/jpeg') 
-            header('../../admin.php?error=bad_file_type');
+            header('Location:../../Admin.php?error=bad_file_type');
         
         $query1 = "INSERT INTO image_paths(image_type)
             VALUES('banner')";
         try{
         $conn->query($query1,$conn);
-        echo $query1;
-        echo "<br/>";
+//        echo $query1;
+//        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
@@ -129,8 +129,8 @@ function update_banner($conn,$files){
             LIMIT 0,1";
         try{
         $conn->query($query2,$conn);
-        echo $query2;
-        echo "<br/>";
+//        echo $query2;
+//        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
@@ -145,15 +145,15 @@ function update_banner($conn,$files){
         
         try{
         $conn->query($query3,$conn);
-        echo $query3;
-        echo "<br/>";
+//        echo $query3;
+//        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
         }
         
         $path = "../../".$file;
-        echo "copying from copy ".$files['banner']['tmp_name']." to $path";
+//        echo "copying from copy ".$files['banner']['tmp_name']." to $path";
         
         if(!copy($files['banner']['tmp_name'], $path) ){
             echo "copy failed!<br/>";
@@ -161,16 +161,16 @@ function update_banner($conn,$files){
                 WHERE id = ".$id['id'];
             try{
             $conn->query($query4,$conn);
-            echo $query4;
-            echo "<br/>";   
+//            echo $query4;
+//            echo "<br/>";   
             }
             catch(Exception $e){
                 echo $e;
             }
-            header('../../admin.php?error='.$files['banner']['error'].'copy_fail');
+            header('Location:../../Admin.php?error='.$files['banner']['error'].'copy_fail');
         }
         else{
-            header('../../admin.php');
+            header('Location:../../Admin.php');
         }
     }   
 }
