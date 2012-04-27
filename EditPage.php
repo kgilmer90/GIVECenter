@@ -687,7 +687,7 @@ Night</label></td>
 <div align="center">
   <input type="submit" value="Save Changes" />
   <br />
-<input type="button" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="alert('Are you sure you want to permanently DELETE this program/agency?')"></div>
+<input type="submit" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="deleteAgencyOrProgram()"></div>
 </form>
 </div></div>
 </p>

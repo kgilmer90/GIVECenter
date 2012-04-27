@@ -18,30 +18,31 @@ var LEFT_SIDEBAR_AGENCY = 0;
 var LEFT_SIDEBAR_PROGRAM = 1;
 var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 
-function editAgency()
-{
+function editAgency() {
 	var getID = document.getElementById("agencyDropdown").selectedIndex;
 	location = "EditPage.php?mode=edit&what=agency&id="+ getID;
 }
 
-function editProgram()
-{
+function editProgram() {
 	var getID = document.getElementById("programDropdown").selectedIndex;
 	location = "EditPage.php?mode=edit&what=program&id="+ getID;
 }
 
-function addAgency()
-{
+function addAgency() {
 	location = "EditPage.php?mode=add&what=agency";
 }
 
-function addProgram()
-{
+function addProgram() {
 	location = "EditPage.php?mode=add&what=program";
 }
 
-function loadEditPage(mode, what, id) //onload editPage
-{
+function deleteAgencyOrProgram() {
+	
+	var r = confirm("Are you sure you want to permanently DELETE this program/agency?");
+	return r;
+}
+
+function loadEditPage(mode, what, id) { //onload editPage
 	initIssues();
 	initAgenciesAndPrograms();
 	

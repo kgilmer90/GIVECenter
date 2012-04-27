@@ -1,5 +1,7 @@
 <?php
-include_once('../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/ini/GIVECenterIni.php');
+
 $conn =0;
 try{
 $conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
@@ -55,8 +57,6 @@ if (isset($_POST['program_id'])){
     }
     
     remove_program($conn, $_POST['program_id']);
-    
-    header('../../Admin.php');
 }
  
 if(isset($_POST['agency_id']) && agency_empty($conn, $_POST['agency_id'])){
@@ -70,5 +70,6 @@ if(isset($_POST['agency_id']) && agency_empty($conn, $_POST['agency_id'])){
     
     remove_agency($conn, $_POST['agency_id']);
 }
+header('Location: ../../Admin.php');
 ?>
 
