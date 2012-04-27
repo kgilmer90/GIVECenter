@@ -1,8 +1,8 @@
 <?php
-include_once ('sql/update/update_banner_old.php');
-include_once ('sql/queries/queries.php');
-include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
-include_once('php/ini/GIVECenterIni.php');
+include_once (dirname(__FILE__).'sql/update/update_banner_old.php');
+include_once (dirname(__FILE__).'/sql/queries/queries.php');
+include_once(dirname(__FILE__).'/php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/php/ini/GIVECenterIni.php');
 
 $conn=0;
 try {
@@ -215,7 +215,7 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
     <div align="center"><b>Change Banner: </b>
         <h1 align="center">&nbsp;</h1>
         <h1 align="center">Stored Banners:</h1>
-        <form method="POST">
+        <form method="POST" action="/sql/update/update_banner_old.php">
         <?php
             
         $banners = get_banners($conn);
@@ -224,7 +224,7 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
             echo "<a href='#'>";
             echo "<img src='".$temp['path']."' alt='giveBanner' name='Insert_logo' width='100%'
                 height='90' id='giveBanner' style='background: #8090AB; display:block;' />";
-            echo "</a><input name='set_banner' type='button' value='".$temp['id']."' />";
+            echo "</a><input name='set_banner' type='submit' value='".$temp['id']."' />";
         }
         ?> 
         </form>
