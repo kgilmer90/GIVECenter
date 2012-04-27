@@ -8,6 +8,7 @@ include_once(dirname(__FILE__).'/../remove/remove_issue.php');
 include_once(dirname(__FILE__).'/../remove/remove_p_contact.php');
 include_once(dirname(__FILE__).'/../remove/remove_s_contact.php');
 include_once(dirname(__FILE__).'/../remove/remove_season.php');
+include_once(dirname(__FILE__).'/../remove/remove_program.php');
 
 $conn =0;
 try{
