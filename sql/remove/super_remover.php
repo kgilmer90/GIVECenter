@@ -53,25 +53,25 @@ if (isset($_POST['program_id'])){
     remove_issues($conn, $_POST['program_id']);
     remove_season($conn, $_POST['program_id']);
     
-    if (isset($_POST['p_contact_id'])){
+    if ($_POST['p_contact_id']!= -1){
         remove_p_contact_program($conn, $_POST['program_id']);
     }
-    if (isset($_POST['addr_id'])){
+    if ($_POST['addr_id']!= -1){
         remove_addr_from_program($conn, $_POST['addr_id'], $_POST['program_id']);
     }
-    if (isset($_POST['s_contact_id'])){
+    if ($_POST['s_contact_id'] != -1){
         remove_s_contact_by_id($conn, $_POST['s_contact_id']);
     }
     
     remove_program($conn, $_POST['program_id']);
 }
  
-if(isset($_POST['agency_id']) && agency_empty($conn, $_POST['agency_id'])){
+if($_POST['agency_id'] != -1 && agency_empty($conn, $_POST['agency_id'])){
     
-    if (isset($_POST['p_contact_id'])){
+    if ($_POST['p_contact_id']!= -1){
         remove_p_contact_agency($conn, $_POST['agency_id']);
     }
-    if (isset($_POST['addr_id'])){
+    if ($_POST['addr_id']!= -1){
         remove_addr_from_program($conn, $_POST['addr_id'], $_POST['program_id']);
     }
     
