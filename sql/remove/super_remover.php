@@ -1,6 +1,13 @@
 <?php
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once(dirname(__FILE__).'/../../php/ini/GIVECenterIni.php');
+include_once(dirname(__FILE__).'/../remove/remove_addr.php');
+include_once(dirname(__FILE__).'/../remove/remove_agency.php');
+include_once(dirname(__FILE__).'/../remove/remove_hours.php');
+include_once(dirname(__FILE__).'/../remove/remove_issue.php');
+include_once(dirname(__FILE__).'/../remove/remove_p_contact.php');
+include_once(dirname(__FILE__).'/../remove/remove_s_contact.php');
+include_once(dirname(__FILE__).'/../remove/remove_season.php');
 
 $conn =0;
 try{
