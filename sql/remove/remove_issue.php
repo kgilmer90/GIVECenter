@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-function update_issues($conn,$program_id)
+function remove_issues($conn,$program_id)
 {
     $query="DELETE FROM program_issues
             WHERE program_id = $program_id";

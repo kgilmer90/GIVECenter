@@ -5,7 +5,7 @@
  * and open the template in the editor.
  */
 
-function delete_season($conn,$program_id)
+function remove_season($conn,$program_id)
 {
     $query="DELETE FROM program_seasons
             WHERE program_id = $program_id";

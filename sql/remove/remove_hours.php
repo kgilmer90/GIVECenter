@@ -11,7 +11,7 @@
  * @param type $program_id 
  */
 
-function delete_hours($conn,$program_id)
+function remove_hours($conn,$program_id)
 {
     $query1="DELETE FROM program_hours
             WHERE program_id = $program_id";
