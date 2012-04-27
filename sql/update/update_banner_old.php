@@ -81,18 +81,4 @@ function update_banner_old($conn,$post){
     
     header('../../Admin.php');
 }
-
-function get_banners($conn){
-    
-    $query = "SELECT id,path
-        FROM image_paths
-        WHERE image_type = 'banner'
-        ORDER BY id DESC";
-    
-    $conn->query($query);
-    
-    $banners = $conn->fetchAllAsAssoc();
-    
-    return $banners;
-}
 ?>

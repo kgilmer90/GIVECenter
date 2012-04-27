@@ -1,11 +1,14 @@
 <?php
+include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/../../php/ini/GIVECenterIni.php');
 
-
-
-
-include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
+$conn =0;
+try{
 $conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
-
+}
+catch(Exception $e){
+    echo $e;
+}
 
 
 /****************************************************************************
@@ -96,44 +99,68 @@ function update_banner($conn,$files){
  *  DONT FORGET TO ADD PERMISSIONS FOR www-data ON THE TARGET FOLDER
  * 
  *  Sample Form:
- * 
- * <html><head><title>PHP Form Upload</title></head><body>
+ */ ?>
+  <html><head><title>PHP Form Upload</title></head><body>
     <form method='post' action='update_banner.php' enctype='multipart/form-data'>
         Select File: <input type='file' name='banner' size='10' />
         <input type='submit' value='Upload' />
     </form>
-    */
+   <?php 
 
 
     if(count($files)){
         if($files['banner']['type']!= 'image/jpeg') 
             header('../../admin.php?error=bad_file_type');
         
-        $query1 = "INSERT INTO image_paths('banner')
-            VALUES(image_type)";
+        $query1 = "INSERT INTO image_paths(image_type)
+            VALUES('banner')";
+        try{
         $conn->query($query1,$conn);
+        echo $query1;
+        }
+        catch(Exception $e){
+            echo $e;
+        }
         
         $query2 = "SELECT id
             FROM image_paths
             ORDER BY id
             LIMIT 0,1";
-        $conn->query($query2, $conn);
+        try{
+        $conn->query($query2,$conn);
+        echo $query2;
+        }
+        catch(Exception $e){
+            echo $e;
+        }
         
         $id = $conn->fetchRowAsAssoc();
         $file = 'img/'.$id['id'];
         
         $query3 = "UPDATE image_paths
-            SET path =".$file.
-            "WHERE id =".$id['id'];
+            SET path = '$file'  
+            WHERE id =".$id['id'];
         
-        $conn->query($query3);
+        try{
+        $conn->query($query3,$conn);
+        echo $query3;
+        }
+        catch(Exception $e){
+            echo $e;
+        }
         
-        $path = "../../".$file;
+        $path = "../../img/".$file;
 
         if(!copy($files['banner']['tmp_name'], $path) ){
             $query4 = "DELETE FROM image_path
                 WHERE id = ".$id['id'];
-            $conn->query($query4);
+            try{
+            $conn->query($query4,$conn);
+            echo $query4;
+            }
+            catch(Exception $e){
+                echo $e;
+            }
             header('../../admin.php?error='.$files['banner']['error'].'copy_fail');
         }
         else{

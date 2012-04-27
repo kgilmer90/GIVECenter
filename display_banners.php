@@ -1,5 +1,4 @@
 <?php
-include_once(dirname(__FILE__).'/sql/update/update_banner_old.php');
 include_once(dirname(__FILE__).'/sql/queries/queries.php');
 include_once(dirname(__FILE__).'/php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once(dirname(__FILE__).'/php/ini/GIVECenterIni.php');
@@ -215,7 +214,7 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
     <div align="center"><b>Change Banner: </b>
         <h1 align="center">&nbsp;</h1>
         <h1 align="center">Stored Banners:</h1>
-        <form method="POST" action="/sql/update/update_banner_old.php">
+        <form method="POST" action="sql/update/update_banner_old.php">
         <?php
             
         $banners = get_banners($conn);
@@ -236,3 +235,21 @@ $conn->close();
 ?>
 </body>
 </html>
+
+<?php
+
+function get_banners($conn){
+    
+    $query = "SELECT id,path
+        FROM image_paths
+        WHERE image_type = 'banner'
+        ORDER BY id DESC";
+    
+    $conn->query($query);
+    
+    $banners = $conn->fetchAllAsAssoc();
+    
+    return $banners;
+}
+
+?>
