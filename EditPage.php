@@ -287,7 +287,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <h1 id="editHeader" align="center"></h1>
 <div class="topRow">
 <div class="column1">
-<form action="add_edit.php" method="post" name="editDBform">
+<form action="add_edit.php" method="post" name="editDBform" id="editDBform">
 <label>
 <p align="center">&nbsp;</p>
 <table width="400" border="0">

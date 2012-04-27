@@ -39,6 +39,7 @@ function addProgram() {
 function deleteAgencyOrProgram() {
 	
 	var r = confirm("Are you sure you want to permanently DELETE this program/agency?");
+	document.getElementById('editDBform').action = 'sql/remove/super_remover.php';
 	return r;
 }
 
@@ -151,12 +152,13 @@ function fillEditPageForm(what, mode, id) {
 		fax.value = elem.fax;
 		document.getElementById('agency_id').value = elem.id;
 		document.getElementById('program_id').value = -1;
+		s_contact_id.value = -1;
 	}
 	else if(what == 'program') {
 		elem = programs[id];
 		
 		//set the student contact info
-		s_contact_id.value = elem.s_contact.id;
+		s_contact_id.value = (elem.s_contact.id) ? elem.s_contact.id : -1;
 		s_f_name.value = elem.s_contact.f_name;
 		s_l_name.value = elem.s_contact.l_name;
 		s_f_name.value = elem.s_contact.f_name;
@@ -201,7 +203,7 @@ function fillEditPageForm(what, mode, id) {
 	name.value = elem.name;
 	descript.value = elem.descript;
 	
-	p_contact_id.value = elem.p_contact.id;
+	p_contact_id.value = (elem.p_contact.id) ? elem.p_contact.id : -1;
 	f_name.value = elem.p_contact.f_name;
 	m_name.value = elem.p_contact.m_name;
 	l_name.value = elem.p_contact.l_name;
@@ -211,7 +213,7 @@ function fillEditPageForm(what, mode, id) {
 	m_phone.value = elem.p_contact.m_phone;
 	mail.value = elem.p_contact.mail;
 	
-	addr_id.value = elem.addr.id;
+	addr_id.value = (elem.addr.id) ? elem.addr.id : -1;
 	street.value = elem.addr.street;
 	city.value = elem.addr.city;
 	state_us.value = elem.addr.state_us;
