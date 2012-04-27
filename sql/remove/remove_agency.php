@@ -32,4 +32,20 @@ function remove_agency($conn,$id){
     }
     
 }
+
+function agency_empty($conn,$agency_id){
+    $query = "SELECT program.id
+        FROM program, agency
+        WHERE agency.id = $agency_id
+        AND agency.id = program.agency";
+    $conn->query($query);
+    $results = $conn->numRows();
+    
+    if ($results > 0){
+        return false;
+    }
+    else{
+        return true;
+    }
+}
 ?>

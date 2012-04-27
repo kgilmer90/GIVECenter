@@ -57,5 +57,18 @@ if (isset($_POST['program_id'])){
     remove_program($conn, $_POST['program_id']);
     
     header('../../Admin.php');
+}
+ 
+if(isset($_POST['agency_id']) && agency_empty($conn, $_POST['agency_id'])){
+    
+    if (isset($_POST['p_contact_id'])){
+        remove_p_contact($conn, $_POST['p_contact_id']);
+    }
+    if (isset($_POST['addr_id'])){
+        remove_addr_from_program($conn, $_POST['addr_id'], $_POST['program_id']);
+    }
+    
+    remove_agency($conn, $_POST['agency_id']);
+}
 ?>
 
