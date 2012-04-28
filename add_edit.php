@@ -40,10 +40,14 @@ if(isset($_GET['code'])) {
  * TODO: Mail,Phone,Fax for agency
  * TODO: Duration for program
  *****************************************************************************/
-
+echo "<pre>";
+    print_r($_POST);
+echo "</pre>";
 
 if($_POST['mode']=='edit'){     //  EDIT CONDITION
-    if($_POST['addr_id']){
+    
+    // Only update if address exists and is edited 
+    if($_POST['addr_id'] && $_POST['addr_id']!=-1){
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
         $update['addr']['city'] = $_POST['city'];
@@ -51,16 +55,21 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['addr']['zip'] = $_POST['zip'];
         
         update_generic($conn, 'addr', $_POST['addr_id'], $update['addr']);
-        
-        
-        echo "<pre>";
-        print_r($update['addr']);
-        echo"</pre>";
-        
-        echo "<pre>";
-        print_r($_POST);
-        echo"</pre>";
     }
+    //  If address doesnt exist, and was edited create it
+    elseif($_POST['addr_id']==-1){
+                //  Need to return addr id
+        $update['addr']['id'] = $_POST['addr_id'];
+        $update['addr']['street'] = $_POST['street'];
+        $update['addr']['city'] = $_POST['city'];
+        $update['addr']['state_us'] = $_POST['state_us'];
+        $update['addr']['zip'] = $_POST['zip'];
+        
+        $addr_id = create_new_addr($conn, $update['addr']);
+        $update['addr_id'] = $addr_id;
+    }
+    else
+        $update['addr']['id'] = $_POST['addr_id'];
     
     if(isset($_POST['Hours'])){
         $update['hours'] = $_POST['Hours'];
@@ -155,7 +164,7 @@ elseif ($_POST['mode']=='add'){
         $update['addr']['zip'] = $_POST['zip'];
         
         $addr_id = create_new_addr($conn, $update['addr']);
-        $update['program_addr'] = $addr_id;
+        $update['addr']['id'] = $addr_id;
         
     }
     if(isset($_POST['Hours'])){
