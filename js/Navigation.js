@@ -18,36 +18,58 @@ var LEFT_SIDEBAR_AGENCY = 0;
 var LEFT_SIDEBAR_PROGRAM = 1;
 var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
 
+/**
+ * Called in Admin.php to set up the edit page to edit a
+ * database entry for an Agency
+ */
 function editAgency() {
 	var getID = document.getElementById("agencyDropdown").selectedIndex;
 	location = "EditPage.php?mode=edit&what=agency&id="+ getID;
 }
-
+/**
+ * Called in Admin.php to set up the edit page to edit a
+ * database entry for a Program
+ */
 function editProgram() {
 	var getID = document.getElementById("programDropdown").selectedIndex;
 	location = "EditPage.php?mode=edit&what=program&id="+ getID;
 }
-
+/**
+ * Called in Admin.php to set up the edit page to add a new 
+ * database entry for an Agency
+ */
 function addAgency() {
 	location = "EditPage.php?mode=add&what=agency";
 }
-
+/**
+ * Called in Admin.php to set up the edit page to add a new 
+ * database entry for a Program
+ */
 function addProgram() {
 	location = "EditPage.php?mode=add&what=program";
 }
-
+/**
+ * Called on Add/Edit pages to delete a database entry for an Agency or Program
+ */
 function deleteAgencyOrProgram() {
 	
 	var r = confirm("Are you sure you want to permanently DELETE this program/agency?");
 	document.getElementById('editDBform').action = 'sql/remove/super_remover.php';
 	return r;
 }
-
+/**
+ * Called onload on the edit page. Fills in the form with all
+ * available info about the Agency or Program
+ * @param mode - "add" or "edit"
+ * @param what - "program" or "agency"
+ * @param id - index of the program or agency in its respective global array
+ */
 function loadEditPage(mode, what, id) { //onload editPage
+
 	initIssues();
 	initAgenciesAndPrograms();
 	
-	if(mode == 'none' || what == 'none') {
+	if(mode == 'none' || what == 'none' || !mode || !what) {
 		return;
 	}
 	
@@ -55,6 +77,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 	{
 		if(what == "program") //edit program
 		{
+			//set the descriptive headers
 			document.getElementById("editHeader").innerHTML = "Edit Program";
 			document.getElementById("agencyDescrip").style.visibility="visible";
 			document.getElementById("agencyOpt").style.visibility="visible";
@@ -63,16 +86,19 @@ function loadEditPage(mode, what, id) { //onload editPage
 			
 			//fill the dropdown menu and set the selected index to the program index
 			addAgenciesToEditPageDropdown(id);
+			//fill the form with all the available information
 			fillEditPageForm('program', 'edit', id);
 		}
 		else //edit agency
 		{
+			//set the descriptive headers
 			document.getElementById("editHeader").innerHTML = "Edit Agency";
 			document.getElementById("agencyDescrip").style.visibility="hidden";
 			document.getElementById("agencyOpt").style.visibility="hidden";
 			document.getElementById("agencyDescrip").style.display="none";
 			document.getElementById("agencyOpt").style.display="none";
 			
+			//fill the form with all available information
 			fillEditPageForm('agency', 'edit', id);
 		}
 	}
@@ -80,6 +106,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 	{
 		if(what == "program") //add program
 		{
+			//set the descriptive headers
 			document.getElementById("editHeader").innerHTML = "Add Program";
 			document.getElementById("agencyDescrip").style.visibility="visible";
 			document.getElementById("agencyOpt").style.visibility="visible";
@@ -93,6 +120,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 		}
 		else // add agency
 		{
+			//set the descriptive headers
 			document.getElementById("editHeader").innerHTML = "Add Agency";
 			document.getElementById("agencyDescrip").style.visibility="hidden";
 			document.getElementById("agencyOpt").style.visibility="hidden";
@@ -105,9 +133,13 @@ function loadEditPage(mode, what, id) { //onload editPage
 
 	}
 }
+/**
+ * Fills in the edit page's form with all available information
+ * about the program or agency
+ */
 function fillEditPageForm(what, mode, id) {
 	
-	if(mode == 'add' || mode == 'edit') {
+	if(mode == 'add' || mode == 'edit' || !mode || !edit) {
 		document.getElementById('mode').value = mode;
 	}
 	else {
@@ -144,6 +176,7 @@ function fillEditPageForm(what, mode, id) {
 	var state_us = document.getElementById('state_us');
 	var zip = document.getElementById('zip');
 	
+	//agency or program depending on the what parameter
 	var elem;
 	
 	if(what == 'agency') {
@@ -219,26 +252,25 @@ function fillEditPageForm(what, mode, id) {
 	state_us.value = elem.addr.state_us;
 	zip.value = elem.addr.zip;
 }
-
+/**
+ * Populates the dropdown box on the Program EditPage
+ * @param program_index - array index of the program being edited
+ */
 function addAgenciesToEditPageDropdown(program_index) {
 	var dropdown = document.getElementById("agencyOpt");
 	dropdown.options.length = 0;
 	
 	var options = [];
-	
 	options.push(new Option('--No Agency--'));
 	
+	//add every agency to the list 
 	var i;
 	for(i in agencies) {
 		var agency = agencies[i];
-		options.push(new Option(agency.name));
-	}
-	for(i in options) {
-		var option = options[i];
-		dropdown.add(option, null);
+		dropdown.add((new Option(agency.name), null);
 	}
 	
-	//set the selected index to the program being edited's agency's index
+	//set the dropdown's selected index to match the agency of the program being edited
 	if(program_index >= 0)
 		dropdown.selectedIndex = programs[program_index].agency.index + 1;
 	
@@ -254,13 +286,20 @@ function addAgenciesToEditPageDropdown(program_index) {
 		}
 	};
 }
-
+/**
+ * Displays a new window
+ * @param url - address to open in a new window
+ * @returns false
+ */
 function popitup(url) {
 	newwindow=window.open(url,'name','height=500,width=500');
 	if (window.focus) {newwindow.focus()}
 	return false;
 }
-
+/**
+ * Hides elements on screen
+ * @param boxid - id of the element to hide
+ */
 function hidestuff(boxid){
 	
 	if(boxid == 'results') {
@@ -274,6 +313,10 @@ function hidestuff(boxid){
   	e.style.position = "absolute";
   	e.style.display = "none";
 }
+/**
+ * Displays elements on screen
+ * @param boxid - id of the element to display
+ */
 function showstuff(boxid){
 	
 	if(boxid == 'results') {
@@ -288,13 +331,22 @@ function showstuff(boxid){
 	e.style.position= "relative";
 	e.style.display="block";
 }
+/**
+ * Switches from advanced search to search results
+ * @returns
+ */
 function searchtoresults()
 {
 	showstuff('results');
 	hidestuff('interests');	
 }
+/**
+ * Switches from search results to advanced search
+ * @returns
+ */
 function backtosearch()
 {
+	//clear previous search results and display all
 	var i;
 	program_search_results = [];
 	for(i in programs) {
@@ -304,17 +356,31 @@ function backtosearch()
 	for(i in agencies) {
 		agency_search_results.push(i);
 	}
-	clearLeftSideBar();
-	addAgenciesToLeftSideBar(agency_search_results);
+	//clear the sidebar and repopulate with all
+	if(left_sidebar_display == LEFT_SIDEBAR_PROGRAM) {
+		toggleLeftSideBarDisplay();
+	}
+	else {
+		clearLeftSideBar();
+		addAgenciesToLeftSideBar(agency_search_results);
+	}
 	showstuff('interests');
 	hidestuff('results');
 }
+/**
+ * Uncheck all checked interest boxes
+ */
 function clearChoices()
 {
 	 document.getElementById('form1').reset();
 	 document.getElementById('form3').reset();
 }
-
+/**
+ * Homepage onload function, can be told to display 
+ * a certain agency or program with arguments
+ * @param what - "program" or "agency", sets display mode
+ * @param id - index in global array of program or agency to display
+ */
 function init(what, id)
 {
 	initAgenciesAndPrograms();
@@ -327,7 +393,7 @@ function init(what, id)
 	showstuff('interests');
 	hidestuff('results');
 	
-	if(what == 'none' || id == -1) {
+	if(what == 'none' || id == -1 || !what || !id) {
 		return;
 	}
 	if(what == 'program') {
@@ -606,6 +672,10 @@ function clearLeftSideBar() {
 		removeNode(leftSideBar.childNodes[0]);
 	}
 }
+/**
+ * 
+ * @returns
+ */
 function clearProgramAgenciesList() {
 	var list = document.getElementById("link_to_prog_agency");
 	
