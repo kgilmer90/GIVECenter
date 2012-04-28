@@ -1,5 +1,4 @@
 <?php
-
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 include_once(dirname(__FILE__).'/../../php/ini/GIVECenterIni.php');
 
@@ -41,44 +40,86 @@ if(isset($_GET['code'])) {
  * Run Update
  * **************************************************************************/
 
-update_banner_old($conn, $_POST) or die("bad update!");
-header("../../add_edit.php");
+update_banner_old($conn, $_POST);
+header("Location:../../Admin.php");
 
 /**
  *
  * @param type $conn 
  * @param type $post pass $post variable with 'image_id' set to new banner
  */
+
+//  Path is being set to null
+
 function update_banner_old($conn,$post){
-    $query1 = "INSERT INTO image_paths('banner')
-            VALUES(image_type)";
+        
+    $query1 = "INSERT INTO image_paths(image_type)
+            VALUES('banner')";
+    try{
     $conn->query($query1,$conn);
+    echo $query1."<br/>";
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 
     $query2 = "SELECT id
         FROM image_paths
-        ORDER BY id
+        ORDER BY id DESC
         LIMIT 0,1";
-    $conn->query($query2, $conn);
+    try{
+    $conn->query($query2,$conn);
+    echo $query2."<br/>";
+    }
+    catch(Exception $e){
+        echo $e;
+    }
     $id = $conn->fetchRowAsAssoc();
 
     $query3 = "SELECT path
         FROM image_paths
-        WHERE id = ".$post['id'];
-    $conn->query($query3);
-    if($conn->fetchRows() == 0)
-        header('../../Admin.php?error=bad_id');
+        WHERE id = ".$post['set_banner'];
+    try{
+    $conn->query($query3,$conn);
+    echo $query3."<br/>";
+    }
+    catch(Exception $e){
+        echo $e;
+    }
     
-    $file = $conn->fetchRowAsAssoc();
+    if($conn->numRows() == 0){
+        echo "bad id";
+        header('Location:../../Admin.php?error=bad_id');
+    }
+    
+    $file = $conn->fetchRowAsAssoc();   
     
     $query4 = "UPDATE image_paths
-        SET path =".$file['path'].
-        "WHERE id =".$id['id'];
-    $conn->query($query4);
+        SET path = '".$file['path']."'
+        WHERE id =".$id['id'];
+    try{
+    $conn->query($query4,$conn);
+    echo $query4."<br/>";
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 
+    //  Delete is working
     $query5 = "DELETE FROM image_paths
-        WHERE id = ".$post['id'];  
-    $conn->query($query5);
+        WHERE id = ".$post['set_banner'];  
+    try{
+    $conn->query($query5,$conn);
+    echo $query5."<br/>";
+    }
+    catch(Exception $e){
+        echo $e;
+    }
     
-    header('../../Admin.php');
+    $query6 = "DELETE FROM image_paths
+        WHERE path = 'null' OR path = ''";
+    $conn->query($query6);
+    
+    return 0;
 }
 ?>

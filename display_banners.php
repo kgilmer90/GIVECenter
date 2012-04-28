@@ -190,7 +190,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class="sidebar1">
 <div align="center">
 <ul class="nav">
-<li><a href="#">Admin</a></li>
+<li><a href="Admin.php">Admin</a></li>
 <li><a href="BrowseAll.php">Browse All</a></li>
 <li><a href="Homepage.php">Homepage</a></li>
 <li><a href="php/Session/Logout.php">Logout</a></li>
