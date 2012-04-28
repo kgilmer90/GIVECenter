@@ -260,14 +260,13 @@ function addAgenciesToEditPageDropdown(program_index) {
 	var dropdown = document.getElementById("agencyOpt");
 	dropdown.options.length = 0;
 	
-	var options = [];
-	options.push(new Option('--No Agency--'));
+	dropdown.add(new Option('--No Agency--'), null);
 	
 	//add every agency to the list 
 	var i;
 	for(i in agencies) {
 		var agency = agencies[i];
-		dropdown.add((new Option(agency.name), null);
+		dropdown.add(new Option(agency.name), null);
 	}
 	
 	//set the dropdown's selected index to match the agency of the program being edited
@@ -1053,16 +1052,10 @@ function initAdminAgencyDropdown() {
 	var dropdown = document.getElementById("agencyDropdown");
 	dropdown.options.length = 0;
 	
-	var options = [];
-	
 	var i;
 	for(i in agencies) {
 		var agency = agencies[i];
-		options.push(new Option(agency.name));
-	}
-	for(i in options) {
-		var option = options[i];
-		dropdown.add(option, null);
+		dropdown.add(new Option(agency.name), null);
 	}
 }
 
@@ -1070,16 +1063,10 @@ function initAdminProgramDropdown() {
 	var dropdown = document.getElementById("programDropdown");
 	dropdown.options.length = 0;
 	
-	var options = [];
-	
 	var i;
 	for(i in programs) {
 		var program = programs[i];
-		options.push(new Option(program.name));
-	}
-	for(i in options) {
-		var option = options[i];
-		dropdown.add(option, null);
+		dropdown.add(new Option(program.name), null);
 	}
 }
 
