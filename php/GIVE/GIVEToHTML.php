@@ -16,6 +16,7 @@ include_once(dirname(__FILE__).'/../../sql/object_creator/create_agencies.php');
  * from the server to the client.
  * @param MySQLDatabaseConn $conn - valid connection to the database
  */
+
 function GIVEFetchAndEcho($conn)
 {
 	//$_SESSSION['admin'] is true if logged in as admin, false otherwise

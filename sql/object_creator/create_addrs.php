@@ -20,7 +20,7 @@ include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php')
  * @param MySQLDatabaseConn $conn   connection to database
  * @param int $id   id for which address to pull
  * @return addr    object containing address information
- */ 
+ */
 function create_addr($conn,$id){
     if($id == null){ return null; }
     
@@ -62,4 +62,4 @@ function create_all_addrs($conn){
 
     return $addr_array;
 }
-?>i
+?>
