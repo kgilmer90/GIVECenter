@@ -48,6 +48,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     
     // Only update if address exists and is edited 
     if($_POST['addr_id'] && $_POST['addr_id']!=-1){
+        echo "<p> address exists and was edited";
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
         $update['addr']['city'] = $_POST['city'];
@@ -57,8 +58,8 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         update_generic($conn, 'addr', $_POST['addr_id'], $update['addr']);
     }
     //  If address doesnt exist, and was edited create it
-    elseif($_POST['addr_id']==-1){
-                //  Need to return addr id
+    elseif($_POST['addr_id'] && $_POST['addr_id']==-1){
+         echo "<p> address doesnt exist and was edited";
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
         $update['addr']['city'] = $_POST['city'];
@@ -67,9 +68,8 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         
         $addr_id = create_new_addr($conn, $update['addr']);
         $update['addr_id'] = $addr_id;
-    }
-    else
         $update['addr']['id'] = $_POST['addr_id'];
+    }
     
     if(isset($_POST['Hours'])){
         $update['hours'] = $_POST['Hours'];
