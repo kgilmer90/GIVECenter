@@ -40,9 +40,12 @@ if(isset($_GET['code'])) {
  * TODO: Mail,Phone,Fax for agency
  * TODO: Duration for program
  *****************************************************************************/
-
+echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
 
 if($_POST['mode']=='edit'){     //  EDIT CONDITION
+    
     if($_POST['addr_id']){
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
