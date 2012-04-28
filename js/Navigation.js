@@ -166,7 +166,7 @@ function fillEditPageForm(what, mode, id) {
 		s_w_phone.value = elem.s_contact.w_phone;
 		s_mail.value = elem.s_contact.mail;
 		
-		document.getElementById('agency_id').value = -1;
+		document.getElementById('agency_id').value = elem.agency.id;
 		document.getElementById('program_id').value = elem.id;
 		
 		if(elem.referal == referal.full) {
@@ -353,6 +353,12 @@ function init(what, id)
  * @returns starting index of searchTerms in stringToSearch or -1 if not found
  */
 function stringSearch(stringToSearch, searchTerms) {
+	if(!stringToSearch) {
+		return -1;
+	}
+	if(!searchTerms) {
+		return 0;
+	}
 	return stringToSearch.indexOf(searchTerms);
 }
 
@@ -363,6 +369,12 @@ function stringSearch(stringToSearch, searchTerms) {
  * @returns starting index of searchTerms in stringToSearch or -1 if not found
  */
 function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
+	if(!stringToSearch) {
+		return -1;
+	}
+	if(!searchTerms) {
+		return 0;
+	}
 	var s = stringToSearch.toLowerCase();
 	var t = searchTerms.toLowerCase();
 	return stringSearch(s, t);
@@ -372,22 +384,23 @@ function caseInsensitiveStringSearch(stringToSearch, searchTerms) {
  * @returns false - so the form submit doesn't reload the page
  */
 function quickSearch() {
+	
+	var searchTerms = document.getElementById('searchBar').value;
+	
+	searchAgency(searchTerms);
+	searchProgram(searchTerms);
+	clearLeftSideBar();
+	
 	if(left_sidebar_display == LEFT_SIDEBAR_AGENCY) {
-		searchAgency(document.getElementById('searchBar').value);
-		
-		clearLeftSideBar();
-		addProgramsToLeftSideBar(program_search_results);
-		if(program_search_results.length > 0) {
-			displayProgramInfo(program_search_results[0]);
-		}	
-	}
-	else if(left_sidebar_display == LEFT_SIDEBAR_PROGRAM) {
-		searchProgram(document.getElementById('searchBar').value);
-		
-		clearLeftSideBar();
 		addAgenciesToLeftSideBar(agency_search_results);
 		if(agency_search_results.length > 0) {
 			displayAgencyInfo(agency_search_results[0]);
+		}
+	}
+	else if(left_sidebar_display == LEFT_SIDEBAR_PROGRAM) {
+		addProgramsToLeftSideBar(program_search_results);
+		if(program_search_results.length > 0) {
+			displayProgramInfo(program_search_results[0]);
 		}
 	}
 	return false;
@@ -446,12 +459,16 @@ function advancedSearch() {
 	agency_search_results = matching_agency_indices;
 	program_search_results = matching_program_indices;
 
-	clearLeftSideBar();
-	addProgramsToLeftSideBar(program_search_results);
-	if(program_search_results.length > 0) {
-		displayProgramInfo(program_search_results[0]);
+	if(left_sidebar_display == LEFT_SIDEBAR_AGENCY) {
+		toggleLeftSideBarDisplay();
 	}
-	
+	else {
+		clearLeftSideBar();
+		addProgramsToLeftSideBar(program_search_results);
+		if(program_search_results.length > 0) {
+			displayProgramInfo(program_search_results[0]);
+		}
+	}
 	return false;
 }
 /**
