@@ -34,7 +34,6 @@ function update_generic($conn,$table,$id,$info_array)
                 WHERE id = $id";
     try{
         $conn->query($query);
-        echo $query."\n";
     }
     catch(Exception $e){
         echo $e;
