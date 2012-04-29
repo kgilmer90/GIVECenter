@@ -30,7 +30,7 @@ catch(MySQLDatabaseConnException $e)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Administration</title>
+<title>GIVE Center Volunteer Administration</title>
 <style type="text/css">
 <!--
 body {
@@ -243,7 +243,7 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
         Select Image to Upload: <input type='file' name='banner' size='10' />
         <input type='submit' value='Upload' />
     </form>
-    <a href="displayBanners.php">Choose Previous Banner</a>
+    <a href="DisplayBanners.php">Choose Previous Banner</a>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">ADMINISTRATION</h1>
 <div align="center">

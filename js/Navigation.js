@@ -159,11 +159,13 @@ function fillEditPageForm(what, mode, id) {
 		return;
 	}
 	
+	//collect the DOM elements for all the fields that need to be filled
 	var name = document.getElementById('name');
 	var descript = document.getElementById('descript');
 	var ref_type_full = document.getElementById('ref_type_full');
 	var ref_type_lim = document.getElementById('ref_type_lim');
 	
+	//pro contact information
 	var p_contact_id = document.getElementById('p_contact_id');
 	var title = document.getElementById('title');
 	var f_name = document.getElementById('f_name');
@@ -173,8 +175,7 @@ function fillEditPageForm(what, mode, id) {
 	var m_phone = document.getElementById('m_phone');
 	var w_phone = document.getElementById('w_phone');
 	var mail = document.getElementById('mail');
-	var fax = document.getElementById('fax');
-	
+
 	var s_contact_id = document.getElementById('s_contact_id');
 	var s_f_name = document.getElementById('s_f_name');
 	var s_l_name = document.getElementById('s_l_name');
@@ -198,7 +199,9 @@ function fillEditPageForm(what, mode, id) {
 		fax.value = elem.fax;
 		document.getElementById('agency_id').value = elem.id;
 		document.getElementById('program_id').value = -1;
-		s_contact_id.value = -1;
+/*		document.getElementById('phone').value = elem.phone;
+		document.getElementById('fax').value = elem.fax;
+*/		s_contact_id.value = -1;
 	}
 	else if(what == 'program') {
 		elem = programs[id];
@@ -214,7 +217,9 @@ function fillEditPageForm(what, mode, id) {
 		
 		document.getElementById('agency_id').value = elem.agency.id;
 		document.getElementById('program_id').value = elem.id;
-		
+/*		document.getElementById('phone').value = elem.phone;
+		document.getElementById('fax').value = ''; //programs don't have fax numbers
+*/		
 		if(elem.referal == referal.full) {
 			ref_type_full.checked = true;
 			ref_type_lim.checked = false;
@@ -405,7 +410,7 @@ function init(what, id)
 	showstuff('interests');
 	hidestuff('results');
 	
-	if(what == 'none' || id == -1 || !what || !id) {
+	if(!what || what == 'none' || id < 0) {
 		return;
 	}
 	if(what == 'program') {
@@ -704,6 +709,7 @@ function displayProgramInfo(index) {
 	
 	//valid index
 	if(index < programs.length) {
+		
 		//switch display mode so program info is visible
 		if(display_mode != DISPLAY_RESULTS) {
 			searchtoresults();
@@ -715,6 +721,9 @@ function displayProgramInfo(index) {
 		
 		document.getElementById("display_name").innerHTML = (p.name) ? p.name : "";
 		document.getElementById("display_descript").innerHTML = (p.descript) ? p.descript : "";
+/*		document.getElementById("display_phone").innerHTML = (p.phone) ? p.phone : "";
+		document.getElementById("display_fax").innerHTML = "";
+*/		
 		
 		var pcon = p.p_contact;
 		var scon = p.s_contact;
@@ -728,7 +737,7 @@ function displayProgramInfo(index) {
 		document.getElementById("display_p_contact_name").innerHTML = str; 
 		
 		document.getElementById("display_p_contact_m_phone").innerHTML = (pcon.m_phone) ? pcon.m_phone : "";
-		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone && pcon.w_phone != 0) ? pcon.w_phone : "";
+		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone) ? pcon.w_phone : "";
 		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
 		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
 		
@@ -740,9 +749,8 @@ function displayProgramInfo(index) {
 		document.getElementById("display_address_city").innerHTML = str;
 		
 		document.getElementById("display_s_contact_m_phone").innerHTML = (scon.m_phone) ? scon.m_phone : "";
-		document.getElementById("display_s_contact_w_phone").innerHTML = (scon.w_phone && scon.w_phone != 0) ? scon.w_phone : "";
+		document.getElementById("display_s_contact_w_phone").innerHTML = (scon.w_phone) ? scon.w_phone : "";
 		document.getElementById("display_s_contact_mail").innerHTML = (scon.mail) ? scon.mail : "";
-	//	document.getElementById("display_s_contact_fax").innerHTML = (scon.fax) ? scon.fax : "";
 		
 		clearProgramAgenciesList();
 		
@@ -776,6 +784,9 @@ function displayAgencyInfo(index) {
 		
 		document.getElementById("display_name").innerHTML = (agency.name) ? agency.name : "";
 		document.getElementById("display_descript").innerHTML = (agency.descript) ? agency.descript : "";
+/*		document.getElementById("display_phone").innerHTML = (agency.phone) ? agency.phone : "";
+		document.getElementById("display_fax").innerHTML = (agency.fax) ? agency.fax : "";
+*/		
 		
 		var pcon = agency.p_contact;
 		
@@ -787,9 +798,8 @@ function displayAgencyInfo(index) {
 		document.getElementById("display_p_contact_name").innerHTML = str; 
 		
 		document.getElementById("display_p_contact_m_phone").innerHTML = (pcon.m_phone) ? pcon.m_phone : "";
-		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone && pcon.w_phone != 0) ? pcon.w_phone : "";
+		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone) ? pcon.w_phone : "";
 		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
-		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
 		
 		clearProgramAgenciesList();
 		var i;
@@ -1414,12 +1424,7 @@ function GIVEAddr(id, street, city, state, zip) {
 		street 		: street,
 		city 		: city,
 		state_us 	: state,
-		zip 		: zip,
-		toString : function() {
-			return "street=" + this.street + 
-			",city=" + this.city + ",state_us=" + this.state_us + 
-			",zip=" + this.zip;
-		}
+		zip 		: zip
 	};
 	return addr;
 }
@@ -1438,6 +1443,7 @@ function GIVEAddr(id, street, city, state, zip) {
 */
 function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, programs) {
 	var agency = {
+		//keep track of index in global array, set to zero for now
 		index		: 0,
 		id 			: id, 
 		name		: name, 
@@ -1447,19 +1453,7 @@ function GIVEAgency(id, name, descript, mail, phone, fax, p_contact, addr, progr
 		fax			: fax,
 		p_contact	: p_contact,
 		addr		: addr,
-		programs	: programs,
-		toString	: function() {
-			var str = "id=" + this.id + ",name=" + this.name + ",descript=" + 
-				this.descript + ",mail=" + this.mail + ",phone=" + this.phone + 
-				",fax=" + this.fax + "<br />" + this.p_contact + "<br />" + this.addr +
-				"<br />";
-			
-			var i;
-			for(i in this.programs) {
-				str += "program" + i + "=" + this.programs[i] + "<br />";
-			}
-			return str;
-		}
+		programs	: (!programs) ? [] : programs
 	};
 	return agency;
 }
@@ -1485,14 +1479,12 @@ function GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone
 		f_name	: f_name,
 		m_name	: m_name,
 		suf 	: suf,
-		w_phone	: w_phone, 
-		m_phone	: m_phone,
-		mail	: mail,
-		toString : function() {
-			return "title=" + this.title + ",l_name=" + this.l_name + ",f_name=" + 
-			this.f_name + ",m_name=" + this.m_name + ",suf=" + this.suf + ",w_phone=" +
-			this.w_phone + ",m_phone=" + this.m_phone + ",mail=" + this.mail;
-		}
+		
+		//some DB entries for phone numbers are 0 or -1 to denote
+		//no phone number known, set to empty string for these
+		w_phone	: (w_phone <= 0) ? '' : w_phone, 
+		m_phone	: (m_phone <= 0) ? '' : m_phone,
+		mail	: mail
 	};
 	return pcon;
 }
@@ -1515,6 +1507,7 @@ function GIVEProContact(id, title, l_name, f_name, m_name, suf, w_phone, m_phone
 */
 function GIVEProgram (id, referal, seasons, hours, name, descript, duration, notes, issues, addr, agency, p_contact, s_contact) {
 	var program = {
+		//keep track of index in global array, set to zero for now
 		index 		: 0,
 		id 			: id,
 		referal		: referal,
@@ -1524,27 +1517,11 @@ function GIVEProgram (id, referal, seasons, hours, name, descript, duration, not
 		descript	: descript,
 		duration	: duration,
 		notes		: notes,
-		issues		: issues,
+		issues		: (!issues) ? [] : issues,
 		addr		: addr,
 		agency		: agency,
 		p_contact	: p_contact,
-		s_contact	: s_contact,
-		toString 	: function() {
-			
-			var str = "id=" + this.id + ",referal=" + this.referal + 
-				",season=" + this.seasons + ",hours=" + this.hours+ ",name=" + 
-				this.name + ",descript=" + this.descript + ",duration=" + 
-				this.duration + ",notes=" + this.notes + "<br />";
-	
-			var i;
-			for(i in issues) {
-				str += "issue" + i + "=" + issues[i] + ",";
-			}
-			str += "<br />";
-			
-			str += this.addr + "<br />" + this.p_contact + "<br />" + this.s_contact;
-			return str;
-		}
+		s_contact	: s_contact
 	};
 	return program;
 }
@@ -1568,14 +1545,12 @@ function GIVEStudentContact(id, l_name, f_name, m_name, suf, w_phone, m_phone, m
 		f_name	: f_name,
 		m_name	: m_name,
 		suf 	: suf,
-		w_phone	: w_phone, 
-		m_phone	: m_phone,
-		mail	: mail,
-		toString : function() {
-			return "l_name=" + this.l_name + ",f_name=" + this.f_name + 
-			",m_name=" + this.m_name + ",suf=" + this.suf + ",w_phone=" +
-			this.w_phone + ",m_phone" + this.m_phone + ",mail=" + this.mail;
-		}
+		
+		//some DB entries for phone numbers are 0 or -1 to denote
+		//no phone number known, set to empty string for these
+		w_phone	: (w_phone <= 0) ? '' : w_phone, 
+		m_phone	: (m_phone <= 0) ? '' : m_phone,
+		mail	: mail
 	};
 	return scon;
 }

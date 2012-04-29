@@ -17,7 +17,7 @@ catch(Exception $e){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Display Banners</title>
+<title>GIVE Center Display Banners</title>
 <style type="text/css">
 <!--
 body {
@@ -225,14 +225,11 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
                 height='90' id='giveBanner' style='background: #8090AB; display:block;' />";
             echo "</a><input name='set_banner' type='submit' value='".$temp['id']."' />";
         }
+        $conn->close();
         ?> 
         </form>
     </div>
 </div>
-<?php
-//GIVEFetchAndEcho($conn);
-$conn->close();
-?>
 </body>
 </html>
 

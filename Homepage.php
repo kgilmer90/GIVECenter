@@ -38,7 +38,7 @@ catch(MySQLDatabaseConnException $e)
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Homepage</title>
+<title>GIVE Center Volunteer Matching Homepage</title>
 <style type="text/css">
 <!--
 body {
