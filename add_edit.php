@@ -131,9 +131,9 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['agency']['descript'] = $_POST['descript'];
         $update['agency']['p_contact'] = $update['p_contact']['id'];;
         $update['agency']['addr'] = $update['addr']['id'];
-        //$update['agency']['mail'] = $_POST;
-        //$update['agency']['phone'] = $_POST;
-        $update['agency']['fax'] = $_POST['fax'];
+        //$update['agency']['mail'] = $_POST['agency_mail'];
+        //$update['agency']['phone'] = $_POST['agency_phone'];
+        $update['agency']['fax'] = $_POST['agency_fax'];
         
         update_generic($conn, 'agency', $_POST['agency_id'], $_POST['agency']);
     }
@@ -223,9 +223,9 @@ elseif ($_POST['mode']=='add'){
         $update['agency']['descript'] = $_POST['descript'];
         $update['agency']['p_contact'] = $update['p_contact']['id'];
         $update['agency']['addr'] = $update['addr'];
-        //$update['agency']['mail'] = $_POST;
-        //$update['agency']['phone'] = $_POST;
-        $update['agency']['fax'] = $_POST['fax'];
+        //$update['agency']['mail'] = $_POST['agency_mail'];
+        //$update['agency']['phone'] = $_POST['agency_phone'];
+        $update['agency']['fax'] = $_POST['agency_fax'];
         
         $agency_id = create_new_agency($conn, $update['agency']);
         $update['program']['agency'] = $agency_id;
