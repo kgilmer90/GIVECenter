@@ -1,11 +1,18 @@
 <?php
 
-include_once('php/MySQLDatabase/MySQLDatabaseConn.php');
-include_once('php/ini/GIVECenterIni.php');
-include_once('sql/update/update_generic.php');
-include_once('sql/update/update_hours.php');
-include_once('sql/update/update_issues.php');
-include_once('sql/update/update_season.php');
+include_once(dirname(__FILE__).'/php/MySQLDatabase/MySQLDatabaseConn.php');
+include_once(dirname(__FILE__).'/php/ini/GIVECenterIni.php');
+include_once(dirname(__FILE__).'/sql/update/update_generic.php');
+include_once(dirname(__FILE__).'/sql/update/update_hours.php');
+include_once(dirname(__FILE__).'/sql/update/update_issues.php');
+include_once(dirname(__FILE__).'/sql/update/update_season.php');
+include_once(dirname(__FILE__).'/sql/add/create_new_addr.php');
+include_once(dirname(__FILE__).'/sql/add/create_new_agency.php');
+include_once(dirname(__FILE__).'/sql/add/create_new_hours.php');
+include_once(dirname(__FILE__).'/sql/add/create_new_issue.php');
+include_once(dirname(__FILE__).'/sql/add/create_new_p_contact.php');
+include_once(dirname(__FILE__).'/sql/add/create_new_program.php');
+include_once(dirname(__FILE__).'/sql/add/create_new_s_contact.php');
 
 $conn = new MySQLDatabaseConn($GIVE_MYSQL_SERVER, $GIVE_MYSQL_DATABASE, $GIVE_MYSQL_UNAME, $GIVE_MYSQL_PASS);
 $update = array();
@@ -40,8 +47,10 @@ if(isset($_GET['code'])) {
  * TODO: Mail,Phone,Fax for agency
  * TODO: Duration for program
  *****************************************************************************/
+
+
 echo "<pre>";
-    print_r($_POST);
+print_r($_POST);
 echo "</pre>";
 
 if($_POST['mode']=='edit'){     //  EDIT CONDITION
@@ -55,7 +64,12 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['addr']['state_us'] = $_POST['state_us'];
         $update['addr']['zip'] = $_POST['zip'];
         
-        update_generic($conn, 'addr', $_POST['addr_id'], $update['addr']);
+        try{
+            update_generic($conn, 'addr', $_POST['addr_id'], $update['addr']);
+        }
+        catch(Exception $e){
+            echo $e;
+        }
     }
     //  If address doesnt exist, and was edited create it
     elseif($_POST['addr_id'] && $_POST['addr_id']==-1){
@@ -67,21 +81,27 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['addr']['zip'] = $_POST['zip'];
         
         $addr_id = create_new_addr($conn, $update['addr']);
-        $update['addr_id'] = $addr_id;
-        $update['addr']['id'] = $_POST['addr_id'];
+        
+        $update['addr']['id'] = $addr_id;
+        echo "new id:".$update['addr']['id'];
     }
     
     if(isset($_POST['Hours'])){
+        echo "updating hours";
         $update['hours'] = $_POST['Hours'];
         
         update_hours($conn, $_POST['program_id'], $_POST['Hours']);
     }
     
     if(isset($_POST['selectInterests'])){
+        echo "updating interests";
+        
         update_issues($conn, $_POST['program_id'],$_POST['selectInterests']);
     }
     
-    if(isset($_POST['p_contact_id'])){    
+    if(isset($_POST['p_contact_id'])){   
+        echo "updating p contact";
+        
         $update['p_contact']['id'] = $_POST['p_contact_id'];
         $update['p_contact']['f_name'] = $_POST['f_name'];
         $update['p_contact']['f_name'] = $_POST['l_name'];
@@ -92,10 +112,12 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['p_contact']['mail'] = $_POST['mail'];
         $update['p_contact']['fax'] = $_POST['fax'];
         
-        update_generic($conn, 'pro_contact', $_POST['p_contact_id'], $update['p_contact']);
+        update_generic($conn, 'pro_contact', $_POST['p_contact_id'], $update['p_contact']);   
     }
     
     if(isset($_POST['s_contact_id'])){ //might also give errors
+        echo "updating s contact";
+        
         $update['s_contact']['id'] = $_POST['s_contact_id'];
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
         $update['s_contact']['f_name'] = $_POST['s_l_name'];
@@ -106,15 +128,21 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['s_contact']['mail'] = $_POST['s_mail'];
         
         update_generic($conn, 'student_contact',$update['s_contact']['id'] , $update['s_contact']);
+      
     }
     
     if(isset($_POST['season'])){
+        echo "updating season";
+        
         $update['season'] = $_POST['season'];
         
         update_season($conn, $_POST['program_id'], $update['season']);
+        
     }
     
     if($_POST['program_id']==-1){
+        echo "updating agency";
+        
         $update['agency']['id'] = $_POST['agency_id'];
         $update['agency']['name'] = $_POST['name'];
         $update['agency']['descript'] = $_POST['descript'];
@@ -123,11 +151,13 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['agency']['mail'] = $_POST;
         $update['agency']['phone'] = $_POST;
         $update['agency']['fax'] = $_POST;
-   
+        
         update_generic($conn, 'agency', $_POST['agency_id'], $_POST['agency']);
     }
         
     else{
+        echo "updating program";
+        
         $update['program']['id'] = $_POST['program_id'];
         $update['program']['agency'] = $_POST['agency_id'];
         $update['program']['addr'] = $update['addr']['id'];
@@ -142,6 +172,8 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         update_generic($conn, 'program', $update['program']['id'], $update['program']);
     }
 }
+
+
 
 /*****************************************************************************
  * Add Condition!
@@ -231,7 +263,6 @@ elseif ($_POST['mode']=='add'){
         create_new_program_existing_agency($conn, $update['program']);
     }
 }
-
-header('Location: EditPage.php');
+// header('Location: EditPage.php');
 
 ?>
