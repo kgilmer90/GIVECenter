@@ -57,7 +57,6 @@ function update_banner_old($conn,$post){
             VALUES('banner')";
     try{
     $conn->query($query1,$conn);
-    echo $query1."<br/>";
     }
     catch(Exception $e){
         echo $e;
@@ -69,7 +68,6 @@ function update_banner_old($conn,$post){
         LIMIT 0,1";
     try{
     $conn->query($query2,$conn);
-    echo $query2."<br/>";
     }
     catch(Exception $e){
         echo $e;
@@ -81,14 +79,12 @@ function update_banner_old($conn,$post){
         WHERE id = ".$post['set_banner'];
     try{
     $conn->query($query3,$conn);
-    echo $query3."<br/>";
     }
     catch(Exception $e){
         echo $e;
     }
     
     if($conn->numRows() == 0){
-        echo "bad id";
         header('Location:../../Admin.php?error=bad_id');
     }
     
@@ -99,7 +95,6 @@ function update_banner_old($conn,$post){
         WHERE id =".$id['id'];
     try{
     $conn->query($query4,$conn);
-    echo $query4."<br/>";
     }
     catch(Exception $e){
         echo $e;
@@ -110,7 +105,6 @@ function update_banner_old($conn,$post){
         WHERE id = ".$post['set_banner'];  
     try{
     $conn->query($query5,$conn);
-    echo $query5."<br/>";
     }
     catch(Exception $e){
         echo $e;

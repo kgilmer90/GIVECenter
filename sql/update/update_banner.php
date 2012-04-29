@@ -116,8 +116,6 @@ function update_banner($conn,$files){
             VALUES('banner')";
         try{
         $conn->query($query1,$conn);
-//        echo $query1;
-//        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
@@ -129,8 +127,6 @@ function update_banner($conn,$files){
             LIMIT 0,1";
         try{
         $conn->query($query2,$conn);
-//        echo $query2;
-//        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
@@ -145,8 +141,6 @@ function update_banner($conn,$files){
         
         try{
         $conn->query($query3,$conn);
-//        echo $query3;
-//        echo "<br/>";
         }
         catch(Exception $e){
             echo $e;
@@ -161,8 +155,6 @@ function update_banner($conn,$files){
                 WHERE id = ".$id['id'];
             try{
             $conn->query($query4,$conn);
-//            echo $query4;
-//            echo "<br/>";   
             }
             catch(Exception $e){
                 echo $e;
