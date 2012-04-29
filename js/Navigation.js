@@ -4,16 +4,29 @@ var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
 var issues = [];		//global issues array, contains all issues
 var referal = { limited:0, full:1 }; 	//referal type
+
+//global hours array, contains all hours a program can require volunteers to dedicate
+//hours ids start at 1 so fill in index 0 with no data
 var hours = [0, 'Morning', 'Afternoon', 'Evening', 'Night', 'Graveyard'];
+
+//global seasons array, contains all seasons a program can be active
+//season ids start at 1 so fill in index 0 with no data
 var seasons = [0, 'Spring', 'Summer', 'Fall', 'Winter'];
 
+//previous quick or advanced search results, used to toggle 
+//between the left sidebar displaying agencies or programs
+//without having to perform the search all over again
 var agency_search_results = [];
 var program_search_results = [];
 
+//display_mode is used to tell if the page is currently displaying the
+//advanced search checkboxes (interests) or the search results
 var DISPLAY_INTERESTS = 0;
 var DISPLAY_RESULTS = 1;
 var display_mode = DISPLAY_INTERESTS;
 
+//left_sidebar_display is used to tell if the left sidebar is currently
+//set to display programs or agencies
 var LEFT_SIDEBAR_AGENCY = 0;
 var LEFT_SIDEBAR_PROGRAM = 1;
 var left_sidebar_display = LEFT_SIDEBAR_AGENCY;
@@ -947,7 +960,13 @@ function initAgenciesAndPrograms() {
 
 	var i = 0;
 	//get the main table and count how many <tr> tags exist (number of agencies)
-	var agency_count = document.getElementById("agency_table").rows.length;
+	var agency_count = 0;
+	var agency_DOM_element = document.getElementById("agency_table");
+	if(agency_DOM_element) {
+		if(agency_DOM_element.rows) {
+			agency_count = agency_DOM_element.rows.length;
+		}
+	}
 	for(i = 0; i < agency_count; i++) {
 	
 		//get the table for each agency and construct a GIVEAgency object from it
@@ -957,7 +976,6 @@ function initAgenciesAndPrograms() {
 		//add to global agencies array
 		agencies.push(agency);
 		agency.index = i;
-		agency_search_results.push(i);
 		
 		//each GIVEAgency contains an array of GIVEPrograms
 		//add each agency's programs to the global programs array
@@ -971,12 +989,17 @@ function initAgenciesAndPrograms() {
 	for(i in programs) {
 		program_search_results.push(i);
 	}
+	for(i in agencies) {
+		agency_search_results.push(i);
+	}
 }
 /**
  * Initializes the global issues array
+ * Should be called on every page that needs the issues array.
  */
 function initIssues() {
-	issues = [0, 0, 0, 0, 0,		//fill in to make retrieval trivial
+	//ids start at 5 so fill in 0-4 to make retrieval bawed on array index trivial
+	issues = [0, 0, 0, 0, 0,
             {id:5,	name:"Alumni"},
 			{id:6,	name:"Animals"},
 			{id:7,	name:"Children"},
@@ -1001,14 +1024,25 @@ function initIssues() {
 			{id:26,	name:"Technology"}
 			];
 }
+/**
+ * Onload function called on Browse All page.
+ * Builds the list of all agencies and programs.
+ */
 function initBrowseAll() {
+	//initialize the global arrays and add to the page
 	initAgenciesAndPrograms();
 	addAgenciesToBrowseAll();
 	addProgramsToBrowseAll();
 }
+/**
+ * Adds the list of all agencies to the browse all page.
+ */
 function addAgenciesToBrowseAll() {
 	
 	var list = document.getElementById("agencyList");
+	if(!list) {
+		return;
+	}
 	
 	var i;
 	for(i in agencies) {
@@ -1023,9 +1057,16 @@ function addAgenciesToBrowseAll() {
 		list.appendChild(li);
 	}
 }
+/**
+ * Adds the list of all programs to the browse all page
+ */
 function addProgramsToBrowseAll() {
 	
 	var list = document.getElementById("programList");
+	
+	if(!list) {
+		return;
+	}
 	
 	var i;
 	for(i in programs) {
@@ -1040,33 +1081,51 @@ function addProgramsToBrowseAll() {
 		list.appendChild(li);
 	}
 }
-
+/**
+ * Initializes the dropdown boxes to add and edit agencies and programs
+ * and displays a warning message to alert the user that they are now in admin mode.
+ */
 function initAdmin() {
-	alert('You have selected the "Administrator" option. Use this option only to add, delete, or edit programs or agencies and their descriptions.');
 	initAgenciesAndPrograms();
 	initAdminAgencyDropdown();
 	initAdminProgramDropdown();
+	alert('You have selected the "Administrator" option. Use this option only to add, delete, or edit programs or agencies and their descriptions.');
 }
-
+/**
+ * Initializes the agency dropdown box on the Admin page with all agencies.
+ */
 function initAdminAgencyDropdown() {
-	var dropdown = document.getElementById("agencyDropdown");
-	dropdown.options.length = 0;
 	
-	var i;
-	for(i in agencies) {
-		var agency = agencies[i];
-		dropdown.add(new Option(agency.name), null);
+	var dropdown = document.getElementById("agencyDropdown");
+	//if the dropdown box exists
+	if(dropdown) {
+		//clear the dropdown box
+		dropdown.options.length = 0;
+
+		//add every agency to the dropdown box
+		var i;
+		for(i in agencies) {
+			var agency = agencies[i];
+			dropdown.add(new Option(agency.name), null);
+		}
 	}
 }
-
+/**
+ * Initializes the program dropdown box on the admin page with all programs.
+ */
 function initAdminProgramDropdown() {
 	var dropdown = document.getElementById("programDropdown");
-	dropdown.options.length = 0;
-	
-	var i;
-	for(i in programs) {
-		var program = programs[i];
-		dropdown.add(new Option(program.name), null);
+	//if the dropdown box exists
+	if(dropdown) {
+		//clear the dropdown box
+		dropdown.options.length = 0;
+		
+		//add every program to the dropdown box
+		var i;
+		for(i in programs) {
+			var program = programs[i];
+			dropdown.add(new Option(program.name), null);
+		}
 	}
 }
 
@@ -1279,6 +1338,12 @@ function TableIdToIssuesArray(table_id) {
 	}
 	return issues_arr;
 }
+/**
+ * Constructs an array of the hours a program requires each volunteer to dedicate
+ * @param table_id - table's id property so the DOM element can be retrieved
+ * @returns {Array} - array if hours ids which can then be referenced to the
+ * global hours array.
+ */
 function TableIdToHoursArray(table_id) {
 
 	var hours_arr = [];
