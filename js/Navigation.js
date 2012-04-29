@@ -152,7 +152,7 @@ function loadEditPage(mode, what, id) { //onload editPage
  */
 function fillEditPageForm(what, mode, id) {
 	
-	if(mode == 'add' || mode == 'edit' || !mode || !edit) {
+	if(mode == 'add' || mode == 'edit') {
 		document.getElementById('mode').value = mode;
 	}
 	else {
@@ -198,8 +198,9 @@ function fillEditPageForm(what, mode, id) {
 
 		document.getElementById('agency_id').value = elem.id;
 		document.getElementById('program_id').value = -1;
-/*		document.getElementById('phone').value = elem.phone;
-		document.getElementById('fax').value = elem.fax;
+/*		document.getElementById('agency_phone').value = elem.phone;
+		document.getElementById('agency_fax').value = elem.fax;
+		document.getElementById('agency_mail').value = elem.mail;
 */		s_contact_id.value = -1;
 	}
 	else if(what == 'program') {
@@ -217,7 +218,6 @@ function fillEditPageForm(what, mode, id) {
 		document.getElementById('agency_id').value = elem.agency.id;
 		document.getElementById('program_id').value = elem.id;
 /*		document.getElementById('phone').value = elem.phone;
-		document.getElementById('fax').value = ''; //programs don't have fax numbers
 */		
 		if(elem.referal == referal.full) {
 			ref_type_full.checked = true;
