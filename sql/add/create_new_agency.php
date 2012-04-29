@@ -16,11 +16,25 @@ function create_new_agency($conn,$info_array)
                 VALUES (".$info_array['name'].",".$info_array['descript'].",
                 $p_id,$addr_id,".$info_array['mail'].",".$info_array['phone'].",".$info_array['fax'].")";
     
-    $conn->query($query);
+    try{
+        $conn->query($query);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
     
-     $agency_id = "SELECT id FROM agency SORT id DESC Limit 1,1";
+    $query2 = "SELECT id FROM agency SORT id DESC Limit 1,1";
+    
+    try{
+        $conn->query($query2);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
+    $agency_id = $conn->fetchRowAsAssoc();
     // get id of last program inserted
     
-    return $agency_id;
+    echo $query."<br/>".$query2."<br/>";
+    return $agency_id['id'];
 }
 ?>

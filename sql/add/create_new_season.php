@@ -17,7 +17,14 @@ function create_new_seasons($conn,$program_id,$seasons_id)
     {
         $query = "INSERT INTO program_seasons(program_id,season_id)
             VALUES ($program_id,$temp)";
-        $conn->query($query);
+        echo $query;
+        
+        try{
+            $conn->query($query);
+        }
+        catch(Exception $e){
+            echo $e;
+        }
     }
 }
 ?>  

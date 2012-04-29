@@ -17,7 +17,13 @@ function create_new_hours($conn,$program_id,$hours)
     {
         $query = "INSERT INTO program_hours (program_id,hours_id)
             VALUES ($program_id,$temp)";
-        $conn->query($query);
+        try{
+            $conn->query($query);
+        }
+        catch(Exception $e){
+            echo $e;
+        }
+        echo $query."<br/>";
     }
 }
 ?>

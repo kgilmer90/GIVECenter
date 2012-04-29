@@ -24,7 +24,13 @@ function create_new_issue($conn,$program_id,$issue_id)
     {
         $query = "INSERT INTO program_issues(program_id,issue_id)
                     VALUES($program_id,$temp)";
-        $conn->query($query);
+        try{
+            $conn->query($query);
+        }
+        catch(Exception $e){
+            echo $e;
+        }
+        echo $query."<br/>";
     }
     // get id of last program_issue inserted
     

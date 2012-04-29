@@ -22,7 +22,7 @@ function update_generic($conn,$table,$id,$info_array)
         if (is_numeric($v)) {
             $set .= "$k = $v,";
         }
-        elseif(!isSet($v)){
+        else{
             $set .= "$k = '$v',";
         }
     }
@@ -32,7 +32,12 @@ function update_generic($conn,$table,$id,$info_array)
     $query = "UPDATE $table
                 SET $set
                 WHERE id = $id";
-    
-    $conn->query($query);
+    try{
+        $conn->query($query);
+        echo $query."\n";
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 }
 ?>

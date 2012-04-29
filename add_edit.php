@@ -57,7 +57,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     
     // Only update if address exists and is edited 
     if($_POST['addr_id'] && $_POST['addr_id']!=-1){
-        echo "<p> address exists and was edited";
+        echo "<p> address exists and was edited<br/>";
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
         $update['addr']['city'] = $_POST['city'];
@@ -73,7 +73,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     }
     //  If address doesnt exist, and was edited create it
     elseif($_POST['addr_id'] && $_POST['addr_id']==-1){
-         echo "<p> address doesnt exist and was edited";
+         echo "<p> address doesnt exist and was edited<br/>";
         $update['addr']['id'] = $_POST['addr_id'];
         $update['addr']['street'] = $_POST['street'];
         $update['addr']['city'] = $_POST['city'];
@@ -87,20 +87,20 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     }
     
     if(isset($_POST['Hours'])){
-        echo "updating hours";
+        echo "updating hours<br/>";
         $update['hours'] = $_POST['Hours'];
         
         update_hours($conn, $_POST['program_id'], $_POST['Hours']);
     }
     
     if(isset($_POST['selectInterests'])){
-        echo "updating interests";
+        echo "updating interests<br/>";
         
         update_issues($conn, $_POST['program_id'],$_POST['selectInterests']);
     }
     
     if(isset($_POST['p_contact_id'])){   
-        echo "updating p contact";
+        echo "updating p contact<br/>";
         
         $update['p_contact']['id'] = $_POST['p_contact_id'];
         $update['p_contact']['f_name'] = $_POST['f_name'];
@@ -110,13 +110,12 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         $update['p_contact']['m_phone'] = $_POST['m_phone'];
         $update['p_contact']['w_phone'] = $_POST['w_phone'];
         $update['p_contact']['mail'] = $_POST['mail'];
-        $update['p_contact']['fax'] = $_POST['fax'];
         
         update_generic($conn, 'pro_contact', $_POST['p_contact_id'], $update['p_contact']);   
     }
     
     if(isset($_POST['s_contact_id'])){ //might also give errors
-        echo "updating s contact";
+        echo "updating s contact<br/>";
         
         $update['s_contact']['id'] = $_POST['s_contact_id'];
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
@@ -132,7 +131,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     }
     
     if(isset($_POST['season'])){
-        echo "updating season";
+        echo "updating season<br/>";
         
         $update['season'] = $_POST['season'];
         
@@ -141,22 +140,22 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
     }
     
     if($_POST['program_id']==-1){
-        echo "updating agency";
+        echo "updating agency<br/>";
         
         $update['agency']['id'] = $_POST['agency_id'];
         $update['agency']['name'] = $_POST['name'];
         $update['agency']['descript'] = $_POST['descript'];
         $update['agency']['p_contact'] = $update['p_contact']['id'];;
         $update['agency']['addr'] = $update['addr']['id'];
-        $update['agency']['mail'] = $_POST;
-        $update['agency']['phone'] = $_POST;
-        $update['agency']['fax'] = $_POST;
+        //$update['agency']['mail'] = $_POST;
+        //$update['agency']['phone'] = $_POST;
+        $update['agency']['fax'] = $_POST['fax'];
         
         update_generic($conn, 'agency', $_POST['agency_id'], $_POST['agency']);
     }
         
     else{
-        echo "updating program";
+        echo "updating program<br/>";
         
         $update['program']['id'] = $_POST['program_id'];
         $update['program']['agency'] = $_POST['agency_id'];
@@ -171,6 +170,7 @@ if($_POST['mode']=='edit'){     //  EDIT CONDITION
         
         update_generic($conn, 'program', $update['program']['id'], $update['program']);
     }
+    header('Location: EditPage.php?edit=success');
 }
 
 
@@ -215,7 +215,6 @@ elseif ($_POST['mode']=='add'){
         $update['p_contact']['m_phone'] = $_POST['m_phone'];
         $update['p_contact']['w_name'] = $_POST['w_contact'];
         $update['p_contact']['mail'] = $_POST['mail'];
-        $update['p_contact']['fax'] = $_POST['fax'];
         
         $p_id = create_new_p_contact($conn, $update['pro_contact']);
         $update['program']['p_contact'] = $p_id;
@@ -242,9 +241,9 @@ elseif ($_POST['mode']=='add'){
         $update['agency']['descript'] = $_POST['descript'];
         $update['agency']['p_contact'] = $update['p_contact']['id'];
         $update['agency']['addr'] = $update['addr'];
-        $update['agency']['mail'] = $_POST;
-        $update['agency']['phone'] = $_POST;
-        $update['agency']['fax'] = $_POST;
+        //$update['agency']['mail'] = $_POST;
+        //$update['agency']['phone'] = $_POST;
+        $update['agency']['fax'] = $_POST['fax'];
         
         $agency_id = create_new_agency($conn, $update['agency']);
         $update['program']['agency'] = $agency_id;
@@ -262,7 +261,8 @@ elseif ($_POST['mode']=='add'){
         
         create_new_program_existing_agency($conn, $update['program']);
     }
+    header('Location: EditPage.php?add=success');
 }
-// header('Location: EditPage.php');
+
 
 ?>
