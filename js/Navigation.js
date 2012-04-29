@@ -195,8 +195,7 @@ function fillEditPageForm(what, mode, id) {
 	
 	if(what == 'agency') {
 		elem = agencies[id];
-		
-		fax.value = elem.fax;
+
 		document.getElementById('agency_id').value = elem.id;
 		document.getElementById('program_id').value = -1;
 /*		document.getElementById('phone').value = elem.phone;
