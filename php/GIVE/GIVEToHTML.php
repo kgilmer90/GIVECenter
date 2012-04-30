@@ -51,11 +51,11 @@ function GIVEAgenciesToHTMLTable($agencies, $hidden = true, $display = 'none')
 }
 
 /**
- * 
- * Enter description here ...
- * @param unknown_type $data
- * @param unknown_type $title
- * @param unknown_type $newlines
+ * Convenience function for wrapping data to be inserted in the HTML table
+ * in <tr><td> </td></tr> tags.
+ * @param $data - information to be wrapped
+ * @param $title - description of the data, sets the HTML field's title property
+ * @param $newlines - whether or not to append newlines to the table elements, defaults to true
  */
 function GIVEWrapDataWithTrTd($data, $title = false, $newlines = true) {
 	

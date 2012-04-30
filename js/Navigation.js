@@ -1,4 +1,9 @@
-// JavaScript Document
+/**
+* All client-side code for the software. Contains functions for parsing the
+* hidden HTML table and rebuilding the data into JS objects, functions for
+* showing and hiding elements on screen as needed, and functions for filling
+* out various forms with all available information.
+*/
 
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs

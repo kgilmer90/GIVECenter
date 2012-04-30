@@ -1,5 +1,6 @@
 <?php
 
+//Base exception class for MySQL exceptions
 class MySQLException extends Exception
 {
 	/**
