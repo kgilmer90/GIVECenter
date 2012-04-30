@@ -206,7 +206,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <script type="text/javascript" src="js/Navigation.js"></script>
 </head>
 
-<body onload="initAdmin()"><div class="container" id="content">
+<body><div class="container" id="content">
 <div align="center"></div>
 <div class="sidebar1">
 <div align="center">
