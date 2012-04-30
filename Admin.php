@@ -2,6 +2,8 @@
 include_once('php/GIVE/GIVEToHTML.php');
 include_once('sql/queries/queries.php');
 
+//TODO: Fix Admin Page Where Names Are Too Long
+
 session_start();
 
 //if not properly logged in, redirect to login page

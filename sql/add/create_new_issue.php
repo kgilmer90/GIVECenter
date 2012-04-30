@@ -30,7 +30,6 @@ function create_new_issue($conn,$program_id,$issue_id)
         catch(Exception $e){
             echo $e;
         }
-        echo $query."<br/>";
     }
     // get id of last program_issue inserted
     
