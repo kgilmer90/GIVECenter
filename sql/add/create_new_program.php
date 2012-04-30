@@ -8,14 +8,11 @@
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
 function create_new_program_existing_agency($conn,$info_array)
-{
-    $addr_id = create_new_addr($conn, $info_array['addr']);
-    $p_id = create_new_p_contact($conn, $info_array['p_contact']); 
-    
-    $query = "INSERT INTO programs(referal,season,time,name,duration,notes,addr,agency,p_contact,s_contact,descript)
-                VALUES( ".$info_array['referal'].",".$info_array['season'].",".$info_array['time'].",".$info_array['name'].",
-                ".$info_array['duration'].",".$info_array['notes'].",$addr_id,".$info_array['agency'].",
-                $p_id,$s_id,".$info_array['descript'].")";
+{    
+    $query = "INSERT INTO program(referal,name,notes,addr,agency,p_contact,s_contact,descript)
+        VALUES( '".$info_array['referal']."','".$info_array['name']."','".$info_array['notes']."'
+            ,".$info_array['addr'].",".$info_array['agency'].",".$update['p_contact'].",
+                ".$update['s_contact'].",'".$info_array['descript']."')";
     try{
         $conn->query($query);
     }
@@ -23,9 +20,9 @@ function create_new_program_existing_agency($conn,$info_array)
         echo $e;
     }
     $query2 = "SELECT id
-                    FROM programs
-                    SORT id DESC
-                    Limit 1,1";
+                    FROM program
+                    ORDER BY id DESC
+                    Limit 0,1";
     // get id of last program inserted
     try{
         $conn->query($query2);
@@ -48,37 +45,30 @@ function create_new_program_existing_agency($conn,$info_array)
         echo $e;
     }
     
-    echo $query."<br/>".$query2."<br/>".$query3."<br/>";
-    
     return $program_id['id'];
 }
 
-
+/*
 function create_new_program_new_agency($conn,$info_array)
 {
-    $addr_id = create_new_addr($conn, $info_array['addr']);
-    $issues_id = create_new_issue($conn, $info_array['issues']);
-    $p_id = create_new_p_contact($conn, $info_array['p_contact']);
-    $s_id = create_new_s_contact($conn, $info_array['s_contact']); 
-    $agency_id = create_new_agency($conn,$info_array['agency']);
-    
-    $query = "INSERT INTO programs(referal,season,time,name,duration,notes,issues,addr,agency,p_contact,s_contact,descript)
-                VALUES( ".$info_array['referal'].",".$info_array['season'].",".$info_array['time'].",".$info_array['name'].",
-                ".$info_array['duration'].",".$info_array['notes'].",$issues_id,$addr_id,$agency_id,
-                $p_id,$s_id,".$info_array['descript'].")";
+    $query = "INSERT INTO program(referal,name,notes,addr,agency,p_contact,s_contact,descript)
+        VALUES( '".$info_array['referal']."','".$info_array['name']."','".$info_array['notes']."'
+            ,".$info_array['addr'].",".$info_array['agency'].",".$update['p_contact'].",
+                ".$update['s_contact'].",'".$info_array['descript']."')";
 
     $conn->query($query);
     // get id of last program inserted
     
     $program_id = "SELECT id
-                    FROM programs
-                    SORT id DESC
+                    FROM program
+                    ORDER BY id DESC
                     Limit 1,1";
-    
-    create_new_issue_assoc($conn, $program_id, $issues_id);
     
     // get id of last program inserted
     
     return $program_id;
+
 }
+ * 
+ */
 ?>

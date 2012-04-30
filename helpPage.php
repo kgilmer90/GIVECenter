@@ -59,6 +59,18 @@ padding-left: 15px; /* adding the padding to the sides of the elements within th
 <a href="helpVideo.php" onclick="return popitup('helpVideo.php?v=AdminEditingDatabaseEntries.mp4')">How To Edit Database Entries</a><br />
 <a href="helpVideo.php" onclick="return popitup('helpVideo.php?v=AdminExit.mp4')">How To Exit The Administration Section</a>
 </div>
+
+<div id="movieDiv" style="visibility:hidden;display:none;">
+<OBJECT CLASSID="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" WIDTH="640" HEIGHT="480" 
+	CODEBASE="http://www.apple.com/qtactivex/qtplugin.cab">
+<PARAM name="SRC" VALUE="sample.mov">
+<PARAM name="AUTOPLAY" VALUE="true">
+<PARAM name="CONTROLLER" VALUE="true">
+<EMBED SRC="sample.mov" WIDTH="640" HEIGHT="480" AUTOPLAY="true" CONTROLLER="true" 
+	PLUGINSPAGE="http://www.apple.com/quicktime/download/">
+</EMBED>
+</OBJECT>
+</div>
 </div>
 </body>
 </html>

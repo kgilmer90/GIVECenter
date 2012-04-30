@@ -23,7 +23,6 @@ function create_new_hours($conn,$program_id,$hours)
         catch(Exception $e){
             echo $e;
         }
-        echo $query."<br/>";
     }
 }
 ?>

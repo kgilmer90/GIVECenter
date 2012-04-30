@@ -411,10 +411,6 @@ function addAgenciesToEditPageDropdown(program_index) {
 		dropdown.add(new Option(agency.name), null);
 	}
 	
-	//set the dropdown's selected index to match the agency of the program being edited
-	if(program_index >= 0)
-		dropdown.selectedIndex = programs[program_index].agency.index + 1;
-	
 	//change the value of the field holding the agency id for form submission
 	//need to subtract 1 from selectedIndex to account for "No agency" entry
 	dropdown.onchange = function() {
@@ -423,9 +419,13 @@ function addAgenciesToEditPageDropdown(program_index) {
 			location = 'EditPage.php?mode=add&what=agency';
 		}
 		else {
-			document.getElementById('agency_id').value = selectedIndex - 1;
+			document.getElementById('agency_id').value = agencies[selectedIndex - 1].id;
 		}
 	};
+	
+	//set the dropdown's selected index to match the agency of the program being edited
+	if(program_index >= 0)
+		dropdown.selectedIndex = programs[program_index].agency.index + 1;
 }
 /**
  * Displays a new window
