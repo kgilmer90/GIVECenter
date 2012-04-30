@@ -169,7 +169,9 @@ padding: 2%;
 .getInterests
 {
 	width: 90%;
-	padding:10%
+	padding:10%;
+	visibility:hidden;
+	display:none;
 
 }
 input.hint
@@ -196,12 +198,16 @@ overflow-x:hidden;
 width: 45%;
 float: left;
 padding: 2%;
+	visibility:hidden;
+	display:none;
 
 }
 .column4 {
 width: 45%;
 float: right;
 padding: 2%;
+	visibility:hidden;
+	display:none;
 
 }
 
@@ -212,6 +218,7 @@ width:55%;
 .agencyOpt option{
 width:55%;	
 }
+.refTypes{}
 
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
@@ -339,17 +346,18 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td>&nbsp;</td>
     <td><div class="textBox"><textarea name="descript" cols="25" rows="16" id="descript"></textarea></div></td>
   </tr>
-    <tr>
+    <tr id="notesLabel">
     <td>Notes: </td>
     <td>&nbsp;</td>
   </tr>
-  <tr>
+  <tr id="notesBox">
     <td>&nbsp;</td>
     <td><div class="textBox"><textarea name="notes" cols="25" rows="16" id="notes"></textarea></div></td>
   </tr>
 </table></label>
 
 <p align="center">&nbsp;</p>
+<div class = "refTypes" id= "refTypes">
 <div align="center"><strong>Referral Type:</strong>
   <table width="100">
     <tr>
@@ -363,6 +371,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
         Limited</label></td>
     </tr>
   </table>
+</div>
 </div>
 <p align="center">&nbsp;</p>
 
@@ -507,7 +516,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p></div></div>
-<div class = "getInterests">
+<div class = "getInterests" id="getInterests">
     <div align="center">
     
 <label><b>Select Up to 3 Interests Associated:</b></label>
@@ -658,7 +667,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <div class ="layers">
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p>
-<div class = "column3">
+<div class = "column3" id="column3">
 <div align="center">
 <label><b>Select All Hours Available:</b></label>
 <table width="150" class="form3">
@@ -684,7 +693,7 @@ Night</label></td>
 </tr>
 </table>
 </div></div>
-  <div class = "column4">
+  <div class = "column4" id="column4">
 <label><b>Select All Seasons Available:</b></label>
 <table width="150" class="form3">
       <tr>

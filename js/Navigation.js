@@ -114,6 +114,22 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_label").style.display="none";
 			document.getElementById("agency_contact_table").style.display="none";
 			
+			//display checkboxes
+			document.getElementById("getInterests").style.visibility="visible";
+			document.getElementById("getInterests").style.display="block";
+			document.getElementById("column3").style.visibility="visible";
+			document.getElementById("column3").style.display="block";
+			document.getElementById("column4").style.visibility="visible";
+			document.getElementById("column4").style.display="block";
+			
+			//display notes & ref types
+			document.getElementById("notesBox").style.visibility="visible";
+			document.getElementById("notesLabel").style.visibility="visible";
+			document.getElementById("notesBox").style.display="block";
+			document.getElementById("notesLabel").style.display="block";
+			document.getElementById("refTypes").style.visibility="visible";
+			document.getElementById("refTypes").style.display="block";
+			
 			
 			//fill the dropdown menu and set the selected index to the program index
 			addAgenciesToEditPageDropdown(id);
@@ -140,6 +156,22 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_table").style.visibility="visible";
 			document.getElementById("agency_contact_label").style.display="block";
 			document.getElementById("agency_contact_table").style.display="block";
+			
+			//hide checkboxes
+			document.getElementById("getInterests").style.visibility="hidden";
+			document.getElementById("getInterests").style.display="none";
+			document.getElementById("column3").style.visibility="hidden";
+			document.getElementById("column3").style.display="none";
+			document.getElementById("column4").style.visibility="hidden";
+			document.getElementById("column4").style.display="none";
+			
+			//hide notes & ref types
+			document.getElementById("notesBox").style.visibility="hidden";
+			document.getElementById("notesLabel").style.visibility="hidden";
+			document.getElementById("notesBox").style.display="none";
+			document.getElementById("notesLabel").style.display="none";
+			document.getElementById("refTypes").style.visibility="hidden";
+			document.getElementById("refTypes").style.display="none";
 			
 			//fill the form with all available information
 			fillEditPageForm('agency', 'edit', id);	
@@ -168,6 +200,23 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_table").style.visibility="hidden";
 			document.getElementById("agency_contact_label").style.display="none";
 			document.getElementById("agency_contact_table").style.display="none";
+			
+			
+			//display checkboxes
+			document.getElementById("getInterests").style.visibility="visible";
+			document.getElementById("getInterests").style.display="block";
+			document.getElementById("column3").style.visibility="visible";
+			document.getElementById("column3").style.display="block";
+			document.getElementById("column4").style.visibility="visible";
+			document.getElementById("column4").style.display="block";
+			
+			//display notes & ref types
+			document.getElementById("notesBox").style.visibility="visible";
+			document.getElementById("notesLabel").style.visibility="visible";
+			document.getElementById("notesBox").style.display="block";
+			document.getElementById("notesLabel").style.display="block";
+			document.getElementById("refTypes").style.visibility="visible";
+			document.getElementById("refTypes").style.display="block";
 			
 			//fill the dropdown box and do not set the selected index
 			addAgenciesToEditPageDropdown(-1);
@@ -198,6 +247,22 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_table").style.visibility="visible";
 			document.getElementById("agency_contact_label").style.display="block";
 			document.getElementById("agency_contact_table").style.display="block";
+			
+			//hide checkboxes
+			document.getElementById("getInterests").style.visibility="hidden";
+			document.getElementById("getInterests").style.display="none";
+			document.getElementById("column3").style.visibility="hidden";
+			document.getElementById("column3").style.display="none";
+			document.getElementById("column4").style.visibility="hidden";
+			document.getElementById("column4").style.display="none";
+			
+			//hide notes & ref types
+			document.getElementById("notesBox").style.visibility="hidden";
+			document.getElementById("notesLabel").style.visibility="hidden";
+			document.getElementById("notesBox").style.display="none";
+			document.getElementById("notesLabel").style.display="none";
+			document.getElementById("refTypes").style.visibility="hidden";
+			document.getElementById("refTypes").style.display="none";
 			
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
