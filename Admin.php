@@ -185,6 +185,22 @@ ul.nav a:hover, ul.nav a:active, ul.nav a:focus { /* this changes the background
 	font-size: 1px;
 	line-height: 0px;
 }
+
+.agencyDropdown{
+width:55%;
+}
+
+.agencyDropdown option{
+width:55%;	
+}
+
+.programDropdown{
+width:55%;
+}
+
+.programDropdown option{
+width:55%;	
+}
 -->
 </style>
 
