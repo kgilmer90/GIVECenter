@@ -392,12 +392,12 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 
 
-<label id="p_contact_label">
+<label>
 <p align="center">&nbsp;</p>
 <b><p align="center">Professional Contact Information</p>
 </label>
 </b>
-<table width="400" border="0" id="p_contact_table">
+<table width="400" border="0">
   <tr>
     <td><input name="p_contact_id" id="p_contact_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
   </tr>
@@ -436,14 +436,14 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 
 
-<label>
+<label id="s_contact_label">
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
 <b>
 <p align="center">Student Contact Information</p>
 </label>
 </b>
-<table width="400" border="0">
+<table width="400" border="0" id="s_contact_table">
 <tr>
     <td><input name="s_contact_id" id="s_contact_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
   </tr>
