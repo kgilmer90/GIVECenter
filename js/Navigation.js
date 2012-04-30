@@ -368,7 +368,7 @@ function addAgenciesToEditPageDropdown(program_index) {
  * @returns false
  */
 function popitup(url) {
-	newwindow=window.open(url,'name','height=500,width=500');
+	newwindow=window.open(url,'name','height=600,width=800');
 	if (window.focus) {newwindow.focus()}
 	return false;
 }

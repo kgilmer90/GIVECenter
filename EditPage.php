@@ -170,6 +170,7 @@ padding: 2%;
 {
 	width: 90%;
 	padding:10%
+
 }
 input.hint
 {
@@ -195,11 +196,13 @@ overflow-x:hidden;
 width: 45%;
 float: left;
 padding: 2%;
+
 }
 .column4 {
 width: 45%;
 float: right;
 padding: 2%;
+
 }
 
 .agencyOpt{
@@ -262,8 +265,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <body onload="loadEditPage(<?php echo "'$mode', '$what', $id"; ?>)">
 <div class="container" id="content">
-<div class="sidebar1">
-<div align="center">
+<div class="sidebar1" align="center">
 <ul class="nav">
 <li><a href="Admin.php">Admin</a></li>
 <li><a href="BrowseAll.php">Browse All</a></li>
@@ -272,7 +274,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     onfocus="if (this.className=='hint') { this.className = ''; this.value = ''; }"
     onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...'; }">
 </ul>
-<!-- end .sidebar1 --></div>
+<!-- end .sidebar1 -->
 </div>
 <div class="sidebar2">
 <div align="center">
@@ -687,8 +689,7 @@ Night</label></td>
 <table width="150" class="form3">
       <tr>
         <td><div align="left">
-          <div align="left">
-            <input type="checkbox" name="season[]" value="1" id="Winter" />
+          <input type="checkbox" name="season[]" value="1" id="Winter" />
             Winter</div></td>
       </tr>
       <tr>
@@ -711,13 +712,12 @@ Night</label></td>
 </div>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
-<p align="center">&nbsp;</p>
+<p align="center">&nbsp;</p></div></div></div>
 <div align="center">
   <input type="submit" value="Save Changes" />
   <br />
 <input type="submit" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="deleteAgencyOrProgram()"></div>
 </form>
-</div></div>
 </p>
 </p>
 </div>
