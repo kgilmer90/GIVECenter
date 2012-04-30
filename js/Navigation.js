@@ -137,7 +137,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_table").style.display="block";
 			
 			//fill the form with all available information
-			fillEditPageForm('agency', 'edit', id);
+			fillEditPageForm('agency', 'edit', id);	
 		}
 	}
 	else //mode == 'add'
@@ -168,6 +168,8 @@ function loadEditPage(mode, what, id) { //onload editPage
 			addAgenciesToEditPageDropdown(-1);
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
+			
+			//alert('Setting the mode to add');
 			document.getElementById('mode').value = 'add';
 		}
 		else // add agency
@@ -194,9 +196,9 @@ function loadEditPage(mode, what, id) { //onload editPage
 			
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
+			//alert('Setting the mode to add');
 			document.getElementById('mode').value = 'add';
 		}
-
 	}
 }
 /**
