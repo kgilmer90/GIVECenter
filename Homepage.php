@@ -320,7 +320,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </div>
 <div class="content" id="content">
 <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-<div align="right"><a href="helpPage.html" onclick="return popitup('helpPage.php')"><img src="help.png" alt="helpButton" name="helpButton" width="4%" height="4%" style="padding: 1%;"/></a></div>
+<div align="right"><a href="helpPage.php" onclick="return popitup('helpPage.php')"><img src="help.png" alt="helpButton" name="helpButton" width="4%" height="4%" style="padding: 1%;"/></a></div>
 <div class ="results" id="results">
 <div align="left"><a href="javascript:backtosearch()"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <p align="center">&nbsp;</p>
