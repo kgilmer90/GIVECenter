@@ -32,20 +32,23 @@ padding-left: 15px; /* adding the padding to the sides of the elements within th
 </style>
 </head>
 <body>
+<br />
 <div class = "GeneralHelp" id="GeneralHelp" align="center">
 <h1>General Help</h1>
-<a href="#">Link</a>
-<a href="#"></a>
-<a href="#"></a>
-<a href="#"></a>
+<a href="#">How To Use The Advanced Search Feature</a><br />
+<a href="#">How To Use The Quick Search Feature</a><br />
+<a href="#">How to Browse All</a><br />
+<a href="#">How to Toggle Between Program and Agency Lists</a>
 
 </div>
+<br />
+<br />
 <div class= "AdminHelp" id="AdminHelp" align="center">
 <h1>Admin Help</h1>
-<a href="#">Link</a>
-<a href="#"></a>
-<a href="#"></a>
-<a href="#"></a>
+<a href="#">How To Access the Adminisitration Section</a><br />
+<a href="#">How To Change The Banner</a><br />
+<a href="#">How To Edit Database Entries</a><br />
+<a href="#">How To Exit The Administration Section</a>
 </div>
 </body>
 </html>
