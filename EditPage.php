@@ -106,46 +106,39 @@ background-color: #cccccc;
 4) If you prefer your nav on the right instead of the left, simply float these columns the opposite direction (all right instead of all left) and they'll render in reverse order. There's no need to move the divs around in the HTML source.
 
 */
+/* Right nav bar */
 .sidebar1 {
 float: right;
 width: 12.5%;
 background-color: #FFF;
 }
+/* Left nav bar */
 .sidebar2 {
 visibility: hidden;
 float: left;
 width: 12.5%;
 padding-top: 90px;
-/* padding-left: 10px
-padding-right: 10px; */
 background-color: #FF9;
 background-color: #cccccc;
 }
+
+/*Center content */
 .content {
-/* position: absoulte; */
 width: 75%;
 float: left;
 background-image: url(img/gradientHORIZ.png);
 }
-.results {
-width: 100%;
-float: left;
-height: 100%;
-}
-.interests {
-visibility: hidden;
-width: 100%;
-float: left;
-height: 100%;
-}
+/*Interests table */
 .form1 {
 background-color: #FFF;
 border: thin solid #000;
 }
+/*Hours and seasons table */
 .form3 {
 background-color: #FFF;
 border: thin solid #000;
 }
+/* Left column */
 .column1 {
 width: 45%;
 float: left;
@@ -154,18 +147,13 @@ border-right-style: solid;
 border-right-color: #000;
 padding: 2%;
 }
+/*Right column */
 .column2 {
 width: 45%;
 float: right;
 padding: 2%;
 }
-.getData{
-	width:100%;
-	height: 50%;
-	border-bottom-width: thin;
-	border-bottom-style: none;
-	border-bottom-color: #000;
-}
+/*Div to hold interests for visibility purposes */
 .getInterests
 {
 	width: 90%;
@@ -174,26 +162,25 @@ padding: 2%;
 	display:none;
 
 }
+/*QuickSearch hint */
 input.hint
 {
 	color:grey;
 }
+/*Groups columns in one div */
 .topRow
 {
 	width:100%;	
 }
 
+/*Formats text boxes for overflow */
 .textBox
 {
 overflow-y: hidden;
 overflow-x:hidden;	
 }
 
-.layer
-{
-	width:50%;
-}
-
+/*Left bottom column */
 .column3 {
 width: 45%;
 float: left;
@@ -202,6 +189,7 @@ padding: 2%;
 	display:none;
 
 }
+/*Right bottom column */
 .column4 {
 width: 45%;
 float: right;
@@ -211,6 +199,7 @@ padding: 2%;
 
 }
 
+/*Set width for drop down boxes */
 .agencyOpt{
 width:55%;
 }
@@ -218,6 +207,8 @@ width:55%;
 .agencyOpt option{
 width:55%;	
 }
+
+/*make refType div for visibility in JS */
 .refTypes{}
 
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
@@ -272,6 +263,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <body onload="loadEditPage(<?php echo "'$mode', '$what', $id"; ?>)">
 <div class="container" id="content">
+<!-- Right nav bar -->
 <div class="sidebar1" align="center">
 <ul class="nav">
 <li><a href="Admin.php">Admin</a></li>
@@ -283,26 +275,23 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </ul>
 <!-- end .sidebar1 -->
 </div>
+<!--Left nav bar -invisible but holds space -->
 <div class="sidebar2">
 <div align="center">
 <ul class="nav">
-<li><a href="#">Program1 </a></li>
-<li><a href="#">Program2 </a></li>
-<li><a href="#">Program3 </a></li>
-<li><a href="#">Program4 </a></li>
-<li><a href="#">Program5 </a></li>
-<li><a href="#">Program6 </a></li>
-<li><a href="#">Program7 </a></li>
-<li><a href="#">Program8 </a></li>
-<li><a href="#">...</a></li>
 </ul>
-<!-- end .sidebar1 --></div>
+<!-- end .sidebar2 --></div>
 </div>
+<!-- Center content -->
 <div class="content" id="content">
+<!-- Banner -->
 <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
+<!--Back button -->
 <div align="left"><a href="Admin.php"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <h1 id="editHeader" align="center"></h1>
+<!--Begin top divs -->
 <div class="topRow">
+<!-- Left column -->
 <div class="column1">
 <form action="add_edit.php" method="post" name="editDBform" id="editDBform">
 <label>
@@ -327,14 +316,6 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td id="agencyDescrip">Select Agency:</td>
     <td>    
     <select id="agencyOpt">
-    <!-- 
-    	<option>Agency1</option>
-    	<option>Agency2</option>
-        <option>Agency3</option>
-    	<option>Agency4</option>
-        <option>Agency5</option>
-    	<option>Agency6</option>
-     -->
     </select>
     </td>
   </tr>
@@ -357,6 +338,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table></label>
 
 <p align="center">&nbsp;</p>
+<!-- Referall types -->
 <div class = "refTypes" id= "refTypes">
 <div align="center"><strong>Referral Type:</strong>
   <table width="100">
@@ -374,13 +356,14 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </div>
 </div>
 <p align="center">&nbsp;</p>
-
-
-
 </div>
+
+
+
+<!-- Right column -->
 <div class="column2"> 
 
-
+<!--Agency info -->
 <label id="agency_contact_label">
 <p align="center">&nbsp;</p>
 <b><p align="center">Agency Contact Information</p>
@@ -402,7 +385,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 
 
-
+<!--Pro contact info -->
 <label>
 <p align="center">&nbsp;</p>
 <b><p align="center">Professional Contact Information</p>
@@ -446,7 +429,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   </tr>
 </table>
 
-
+<!--Stud Contact info -->
 <label id="s_contact_label">
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
@@ -488,6 +471,8 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   </tr>
 </table>
 
+
+<!--Address -->
 <label>
 <table width="400" border="0">
 <p align="center">&nbsp;</p>
@@ -514,6 +499,8 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 </label>
 
+
+<!-- Select Interests -->
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p></div></div>
 <div class = "getInterests" id="getInterests">
@@ -664,9 +651,12 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <td width="200"></td>
 </tr>
 </table>
-<div class ="layers">
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p>
+
+
+
+<!--Select Hours left column -->
 <div class = "column3" id="column3">
 <div align="center">
 <label><b>Select All Hours Available:</b></label>
@@ -693,6 +683,9 @@ Night</label></td>
 </tr>
 </table>
 </div></div>
+
+
+<!--Select seasons Right column -->
   <div class = "column4" id="column4">
 <label><b>Select All Seasons Available:</b></label>
 <table width="150" class="form3">
@@ -721,8 +714,11 @@ Night</label></td>
 </div>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
-<p align="center">&nbsp;</p></div></div></div>
+<p align="center">&nbsp;</p></div></div>
 <div align="center">
+
+
+<!--Form submit & delete buttons -->
   <input type="submit" value="Save Changes" />
   <br />
 <input type="submit" value="Delete Program / Agency" style="background-color:#FF0000; color:#FFFFFF;" onclick="deleteAgencyOrProgram()"></div>
