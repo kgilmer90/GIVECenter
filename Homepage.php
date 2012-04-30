@@ -111,23 +111,26 @@ width: 12.5%;
 	overflow-x: hidden;
 	height: 400px;
 }
+/*Center page layout div*/
 .content {
-/* position: absolute; */
 width: 75%;
 float: left;
 background-image: url(img/gradientHORIZ.png);
 }
+/* contains the search results - initially hidden */
 .results {
 visibility: hidden;
 display: none;
 width: 100%;
 float: left;
 }
+/* Table of interests for advanced search */
 .interests {
 width: 100%;
 float: left;
 height: 100%;
 }
+
 .form1 {
 background-color: #FFF;
 border: thin solid #000;
@@ -136,6 +139,7 @@ border: thin solid #000;
 background-color: #FFF;
 border: thin solid #000;
 }
+/* Left results column*/
 .column1 {
 width: 40%;
 float: left;
@@ -150,6 +154,7 @@ border: thin solid #D6D6D6;
 	overflow-y: scroll;
 
 }
+/*box to hold address */
 .address {
 width: 40%;
 float: left;
@@ -163,6 +168,7 @@ border: thin solid #D6D6D6;
 
 
 }
+/* Right results column*/
 .column2 {
 	width: 40%;
 	float: right;
@@ -176,7 +182,7 @@ border: thin solid #D6D6D6;
 	overflow-x: scroll;
 	overflow-y:hidden;
 }
-
+/* Holds student contact info */
 .studContact {
 	width: 40%;
 	float: right;
@@ -191,10 +197,12 @@ border: thin solid #D6D6D6;
 	overflow-y:hidden;
 }
 
+/* Quick Search hint*/
 input.hint {
     color: grey;
 }
 
+/*Results tables can have smaller fonts*/
 .table1{font-family:Arial; font-size:11pt;}	
 
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
@@ -288,9 +296,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <body onload="init(<?php echo "'$what', $id"; ?>)">
 <div class="container" id="content">
 <div align="center"></div>
-<!-- <div class="header">
-<div align="center"><a href="#"><img src="img/giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-</div> -->
+<!-- Right nav bar -->
 <div class="sidebar1">
 <div align="center">
 <ul class="nav">
@@ -308,6 +314,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </ul>
 <!-- end .sidebar1 --></div>
 </div>
+<!-- Left nav bar -->
 <div class="sidebar2">
 <div align="center">
 <ul class="nav1" id="toggleNav">
@@ -316,16 +323,24 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <ul class="nav" id="leftSideBar">
 
 </ul>
-<!-- end .sidebar1 --></div>
+<!-- end .sidebar2 --></div>
 </div>
+
+<!-- Center content -->
 <div class="content" id="content">
+<!-- Banner here -->
 <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
-<div align="right"><a href="helpPage.html" onclick="return popitup('helpPage.html')"><img src="help.png" alt="helpButton" name="helpButton" width="4%" height="4%" style="padding: 1%;"/></a></div>
+<!-- Help button here -->
+<div align="right"><a href="helpPage.php" onclick="return popitup('helpPage.php')"><img src="help.png" alt="helpButton" name="helpButton" width="4%" height="4%" style="padding: 1%;"/></a></div>
+
+<!-- Set up results page view -->
 <div class ="results" id="results">
+<!-- Back Button -->
 <div align="left"><a href="javascript:backtosearch()"><img src="back.png" alt="backButton" name="backButton" width="5%" height="5%" style="padding: 2%;"/></a></div>
 <p align="center">&nbsp;</p>
 <div align="center"></div>
 <h1 align="center" id="display_name">Program Name</h1>
+<!-- Left column -->
 <div class="column1"><b>
 <p align="center">&nbsp;</p>
 <p align="center" id="descript">Description</p></b>
@@ -335,7 +350,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 </div>
 </div>
-
+<!-- Right column -->
 <div class="column2"> <b>
 <p align="center">&nbsp;</p>
 <p align="center">Contact Information</p>
@@ -359,10 +374,6 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td>Email:</td>
     <td id="display_p_contact_mail"></td>
   </tr>
-  <tr>
-    <td>Fax Number:</td>
-    <td id="display_p_contact_fax"></td>
-  </tr>
     <tr>
     <td></td>
     <td></td>
@@ -374,7 +385,8 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 </div>
 
-<div class="studContact"> <b>
+<!-- Display student contact info -->
+<div class="studContact" id = "studInfo"> <b>
 <p align="center">&nbsp;</p>
 <p align="center">Student Contact Information</p>
 <label>
@@ -407,7 +419,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   </tr>
 </table>
 </div>
-
+<!-- Display address -->
 <div class="address"> <b>
 <p align="center">&nbsp;</p>
 <p align="center" id="display_address">Address</p></b>
@@ -421,7 +433,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </p>
 </p>
 
-
+<!-- Link to related agency / programs -->
 <div align="center"><h4>Link to Agency / Program(s): </h4><br />
 <ul id="link_to_prog_agency">
 <li><a href="#" style="color:#00C">Programs Here...</a></li>
@@ -432,11 +444,13 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </div>
 
 </div>
-<!--********************* BETWEEN CONTENT PAGES ***************************** -->
+<!--********************* BETWEEN RESULTS & SEARCH VIEWS ***************************** -->
+<!-- Begin search view -->
 <div class = "interests" id="interests">
 <div align="center">
 <h1 align="center">&nbsp;</h1>
 <h1 align="center">Select Your Interests</h1>
+<!-- Advanced Search here -->
 <form id="form1" name="form1" method="post" action="">
 <div align="center">
 <table class="form1">
@@ -586,6 +600,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </form>
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p>
+<!-- Hours selection -->
 <div align="center">
 <label><b>Select All Hours Available:</b></label>
 <form id="form3" name="form3" method="post" action="">

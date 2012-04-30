@@ -6,6 +6,8 @@ include_once(dirname(__FILE__).'/GIVEProContact.php');
 include_once(dirname(__FILE__).'/GIVEStudentContact.php');
 include_once(dirname(__FILE__).'/GIVEToHTML.php');
 
+//Server-side defintion of a program object, represents an organization run by an agency
+//that potential volunteers can participate in.
 class GIVEProgram
 {
 	public $id;										//INT
@@ -18,6 +20,8 @@ class GIVEProgram
 	public $p_contact;								//GIVEProContact
 	public $s_contact;								//GIVEStudentContact
 	
+	//Constructor
+	//If any array keys are not set, initializes to empty string or empty object
 	public function __construct($args = array())
 	{
 		$this->id = isset($args['id']) ? $args['id'] : '';
@@ -33,6 +37,8 @@ class GIVEProgram
 		$this->p_contact = isset($args['p_contact']) ? $args['p_contact'] : new GIVEProContact();
 		$this->s_contact = isset($args['s_contact']) ? $args['s_contact'] : new GIVEStudentContact();
 	}
+	//Used to print the object to an HTML table
+	//@param $id - the id property of the table
 	public function toHTMLTable($id)
 	{	
 		$str = "<table id=\"$id\">".PHP_EOL;

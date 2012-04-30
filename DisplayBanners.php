@@ -16,20 +16,20 @@ $error = array();
 
 //set to 'failed' if previous login attempt yielded no matches for the uname/pass combo
 if(isset($_GET['login'])) {
-	$error['login'] = $_GET['login'];
+$error['login'] = $_GET['login'];
 }
 //set to 'true' if user was redirected to the login page via another page's logout button
 if(isset($_GET['logout'])) {
-	$error['logout'] = $_GET['logout'];
+$error['logout'] = $_GET['logout'];
 }
 //set to 'conn' if an exception was thrown during login connecting to the database
 //set to 'query' if an exception was thrown during login querying the database
 if(isset($_GET['except'])) {
-	$error['except'] = $_GET['except'];
+$error['except'] = $_GET['except'];
 }
 //set to the error code resulting from an exception during login
 if(isset($_GET['code'])) {
-	$error['code'] = $_GET['code'];
+$error['code'] = $_GET['code'];
 }
     
 ?>
@@ -96,11 +96,13 @@ background-color: #cccccc;
 4) If you prefer your nav on the right instead of the left, simply float these columns the opposite direction (all right instead of all left) and they'll render in reverse order. There's no need to move the divs around in the HTML source.
 
 */
+/*Right nav bar */
 .sidebar1 {
 float: right;
 width: 12.5%;
 background-color: #FFF;
 }
+/*Left nav bar */
 .sidebar2 {
 visibility:hidden;
 float: left;
@@ -109,6 +111,7 @@ padding-top: 90px;
 background-color: #FF9;
 background-color: #cccccc;
 }
+/* Center content */
 .content {
 position: absoulte;
 width: 75%;
@@ -116,43 +119,7 @@ float: left;
 background-image: url(img/gradientHORIZ.png);
 height: 100%;
 }
-
-.editAgency {
-width: 19%;
-float: left;
-border: thin solid #000;
-height: 250px;
-padding: 3%;
-margin: 3%;
-}
-
-.editProgram {
-width: 19%;
-float: left;
-border: thin solid #000;
-height: 250px;
-padding: 3%;
-margin: 3%;
-}
-
-.addNew {
-width: 19%;
-float: left;
-border: thin solid #000;
-height: 250px;
-padding: 3%;
-margin: 3%;
-}
-
-.orBox {
-float: left;
-width: 3%;
-height: 250px;
-padding-top: 120px;
-padding-bottom: 120px;
-
-}
-
+/*Quick Search hint */
 input.hint {
 color: grey;
 }
@@ -206,8 +173,11 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 <script type="text/javascript" src="js/Navigation.js"></script>
 </head>
 
-<body onload="initAdmin()"><div class="container" id="content">
+<body><div class="container" id="content">
 <div align="center"></div>
+<!--Insert sidebar2 to hold shape -->
+<div class = "sidebar2"></div>
+<!--Right nav bar -->
 <div class="sidebar1">
 <div align="center">
 <ul class="nav">
@@ -225,31 +195,34 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
 <!-- end .sidebar1 --></div>
 </div>
 
-<div class="content" id="content">
-    <div align="center">
-        <a href="#">
-            <img src=<?php echo get_banner_latest($conn); ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" />
-        </a>
-    </div>
 
-    <div align="center"><b>Change Banner: </b>
-        <h1 align="center">&nbsp;</h1>
-        <h1 align="center">Stored Banners:</h1>
-        <form method="POST" action="sql/update/update_banner_old.php">
-        <?php
+<!--Center content -->
+<div class="content" id="content">
+<div align="center">
+<!--Banner here -->
+<a href="#">
+<img src=<?php echo get_banner_latest($conn); ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" />
+</a>
+</div>
+<!--Display previous banners w/ button -->
+<div align="center"><b>Change Banner: </b>
+<h1 align="center">&nbsp;</h1>
+<h1 align="center">Stored Banners:</h1>
+<form method="POST" action="sql/update/update_banner_old.php">
+<?php
             
         $banners = get_banners($conn);
       
         foreach($banners as $temp){
             echo "<a href='#'>";
             echo "<img src='".$temp['path']."' alt='giveBanner' name='Insert_logo' width='100%'
-                height='90' id='giveBanner' style='background: #8090AB; display:block;' />";
+height='90' id='giveBanner' style='background: #8090AB; display:block;' />";
             echo "</a><input name='set_banner' type='submit' value='".$temp['id']."' />";
         }
         $conn->close();
-        ?> 
-        </form>
-    </div>
+        ?>
+</form>
+</div>
 </div>
 </body>
 </html>
@@ -259,9 +232,9 @@ onblur="if (this.value == '') { this.className = 'hint'; this.value = 'Search...
 function get_banners($conn){
     
     $query = "SELECT id,path
-        FROM image_paths
-        WHERE image_type = 'banner'
-        ORDER BY id DESC";
+FROM image_paths
+WHERE image_type = 'banner'
+ORDER BY id DESC";
     
     $conn->query($query);
     

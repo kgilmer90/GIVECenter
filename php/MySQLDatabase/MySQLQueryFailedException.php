@@ -2,6 +2,8 @@
 
 include_once(dirname(__FILE__).'/MySQLException.php');
 
+//Exception class thrown when a MySQLDatabaseConn object executes
+//an SQL query that contains errors in syntax or is otherwise invalid.
 class MySQLQueryFailedException extends MySQLException
 {
 	/**

@@ -4,6 +4,9 @@ include_once(dirname(__FILE__).'/MySQLException.php');
 include_once(dirname(__FILE__).'/MySQLDatabaseConnException.php');
 include_once(dirname(__FILE__).'/MySQLQueryFailedException.php');
 
+//Class wrapper around PHP MySQL library functions
+//Allows connections to MySQL databases and queries against databases to be
+//performed using object-oriented methods.
 class MySQLDatabaseConn
 {	
 	//consts

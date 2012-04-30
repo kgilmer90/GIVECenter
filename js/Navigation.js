@@ -1,4 +1,9 @@
-// JavaScript Document
+/**
+* All client-side code for the software. Contains functions for parsing the
+* hidden HTML table and rebuilding the data into JS objects, functions for
+* showing and hiding elements on screen as needed, and functions for filling
+* out various forms with all available information.
+*/
 
 var agencies = [];		//global agencies array, contains all agencies
 var programs = [];		//global programs array, contains all programs
@@ -109,6 +114,22 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_label").style.display="none";
 			document.getElementById("agency_contact_table").style.display="none";
 			
+			//display checkboxes
+			document.getElementById("getInterests").style.visibility="visible";
+			document.getElementById("getInterests").style.display="block";
+			document.getElementById("column3").style.visibility="visible";
+			document.getElementById("column3").style.display="block";
+			document.getElementById("column4").style.visibility="visible";
+			document.getElementById("column4").style.display="block";
+			
+			//display notes & ref types
+			document.getElementById("notesBox").style.visibility="visible";
+			document.getElementById("notesLabel").style.visibility="visible";
+			document.getElementById("notesBox").style.display="block";
+			document.getElementById("notesLabel").style.display="block";
+			document.getElementById("refTypes").style.visibility="visible";
+			document.getElementById("refTypes").style.display="block";
+			
 			
 			//fill the dropdown menu and set the selected index to the program index
 			addAgenciesToEditPageDropdown(id);
@@ -135,6 +156,22 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_table").style.visibility="visible";
 			document.getElementById("agency_contact_label").style.display="block";
 			document.getElementById("agency_contact_table").style.display="block";
+			
+			//hide checkboxes
+			document.getElementById("getInterests").style.visibility="hidden";
+			document.getElementById("getInterests").style.display="none";
+			document.getElementById("column3").style.visibility="hidden";
+			document.getElementById("column3").style.display="none";
+			document.getElementById("column4").style.visibility="hidden";
+			document.getElementById("column4").style.display="none";
+			
+			//hide notes & ref types
+			document.getElementById("notesBox").style.visibility="hidden";
+			document.getElementById("notesLabel").style.visibility="hidden";
+			document.getElementById("notesBox").style.display="none";
+			document.getElementById("notesLabel").style.display="none";
+			document.getElementById("refTypes").style.visibility="hidden";
+			document.getElementById("refTypes").style.display="none";
 			
 			//fill the form with all available information
 			fillEditPageForm('agency', 'edit', id);	
@@ -163,6 +200,23 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_table").style.visibility="hidden";
 			document.getElementById("agency_contact_label").style.display="none";
 			document.getElementById("agency_contact_table").style.display="none";
+			
+			
+			//display checkboxes
+			document.getElementById("getInterests").style.visibility="visible";
+			document.getElementById("getInterests").style.display="block";
+			document.getElementById("column3").style.visibility="visible";
+			document.getElementById("column3").style.display="block";
+			document.getElementById("column4").style.visibility="visible";
+			document.getElementById("column4").style.display="block";
+			
+			//display notes & ref types
+			document.getElementById("notesBox").style.visibility="visible";
+			document.getElementById("notesLabel").style.visibility="visible";
+			document.getElementById("notesBox").style.display="block";
+			document.getElementById("notesLabel").style.display="block";
+			document.getElementById("refTypes").style.visibility="visible";
+			document.getElementById("refTypes").style.display="block";
 			
 			//fill the dropdown box and do not set the selected index
 			addAgenciesToEditPageDropdown(-1);
@@ -193,6 +247,22 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agency_contact_table").style.visibility="visible";
 			document.getElementById("agency_contact_label").style.display="block";
 			document.getElementById("agency_contact_table").style.display="block";
+			
+			//hide checkboxes
+			document.getElementById("getInterests").style.visibility="hidden";
+			document.getElementById("getInterests").style.display="none";
+			document.getElementById("column3").style.visibility="hidden";
+			document.getElementById("column3").style.display="none";
+			document.getElementById("column4").style.visibility="hidden";
+			document.getElementById("column4").style.display="none";
+			
+			//hide notes & ref types
+			document.getElementById("notesBox").style.visibility="hidden";
+			document.getElementById("notesLabel").style.visibility="hidden";
+			document.getElementById("notesBox").style.display="none";
+			document.getElementById("notesLabel").style.display="none";
+			document.getElementById("refTypes").style.visibility="hidden";
+			document.getElementById("refTypes").style.display="none";
 			
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
@@ -341,10 +411,6 @@ function addAgenciesToEditPageDropdown(program_index) {
 		dropdown.add(new Option(agency.name), null);
 	}
 	
-	//set the dropdown's selected index to match the agency of the program being edited
-	if(program_index >= 0)
-		dropdown.selectedIndex = programs[program_index].agency.index + 1;
-	
 	//change the value of the field holding the agency id for form submission
 	//need to subtract 1 from selectedIndex to account for "No agency" entry
 	dropdown.onchange = function() {
@@ -353,9 +419,13 @@ function addAgenciesToEditPageDropdown(program_index) {
 			location = 'EditPage.php?mode=add&what=agency';
 		}
 		else {
-			document.getElementById('agency_id').value = selectedIndex - 1;
+			document.getElementById('agency_id').value = agencies[selectedIndex - 1].id;
 		}
 	};
+	
+	//set the dropdown's selected index to match the agency of the program being edited
+	if(program_index >= 0)
+		dropdown.selectedIndex = programs[program_index].agency.index + 1;
 }
 /**
  * Displays a new window
@@ -363,7 +433,7 @@ function addAgenciesToEditPageDropdown(program_index) {
  * @returns false
  */
 function popitup(url) {
-	newwindow=window.open(url,'name','height=500,width=500');
+	newwindow=window.open(url,'name','height=600,width=800');
 	if (window.focus) {newwindow.focus()}
 	return false;
 }
@@ -883,6 +953,11 @@ function toggleLeftSideBarDisplay() {
 		
 		clearLeftSideBar();
 		addProgramsToLeftSideBar(program_search_results);
+		
+		//display student info if program
+		document.getElementById('studInfo').style.visibility="visible";
+		document.getElementById('studInfo').style.display="block";
+		
 		if(program_search_results.length > 0) {
 			displayProgramInfo(program_search_results[0]);
 		}	
@@ -896,6 +971,10 @@ function toggleLeftSideBarDisplay() {
 		if(agency_search_results.length > 0) {
 			displayAgencyInfo(agency_search_results[0]);
 		}
+		
+		//hide student info if agency
+		document.getElementById('studInfo').style.visibility="hidden";
+		document.getElementById('studInfo').style.display="none";
 	}
 }
 

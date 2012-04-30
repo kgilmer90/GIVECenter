@@ -4,6 +4,8 @@ session_start();
  * Login.php
  * 
  * Used as the action property of the login form in LoginPage.php.
+ * Validates login credentials and redirects to LoginPage.php on error
+ * or Homepage.php on success.
  */
 include_once(dirname(__FILE__).'/../ini/cred_manipulation.php');
 include_once(dirname(__FILE__).'/../ini/GIVECenterIni.php');
