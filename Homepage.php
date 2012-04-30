@@ -374,10 +374,6 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td>Email:</td>
     <td id="display_p_contact_mail"></td>
   </tr>
-  <tr>
-    <td>Fax Number:</td>
-    <td id="display_p_contact_fax"></td>
-  </tr>
     <tr>
     <td></td>
     <td></td>

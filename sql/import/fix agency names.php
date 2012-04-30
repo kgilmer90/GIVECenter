@@ -1,8 +1,7 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+Find all programs named "volunteer" and rename them as the agency's
  */
 
 $import = "100 Black Men of Milledgeville Oconee Area

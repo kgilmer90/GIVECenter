@@ -3,6 +3,9 @@
 /*
  *      Generic Will Work on All Updates Except Images, Hours, Issues, & Seasons
  * 
+ *      update works by taking in an Assoc array and for each key, which matches
+ *      a field in the database, it will set the value for the key, by appending
+ *      them all to a string which is part of the update sql statement
  */
 
 /**

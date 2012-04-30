@@ -112,6 +112,7 @@ function update_banner($conn,$files){
         if($files['banner']['type']!= 'image/jpeg') 
             header('Location:../../Admin.php?error=bad_file_type');
         
+        // create new entry to hold the banner
         $query1 = "INSERT INTO image_paths(image_type)
             VALUES('banner')";
         try{
@@ -121,6 +122,7 @@ function update_banner($conn,$files){
             echo $e;
         }
         
+        // get id of the newest banner entry
         $query2 = "SELECT id
             FROM image_paths
             ORDER BY id DESC
@@ -134,11 +136,11 @@ function update_banner($conn,$files){
         
         $id = $conn->fetchRowAsAssoc();
         $file = 'img/'.$id['id'].".jpg";
-        
+        // use the id for naming the new banner
         $query3 = "UPDATE image_paths
             SET path = '$file'  
             WHERE id =".$id['id'];
-        
+        //update image path to match the new name
         try{
         $conn->query($query3,$conn);
         }
@@ -148,9 +150,10 @@ function update_banner($conn,$files){
         
         $path = "../../".$file;
 //        echo "copying from copy ".$files['banner']['tmp_name']." to $path";
-        
+        // copy file out of temp space and into img folder, using new name
         if(!copy($files['banner']['tmp_name'], $path) ){
             echo "copy failed!<br/>";
+            // try to remvoe banner entry if the copy fails
             $query4 = "DELETE FROM image_paths
                 WHERE id = ".$id['id'];
             try{

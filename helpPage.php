@@ -1,8 +1,11 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<title>GIVE Center Help Page</title>
 <style type="text/css">
 <!--
 body {
@@ -52,6 +55,7 @@ padding-left: 15px; /* adding the padding to the sides of the elements within th
 </div>
 <br />
 <br />
+<?php if($_SESSION['admin']) { ?>
 <div class= "AdminHelp" id="AdminHelp" align="center">
 <h1>Admin Help</h1>
 <a href="helpVideo.php" onclick="return popitup('helpVideo.php?v=AdminIntro.mp4')">How To Access the Adminisitration Section</a><br />
@@ -59,6 +63,7 @@ padding-left: 15px; /* adding the padding to the sides of the elements within th
 <a href="helpVideo.php" onclick="return popitup('helpVideo.php?v=AdminEditingDatabaseEntries.mp4')">How To Edit Database Entries</a><br />
 <a href="helpVideo.php" onclick="return popitup('helpVideo.php?v=AdminExit.mp4')">How To Exit The Administration Section</a>
 </div>
+<?php }?>
 
 <div id="movieDiv" style="visibility:hidden;display:none;">
 <OBJECT CLASSID="clsid:02BF25D5-8C17-4B23-BC80-D3488ABDDC6B" WIDTH="640" HEIGHT="480" 

@@ -1,15 +1,19 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+    find all issues matching program, and remove
  */
 
 function remove_issues($conn,$program_id)
 {
     $query="DELETE FROM program_issues
             WHERE program_id = $program_id";
-    $conn->query($query);
+    try{
+        $conn->query($query);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 }
 
 /*CREATE TABLE program_issues(
