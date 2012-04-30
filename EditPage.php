@@ -499,7 +499,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 </label>
 
-
+</div>
 <!-- Select Interests -->
 <p align="center">&nbsp; </p>
 <p align="center">&nbsp;</p></div></div>
