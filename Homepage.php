@@ -197,6 +197,21 @@ border: thin solid #D6D6D6;
 	overflow-y:hidden;
 }
 
+/* Holds student contact info */
+.agencyInfo {
+	width: 40%;
+	float: right;
+	background-color: #FFF;
+	padding: 1%;
+	border: thin solid #D6D6D6;
+	height: 30%;
+	margin-right: 5%;
+	margin-bottom: 5%;
+	margin-left: 1%;
+	overflow-x: scroll;
+	overflow-y:hidden;
+}
+
 /* Quick Search hint*/
 input.hint {
     color: grey;
@@ -385,26 +400,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 </div>
 
-<!--Agency info -->
-<label id="agencyLabel">
-<p align="center">&nbsp;</p>
-<b><p align="center">Agency Contact Information</p>
-</label>
-</b>
-<table width="400" border="0" id="agencyBox">
-  <tr>
-    <td>Phone: </td>
-    <td id="agency_phone"></td>
-  </tr>
-    <tr>
-    <td>Fax </td>
-    <td id="agency_fax"></td>
-  </tr>
-  <tr>
-    <td>Email:</td>
-    <td id="agency_mail"></td>
-  </tr>
-</table>
+
 <!-- Display student contact info -->
 <div class="studContact" id = "studInfo"> <b>
 <p align="center">&nbsp;</p>
@@ -436,6 +432,29 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <tr>
     <td></td>
     <td></td>
+  </tr>
+</table>
+</div>
+
+<!--Agency info -->
+<div class = "agencyInfo" id="agencyInfo">
+<label id="agencyLabel">
+<p align="center">&nbsp;</p>
+<b><p align="center">Agency Contact Information</p>
+</label>
+</b>
+<table width="400" border="0" id="agencyBox">
+  <tr>
+    <td>Phone: </td>
+    <td id="agency_phone"></td>
+  </tr>
+    <tr>
+    <td>Fax </td>
+    <td id="agency_fax"></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td id="agency_mail"></td>
   </tr>
 </table>
 </div>

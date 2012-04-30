@@ -956,10 +956,9 @@ function toggleLeftSideBarDisplay() {
 		document.getElementById('studInfo').style.display="block";
 		
 		//hide agency info if program
-		document.getElementById('agencyLabel').style.visibility="hidden";
-		document.getElementById('agencyLabel').style.display="none";
-		document.getElementById('agencyBox').style.visibility="hidden";
-		document.getElementById('agencyBox').style.display="none";
+		document.getElementById('agencyInfo').style.visibility="hidden";
+		document.getElementById('agencyInfo').style.display="none";
+
 		
 		
 		
