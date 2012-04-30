@@ -1,12 +1,17 @@
 <?php
+
+//Server-side defintion of a professional contact, an individual who serves as a liaison
+//between an agency or program and the GIVE Center
 class GIVEProContact
 {
 	public $id;
-	public $title;								//STRING
-	public $l_name, $f_name, $m_name, $suf;		//STRING
-	public $w_phone, $m_phone;					//STRING
-	public $mail;								//STRING
+	public $title;
+	public $l_name, $f_name, $m_name, $suf;
+	public $w_phone, $m_phone;
+	public $mail;
 	
+	//Constructor
+	//If any array keys are not set, initializes to empty string
 	public function __construct($args = array())
 	{		
 		$this->id = isset($args['id']) ? $args['id'] : '';
@@ -19,6 +24,9 @@ class GIVEProContact
 		$this->m_phone = isset($args['m_phone']) ? $args['m_phone'] : '';
 		$this->mail = isset($args['mail']) ? $args['mail'] : '';
 	}
+	
+	//Used to print the object to an HTML table
+	//@param $id - the id property of the table
 	public function toHTMLTable($id)
 	{	
 		$str = "<table id=\"$id\">".PHP_EOL;

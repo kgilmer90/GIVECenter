@@ -2,6 +2,9 @@
 
 include_once(dirname(__FILE__).'/MySQLException.php');
 
+//Thrown when a MySQLDatabaseConn object fails to connect to a
+//database, either because of invalid username or password
+//or because a remote connection could not be established.
 class MySQLDatabaseConnException extends MySQLException
 {
 	/**

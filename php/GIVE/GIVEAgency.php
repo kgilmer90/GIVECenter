@@ -5,15 +5,19 @@ include_once(dirname(__FILE__).'/GIVEProContact.php');
 include_once(dirname(__FILE__).'/GIVEProgram.php');
 include_once(dirname(__FILE__).'/GIVEToHTML.php');
 
+
+//Server-side definition of the Agency object
 class GIVEAgency
 {
-	public $id;						//INT
-	public $name, $descript;		//STRING
-	public $mail, $phone, $fax;		//STRING
+	public $id;
+	public $name, $descript;
+	public $mail, $phone, $fax;
 	public $p_contact;				//GIVEProContact
 	public $addr;					//GIVEAddr
 	public $programs;				//GIVEProgram array
 	
+	//Constructor
+	//If array key is not set, intializes the field to an empty string
 	public function __construct($args = array())
 	{
 		$this->id = isset($args['id']) ? $args['id'] : '';
@@ -26,6 +30,8 @@ class GIVEAgency
 		$this->addr = isset($args['addr']) ? $args['addr'] : new GIVEAddr();
 		$this->programs = isset($args['programs']) ? $args['programs'] : array(0 => new GIVEProgram());
 	}
+	//Used to print the object to an HTML table
+	//@param $id - the id property of the table
 	public function toHTMLTable($id)
 	{	
 		$str = "<table id=\"$id\">".PHP_EOL;
