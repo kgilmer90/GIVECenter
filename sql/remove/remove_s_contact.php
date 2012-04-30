@@ -8,38 +8,70 @@
  */
 
 function remove_s_contact_latest($conn,$p_id){
+    // Find latest S Contact and history for matching program and remove
+    // find contact
     $query1 = "SELECT *
         FROM contact_history
         WHERE program_id = $p_id
         ORDER BY id
         LIMIT 0,1";
-    
+    try{
+        $conn->query($query1);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
+    $contact = $conn->getRowAsAssoc();
+    // delete specific contact
     $query2 = "DELETE FROM student_contact
             WHERE id = ".$contact['contact_id'];
-    
+    try{
+        $conn->query($query2);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
+    // remove from history
     $query3 = "DELETE FROM contact_history
         WHERE id = ".$contact['id'];
+    try{
+        $conn->query($query3);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
     
+    // remove pointer from program
     $query4 = "UPDATE program
         SET s_contact = 'null'
         WHERE id = $p_id";
     
-    $conn->query($query1);
-    $contact = $conn->getRowAsAssoc();
-    
-    $conn->query($query2);
-    $conn->query($query3);
-    $conn->query($query4);
+    try{
+        $conn->query($query4);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 }
 
+// to remove specific contact
 function remove_s_contact_by_id($conn,$s_id){
     $query1 = "DELETE FROM student_contact
         WHERE id = $s_id";
+    try{
+        $conn->query($query1);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
     $query2 = "DELETE FROM contact_history
         WHERE contact_id = $s_id";
-    
-    $conn->query($query1);
-    $conn->query($query2);
+    try{
+        $conn->query($query2);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 }
 
 /*

@@ -13,24 +13,29 @@
  * @return int Returns 1 if there is a program still associated with said agency
  */
 function remove_agency($conn,$id){
-    
+    // find agency matching program
     $query1 = "SELECT agency
         FROM program
         WHERE agency = $id";
-    
-    $query2 = "DELETE FROM agency
-        WHERE id=$id";
-    $conn->query($query1);
+    try{
+        $conn->query($query1);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
     
     if ($conn->numRows() != 0){
         return 1;
     }
-    
-    else{
+    // remove agency
+    $query2 = "DELETE FROM agency
+        WHERE id=$id";
+    try{
         $conn->query($query2);
-        return 0;
     }
-    
+    catch(Exception $e){
+        echo $e;
+    }   
 }
 
 function agency_empty($conn,$agency_id){

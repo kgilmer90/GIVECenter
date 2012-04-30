@@ -1,7 +1,7 @@
 <?php
 
 /*
- * delete matches and create new ones
+ * Remove all hours entries for program, then pass new hours to the create hours function
  * 
  */
 

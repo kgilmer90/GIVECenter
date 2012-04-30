@@ -7,6 +7,7 @@
 
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
+//  Create professional contact in database
 function create_new_p_contact($conn,$info_array)
 {
     $query = "INSERT INTO pro_contact(title,l_name,f_name,m_name,suf,m_phone,w_phone,mail)
@@ -21,7 +22,10 @@ function create_new_p_contact($conn,$info_array)
         echo $e;
     }
     
-    $query2 = "SELECT id FROM pro_contact ORDER BY id DESC Limit 0,1";
+    $query2 = "SELECT id
+        FROM pro_contact 
+        ORDER BY id DESC 
+        Limit 0,1";
     try{
         $conn->query($query2);
     }

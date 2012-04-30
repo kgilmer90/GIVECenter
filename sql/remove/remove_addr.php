@@ -1,16 +1,17 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+        remove address matching program id
  * 
  */
 
     function remove_addr_from_program($conn,$addr_id,$program_id)
     {
+        // remove address
         $query1="DELETE FROM addr
                 WHERE id = $addr_id";
         
+        // remove addr pointer from program
         $query2 = "UPDATE program
                     SET addr = 'NULL'
                     WHERE id = $program_id";

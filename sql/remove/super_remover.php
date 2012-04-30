@@ -45,15 +45,23 @@ if(isset($_GET['code'])) {
 
 
 /****************************************************************************
- * KIll it with fire!
+ * Call All Remove Functions!
  ****************************************************************************/
+
+    /*
+    echo "<pre>";
+    print_r($_POST);
+    echo "</pre>";
+    */
 
 if (isset($_POST['program_id'])){
     
+    // functions that are independent 
     remove_hours($conn, $_POST['program_id']);
     remove_issues($conn, $_POST['program_id']);
     remove_season($conn, $_POST['program_id']);
     
+    // remove objects from database
     if ($_POST['p_contact_id']!= -1){
         remove_p_contact_program($conn, $_POST['program_id']);
     }
@@ -63,12 +71,13 @@ if (isset($_POST['program_id'])){
     if ($_POST['s_contact_id'] != -1){
         remove_s_contact_by_id($conn, $_POST['s_contact_id']);
     }
-    
+    // tidy up
     remove_program($conn, $_POST['program_id']);
 }
- 
+    // remove agency
 if($_POST['agency_id'] != -1 && agency_empty($conn, $_POST['agency_id'])){
     
+    // remove objects
     if ($_POST['p_contact_id']!= -1){
         remove_p_contact_agency($conn, $_POST['agency_id']);
     }
@@ -76,6 +85,7 @@ if($_POST['agency_id'] != -1 && agency_empty($conn, $_POST['agency_id'])){
         remove_addr_from_program($conn, $_POST['addr_id'], $_POST['program_id']);
     }
     
+    // tidy up
     remove_agency($conn, $_POST['agency_id']);
     header('Location: ../../Admin.php');
 }
