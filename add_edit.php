@@ -197,7 +197,7 @@ elseif ($_POST['mode']=='add'){
     else
         $update['p_contact']['id'] = 'null';
         
-    if((isset($_POST['s_f_name']) || isset($_POST['s_l_name'])){
+    if(isset($_POST['s_f_name']) || isset($_POST['s_l_name'])){
         $update['s_contact']['f_name'] = $_POST['s_f_name'];
         $update['s_contact']['l_name'] = $_POST['s_l_name'];
         $update['s_contact']['m_name'] = $_POST['s_m_name'];
