@@ -98,10 +98,10 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agencyOpt").style.display="block";
 			
 			//display pro contact info
-			document.getElementById("p_contact_label").style.visibility="visible";
-			document.getElementById("p_contact_table").style.visibility="visible";
-			document.getElementById("p_contact_label").style.display="block";
-			document.getElementById("p_contact_table").style.display="block";
+			document.getElementById("s_contact_label").style.visibility="visible";
+			document.getElementById("s_contact_table").style.visibility="visible";
+			document.getElementById("s_contact_label").style.display="block";
+			document.getElementById("s_contact_table").style.display="block";
 			
 			// hide agency contact info
 			document.getElementById("agency_contact_label").style.visibility="hidden";
@@ -125,10 +125,10 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agencyOpt").style.display="none";
 			
 			// hide pro contact info
-			document.getElementById("p_contact_label").style.visibility="hidden";
-			document.getElementById("p_contact_table").style.visibility="hidden";
-			document.getElementById("p_contact_label").style.display="none";
-			document.getElementById("p_contact_table").style.display="none";
+			document.getElementById("s_contact_label").style.visibility="hidden";
+			document.getElementById("s_contact_table").style.visibility="hidden";
+			document.getElementById("s_contact_label").style.display="none";
+			document.getElementById("s_contact_table").style.display="none";
 			
 			//display agency contact info
 			document.getElementById("agency_contact_label").style.visibility="visible";
@@ -153,10 +153,10 @@ function loadEditPage(mode, what, id) { //onload editPage
 			
 			
 			//display pro contact info
-			document.getElementById("p_contact_label").style.visibility="visible";
-			document.getElementById("p_contact_table").style.visibility="visible";
-			document.getElementById("p_contact_label").style.display="block";
-			document.getElementById("p_contact_table").style.display="block";
+			document.getElementById("s_contact_label").style.visibility="visible";
+			document.getElementById("s_contact_table").style.visibility="visible";
+			document.getElementById("s_contact_label").style.display="block";
+			document.getElementById("s_contact_table").style.display="block";
 			
 			// hide agency contact info
 			document.getElementById("agency_contact_label").style.visibility="hidden";
@@ -168,6 +168,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 			addAgenciesToEditPageDropdown(-1);
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
+			document.getElementById('mode').value = 'add';
 		}
 		else // add agency
 		{
@@ -180,10 +181,10 @@ function loadEditPage(mode, what, id) { //onload editPage
 			
 			
 			//hide pro contact info
-			document.getElementById("p_contact_label").style.visibility="hidden";
-			document.getElementById("p_contact_table").style.visibility="hidden";
-			document.getElementById("p_contact_label").style.display="none";
-			document.getElementById("p_contact_table").style.display="none";
+			document.getElementById("s_contact_label").style.visibility="hidden";
+			document.getElementById("s_contact_table").style.visibility="hidden";
+			document.getElementById("s_contact_label").style.display="none";
+			document.getElementById("s_contact_table").style.display="none";
 			
 			//display agency contact info
 			document.getElementById("agency_contact_label").style.visibility="visible";
@@ -193,6 +194,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 			
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
+			document.getElementById('mode').value = 'add';
 		}
 
 	}
