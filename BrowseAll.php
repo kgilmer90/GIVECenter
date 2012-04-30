@@ -87,10 +87,12 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 4) If you prefer your nav on the right instead of the left, simply float these columns the opposite direction (all right instead of all left) and they'll render in reverse order. There's no need to move the divs around in the HTML source.
 
 */
+/*Right nav bar */
 .sidebar1 {
 	float: right;
 	width: 12.5%;
 }
+/*Left nav bar */
 .sidebar2 {
 	float: left;
 	width: 12.5%;
@@ -99,6 +101,7 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	background-color: #cccccc;
 	visibility: hidden;
 }
+/*Center content */
 .content {
 	position: absoulte;
 	width: 75%;
@@ -106,10 +109,12 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	background-image: url(img/gradientHORIZ.png);
 }
 
+/*Agency left column */
 .agencyColumn {
 	width: 50%;
 	float: left;
 }
+/*Program right column */
 .programColumn {
 	width: 49%;
 	float: right;
@@ -168,9 +173,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
 <body onload="initBrowseAll()">
 <div class="container" id="content">
   <div align="center"></div>
-  <!-- <div class="header">
-    <div align="center"><a href="#"><img src="giveBannerThin.jpg" alt="giveBanner" name="Insert_logo" width="75%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div> 
-     </div> -->
+  <!-- Right nav bar -->
   <div class="sidebar1">
     <div align="center">
       <ul class="nav">
@@ -188,29 +191,23 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
       </ul>
       <!-- end .sidebar1 --></div>
   </div>
+  <!-- Left nav bar -->
   <div class="sidebar2">
     <div align="center">
       <ul class="nav">
-        <li><a href="#">Program1 </a></li>
-        <li><a href="#">Program2 </a></li>
-        <li><a href="#">Program3 </a></li>
-        <li><a href="#">Program4 </a></li>
-        <li><a href="#">Program5 </a></li>
-        <li><a href="#">Program6 </a></li>
-        <li><a href="#">Program7 </a></li>
-        <li><a href="#">Program8 </a></li>
-        <li><a href="#">...</a></li>
+        
       </ul>
       
-      <!-- end .sidebar1 --></div>
+      <!-- end .sidebar2 --></div>
   </div>
   <div class="content" id="content"> 
-    <!-- <h1 align="center"><img src="img/giveBannerThin.jpg" alt="giveBanner" width="797" align="top" /></h1>  -->
+  <!--Banner -->
     <div align="center"><a href="#"><img src=<?php echo "$banner_path"; ?> alt="giveBanner" name="Insert_logo" width="100%" height="90" id="giveBanner" style="background: #8090AB; display:block;" /></a></div>
     <h1 align="center">&nbsp;</h1>
     <h1 align="center">Browse All</h1>
     <h1 align="center">&nbsp;</h1>
 
+<!--Agency left column -->
     <div class="agencyColumn" id="agencyColumn">
     <div align="center">
     <b>Agencies</b>
@@ -220,6 +217,7 @@ ul.nav a { zoom: 1; }  /* the zoom property gives IE the hasLayout trigger it ne
     </div>
     </div>
     
+    <!--Program right column -->
     <div class="programColumn" id="programColumn">
     <div align="center">
     <b>Programs</b>

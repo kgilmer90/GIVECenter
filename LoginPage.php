@@ -46,7 +46,7 @@ catch(MySQLDatabaseConnException $e)
 <title>Login to GIVE Center Volunteer Matching!</title>
 <script language="text/Javascript" src="js/Navigation.js"></script>
 <style type="text/css">
-<!--
+/*Style body of page */
 body {
 	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
 	background: #cccccc;
@@ -98,27 +98,14 @@ a:hover, a:active, a:focus { /* this group of selectors will give a keyboard nav
 	background-color: #cccccc;
 }
 
-/* ~~ These are the columns for the layout. ~~ 
-
-1) Padding is only placed on the top and/or bottom of the divs. The elements within these divs have padding on their sides. This saves you from any "box model math". Keep in mind, if you add any side padding or border to the div itself, it will be added to the width you define to create the *total* width. You may also choose to remove the padding on the element in the div and place a second div within it with no width and the padding necessary for your design.
-
-2) No margin has been given to the columns since they are all floated. If you must add margin, avoid placing it on the side you're floating toward (for example: a right margin on a div set to float right). Many times, padding can be used instead. For divs where this rule must be broken, you should add a "display:inline" declaration to the div's rule to tame a bug where some versions of Internet Explorer double the margin.
-
-3) Since classes can be used multiple times in a document (and an element can also have multiple classes applied), the columns have been assigned class names instead of IDs. For example, two sidebar divs could be stacked if necessary. These can very easily be changed to IDs if that's your preference, as long as you'll only be using them once per document.
-
-4) If you prefer your nav on the right instead of the left, simply float these columns the opposite direction (all right instead of all left) and they'll render in reverse order. There's no need to move the divs around in the HTML source.
-
-*/
-
-/************************************ADDED FROM ORIGINAL CSS FILE**************************************/
 body {
 text-align: center;
 font-family: Arial;
 background-color: rgb(185, 179, 175);}
 h1 {
 text-align: center;
-color: #000
-;}
+color: #000;
+}
 h2 {
 text-align: center;
 color: #000;}
@@ -128,7 +115,6 @@ p.loginform {
 	width: 250px;
 	border: thin solid #000;
 }
-/****************************************END ORIGINAL CSS FILE*****************************************/
 
 
 
@@ -136,11 +122,13 @@ p.loginform {
 
 
 
+/*keep indentions of right nav bar */
 .sidebar1 {
 	float: right;
 	width: 13%;
 	background-color: #FFF;
 }
+/* keep indentions of left nav bar */
 .sidebar2 {
 	float: left;
 	width: 10%;
@@ -150,6 +138,7 @@ p.loginform {
 	background-color: #FF9;
 	background-color: #cccccc;
 }
+/*center content */
 .content {
 	width: 100%;
 	float: left;
@@ -157,10 +146,6 @@ p.loginform {
 	height: 100%;	
 }
 
-.form1 {
-	background-color: #FFF;
-	border: thin solid #000; 
-}
 
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol { 
