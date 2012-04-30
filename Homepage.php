@@ -385,6 +385,26 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 </div>
 
+<!--Agency info -->
+<label id="agencyLabel">
+<p align="center">&nbsp;</p>
+<b><p align="center">Agency Contact Information</p>
+</label>
+</b>
+<table width="400" border="0" id="agencyBox">
+  <tr>
+    <td>Phone: </td>
+    <td id="agency_phone"></td>
+  </tr>
+    <tr>
+    <td>Fax </td>
+    <td id="agency_fax"></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td id="agency_mail"></td>
+  </tr>
+</table>
 <!-- Display student contact info -->
 <div class="studContact" id = "studInfo"> <b>
 <p align="center">&nbsp;</p>

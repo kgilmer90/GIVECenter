@@ -958,6 +958,14 @@ function toggleLeftSideBarDisplay() {
 		document.getElementById('studInfo').style.visibility="visible";
 		document.getElementById('studInfo').style.display="block";
 		
+		//hide agency info if program
+		document.getElementById('agencyLabel').style.visibility="hidden";
+		document.getElementById('agencyLabel').style.display="none";
+		document.getElementById('agencyBox').style.visibility="hidden";
+		document.getElementById('agencyBox').style.display="none";
+		
+		
+		
 		if(program_search_results.length > 0) {
 			displayProgramInfo(program_search_results[0]);
 		}	
@@ -975,6 +983,12 @@ function toggleLeftSideBarDisplay() {
 		//hide student info if agency
 		document.getElementById('studInfo').style.visibility="hidden";
 		document.getElementById('studInfo').style.display="none";
+		
+		//display agency info if agency
+		document.getElementById('agencyLabel').style.visibility="visible";
+		document.getElementById('agencyLabel').style.display="block";
+		document.getElementById('agencyBox').style.visibility="visible";
+		document.getElementById('agencyBox').style.display="block";
 	}
 }
 
