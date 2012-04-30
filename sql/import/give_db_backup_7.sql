@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 22, 2012 at 05:34 PM
--- Server version: 5.1.61
+-- Generation Time: Apr 30, 2012 at 02:50 AM
+-- Server version: 5.1.62
 -- PHP Version: 5.3.2-1ubuntu4.14
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
@@ -363,12 +363,14 @@ CREATE TABLE IF NOT EXISTS `image_paths` (
   `path` varchar(50) DEFAULT NULL,
   `name` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
 -- Dumping data for table `image_paths`
 --
 
+INSERT INTO `image_paths` (`id`, `image_type`, `path`, `name`) VALUES
+(1, 'banner', 'img/giveBannerThin.jpg', NULL);
 
 -- --------------------------------------------------------
 
