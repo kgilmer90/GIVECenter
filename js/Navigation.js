@@ -168,6 +168,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 			addAgenciesToEditPageDropdown(-1);
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
+			document.getElementById('mode').value = 'add';
 		}
 		else // add agency
 		{
@@ -193,6 +194,7 @@ function loadEditPage(mode, what, id) { //onload editPage
 			
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
+			document.getElementById('mode').value = 'add';
 		}
 
 	}
