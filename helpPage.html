@@ -3,8 +3,49 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Untitled Document</title>
+<style type="text/css">
+<!--
+body {
+	font: 100%/1.4 Verdana, Arial, Helvetica, sans-serif;
+	background: #cccccc;
+	margin: 0;
+	padding: 0;
+	color: #000;
+	text-align: right;
+}
+/* ~~ Element/tag selectors ~~ */
+ul, ol, dl { /* Due to variations between browsers, it's best practices to zero padding and margin on lists. For consistency, you can either specify the amounts you want here, or on the list items (LI, DT, DD) they contain. Remember that what you do here will cascade to the .nav list unless you write a more specific selector. */
+padding: 0;
+margin: 0;
+}
+h1, h2, h3, h4, h5, h6, p {
+margin-top: 0; /* removing the top margin gets around an issue where margins can escape from their containing div. The remaining bottom margin will hold it away from any elements that follow. */
+padding-right: 15px;
+padding-left: 15px; /* adding the padding to the sides of the elements within the divs, instead of the divs themselves, gets rid of any box model math. A nested div with side padding can also be used as an alternate method. */
+}
+.GeneralHelp
+{
+}
+.AdminHelp
+{
+}
+</style>
 </head>
-DISPLAY HELP HERE
 <body>
+<div class = "GeneralHelp" id="GeneralHelp" align="center">
+<h1>General Help</h1>
+<a href="#">Link</a>
+<a href="#"></a>
+<a href="#"></a>
+<a href="#"></a>
+
+</div>
+<div class= "AdminHelp" id="AdminHelp" align="center">
+<h1>Admin Help</h1>
+<a href="#">Link</a>
+<a href="#"></a>
+<a href="#"></a>
+<a href="#"></a>
+</div>
 </body>
 </html>
