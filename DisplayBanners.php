@@ -208,6 +208,7 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 <body><div class="container" id="content">
 <div align="center"></div>
+<div class = "sidebar2"></div>
 <div class="sidebar1">
 <div align="center">
 <ul class="nav">
