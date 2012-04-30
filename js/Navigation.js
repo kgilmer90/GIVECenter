@@ -97,6 +97,19 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agencyDescrip").style.display="block";
 			document.getElementById("agencyOpt").style.display="block";
 			
+			//display pro contact info
+			document.getElementById("p_contact_label").style.visibility="visible";
+			document.getElementById("p_contact_table").style.visibility="visible";
+			document.getElementById("p_contact_label").style.display="block";
+			document.getElementById("p_contact_table").style.display="block";
+			
+			// hide agency contact info
+			document.getElementById("agency_contact_label").style.visibility="hidden";
+			document.getElementById("agency_contact_table").style.visibility="hidden";
+			document.getElementById("agency_contact_label").style.display="none";
+			document.getElementById("agency_contact_table").style.display="none";
+			
+			
 			//fill the dropdown menu and set the selected index to the program index
 			addAgenciesToEditPageDropdown(id);
 			//fill the form with all the available information
@@ -110,6 +123,18 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agencyOpt").style.visibility="hidden";
 			document.getElementById("agencyDescrip").style.display="none";
 			document.getElementById("agencyOpt").style.display="none";
+			
+			// hide pro contact info
+			document.getElementById("p_contact_label").style.visibility="hidden";
+			document.getElementById("p_contact_table").style.visibility="hidden";
+			document.getElementById("p_contact_label").style.display="none";
+			document.getElementById("p_contact_table").style.display="none";
+			
+			//display agency contact info
+			document.getElementById("agency_contact_label").style.visibility="visible";
+			document.getElementById("agency_contact_table").style.visibility="visible";
+			document.getElementById("agency_contact_label").style.display="block";
+			document.getElementById("agency_contact_table").style.display="block";
 			
 			//fill the form with all available information
 			fillEditPageForm('agency', 'edit', id);
@@ -126,6 +151,19 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agencyDescrip").style.display="block";
 			document.getElementById("agencyOpt").style.display="block";
 			
+			
+			//display pro contact info
+			document.getElementById("p_contact_label").style.visibility="visible";
+			document.getElementById("p_contact_table").style.visibility="visible";
+			document.getElementById("p_contact_label").style.display="block";
+			document.getElementById("p_contact_table").style.display="block";
+			
+			// hide agency contact info
+			document.getElementById("agency_contact_label").style.visibility="hidden";
+			document.getElementById("agency_contact_table").style.visibility="hidden";
+			document.getElementById("agency_contact_label").style.display="none";
+			document.getElementById("agency_contact_table").style.display="none";
+			
 			//fill the dropdown box and do not set the selected index
 			addAgenciesToEditPageDropdown(-1);
 			//set to anything less than -1 to disregard
@@ -139,6 +177,19 @@ function loadEditPage(mode, what, id) { //onload editPage
 			document.getElementById("agencyOpt").style.visibility="hidden";
 			document.getElementById("agencyDescrip").style.display="none";
 			document.getElementById("agencyOpt").style.display="none";
+			
+			
+			//hide pro contact info
+			document.getElementById("p_contact_label").style.visibility="hidden";
+			document.getElementById("p_contact_table").style.visibility="hidden";
+			document.getElementById("p_contact_label").style.display="none";
+			document.getElementById("p_contact_table").style.display="none";
+			
+			//display agency contact info
+			document.getElementById("agency_contact_label").style.visibility="visible";
+			document.getElementById("agency_contact_table").style.visibility="visible";
+			document.getElementById("agency_contact_label").style.display="block";
+			document.getElementById("agency_contact_table").style.display="block";
 			
 			//set to anything less than -1 to disregard
 			document.getElementById('program_id').value = -2;
