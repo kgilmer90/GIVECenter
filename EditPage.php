@@ -202,6 +202,14 @@ float: right;
 padding: 2%;
 }
 
+.agencyOpt{
+width:55%;
+}
+
+.agencyOpt option{
+width:55%;	
+}
+
 /* ~~ This grouped selector gives the lists in the .content area space ~~ */
 .content ul, .content ol {
 padding: 0 15px 15px 40px; /* this padding mirrors the right padding in the headings and paragraph rule above. Padding was placed on the bottom for space between other elements on the lists and on the left to create the indention. These may be adjusted as you wish. */
@@ -359,13 +367,37 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 
 
 </div>
-<div class="column2"> <b>
-<label>
+<div class="column2"> 
+
+
+<label id="agency_contact_label">
 <p align="center">&nbsp;</p>
-<p align="center">Professional Contact Information</p>
+<b><p align="center">Agency Contact Information</p>
 </label>
 </b>
-<table width="400" border="0">
+<table width="400" border="0" id="agency_contact_table">
+  <tr>
+    <td>Phone: </td>
+    <td><input name="agency_phone" id="agency_phone" type="text" size="10" /></td>
+  </tr>
+    <tr>
+    <td>Fax </td>
+    <td><input name="agency_fax" id="agency_fax" type="text" size="10" /></td>
+  </tr>
+  <tr>
+    <td>Email:</td>
+    <td><input name="agency_mail" type="text" id="agency_mail" size="30" maxlength="40" /></td>
+  </tr>
+</table>
+
+
+
+<label id="p_contact_label">
+<p align="center">&nbsp;</p>
+<b><p align="center">Professional Contact Information</p>
+</label>
+</b>
+<table width="400" border="0" id="p_contact_table">
   <tr>
     <td><input name="p_contact_id" id="p_contact_id" type="text" size="30" style="visibility:hidden;display:none;"/></td>
   </tr>
@@ -378,12 +410,12 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td><input name="f_name" id="f_name" type="text" size="30" /></td>
   </tr>
   <tr>
-    <td>Last Name:</td>
-    <td><input name="l_name" id= "l_name" type="text" size="30" /></td>
-  </tr>
-  <tr>
     <td>Middle Name:</td>
     <td><input name="m_name" id="m_name" type="text" size="30" /></td>
+  </tr>
+  <tr>
+    <td>Last Name:</td>
+    <td><input name="l_name" id= "l_name" type="text" size="30" /></td>
   </tr>
   <tr>
     <td>Suffix: </td>
@@ -400,10 +432,6 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   <tr>
     <td>Email:</td>
     <td><input name="mail" type="text" id="mail" size="30" maxlength="40" /></td>
-  </tr>
-  <tr>
-    <td>Fax Number:</td>
-    <td><input name="fax" id="fax" type="text" size="10" /></td>
   </tr>
 </table>
 
@@ -423,13 +451,13 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
     <td>First Name: </td>
     <td><input name="s_f_name" id="s_f_name" type="text" size="30" /></td>
   </tr>
+    <tr>
+    <td>Middle Name:</td>
+    <td><input name="s_m_name" id="s_m_name" type="text" size="30" /></td>
+  </tr>
   <tr>
     <td>Last Name:</td>
     <td><input name="s_l_name" id= "s_l_name" type="text" size="30" /></td>
-  </tr>
-  <tr>
-    <td>Middle Name:</td>
-    <td><input name="s_m_name" id="s_m_name" type="text" size="30" /></td>
   </tr>
   <tr>
     <td>Suffix: </td>
