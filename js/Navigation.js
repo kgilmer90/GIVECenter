@@ -981,10 +981,9 @@ function toggleLeftSideBarDisplay() {
 		document.getElementById('studInfo').style.display="none";
 		
 		//display agency info if agency
-		document.getElementById('agencyLabel').style.visibility="visible";
-		document.getElementById('agencyLabel').style.display="block";
-		document.getElementById('agencyBox').style.visibility="visible";
-		document.getElementById('agencyBox').style.display="block";
+		document.getElementById('agencyInfo').style.visibility="visible";
+		document.getElementById('agencyInfo').style.display="block";
+		
 	}
 }
 

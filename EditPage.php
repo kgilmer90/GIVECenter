@@ -310,22 +310,31 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
   </tr>
   <tr>
     <td>Name</td>
+    <td>&nbsp;</td>
+   </tr>
+   <tr>
     <td><input name="name" id="name" type="text" size="30" maxlength="30" /></td>
+    <td>&nbsp;</td>
   </tr>
     <tr>
     <td id="agencyDescrip">Select Agency:</td>
+    <td>&nbsp;</td>
+    </tr>
+    <tr>
     <td>    
     <select id="agencyOpt">
     </select>
     </td>
+    <td>&nbsp;</td>
+    
   </tr>
   <tr>
     <td>Description: </td>
     <td>&nbsp;</td>
   </tr>
-  <tr>
-    <td>&nbsp;</td>
+  <tr id="descripBox">
     <td><div class="textBox"><textarea name="descript" cols="25" rows="16" id="descript"></textarea></div></td>
+    <td>&nbsp;</td>
   </tr>
     <tr id="notesLabel">
     <td>Notes: </td>
@@ -499,10 +508,19 @@ ul.nav a { zoom: 1; } /* the zoom property gives IE the hasLayout trigger it nee
 </table>
 </label>
 
-</div>
 <!-- Select Interests -->
 <p align="center">&nbsp; </p>
-<p align="center">&nbsp;</p></div></div>
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp; </p>
+
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp;</p></div>
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp; </p>
+<p align="center">&nbsp; </p>
+
 <div class = "getInterests" id="getInterests">
     <div align="center">
     
@@ -714,7 +732,7 @@ Night</label></td>
 </div>
 <p align="center">&nbsp;</p>
 <p align="center">&nbsp;</p>
-<p align="center">&nbsp;</p></div></div>
+<p align="center">&nbsp;</p>
 <div align="center">
 
 
