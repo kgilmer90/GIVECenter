@@ -7,6 +7,7 @@
 
 include_once(dirname(__FILE__).'/../../php/MySQLDatabase/MySQLDatabaseConn.php');
 
+//  Create professional contact in database
 function create_new_p_contact($conn,$info_array)
 {
     $query = "INSERT INTO pro_contact(title,l_name,f_name,m_name,suf,m_phone,w_phone,mail)

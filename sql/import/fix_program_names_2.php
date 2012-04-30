@@ -1,8 +1,7 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * same as other fix, but for longer names
  */
 
 $import = "Volunteer

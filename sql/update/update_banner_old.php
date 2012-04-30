@@ -44,7 +44,7 @@ update_banner_old($conn, $_POST);
 header("Location:../../Admin.php");
 
 /**
- *
+ *  Function is used for updating the current banner with one that is already been used
  * @param type $conn 
  * @param type $post pass $post variable with 'image_id' set to new banner
  */
@@ -53,6 +53,7 @@ header("Location:../../Admin.php");
 
 function update_banner_old($conn,$post){
         
+    // create new banner entry to hold new one
     $query1 = "INSERT INTO image_paths(image_type)
             VALUES('banner')";
     try{
@@ -62,6 +63,7 @@ function update_banner_old($conn,$post){
         echo $e;
     }
 
+    // find old banner selected and get info
     $query2 = "SELECT id
         FROM image_paths
         ORDER BY id DESC
@@ -74,6 +76,7 @@ function update_banner_old($conn,$post){
     }
     $id = $conn->fetchRowAsAssoc();
 
+    //get path of banner to return for use
     $query3 = "SELECT path
         FROM image_paths
         WHERE id = ".$post['set_banner'];
@@ -90,6 +93,7 @@ function update_banner_old($conn,$post){
     
     $file = $conn->fetchRowAsAssoc();   
     
+    // update new banner entry to match the old one
     $query4 = "UPDATE image_paths
         SET path = '".$file['path']."'
         WHERE id =".$id['id'];
@@ -99,7 +103,7 @@ function update_banner_old($conn,$post){
     catch(Exception $e){
         echo $e;
     }
-
+    //remove old copy of the banner
     //  Delete is working
     $query5 = "DELETE FROM image_paths
         WHERE id = ".$post['set_banner'];  
@@ -110,6 +114,7 @@ function update_banner_old($conn,$post){
         echo $e;
     }
     
+    // in case of an error, remove null path entries
     $query6 = "DELETE FROM image_paths
         WHERE path = 'null' OR path = ''";
     $conn->query($query6);

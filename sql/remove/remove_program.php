@@ -10,8 +10,12 @@
 function remove_program($conn,$p_id){
     $query = "DELETE FROM program
         WHERE id = $p_id";
-    
-    $conn->query($query);
+    try{
+        $conn->query($query);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 }
 
 /*CREATE TABLE program(

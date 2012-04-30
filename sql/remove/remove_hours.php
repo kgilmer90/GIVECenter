@@ -1,9 +1,5 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
  *  Delete Hours from Program
@@ -15,7 +11,12 @@ function remove_hours($conn,$program_id)
 {
     $query1="DELETE FROM program_hours
             WHERE program_id = $program_id";
-    $conn->query($query1);
+    try{
+        $conn->query($query1);
+    }
+    catch(Exception $e){
+        echo $e;
+    }
 }
 
 /*CREATE TABLE program_hours(

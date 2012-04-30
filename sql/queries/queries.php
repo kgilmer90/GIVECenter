@@ -1,16 +1,11 @@
 ﻿<?php
 
 /*
- * QUERIES FOR ADVANCED SEARCH
- * 
+ * Random Queries
  */
 
-    /**
-     *  Queries Database for List of All Issues for Advanced Search
-     * @param type $conn    database connection
-     * @return type     Num'd Sock'd Array of Issues: id,name
-     */
 
+// Find latest Version of the banner and return its path
 function get_banner_latest($conn)
 {
     $query = "SELECT path

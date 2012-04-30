@@ -1,8 +1,7 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Remove all the old issues, then pass the new ones to the create new issues function
  */
 
 include_once(dirname(__FILE__).'/../add/create_new_issue.php');

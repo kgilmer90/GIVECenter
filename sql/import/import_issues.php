@@ -1,8 +1,7 @@
 <?php
 
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * import issues into database
  */
 mysql_connect('localhost', 'bgs', 'dki2012!');
 mysql_select_db('give_ctr_agencies');

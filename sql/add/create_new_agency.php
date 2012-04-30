@@ -13,7 +13,7 @@ function create_new_agency($conn,$info_array)
             VALUES ('".$info_array['name']."','".$info_array['descript']."',
             ".$info_array['p_contact'].",".$info_array['addr'].",'".$info_array['mail']."',
                 ".$info_array['phone'].",".$info_array['fax'].")";
-    
+    // Create agency
     try{
         $conn->query($query);
     }
