@@ -21,7 +21,10 @@ function create_new_p_contact($conn,$info_array)
         echo $e;
     }
     
-    $query2 = "SELECT id FROM pro_contact ORDER BY id DESC Limit 0,1";
+    $query2 = "SELECT id
+        FROM pro_contact 
+        ORDER BY id DESC 
+        Limit 0,1";
     try{
         $conn->query($query2);
     }

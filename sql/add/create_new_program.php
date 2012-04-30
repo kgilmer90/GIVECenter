@@ -11,8 +11,8 @@ function create_new_program_existing_agency($conn,$info_array)
 {    
     $query = "INSERT INTO program(referal,name,notes,addr,agency,p_contact,s_contact,descript)
         VALUES( '".$info_array['referal']."','".$info_array['name']."','".$info_array['notes']."'
-            ,".$info_array['addr'].",".$info_array['agency'].",".$update['p_contact'].",
-                ".$update['s_contact'].",'".$info_array['descript']."')";
+            ,".$info_array['addr'].",".$info_array['agency'].",".$info_array['p_contact'].",
+                ".$info_array['s_contact'].",'".$info_array['descript']."')";
     try{
         $conn->query($query);
     }
