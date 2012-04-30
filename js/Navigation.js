@@ -844,10 +844,7 @@ function displayProgramInfo(index) {
 		var p = programs[index];
 		
 		document.getElementById("display_name").innerHTML = (p.name) ? p.name : "";
-		document.getElementById("display_descript").innerHTML = (p.descript) ? p.descript : "";
-/*		document.getElementById("display_phone").innerHTML = (p.phone) ? p.phone : "";
-		document.getElementById("display_fax").innerHTML = "";
-*/		
+		document.getElementById("display_descript").innerHTML = (p.descript) ? p.descript : "";		
 		
 		var pcon = p.p_contact;
 		var scon = p.s_contact;
@@ -863,7 +860,6 @@ function displayProgramInfo(index) {
 		document.getElementById("display_p_contact_m_phone").innerHTML = (pcon.m_phone) ? pcon.m_phone : "";
 		document.getElementById("display_p_contact_w_phone").innerHTML = (pcon.w_phone) ? pcon.w_phone : "";
 		document.getElementById("display_p_contact_mail").innerHTML = (pcon.mail) ? pcon.mail : "";
-		document.getElementById("display_p_contact_fax").innerHTML = (pcon.fax) ? pcon.fax : "";
 		
 		str = (addr.city) ? addr.city : "";
 		str += (str && addr.state_us) ? ", " + addr.state_us : "";
@@ -908,9 +904,10 @@ function displayAgencyInfo(index) {
 		
 		document.getElementById("display_name").innerHTML = (agency.name) ? agency.name : "";
 		document.getElementById("display_descript").innerHTML = (agency.descript) ? agency.descript : "";
-/*		document.getElementById("display_phone").innerHTML = (agency.phone) ? agency.phone : "";
-		document.getElementById("display_fax").innerHTML = (agency.fax) ? agency.fax : "";
-*/		
+		document.getElementById("agency_phone").innerHTML = (agency.phone) ? agency.phone : "";
+		document.getElementById("agency_fax").innerHTML = (agency.fax) ? agency.fax : "";
+		document.getElementById("agency_mail").innerHTML = (agency.mail) ? agency.mail : "";
+
 		
 		var pcon = agency.p_contact;
 		
